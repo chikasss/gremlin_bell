@@ -8,8 +8,8 @@ class CreateReviews < ActiveRecord::Migration[7.1]
       t.string :videos_url
       t.string :used_bike
       t.string :road_condition
-      t.references :route_id, null: false, foreign_key: true
-      t.references :bike_id, null: false, foreign_key: true
+      t.references :route, null: false, foreign_key: true
+      t.references :bike, null: false, foreign_key: true
 
       t.timestamps
     end
