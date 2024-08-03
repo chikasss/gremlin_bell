@@ -40,6 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_03_061033) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
 
   create_table "bikes", force: :cascade do |t|
     t.string "name"
@@ -105,7 +106,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_03_061033) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_routes_on_user_id"
-
   end
 
   create_table "users", force: :cascade do |t|
@@ -125,7 +125,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_03_061033) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
