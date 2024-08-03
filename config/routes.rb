@@ -8,25 +8,21 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :users, only: %i[edit show update] do
-    resources :messages, only: %i[index show]
-    resources :follow, only: :create
-      member do
-        get 'saved_trips', to: 'users#saved_trips', as: 'saved_trips'
-      end
-  end
-
-  resources :routes, only: %i[new create index show edit update] do
-    resources :reviews, only: %i[index create show edit update]
     member do
-      post 'save', to: 'routes#save', as: 'save'
-      get 'map', to: 'routes#map', as: 'map' do
-        collection do
-          get 'export', to: 'routes#export', as: 'export'
-        end
-      end
-      get 'comments', to: 'routes#comments', as: 'comments'
-      post 'comments', to: 'routes#comments', as: 'new_comment'
+      get 'follow', to: 'users#follow', as: 'follow'
+      get 'saved_trips', to: 'users#saved_trips', as: 'saved_trips'
     end
   end
 
+  resources :messages, only: %i[index show]
+
+  resources :routes, only: %i[new create index show edit update] do
+    resources :reviews, only: %i[index create show edit update]
+    resources :comments, only: %i[index create]
+    member do
+      post 'save', to: 'routes#save', as: 'save'
+      get 'map', to: 'routes#map', as: 'map'
+      get 'export', to: 'routes#export', as: 'export'
+    end
+  end
 end
