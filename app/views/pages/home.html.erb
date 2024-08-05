@@ -1,2 +1,33 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+
+  <div class="container-fluid">
+    <div class="p-2">
+      <div class="user-banner d-flex">
+        <%# <% if @user.avatar.present? %>
+          <%# <div class="p-2"><%= image_tag @user.avatar, class: "avatar-image" %></div>
+        <%# <% else %>
+        <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-image" %></div>
+          <%# <% end %>
+        <div class="p-2 align-self-center col"><h2 class="">Hello <strong><%= %></strong>!</h2></div>
+        <div class="p-2 align-self-center col-1"><button>LOCATION PLACEHOLDER</button></div>
+      </div>
+
+      <div class="search-bar">
+        <%= link_to "Search for new routes:", routes_path, class:"card-button" %>
+      </div>
+
+      <div class="saved-routes">
+        <div class="d-flex justify-content-between">
+          <h3><strong>Your saved routes:</strong></h3>
+          <%= link_to "See all your Routes", class:"card-button" %>
+        </div>
+        </div>
+
+      <div class="reviews">
+        <div class="d-flex justify-content-between">
+          <h3><strong>Your reviews</strong></h3>
+          <%= link_to "See all your reviews", class:"card-button" %>
+        </div>
+      </div>
+
+    </div>
+</div>
