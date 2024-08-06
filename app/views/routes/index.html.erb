@@ -1,8 +1,17 @@
-<h1>Routes</h1>
-<ul>
-  <% @routes.each do |route| %>
-    <li><% route.title %></li>
-    <li><% route.description %></li>
-    <li><% route.ride_type %></li>
-  <% end %>
-</ul>
+<div class="container mt-4">
+  <h1>Routes</h1>
+  <div class="row">
+    <% @routes.each do |route| %>
+      <div class="col-md-4">
+        <div class="card card-routes" style="width: 18rem;">
+          <%= image_tag 'route-bg.jpg', class: 'card-img-top' %>
+          <div class="card-body">
+            <h5 class="card-title"><%= route.title %></h5>
+            <p class="card-text"><%= route.description %></p>
+            <%= link_to 'See Details', route_path(route), class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

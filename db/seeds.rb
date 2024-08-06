@@ -21,3 +21,44 @@ User.create!(
   prefecture: 'Tokyo',
   admin: true
 )
+
+puts 'Creating user...'
+
+user = User.create!(
+  email: 'user@mail.com',
+  password: 'user123',
+  first_name: 'user',
+  last_name: 'User',
+  about: 'normal user',
+  prefecture: 'Tokyo',
+  admin: false
+)
+
+puts 'Creating Routes..'
+
+Route.create([
+  {
+    title: "Scenic Route",
+    description: "A beautiful scenic route with incredible views.",
+    ride_type: "Mountain",
+    waypoints: 5.5,
+    videos_url: "https://www.youtube.com/channel/UCVB3cRk7ibGqQ9m1Yda8zvw",
+    user_id: user.id
+  },
+  {
+    title: "Forest Trail",
+    description: "Challenging trail through dense forest.",
+    ride_type: "Trail",
+    waypoints: 8.3,
+    videos_url: "https://www.youtube.com/channel/UCVB3cRk7ibGqQ9m1Yda8zvw",
+    user_id: user.id
+  },
+  {
+    title: "Urban Ride",
+    description: "Peaceful ride through city streets.",
+    ride_type: "Urban",
+    waypoints: 3.2,
+    videos_url: "https://www.youtube.com/channel/UCVB3cRk7ibGqQ9m1Yda8zvw",
+    user_id: user.id
+  }
+])
