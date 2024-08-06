@@ -165,14 +165,6 @@ eric_route = Route.create!(
 mary_route = Route.create!(
   title: "W800 Street on Mikuni Pass",
   description: "A nice ride with lots of trees surrounding the road. Good ride if you want to just get a good whiff of trees.",
-  ride_type: ["calm"],
-  # waypoints: ,
-  videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
-  user: mary
-)
-mary_route2 = Route.create!(
-  title: "W800 Strdfafadsafeet on Mikuni Pass",
-  description: "A nfsadfaice ride with lots of trees surrounding the road. Good ride if you want to just get a good whiff of trees.",
   ride_type: ["Calm"],
   # waypoints: ,
   videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
