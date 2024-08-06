@@ -25,7 +25,14 @@ class RoutesController < ApplicationController
 
   def show
     @route = Route.find(params[:id])
-    @reviews = @route.reviews.includes(:user)
-    @comments = @route.comments.includes(:user)
+    authorize @route
+    # @reviews = @route.reviews.includes(:user)
+    # @comments = @route.comments.includes(:user)
+  end
+
+  private
+
+  def route_params
+    params.require(:route).permit(:title, :description, :waypoints, :videos_url, ride_type: [])
   end
 end
