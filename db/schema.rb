@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_06_072816) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_06_111752) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -92,19 +92,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_06_072816) do
     t.bigint "bike_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["bike_id"], name: "index_reviews_on_bike_id"
     t.index ["route_id"], name: "index_reviews_on_route_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "routes", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "ride_type"
     t.float "waypoints"
     t.string "videos_url"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ride_type", array: true
     t.index ["user_id"], name: "index_routes_on_user_id"
   end
 
@@ -136,5 +138,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_06_072816) do
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "reviews", "bikes"
   add_foreign_key "reviews", "routes"
+  add_foreign_key "reviews", "users"
   add_foreign_key "routes", "users"
 end
