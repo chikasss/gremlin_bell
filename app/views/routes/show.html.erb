@@ -17,8 +17,33 @@
       <div class="my-4">
         <h5>Tags:</h5>
         <div class="d-flex">
-          <div class="badge bg-primary me-2"><%= @route.ride_type %></div>
+          <% if @route.ride_type.is_a?(Array) %>
+            <% @route.ride_type.each do |type| %>
+              <div class="badge bg-primary me-2"><%= type %></div>
+            <% end %>
+          <% else %>
+            <div class="badge bg-primary me-2"><%= @route.ride_type %></div>
+          <% end %>
         </div>
       </div>
+    <% end %>
+    <% if @route.reviews.any? %>
+      <% @reviews.each do |review| %>
+        <div class="mt-4">
+          <h5><%= review.title %></h5>
+          <p><%= review.content %></p>
+          <div class="d-flex align-items-center">
+            <% if review.user.avatar.present? %>
+              <div class="me-2">
+                <%= image_tag review.user.avatar, class: "avatar" %>
+              </div>
+            <% end %>
+            <div>
+              <p><%= review.user.full_name %></p>
+              <p><%= review.created_at.strftime("%B %d, %Y") %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
   </div>

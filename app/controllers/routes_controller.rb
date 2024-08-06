@@ -26,8 +26,7 @@ class RoutesController < ApplicationController
   def show
     @route = Route.find(params[:id])
     authorize @route
-    # @reviews = @route.reviews.includes(:user)
-    # @comments = @route.comments.includes(:user)
+    @reviews = @route.reviews.includes(:user)
   end
 
   private
