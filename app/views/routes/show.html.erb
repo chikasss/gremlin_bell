@@ -27,23 +27,46 @@
         </div>
       </div>
     <% end %>
-    <% if @route.reviews.any? %>
-      <% @reviews.each do |review| %>
-        <div class="mt-4">
-          <h5><%= review.title %></h5>
-          <p><%= review.content %></p>
-          <div class="d-flex align-items-center">
-            <% if review.user.avatar.present? %>
+    <% if @reviews.present? %>
+      <div class="reviews-show-route">
+        <h3>Reviews:</h3>
+        <% @reviews.each do |review| %>
+          <div class="mt-4">
+            <div class="d-flex">
               <div class="me-2">
-                <%= image_tag review.user.avatar, class: "avatar" %>
+                <h5><%= review.title %></h5>
               </div>
-            <% end %>
+              <% review.rating.times do %>
+                <i class="fa-solid fa-star"></i>
+              <% end %>
+            </div>
+            <p><%= review.description %></p>
             <div>
-              <p><%= review.user.full_name %></p>
-              <p><%= review.created_at.strftime("%B %d, %Y") %></p>
+              <p class="my-4">Bike Used: <strong><%= review.used_bike %></strong></p>
+            </div>
+            <div class="d-flex align-items-center">
+              <% if review.user.avatar.present? %>
+                <div class="me-2">
+                  <%= image_tag review.user.avatar, class: "avatar" %>
+                </div>
+              <% else %>
+                <div class="me-2">
+                  <%= image_tag 'user-photo.png', class: "avatar" %>
+                </div>
+              <% end %>
+              <div>
+                <%= link_to user_path(review.user) do %>
+                  <p class="mb-0"><%= review.user.first_name %></p>
+                <% end %>
+                <p class="mb-0"><%= review.created_at.strftime("%B %d, %Y") %></p>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
+    <div class="my-4">
+      <h3>Write a review:</h3>
+      <%= render "reviews/form" %>
+    </div>
   </div>

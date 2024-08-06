@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-before_action :authenticate_user!
+before_action :set_route
 
   def show
     @review = Review.find(params[:id])
@@ -8,19 +8,30 @@ before_action :authenticate_user!
   def new
     @review = Review.new
   end
-
   def create
-    @review = Review.new(review_params)
-    @review.route = Route.find(params[:route_id])
-    @review.user = current_user
+    @review = @route.reviews.build(review_params)
+    @review.user = current_user  # Set the current user as the review's user
+    authorize @review  # Pundit authorization
+
+    # Log the review attributes and errors if any
+    Rails.logger.info "Review attributes: #{@review.attributes.inspect}"
+    Rails.logger.info "Review valid? #{@review.valid?}"
+    Rails.logger.info "Review errors: #{@review.errors.full_messages.join(', ')}" unless @review.valid?
+
     if @review.save
-      redirect_to route_path(@review.route)
+      Rails.logger.info "Review was successfully saved."
+      redirect_to @route, notice: 'Review was successfully created.'
     else
-      render :new
+      Rails.logger.error "Failed to save review. Errors: #{@review.errors.full_messages.join(', ')}"
+      render 'routes/show', status: :unprocessable_entity
     end
   end
 
   private
+
+  def set_route
+    @route = Route.find(params[:route_id])
+  end
 
   def review_params
     params.require(:review).permit(:date, :title, :description, :rating, :videos_url, :used_bike, :road_condition)

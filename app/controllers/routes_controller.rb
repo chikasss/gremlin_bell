@@ -27,6 +27,7 @@ class RoutesController < ApplicationController
     @route = Route.find(params[:id])
     authorize @route
     @reviews = @route.reviews.includes(:user)
+    @review = @route.reviews.new
   end
 
   private
