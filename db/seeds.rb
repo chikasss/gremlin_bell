@@ -208,6 +208,7 @@ review_for_bill_route = Review.create!(
   used_bike: "2002 Yamaha VMAX",
   road_condition: "",
   route: bill_route,
+  bike_id: eric.bikes.first.id,
   user: eric
 )
 
