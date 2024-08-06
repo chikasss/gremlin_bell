@@ -1,11 +1,11 @@
 class RoutePolicy < ApplicationPolicy
+  def index?
+    true
+  end
+
   class Scope < Scope
     def resolve
-      if user.admin?
-        scope.all
-      else
-        scope.where(user: user)
-      end
+      scope.all
     end
   end
 end
