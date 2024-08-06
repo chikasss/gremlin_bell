@@ -11,6 +11,20 @@
 puts "Deleting Users"
 User.destroy_all
 
+puts 'Creating admin user...'
+
+User.create!(
+  email: 'admin@mail.com',
+  password: 'admin123',
+  first_name: 'Admin',
+  last_name: 'User',
+  about: 'Administrator of the system',
+  prefecture: 'Tokyo',
+  admin: true
+)
+
+puts "Admin created"
+
 puts "Creating Users"
 
 bill = User.create!(
