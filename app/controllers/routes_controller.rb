@@ -1,6 +1,8 @@
 class RoutesController < ApplicationController
   before_action :authenticate_user!
 
+  RIDE_TYPE = Route::RIDE_TYPE
+
   def new
     @route = Route.new
     authorize @route
@@ -9,6 +11,16 @@ class RoutesController < ApplicationController
   def index
     @routes = policy_scope(Route)
     @routes = Route.all
+
+    results = []
+    if params[:query]
+      @routes.each do |route|
+        results << route if route.ride_type.include?(params[:query][:ride_type])
+      end
+      @routes = results
+    else
+      @routes
+    end
   end
 
   def show
