@@ -8,7 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-puts "deleting Users"
+puts "Deleting Users"
 User.destroy_all
 
 puts "Creating Users"
@@ -56,6 +56,18 @@ eric = User.create!(
   prefecture: "Tokyo",
   social_links: { twitter: "twitter.com/notatallarealpageforeric", facebook: "facebook.com/notatallarealpageforeric", instagram: "instagram.com/notatallarealpageforeric", youtube: "youtube.com/notatallarealpageforeric", tiktok: "tiktok.com/notatallarealpageforeric"},
 )
+mary = User.create!(
+  email: 'mary@mail.com',
+  password: 'password',
+  password_confirmation: 'password',
+  first_name: 'Mary',
+  last_name: 'Smith',
+  about: "G'day mate! Just an Aussie cruisin' Japan's countryside.",
+  prefecture: "Nagano",
+  social_links: { twitter: "twitter.com/notatallarealpageformary", facebook: "facebook.com/notatallarealpageformary", instagram: "instagram.com/notatallarealpageformary", youtube: "youtube.com/notatallarealpageformary", tiktok: "tiktok.com/notatallarealpageformary"},
+)
+
+
 puts "Users created"
 
 puts "Creating bikes"
@@ -87,6 +99,12 @@ eric_bikes = Bike.create!(
   brand: 'Yamaha',
   user: eric
 )
+mary_bikes = Bike.create!(
+  name: 'Trail 125',
+  year: 1978,
+  brand: 'Honda',
+  user: mary
+)
 
 puts "Bikes created"
 
@@ -94,15 +112,91 @@ puts "Bikes created"
 
 puts "Creating routes"
 
-bill_routes = Route.create!(
+bill_route = Route.create!(
   title: "Nakayama Pass",
   description: "",
-  ride_type: "scenic",
+  ride_type: ["Scenic"],
   # waypoints: ,
   videos_url: "https://youtu.be/TZezHtKiq-Y?si=fcgT01QuDZ5EkteT",
   user: bill
 )
 
+hideo_route = Route.create!(
+  title: "Jozankei",
+  description: "",
+  ride_type: ["Calm"],
+  # waypoints: ,
+  videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
+  user: hideo
+)
+
+mika_route = Route.create!(
+  title: "Ride Along West Coast of Hokkaido",
+  description: "",
+  ride_type: ["Coastal"],
+  # waypoints: ,
+  videos_url: "https://youtu.be/NFII_nKKB5c?si=HpAm347NhKU1Di7z",
+  user: mika
+)
+
+eric_route = Route.create!(
+  title: "Highway 38",
+  description: "",
+  ride_type: ["Scenic"],
+  # waypoints: ,
+  videos_url: "https://youtu.be/Omf5kd-EK0M?si=B79VP_lMx5YlYbAM",
+  user: eric
+)
+
+mary_route = Route.create!(
+  title: "W800 Street on Mikuni Pass",
+  description: "A nice ride with lots of trees surrounding the road. Good ride if you want to just get a good whiff of trees.",
+  ride_type: ["calm"],
+  # waypoints: ,
+  videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
+  user: mary
+)
+mary_route2 = Route.create!(
+  title: "W800 Strdfafadsafeet on Mikuni Pass",
+  description: "A nfsadfaice ride with lots of trees surrounding the road. Good ride if you want to just get a good whiff of trees.",
+  ride_type: ["Calm"],
+  # waypoints: ,
+  videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
+  user: mary
+)
+
 puts "Routes created"
+
+puts "Creating comments"
+
+hideo_to_bill_route = Comment.create!(
+  description: "Looks incredible! I'm going to check this out next time I'm in the area.",
+  route: bill_route,
+  user: hideo
+)
+
+bill_response_to_hideo = Comment.create!(
+  description: "Can't wait to see what you think. Hit me up when you're in the area. Maybe we can ride together.",
+  route: bill_route,
+  user: bill
+)
+
+puts "Comments created"
+
+puts "Creating Reviews"
+
+review_for_bill_route = Review.create!(
+  date: DateTime.new(2024,8,1,17),
+  title: "Smooth Ride",
+  description: "This is actually the first ride I've ever gone on that I discovered on Gremlin Bell and had a blast!",
+  rating: 5,
+  videos_url: "",
+  used_bike: "2002 Yamaha VMAX",
+  road_condition: "",
+  route: bill_route,
+  user: eric
+)
+
+puts "Reviews Created"
 
 puts "Seeding Complete"
