@@ -4,7 +4,7 @@ before_action :authenticate_user!
   def show
     @review = Review.find(params[:id])
   end
-  
+
   def new
     @review = Review.new
   end
@@ -20,4 +20,9 @@ before_action :authenticate_user!
     end
   end
 
+  private
+
+  def review_params
+    params.require(:review).permit(:date, :title, :description, :rating, :videos_url, :used_bike, :road_condition)
+  end
 end
