@@ -6,6 +6,9 @@ class User < ApplicationRecord
   has_many :routes
   has_many :reviews
   has_many :comments
-  has_many :bikes
   acts_as_favoritor
+
+  has_many :bikes, dependent: :destroy
+
+  has_one_attached :avatar
 end
