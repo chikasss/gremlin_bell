@@ -70,6 +70,7 @@ eric = User.create!(
   prefecture: "Tokyo",
   social_links: { twitter: "twitter.com/notatallarealpageforeric", facebook: "facebook.com/notatallarealpageforeric", instagram: "instagram.com/notatallarealpageforeric", youtube: "youtube.com/notatallarealpageforeric", tiktok: "tiktok.com/notatallarealpageforeric"},
 )
+
 mary = User.create!(
   email: 'mary@mail.com',
   password: 'password',
@@ -81,6 +82,38 @@ mary = User.create!(
   social_links: { twitter: "twitter.com/notatallarealpageformary", facebook: "facebook.com/notatallarealpageformary", instagram: "instagram.com/notatallarealpageformary", youtube: "youtube.com/notatallarealpageformary", tiktok: "tiktok.com/notatallarealpageformary"},
 )
 
+angel = User.create!(
+  email: 'angel@mail.com',
+  password: 'password',
+  password_confirmation: 'password',
+  first_name: 'Angel',
+  last_name: 'Gibson',
+  about: "Hi! I'm Angel. My partner and I have been riding around Fukuoka for 10 years so we know some great areas to ride around.  ",
+  prefecture: "Fukuoka",
+  social_links: { twitter: "twitter.com/notatallarealpageforangel", facebook: "facebook.com/notatallarealpageforangel", instagram: "instagram.com/notatallarealpageforangel", youtube: "youtube.com/notatallarealpageforangel", tiktok: "tiktok.com/notatallarealpageforangel"},
+)
+
+vincenzo = User.create!(
+  email: 'vincenzo@mail.com',
+  password: 'password',
+  password_confirmation: 'password',
+  first_name: 'Vincenzo',
+  last_name: 'Garcia',
+  about: "Hi! I'm Vincenzo. I love riding and drinking coffee. Lets grab a drink during a ride some time.",
+  prefecture: "Kanagawa",
+  social_links: { twitter: "twitter.com/notatallarealpageforvincenzo", facebook: "facebook.com/notatallarealpageforvincenzo", instagram: "instagram.com/notatallarealpageforvincenzo", youtube: "youtube.com/notatallarealpageforvincenzo", tiktok: "tiktok.com/notatallarealpageforvincenzo"},
+)
+
+ami = User.create!(
+  email: 'ami@mail.com',
+  password: 'password',
+  password_confirmation: 'password',
+  first_name: 'Ami',
+  last_name: 'Ozaki',
+  about: "Hi! I'm Ami. I spend most of the warm months on my bike.",
+  prefecture: "Kanagawa",
+  social_links: { twitter: "twitter.com/notatallarealpageforami", facebook: "facebook.com/notatallarealpageforami", instagram: "instagram.com/notatallarealpageforami", youtube: "youtube.com/notatallarealpageforami", tiktok: "tiktok.com/notatallarealpageforami"},
+)
 
 puts "Users created"
 
@@ -108,16 +141,66 @@ mika_bikes = Bike.create!(
 )
 
 eric_bikes = Bike.create!(
-  name: 'VMAX',
+  name: 'V-MAX',
   year: 2002,
   brand: 'Yamaha',
   user: eric
 )
+
+eric_bikes2 = Bike.create!(
+  name: 'GL1500',
+  year: 1998,
+  brand: 'Honda',
+  user: eric
+)
+
+eric_bikes3 = Bike.create!(
+  name: 'XL1200R',
+  year: 2004,
+  brand: 'Harley Davidson',
+  user: eric
+)
+
+eric_bikes4 = Bike.create!(
+  name: 'Z900',
+  year: 2022,
+  brand: 'Kawasaki',
+  user: eric
+)
+
 mary_bikes = Bike.create!(
   name: 'Trail 125',
   year: 1978,
   brand: 'Honda',
   user: mary
+)
+
+mary_bikes2 = Bike.create!(
+  name: 'Z900',
+  year: 2018,
+  brand: 'Kawasaki',
+  user: mary
+)
+
+angel_bikes = Bike.create!(
+  name: 'V-MAX',
+  year: 2004,
+  brand: 'Yamaha',
+  user: angel
+)
+
+vincenzo_bikes = Bike.create!(
+  name: 'Z900',
+  year: 2022,
+  brand: 'Kawasaki',
+  user: vincenzo
+)
+
+ami_bikes = Bike.create!(
+  name: 'Z900',
+  year: 2017,
+  brand: 'Kawasaki',
+  user: ami
 )
 
 puts "Bikes created"
@@ -128,16 +211,24 @@ puts "Creating routes"
 
 bill_route = Route.create!(
   title: "Nakayama Pass",
-  description: "",
+  description: "Do you like making your bike go VROOM in tunnels? This route has a ton of em haha.",
   ride_type: ["Scenic"],
   # waypoints: ,
   videos_url: "https://youtu.be/TZezHtKiq-Y?si=fcgT01QuDZ5EkteT",
   user: bill
 )
+bill_route2 = Route.create!(
+  title: "Ocean Drive",
+  description: "Beautiful ride along the coast in Hokkaido.",
+  ride_type: ["Coastal"],
+  # waypoints: ,
+  videos_url: "https://www.youtube.com/live/DuurJdmyMtQ?si=ECtrX_jTUf4q6woY",
+  user: bill
+)
 
 hideo_route = Route.create!(
   title: "Jozankei",
-  description: "",
+  description: "Just a calm ride by the tree covered mountains.",
   ride_type: ["Calm"],
   # waypoints: ,
   videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
@@ -145,17 +236,18 @@ hideo_route = Route.create!(
 )
 
 mika_route = Route.create!(
-  title: "Ride Along West Coast of Hokkaido",
-  description: "",
+  title: "Kyushu",
+  description: "If you're a fan of the ocean, definitely ride here. ",
   ride_type: ["Coastal"],
   # waypoints: ,
-  videos_url: "https://youtu.be/NFII_nKKB5c?si=HpAm347NhKU1Di7z",
+  videos_url: "https://youtu.be/oF6xabrZblA?si=3yfWVI3uHowPjAX4",
   user: mika
 )
 
+
 eric_route = Route.create!(
   title: "Highway 38",
-  description: "",
+  description: "Calm ride surrounded by nature. I recommend going during the autumn months to enjoy various autumn colors. Cops love hanging around here so best not to speed. Small downside, but the view is worth it.",
   ride_type: ["Scenic"],
   # waypoints: ,
   videos_url: "https://youtu.be/Omf5kd-EK0M?si=B79VP_lMx5YlYbAM",
@@ -165,18 +257,46 @@ eric_route = Route.create!(
 mary_route = Route.create!(
   title: "W800 Street on Mikuni Pass",
   description: "A nice ride with lots of trees surrounding the road. Good ride if you want to just get a good whiff of trees.",
-  ride_type: ["Calm"],
+  ride_type: ["Calm", "Scenic"],
   # waypoints: ,
   videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
   user: mary
 )
+
+angel_route = Route.create!(
+  title: "Ride in Kyushu",
+  description: "This is a nice and relaxing ride I took in the summer in Kyushu with a nice mix of urban and nature.",
+  ride_type: ["Calm", "Mountainous", "Urban"],
+  # waypoints: ,
+  videos_url: "https://youtu.be/Hjx9_m2-ItE?si=FjwsTDV4GBQ0V9on",
+  user: angel
+)
+
+vincenzo_route = Route.create!(
+  title: "Ride Along West Coast of Hokkaido",
+  description: "I was visiting a friend up in Hokkaido and we went for a ride along the coast. If you're a fan of the ocean, definitely ride here.",
+  ride_type: ["Coastal"],
+  # waypoints: ,
+  videos_url: "https://youtu.be/NFII_nKKB5c?si=HpAm347NhKU1Di7z",
+  user: vincenzo
+)
+
+ami_route = Route.create!(
+  title: "Noborito to Yokohama",
+  description: "This is a fun ride that starts in Kawasaki and runs through into Yokohama.",
+  ride_type: ["Urban"],
+  # waypoints: ,
+  videos_url: "https://youtu.be/OpF7UOxqqSU?si=ZIg4BU_kcRwEwEMR",
+  user: ami
+)
+
 
 puts "Routes created"
 
 puts "Creating comments"
 
 hideo_to_bill_route = Comment.create!(
-  description: "Looks incredible! I'm going to check this out next time I'm in the area.",
+  description: "Looks incredible! I'm going to save this and check it out next time I'm in the area. Thanks!",
   route: bill_route,
   user: hideo
 )
@@ -187,14 +307,68 @@ bill_response_to_hideo = Comment.create!(
   user: bill
 )
 
+angel_to_bill_route = Comment.create!(
+  description: "Sadly no tunnels by me, but I totally get what you mean lol",
+  route: bill_route,
+  user: angel
+)
+
+bill_response_to_angel = Comment.create!(
+  description: "VROOOOOOOOOOM!!!",
+  route: bill_route,
+  user: bill
+)
+
+vincenzo_to_ami_route = Comment.create!(
+  description: "Oh wow! I actually live along this route. I've regularly go to Yokohama on the weekends, but I've never gone this way. Looks like fun. I'll check it out this weekend",
+  route: ami_route,
+  user: vincenzo
+)
+
+ami_response_to_vincenzo = Comment.create!(
+  description: "Cool! Let me know how it goes.",
+  route: ami_route,
+  user: ami
+)
+
+vincenzo2_to_ami_route = Comment.create!(
+  description: "Just finished the ride. It was great. I ended up finding a cafe I hadn't heard of before so I'm glad I checked it out.",
+  route: ami_route,
+  user: vincenzo
+)
+
+mary_to_hideo_route = Comment.create!(
+  description: "I just checked out an onsen in the area. Sadly didn't have my bike with me, but I'll save this for next time.",
+  route: hideo_route,
+  user: mary
+)
+
+hideo_response_to_mary = Comment.create!(
+  description: "The onsens are so nice there. Hope you enjoyed it.",
+  route: hideo_route,
+  user: hideo
+)
+
+bill_to_mika_route = Comment.create!(
+  description: "I visited Hiraodai Karst last summer. Kushitani Cafe Aso is the best!",
+  route: mika_route,
+  user: bill
+)
+
+mika_response_to_bill = Comment.create!(
+  description: "It is! Great spot to take a break.",
+  route: mika_route,
+  user: mika
+)
+
 puts "Comments created"
 
 puts "Creating Reviews"
 
 review_for_bill_route = Review.create!(
   date: DateTime.new(2024,8,1,17),
-  title: "Smooth Ride",
-  description: "This is actually the first ride I've ever gone on that I discovered on Gremlin Bell and had a blast!",
+  title: "Small World!",
+  description: "This is actually the first ride I've ever gone on that I discovered on Gremlin Bell and had a blast! Believe it or not, I ran into some other Gremlin Bell users while getting gas during this trip haha",
   rating: 5,
   videos_url: "",
   used_bike: "2002 Yamaha VMAX",
@@ -203,6 +377,72 @@ review_for_bill_route = Review.create!(
   bike_id: eric.bikes.first.id,
   user: eric
 )
+
+review_for_mary_route = Review.create!(
+  date: DateTime.new(2024,8,9,17),
+  title: "Smooth Ride",
+  description: "I rode here in mid-August and the road had just been freshly paved.",
+  rating: 5,
+  videos_url: "",
+  used_bike: "2002 Yamaha VMAX",
+  road_condition: "",
+  route: mary_route,
+  bike_id: eric.bikes.first.id,
+  user: eric
+)
+
+review_for_ami_route = Review.create!(
+  date: DateTime.new(2024,8,10,17),
+  title: "A chill ride through the cities",
+  description: "I normally ride to Yokohama from my home a different way so I figured I switch it up and take this route. Boy was I glad. I'm a big coffee fan and I ended up stumbling across a cafe while riding this route. The name is cafe+cake Baloo. I'm not normally a cake person, but their strawberry shortcake slapped! Thanks Ami for sharing this route!",
+  rating: 5,
+  videos_url: "",
+  used_bike: "2022 Kawasaki Z900",
+  road_condition: "",
+  route: ami_route,
+  bike_id: vincenzo.bikes.first.id,
+  user: vincenzo
+)
+
+review_for_ami_route = Review.create!(
+  date: DateTime.new(2024,8,10,17),
+  title: "Fun ride",
+  description: "I was visiting a friend in Kanagawa and he had never ridden a motorcycle. He was a bit nervous, but this ride was super smooth. (I think I may have convinced him to get a motorcycle license)",
+  rating: 5,
+  videos_url: "",
+  used_bike: "2004 Yamaha V-MAX",
+  road_condition: "",
+  route: ami_route,
+  bike_id: angel.bikes.first.id,
+  user: angel
+)
+
+review_for_mika_route = Review.create!(
+  date: DateTime.new(2024,7,25,17),
+  title: "No one else on the roads",
+  description: "I went here towards the end of July and I didn't see a single other vehicle. Just me and the road. It was awesome. Thanks Mika.",
+  rating: 5,
+  videos_url: "",
+  used_bike: "2004 Yamaha V-MAX",
+  road_condition: "",
+  route: mika_route,
+  bike_id: angel.bikes.first.id,
+  user: angel
+)
+
+review_for_eric_route = Review.create!(
+  date: DateTime.new(2024,7,10,17),
+  title: "Eric wasn't kidding about the cops haha",
+  description: "I ran into a few cops along this route, but the scenery is so beautiful that I felt no need to go any faster than the speed limit.",
+  rating: 4,
+  videos_url: "",
+  used_bike: "1998 Honda GL1500",
+  road_condition: "",
+  route: eric_route,
+  bike_id: mika.bikes.first.id,
+  user: mika
+)
+
 
 puts "Reviews Created"
 
