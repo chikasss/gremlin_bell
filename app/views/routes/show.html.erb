@@ -1,5 +1,3 @@
-<%= button_to 'Save to My Trips', save_route_path(@route),
-method: :post, class: 'btn btn-primary' %>
 
 <div class="container mt-4">
   <div class="banner-show-route">
@@ -24,4 +22,6 @@ method: :post, class: 'btn btn-primary' %>
         </div>
       </div>
     <% end %>
+    <%= button_to 'Save to My Trips', save_route_path(@route),
+    method: :post, class: 'btn btn-primary' %>
   </div>

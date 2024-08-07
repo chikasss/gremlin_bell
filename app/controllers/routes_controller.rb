@@ -1,7 +1,7 @@
 class RoutesController < ApplicationController
   before_action :authenticate_user!
 
-  # RIDE_TYPE = Route::RIDE_TYPE
+  RIDE_TYPE = Route::RIDE_TYPE
 
   def new
     @route = Route.new
@@ -33,6 +33,8 @@ class RoutesController < ApplicationController
   def save
     @route = Route.find(params[:id])
     current_user.favorite(@route)
+    redirect_to @route
+    authorize @route
   end
 
   private
