@@ -8,7 +8,6 @@ class UsersController < ApplicationController
 
   def update
     authorize @user
-    
     if @user.update(user_params.merge(social_links: social_params))
       redirect_to root_path, notice: "Profile was successfully updated.", status: :see_other
     else
