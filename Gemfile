@@ -51,11 +51,13 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "cloudinary"
+gem 'acts_as_favoritor'
 # gem "dotenv-rails"
 
 # Added manually
 
 gem "pundit"
+gem "uri"
 
 group :development, :test do
   gem "dotenv-rails"

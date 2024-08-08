@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_06_072816) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_06_112231) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_06_072816) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "favorites", force: :cascade do |t|
+    t.string "favoritable_type", null: false
+    t.bigint "favoritable_id", null: false
+    t.string "favoritor_type", null: false
+    t.bigint "favoritor_id", null: false
+    t.string "scope", default: "favorite", null: false
+    t.boolean "blocked", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["blocked"], name: "index_favorites_on_blocked"
+    t.index ["favoritable_id", "favoritable_type"], name: "fk_favoritables"
+    t.index ["favoritable_type", "favoritable_id", "favoritor_type", "favoritor_id", "scope"], name: "uniq_favorites__and_favoritables", unique: true
+    t.index ["favoritable_type", "favoritable_id"], name: "index_favorites_on_favoritable"
+    t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
+    t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor"
+    t.index ["scope"], name: "index_favorites_on_scope"
+  end
+
   create_table "landmarks", force: :cascade do |t|
     t.text "description"
     t.float "long"
@@ -92,19 +110,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_06_072816) do
     t.bigint "bike_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.index ["bike_id"], name: "index_reviews_on_bike_id"
     t.index ["route_id"], name: "index_reviews_on_route_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
   create_table "routes", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.string "ride_type"
     t.float "waypoints"
     t.string "videos_url"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ride_type", array: true
     t.index ["user_id"], name: "index_routes_on_user_id"
   end
 
@@ -136,5 +156,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_06_072816) do
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "reviews", "bikes"
   add_foreign_key "reviews", "routes"
+  add_foreign_key "reviews", "users"
   add_foreign_key "routes", "users"
 end

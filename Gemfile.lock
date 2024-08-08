@@ -83,6 +83,8 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    acts_as_favoritor (6.0.2)
+      activerecord (>= 5.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     autoprefixer-rails (10.4.19.0)
@@ -140,9 +142,10 @@ GEM
       multipart-post (~> 2)
     faraday-net_http (3.1.1)
       net-http
-    ffi (1.17.0)
+    ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     font-awesome-sass (6.5.2)
       sassc (~> 2.0)
     globalid (1.2.1)
@@ -318,6 +321,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  acts_as_favoritor
   autoprefixer-rails
   bootsnap
   bootstrap (~> 5.2)
@@ -342,6 +346,7 @@ DEPENDENCIES
   stimulus-rails
   turbo-rails
   tzinfo-data
+  uri
   web-console
 
 RUBY VERSION

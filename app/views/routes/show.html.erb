@@ -1,0 +1,103 @@
+<div class="container mt-4">
+  <div class="banner-show-route">
+    <h1><%= @route.title %></h1>
+    <h4><%= @route.description %></h4>
+    <div class="border-bottom"></div>
+    <% if @route.videos_url.present? %>
+      <div class="mt-4">
+        <h5>Route video:</h5>
+        <%= link_to @route.videos_url, target: "_blank" do %>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-play-circle me-2"></i>Play Video
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <% if @route.ride_type.present? %>
+      <div class="my-4">
+        <h5>Tags:</h5>
+        <div class="d-flex">
+          <% if @route.ride_type.is_a?(Array) %>
+            <% @route.ride_type.each do |type| %>
+              <div class="badge bg-primary me-2"><%= type %></div>
+            <% end %>
+          <% else %>
+            <div class="badge bg-primary me-2"><%= @route.ride_type %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <% if @reviews.present? %>
+      <div class="reviews-show-route">
+        <h3>Reviews:</h3>
+        <% @reviews.each do |review| %>
+          <div class="border p-4 mt-4">
+            <div class="d-flex">
+              <div class="me-2">
+                <h5><%= review.title %></h5>
+              </div>
+              <% review.rating.times do %>
+                <i class="fa-solid fa-star"></i>
+              <% end %>
+            </div>
+            <p><%= review.description %></p>
+            <div class="d-flex my-4">
+              <% if review.bike.present? %>
+                <p class="me-2">Bike Used:</p>
+                <p class="d-flex bike-details">
+                  <strong><%= review.bike.name %> <%= review.bike.year %>, <%= review.bike.brand %></strong>
+                </p>
+              <% end %>
+              <% if review.road_condition.present? %>
+                <p class="ms-4">Road Condition: <strong><%= review.road_condition %></strong></p>
+              <% end %>
+            </div>
+            <div class="mb-4">
+              <% if review.photos.present? %>
+                <p>Photos:</p>
+                <% review.photos.each do |photo| %>
+                  <%= image_tag(photo, class: "review-photo") %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="d-flex justify-content-between">
+              <div class="d-flex align-items-center">
+                <% if review.user.avatar.present? %>
+                  <div class="me-2">
+                    <%= image_tag review.user.avatar, class: "avatar" %>
+                  </div>
+                <% else %>
+                  <div class="me-2">
+                    <%= image_tag 'user-photo.png', class: "avatar" %>
+                  </div>
+                <% end %>
+                <div>
+                  <%= link_to user_path(review.user) do %>
+                    <p class="mb-0"><%= review.user.first_name %></p>
+                  <% end %>
+                  <p class="mb-0"><%= review.created_at.strftime("%B %d, %Y") %></p>
+                </div>
+              </div>
+              <div>
+                <% if current_user == review.user %>
+                  <%= link_to edit_route_review_path(route_id: @route, id: review.id) do %>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="my-4">
+      <h3>Write a review:</h3>
+      <%= simple_form_for [@route, @review] do |f| %>
+        <%= render "reviews/form", f: f %>
+        <%= f.button :submit, "Submit Review", class: "btn btn-info" %>
+      <% end %>
+    </div>
+  </div>
+  <%= button_to 'Save to My Trips', save_route_path(@route),
+    method: :post, class: 'btn btn-primary' %>
+</div>
