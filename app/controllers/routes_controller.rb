@@ -28,6 +28,8 @@ class RoutesController < ApplicationController
     authorize @route
     @reviews = @route.reviews.includes(:user).order(created_at: :desc)
     @review = @route.reviews.new
+    @comments = @route.comments.includes(:user).order(created_at: :desc)
+    @comment = @route.comments.new
   end
 
   def save
