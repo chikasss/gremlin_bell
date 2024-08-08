@@ -205,81 +205,81 @@ ami_bikes = Bike.create!(
 
 puts "Bikes created"
 
-# puts "attaching avatars to Users"
+puts "attaching avatars to Users"
 
-# file = URI.open("")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/bill_cgxobm.jpg")
 
-# bill.avatar.attach(
-#   io: file,
-#   filename: "bill_profile",
-#   content_type: "image/jpg"
-# )
-# bill.save
+bill.avatar.attach(
+  io: file,
+  filename: "bill_profile",
+  content_type: "image/jpg"
+)
+bill.save
 
-# file = URI.open("")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/hideo_qw2ipi.jpg")
 
-# hideo.avatar.attach(
-#   io: file,
-#   filename: "hideo_profile",
-#   content_type: "image/jpg"
-# )
-# hideo.save
+hideo.avatar.attach(
+  io: file,
+  filename: "hideo_profile",
+  content_type: "image/jpg"
+)
+hideo.save
 
-# file = URI.open("")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112804/mika_GL1500_m6vy8n.jpg")
 
-# mika.avatar.attach(
-#   io: file,
-#   filename: "mika_profile",
-#   content_type: "image/jpg"
-# )
-# mika.save
+mika.avatar.attach(
+  io: file,
+  filename: "mika_profile",
+  content_type: "image/jpg"
+)
+mika.save
 
-# file = URI.open("")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/eric_wqvp0k.jpg")
 
-# eric.avatar.attach(
-#   io: file,
-#   filename: "eric_profile",
-#   content_type: "image/jpg"
-# )
-# eric.save
+eric.avatar.attach(
+  io: file,
+  filename: "eric_profile",
+  content_type: "image/jpg"
+)
+eric.save
 
-# file = URI.open("")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112804/mary_yyp4sm.jpg")
 
-# mary.avatar.attach(
-#   io: file,
-#   filename: "mary_profile",
-#   content_type: "image/jpg"
-# )
-# mary.save
+mary.avatar.attach(
+  io: file,
+  filename: "mary_profile",
+  content_type: "image/jpg"
+)
+mary.save
 
-# file = URI.open("")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112804/angel_gr0bov.jpg")
 
-# angel.avatar.attach(
-#   io: file,
-#   filename: "angel_profile",
-#   content_type: "image/jpg"
-# )
-# angel.save
+angel.avatar.attach(
+  io: file,
+  filename: "angel_profile",
+  content_type: "image/jpg"
+)
+angel.save
 
-# file = URI.open("")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/vincenzo_bcx2gv.jpg")
 
-# vincenzo.avatar.attach(
-#   io: file,
-#   filename: "vincenzo_profile",
-#   content_type: "image/jpg"
-# )
-# vincenzo.save
+vincenzo.avatar.attach(
+  io: file,
+  filename: "vincenzo_profile",
+  content_type: "image/jpg"
+)
+vincenzo.save
 
-# file = URI.open("")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/ami_rqcvjg.jpg")
 
-# ami.avatar.attach(
-#   io: file,
-#   filename: "ami_profile",
-#   content_type: "image/jpg"
-# )
-# ami.save
+ami.avatar.attach(
+  io: file,
+  filename: "ami_profile",
+  content_type: "image/jpg"
+)
+ami.save
 
-# puts "avatars attached to Users"
+puts "avatars attached to Users"
 
 puts "Creating routes"
 
