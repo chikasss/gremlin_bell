@@ -30,6 +30,13 @@ class RoutesController < ApplicationController
     # @comments = @route.comments.includes(:user)
   end
 
+  def save
+    @route = Route.find(params[:id])
+    current_user.favorite(@route)
+    redirect_to @route
+    authorize @route
+  end
+
   private
 
   def route_params

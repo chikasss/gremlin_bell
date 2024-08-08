@@ -1,15 +1,17 @@
 <div class="container">
   <h1>Saved Trips for <%= @user.first_name %></h1>
-  <% if @saved_trips.any? %>
-    <ul>
-      <% @saved_trips.each do |route| %>
-        <li>
-          <h2><%= link_to route.title, route_path(route) %></h2>
-          <p><%= route.description %></p>
-        </li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No saved trips found.</p>
-  <% end %>
+
+<% if @saved_trips.any? %>
+  <ul>
+    <% @saved_trips.each do |route| %>
+      <li>
+        <h2><%= link_to route.title, route_path(route) %></h2>
+        <p><%= route.description %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No saved trips found.</p>
+<% end %>
 </div>
+
