@@ -507,10 +507,10 @@ review_for_ami_route = Review.create!(
   user: vincenzo
 )
 
-review_for_ami_route = Review.create!(
+review_for_ami_route2 = Review.create!(
   date: DateTime.new(2024,8,10,17),
   title: "Fun ride",
-  description: "I was visiting a friend in Kanagawa and he had never ridden a motorcycle. He was a bit nervous, but this ride was super smooth. (I think I may have convinced him to get a motorcycle license)",
+  description: "I was visiting a friend in Kanagawa and he had never ridden a motorcycle. He was a bit nervous, but this ride was nice and easy. (I think I may have convinced him to get a motorcycle license)",
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
@@ -546,7 +546,7 @@ review_for_eric_route = Review.create!(
   user: mika
 )
 
-review_for_eric_route = Review.create!(
+review_for_eric_route2 = Review.create!(
   date: DateTime.new(2024,7,16,17),
   title: "Beautiful during sunrise.",
   description: "Rode here during the early morning. Highly recommend it. The sun peeks right over the mountains, but not directly into your eyes.",
@@ -572,7 +572,7 @@ review_for_hideo_route = Review.create!(
   user: ami
 )
 
-review_for_hideo_route = Review.create!(
+review_for_hideo_route2 = Review.create!(
   date: DateTime.new(2024,8,15,17),
   title: "Calm ride with minimal traffic lights. There was some construction with some new signage going up, but it didn't create any traffic",
   description: "There are tunnels! VROOM!",
@@ -586,5 +586,81 @@ review_for_hideo_route = Review.create!(
 )
 
 puts "Reviews Created"
+
+puts "Attaching photos to reviews"
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122229/Review_Bill_Route_bizkh5.jpg")
+
+review_for_bill_route.photos.attach(
+  io: file,
+  filename: "bill_route_photo",
+  content_type: "image/jpg"
+)
+review_for_bill_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Mary_Route_vqxmhq.jpg")
+
+review_for_mary_route.photos.attach(
+  io: file,
+  filename: "mary_route_photo",
+  content_type: "image/jpg"
+)
+review_for_mary_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Ami_Route_amsvyg.jpg")
+
+review_for_ami_route.photos.attach(
+  io: file,
+  filename: "ami_route_photo",
+  content_type: "image/jpg"
+)
+review_for_ami_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Mika_Route_djznvl.jpg")
+
+review_for_mika_route.photos.attach(
+  io: file,
+  filename: "mika_route_photo",
+  content_type: "image/jpg"
+)
+review_for_mika_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122229/Review_Eric_Route_xoj12h.jpg")
+
+review_for_eric_route.photos.attach(
+  io: file,
+  filename: "eric_route_photo",
+  content_type: "image/jpg"
+)
+review_for_eric_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Eric_Route2_rso6zl.jpg")
+
+review_for_eric_route2.photos.attach(
+  io: file,
+  filename: "eric_route_photo2",
+  content_type: "image/jpg"
+)
+review_for_eric_route2.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Hideo_Route_pxpwms.jpg")
+
+review_for_hideo_route.photos.attach(
+  io: file,
+  filename: "hideo_route_photo",
+  content_type: "image/jpg"
+)
+review_for_hideo_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Hideo_Route2_zwzx0m.jpg")
+
+review_for_hideo_route2.photos.attach(
+  io: file,
+  filename: "hideo_route_photo2",
+  content_type: "image/jpg"
+)
+review_for_hideo_route2.save
+
+puts "Photos attached to Reviews"
 
 puts "Seeding Complete"
