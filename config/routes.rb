@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :users, only: %i[edit show update] do
+    resources :bikes, only: %i[create edit update show index new]
     member do
       get 'follow', to: 'users#follow', as: 'follow'
       get 'saved_trips', to: 'users#saved_trips', as: 'saved_trips'

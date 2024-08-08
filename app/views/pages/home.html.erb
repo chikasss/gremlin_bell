@@ -19,11 +19,11 @@
       <div class="bike-garage">
         <div class="d-flex justify-content-between">
           <h3><strong>Your Garage:</strong></h3>
-          <%= link_to "Modify your bikes", class:"card-button" %>
+          <%= link_to "Modify your bikes", user_bikes_path(current_user), class:"card-button" %>
         </div>
         <ul>
           <% @bikes.each do |bike| %>
-            <li><% bike.year %><% bike.brand %><% bike.name %></li>
+            <li><%= bike.year %> <%= bike.brand %> <%= bike.name %></li>
           <% end %>
         </ul>
       </div>
