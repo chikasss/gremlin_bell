@@ -1,10 +1,13 @@
 class UserPolicy < ApplicationPolicy
   def edit?
-    true
+    record.user == user
   end
 
   def update?
-    true
+    record.user == user
+  end
+
+  def saved_trips?
     record == user
   end
 
@@ -27,18 +30,15 @@ class UserPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def saved_trips?
-    record == user
-  end
-
   def show?
     true
   end
 
-  class Scope < ApplicationPolicy::Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    class Scope < ApplicationPolicy::Scope
+      # NOTE: Be explicit about which records you allow access to!
+      # def resolve
+      #   scope.all
+      # end
+    end
   end
 end
