@@ -1,0 +1,8 @@
+<%= link_to "Add a bike", new_user_bike_path, class:"card-button" %>
+
+
+<ul>
+  <% @bikes.each do |bike| %>
+  <li><%= bike.year %> <%= bike.brand %> <%= bike.name %></li>
+  <% end %>
+</ul>
