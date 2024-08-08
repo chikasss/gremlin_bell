@@ -1,4 +1,3 @@
-
 <div class="container mt-4">
   <div class="banner-show-route">
     <h1><%= @route.title %></h1>
@@ -32,7 +31,7 @@
       <div class="reviews-show-route">
         <h3>Reviews:</h3>
         <% @reviews.each do |review| %>
-          <div class="mt-4">
+          <div class="border p-4 mt-4">
             <div class="d-flex">
               <div class="me-2">
                 <h5><%= review.title %></h5>
@@ -51,6 +50,14 @@
               <% end %>
               <% if review.road_condition.present? %>
                 <p class="ms-4">Road Condition: <strong><%= review.road_condition %></strong></p>
+              <% end %>
+            </div>
+            <div class="mb-4">
+              <% if review.photos.present? %>
+                <p>Photos:</p>
+                <% review.photos.each do |photo| %>
+                  <%= image_tag(photo, class: "review-photo") %>
+                <% end %>
               <% end %>
             </div>
             <div class="d-flex align-items-center">
@@ -79,6 +86,6 @@
       <%= render "reviews/form" %>
     </div>
   </div>
-    <%= button_to 'Save to My Trips', save_route_path(@route),
+  <%= button_to 'Save to My Trips', save_route_path(@route),
     method: :post, class: 'btn btn-primary' %>
-  </div>
+</div>

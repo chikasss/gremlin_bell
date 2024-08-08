@@ -29,6 +29,6 @@ before_action :set_route
   end
 
   def review_params
-    params.require(:review).permit(:date, :title, :description, :rating, :videos_url, :used_bike, :road_condition, :bike_id)
+    params.require(:review).permit(:date, :title, :description, :rating, :videos_url, :used_bike, :road_condition, :bike_id, photos: [])
   end
 end
