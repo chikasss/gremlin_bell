@@ -205,7 +205,7 @@ ami_bikes = Bike.create!(
 
 puts "Bikes created"
 
-puts "attaching avatars to Users"
+puts "Attaching avatars to Users"
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/bill_cgxobm.jpg")
 
@@ -279,7 +279,7 @@ ami.avatar.attach(
 )
 ami.save
 
-puts "avatars attached to Users"
+puts "Avatars attached to Users"
 
 puts "Creating routes"
 
@@ -468,7 +468,7 @@ review_for_bill_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2002 Yamaha VMAX",
-  road_condition: "",
+  road_condition: "smooth",
   route: bill_route,
   bike_id: eric.bikes.first.id,
   user: eric
@@ -481,7 +481,7 @@ review_for_mary_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2002 Yamaha VMAX",
-  road_condition: "",
+  road_condition: "smooth",
   route: mary_route,
   bike_id: eric.bikes.first.id,
   user: eric
@@ -494,7 +494,7 @@ review_for_ami_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "",
+  road_condition: "smooth",
   route: ami_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
@@ -507,7 +507,7 @@ review_for_ami_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "",
+  road_condition: "smooth",
   route: ami_route,
   bike_id: angel.bikes.first.id,
   user: angel
@@ -520,7 +520,7 @@ review_for_mika_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "",
+  road_condition: "bumpy",
   route: mika_route,
   bike_id: angel.bikes.first.id,
   user: angel
@@ -533,7 +533,7 @@ review_for_eric_route = Review.create!(
   rating: 4,
   videos_url: "",
   used_bike: "1998 Honda GL1500",
-  road_condition: "",
+  road_condition: "cops",
   route: eric_route,
   bike_id: mika.bikes.first.id,
   user: mika
@@ -542,11 +542,11 @@ review_for_eric_route = Review.create!(
 review_for_eric_route = Review.create!(
   date: DateTime.new(2024,7,16,17),
   title: "Beautiful during sunrise.",
-  description: "Rode here during the early morning. Highly recommend it. The sun peaks right over the mountains, but not directly into your eyes.",
+  description: "Rode here during the early morning. Highly recommend it. The sun peeks right over the mountains, but not directly into your eyes.",
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "",
+  road_condition: "smooth",
   route: eric_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
@@ -559,7 +559,7 @@ review_for_hideo_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2017 Kawasaki 250TR",
-  road_condition: "",
+  road_condition: "smooth",
   route: hideo_route,
   bike_id: ami.bikes.first.id,
   user: ami
@@ -567,12 +567,12 @@ review_for_hideo_route = Review.create!(
 
 review_for_hideo_route = Review.create!(
   date: DateTime.new(2024,8,15,17),
-  title: "Calm ride with minimal traffic lights",
+  title: "Calm ride with minimal traffic lights. There was some construction with some new signage going up, but it didn't create any traffic",
   description: "There are tunnels! VROOM!",
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "",
+  road_condition: "construction",
   route: hideo_route,
   bike_id: angel.bikes.first.id,
   user: angel
