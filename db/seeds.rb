@@ -66,7 +66,7 @@ eric = User.create!(
   password_confirmation: 'password',
   first_name: 'Eric',
   last_name: 'Hall',
-  about: "Hey, I'm Scott. I own a motorcycle repair shop in Tokyo. I've been riding bikes for more than 20 years. On the weekends, I like to pick direction and just go where the road takes.",
+  about: "Hey, I'm Eric. I own a motorcycle repair shop in Tokyo. I've been riding bikes for more than 20 years. On the weekends, I like to pick direction and just go where the road takes.",
   prefecture: "Tokyo",
   social_links: { twitter: "twitter.com/notatallarealpageforeric", facebook: "facebook.com/notatallarealpageforeric", instagram: "instagram.com/notatallarealpageforeric", youtube: "youtube.com/notatallarealpageforeric", tiktok: "tiktok.com/notatallarealpageforeric"},
 )
@@ -197,7 +197,7 @@ vincenzo_bikes = Bike.create!(
 )
 
 ami_bikes = Bike.create!(
-  name: 'Z900',
+  name: '250TR',
   year: 2017,
   brand: 'Kawasaki',
   user: ami
@@ -206,6 +206,80 @@ ami_bikes = Bike.create!(
 puts "Bikes created"
 
 # puts "attaching avatars to Users"
+
+# file = URI.open("")
+
+# bill.avatar.attach(
+#   io: file,
+#   filename: "bill_profile",
+#   content_type: "image/jpg"
+# )
+# bill.save
+
+# file = URI.open("")
+
+# hideo.avatar.attach(
+#   io: file,
+#   filename: "hideo_profile",
+#   content_type: "image/jpg"
+# )
+# hideo.save
+
+# file = URI.open("")
+
+# mika.avatar.attach(
+#   io: file,
+#   filename: "mika_profile",
+#   content_type: "image/jpg"
+# )
+# mika.save
+
+# file = URI.open("")
+
+# eric.avatar.attach(
+#   io: file,
+#   filename: "eric_profile",
+#   content_type: "image/jpg"
+# )
+# eric.save
+
+# file = URI.open("")
+
+# mary.avatar.attach(
+#   io: file,
+#   filename: "mary_profile",
+#   content_type: "image/jpg"
+# )
+# mary.save
+
+# file = URI.open("")
+
+# angel.avatar.attach(
+#   io: file,
+#   filename: "angel_profile",
+#   content_type: "image/jpg"
+# )
+# angel.save
+
+# file = URI.open("")
+
+# vincenzo.avatar.attach(
+#   io: file,
+#   filename: "vincenzo_profile",
+#   content_type: "image/jpg"
+# )
+# vincenzo.save
+
+# file = URI.open("")
+
+# ami.avatar.attach(
+#   io: file,
+#   filename: "ami_profile",
+#   content_type: "image/jpg"
+# )
+# ami.save
+
+# puts "avatars attached to Users"
 
 puts "Creating routes"
 
@@ -243,7 +317,6 @@ mika_route = Route.create!(
   videos_url: "https://youtu.be/oF6xabrZblA?si=3yfWVI3uHowPjAX4",
   user: mika
 )
-
 
 eric_route = Route.create!(
   title: "Highway 38",
@@ -289,7 +362,6 @@ ami_route = Route.create!(
   videos_url: "https://youtu.be/OpF7UOxqqSU?si=ZIg4BU_kcRwEwEMR",
   user: ami
 )
-
 
 puts "Routes created"
 
@@ -442,7 +514,6 @@ review_for_eric_route = Review.create!(
   bike_id: mika.bikes.first.id,
   user: mika
 )
-
 
 puts "Reviews Created"
 
