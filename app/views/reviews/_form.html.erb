@@ -1,33 +1,30 @@
-<%= simple_form_for [@route, @review] do |f| %>
-  <%= f.input :title, label: "Title" %>
-  <%= f.input :description, label: "Description" %>
-  <div class="d-flex">
-    <div class="col-3 me-2">
-      <%= f.input :date,
+<%= f.input :title, label: "Title" %>
+<%= f.input :description, label: "Description" %>
+<div class="d-flex">
+  <div class="col-3 me-2">
+    <%= f.input :date,
             label: "Date",
             as: :string,
             input_html: { data: { controller: "datepicker" } } %>
-    </div>
-    <div class="col-3">
-      <%= f.input :rating, label: "Rating", as: :select, collection: 1..5 %>
-    </div>
-    <div class="col ms-2">
-      <div class="d-flex justify-content-between">
-        <%= f.label :photos, "Upload Photos", class: 'form-label' %>
-        <div class="form-text">
-          <strong>Note:</strong> Maximum file size is 10MB per photo.
-        </div>
+  </div>
+  <div class="col-3">
+    <%= f.input :rating, label: "Rating", as: :select, collection: 1..5 %>
+  </div>
+  <div class="col ms-2">
+    <div class="d-flex justify-content-between">
+      <%= f.label :photos, "Upload Photos", class: 'form-label' %>
+      <div class="form-text">
+        <strong>Note:</strong> Maximum file size is 10MB per photo.
       </div>
-      <%= f.file_field :photos, multiple: true, accept: 'image/*', class: 'form-control' %>
     </div>
+    <%= f.file_field :photos, multiple: true, accept: 'image/*', class: 'form-control' %>
   </div>
-  <div class="d-flex">
-    <div class="col-6 me-2">
-      <%= f.input :road_condition, label: "Road Condition" %>
-    </div>
-    <div class="col">
-      <%= f.association :bike, collection: current_user.bikes, label: "Select Bike", prompt: "Choose a bike" %>
-    </div>
+</div>
+<div class="d-flex">
+  <div class="col-6 me-2">
+    <%= f.input :road_condition, label: "Road Condition" %>
   </div>
-  <%= f.button :submit, "Submit Review", class: "btn btn-info" %>
-<% end %>
+  <div class="col">
+    <%= f.association :bike, collection: current_user.bikes, label: "Select Bike", prompt: "Choose a bike" %>
+  </div>
+</div>

@@ -26,7 +26,7 @@ class RoutesController < ApplicationController
   def show
     @route = Route.find(params[:id])
     authorize @route
-    @reviews = @route.reviews.includes(:user)
+    @reviews = @route.reviews.includes(:user).order(created_at: :desc)
     @review = @route.reviews.new
   end
 

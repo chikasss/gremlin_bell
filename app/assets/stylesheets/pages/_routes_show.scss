@@ -8,10 +8,19 @@
   }
 
   .reviews-show-route {
-    i {
+      .fa-star {
       font-size: 1.1em;
       color: $yellow;
-    }
+      }
+
+      .fa-pen-to-square {
+        color: $gray-icon;
+        transition: color 0.3s;
+
+        &:hover {
+          color: $gray-hover;
+        }
+      }
 
     .review-photo {
       width: 150px;
