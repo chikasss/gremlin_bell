@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Saved Trips for <%= @user.first_name %></h1>
+  <h1>Saved Trips for <%= @user.first_name.capitalize %></h1>
 
 <% if @saved_trips.any? %>
   <ul>
@@ -14,4 +14,3 @@
   <p>No saved trips found.</p>
 <% end %>
 </div>
-

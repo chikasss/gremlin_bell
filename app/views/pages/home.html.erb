@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container col-sm-auto col-lg-6">
   <% if user_signed_in? %>
     <div class="p-2">
       <div class="user-banner d-flex">
@@ -11,7 +11,8 @@
           <h2 class="">Hello <strong><%= current_user.first_name.capitalize %></strong>!</h2>
           <%= link_to "Edit profile", edit_user_path(current_user), class:"card-button" %>
         </div>
-        <div class="p-2 align-self-center col-1"><button><%= current_user.prefecture %></button></div>
+        <div class="p-2 align-self-center col-1 rounded-pill border-info bg-info"><i class="fa-solid fa-map-pin"> <%= current_user.prefecture %></i>
+      </div>
       </div>
       <div class="search-bar my-4">
         <%= link_to "Search for new routes:", routes_path, class:"card-button" %>
@@ -21,17 +22,20 @@
           <h3><strong>Your Garage:</strong></h3>
           <%= link_to "Modify your bikes", user_bikes_path(current_user), class:"card-button" %>
         </div>
-        <ul>
+        <div class="d-flex flex-row flex-nowrap overflow-auto">
           <% @bikes.each do |bike| %>
-            <li><%= bike.year %> <%= bike.brand %> <%= bike.name %></li>
+            <%= render 'components/bike_card', bike: bike %>
           <% end %>
-        </ul>
+          </div>
       </div>
       <div class="saved-routes">
         <div class="d-flex justify-content-between">
           <h3><strong>Your saved routes:</strong></h3>
           <%= link_to "See all your Routes", saved_trips_user_path(current_user), class:"card-button" %>
         </div>
+          <% @saved_trips.each do |route| %>
+            <%= render 'components/saved_trips_card', route: route %>
+          <% end %>
       </div>
       <div class="reviews">
         <div class="d-flex justify-content-between">
