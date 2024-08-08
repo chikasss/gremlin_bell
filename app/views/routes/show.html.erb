@@ -60,21 +60,30 @@
                 <% end %>
               <% end %>
             </div>
-            <div class="d-flex align-items-center">
-              <% if review.user.avatar.present? %>
-                <div class="me-2">
-                  <%= image_tag review.user.avatar, class: "avatar" %>
-                </div>
-              <% else %>
-                <div class="me-2">
-                  <%= image_tag 'user-photo.png', class: "avatar" %>
-                </div>
-              <% end %>
-              <div>
-                <%= link_to user_path(review.user) do %>
-                  <p class="mb-0"><%= review.user.first_name %></p>
+            <div class="d-flex justify-content-between">
+              <div class="d-flex align-items-center">
+                <% if review.user.avatar.present? %>
+                  <div class="me-2">
+                    <%= image_tag review.user.avatar, class: "avatar" %>
+                  </div>
+                <% else %>
+                  <div class="me-2">
+                    <%= image_tag 'user-photo.png', class: "avatar" %>
+                  </div>
                 <% end %>
-                <p class="mb-0"><%= review.created_at.strftime("%B %d, %Y") %></p>
+                <div>
+                  <%= link_to user_path(review.user) do %>
+                    <p class="mb-0"><%= review.user.first_name %></p>
+                  <% end %>
+                  <p class="mb-0"><%= review.created_at.strftime("%B %d, %Y") %></p>
+                </div>
+              </div>
+              <div>
+                <% if current_user == review.user %>
+                  <%= link_to edit_route_review_path(route_id: @route, id: review.id) do %>
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>
@@ -83,7 +92,10 @@
     <% end %>
     <div class="my-4">
       <h3>Write a review:</h3>
-      <%= render "reviews/form" %>
+      <%= simple_form_for [@route, @review] do |f| %>
+        <%= render "reviews/form", f: f %>
+        <%= f.button :submit, "Submit Review", class: "btn btn-info" %>
+      <% end %>
     </div>
   </div>
   <%= button_to 'Save to My Trips', save_route_path(@route),
