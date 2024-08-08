@@ -1,0 +1,21 @@
+.text-muted {
+  --bs-text-opacity: 1;
+  color: #6c757d;
+  text-decoration:none;
+}
+i {
+  text-decoration: none;
+}
+
+.footer-links {
+    a {
+    text-decoration: none;
+    color: black;
+    }
+}
+
+.footer {
+  margin-top: auto;
+  flex-grow: 0;
+  text-align: center;
+}
