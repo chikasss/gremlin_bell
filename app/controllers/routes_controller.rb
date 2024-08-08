@@ -34,6 +34,7 @@ class RoutesController < ApplicationController
     @route = Route.find(params[:id])
     current_user.favorite(@route)
     redirect_to @route
+    flash[:notice] = "Route saved to your trips"
     authorize @route
   end
 
