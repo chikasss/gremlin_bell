@@ -1,4 +1,5 @@
-<div class="container">
+
+  <div class="container">
   <div class="p-2">
     <div class="user-banner d-flex">
       <%# <% if @user.avatar.present? %>
@@ -10,21 +11,35 @@
       <h2 class="">Hello <strong><%= current_user.first_name %></strong>!</h2>
     </div>
     <div class="p-2 align-self-center col-1"><button>LOCATION PLACEHOLDER</button></div>
-  </div>
+    </div>
+
   <div class="search-bar my-4">
     <%= link_to "Search for new routes:", routes_path, class:"card-button" %>
   </div>
+  <div class="bike-garage">
+    <div class="d-flex justify-content-between">
+      <h3><strong>Your Garage:</strong></h3>
+        <%= link_to "Modify your bikes", class:"card-button" %>
+    </div>
+      <ul>
+        <% @bikes.each do |bike| %>
+          <li><% bike.year %><% bike.brand %><% bike.name %></li>
+        <% end %>
+      </ul>
+  </div>
+
   <div class="saved-routes">
     <div class="d-flex justify-content-between">
       <h3><strong>Your saved routes:</strong></h3>
       <%= link_to "See all your Routes", class:"card-button" %>
     </div>
   </div>
+
   <div class="reviews">
     <div class="d-flex justify-content-between">
       <h3><strong>Your reviews</strong></h3>
       <%= link_to "See all your reviews", class:"card-button" %>
     </div>
   </div>
-</div>
+
 </div>
