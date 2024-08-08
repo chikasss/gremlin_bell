@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
+  before_action :set_user, only: [:edit, :update, :show, :saved_trips]
+
 
   def edit
     authorize @user
@@ -7,11 +8,22 @@ class UsersController < ApplicationController
 
   def update
     authorize @user
+    
     if @user.update(user_params.merge(social_links: social_params))
       redirect_to root_path, notice: "Profile was successfully updated.", status: :see_other
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def show
+    authorize @user
+  end
+
+  def saved_trips
+    authorize @user
+    @saved_trips = @user.all_favorited
+    # @user.favorited_routes
   end
 
   private

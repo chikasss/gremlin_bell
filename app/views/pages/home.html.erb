@@ -1,31 +1,51 @@
 <div class="container">
-  <div class="p-2">
-    <div class="user-banner d-flex">
-      <%# <% if @user.avatar.present? %>
-      <%# <div class="p-2"><%= image_tag @user.avatar, class: "avatar-image" %></div>
-    <%# <% else %>
-    <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-image" %></div>
-    <%# <% end %>
-    <div class="p-2 align-self-center col">
-      <h2 class="">Hello <strong><%= current_user.first_name.capitalize %></strong>!</h2>
-        <%= link_to "Edit profile", edit_user_path(current_user), class:"card-button" %>
+  <% if user_signed_in? %>
+    <div class="p-2">
+      <div class="user-banner d-flex">
+        <% if current_user.avatar.present? %>
+          <div class="p-2"><%= image_tag current_user.avatar, class: "avatar-image" %></div>
+        <% else %>
+          <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-image" %></div>
+        <% end %>
+        <div class="p-2 align-self-center col">
+          <h2 class="">Hello <strong><%= current_user.first_name %></strong>!</h2>
+          <%= link_to "Edit profile", edit_user_path(current_user), class:"card-button" %>
+        </div>
+        <div class="p-2 align-self-center col-1"><button>LOCATION PLACEHOLDER</button></div>
+      </div>
+      <div class="search-bar my-4">
+        <%= link_to "Search for new routes:", routes_path, class:"card-button" %>
+      </div>
+      <div class="bike-garage">
+        <div class="d-flex justify-content-between">
+          <h3><strong>Your Garage:</strong></h3>
+          <%= link_to "Modify your bikes", class:"card-button" %>
+        </div>
+        <ul>
+          <% @bikes.each do |bike| %>
+            <li><% bike.year %><% bike.brand %><% bike.name %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="saved-routes">
+        <div class="d-flex justify-content-between">
+          <h3><strong>Your saved routes:</strong></h3>
+          <%= link_to "See all your Routes", saved_trips_user_path(current_user), class:"card-button" %>
+        </div>
+      </div>
+      <div class="reviews">
+        <div class="d-flex justify-content-between">
+          <h3><strong>Your reviews</strong></h3>
+          <%= link_to "See all your reviews", class:"card-button" %>
+        </div>
+      </div>
     </div>
-    <div class="p-2 align-self-center col-1"><button>LOCATION PLACEHOLDER</button></div>
-  </div>
-  <div class="search-bar my-4">
-    <%= link_to "Search for new routes:", routes_path, class:"card-button" %>
-  </div>
-  <div class="saved-routes">
-    <div class="d-flex justify-content-between">
-      <h3><strong>Your saved routes:</strong></h3>
-      <%= link_to "See all your Routes", class:"card-button" %>
+  <% else %>
+    <div class="m-4">
+      <%= link_to "Login", new_user_session_path %>
     </div>
-  </div>
-  <div class="reviews">
-    <div class="d-flex justify-content-between">
-      <h3><strong>Your reviews</strong></h3>
-      <%= link_to "See all your reviews", class:"card-button" %>
+    <div class="m-4">
+      <%= link_to "Register", new_user_registration_path %>
     </div>
-  </div>
-</div>
+  <% end %>
 </div>

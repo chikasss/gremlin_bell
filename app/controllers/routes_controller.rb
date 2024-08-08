@@ -30,6 +30,14 @@ class RoutesController < ApplicationController
     # @comments = @route.comments.includes(:user)
   end
 
+  def save
+    @route = Route.find(params[:id])
+    current_user.favorite(@route)
+    redirect_to @route
+    flash[:notice] = "Route saved to your trips"
+    authorize @route
+  end
+
   private
 
   def route_params
