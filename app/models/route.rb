@@ -1,7 +1,9 @@
 class Route < ApplicationRecord
   belongs_to :user
+  
   has_many :comments, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  acts_as_favoritable
   has_many_attached :photos
   acts_as_favoritable
 
