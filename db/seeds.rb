@@ -291,6 +291,7 @@ bill_route = Route.create!(
   videos_url: "https://youtu.be/TZezHtKiq-Y?si=fcgT01QuDZ5EkteT",
   user: bill
 )
+
 bill_route2 = Route.create!(
   title: "Ocean Drive",
   description: "Beautiful ride along the coast in Hokkaido.",

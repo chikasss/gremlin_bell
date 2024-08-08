@@ -56,6 +56,7 @@ gem "cloudinary"
 # Added manually
 
 gem "pundit"
+gem "uri"
 
 group :development, :test do
   gem "dotenv-rails"
