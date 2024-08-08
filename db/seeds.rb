@@ -303,7 +303,7 @@ bill_route2 = Route.create!(
 hideo_route = Route.create!(
   title: "Jozankei",
   description: "Just a calm ride by the tree covered mountains.",
-  ride_type: ["Calm"],
+  ride_type: ["Calm", "Mountainous"],
   # waypoints: ,
   videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
   user: hideo
@@ -321,7 +321,7 @@ mika_route = Route.create!(
 eric_route = Route.create!(
   title: "Highway 38",
   description: "Calm ride surrounded by nature. I recommend going during the autumn months to enjoy various autumn colors. Cops love hanging around here so best not to speed. Small downside, but the view is worth it.",
-  ride_type: ["Scenic"],
+  ride_type: ["Scenic", "Mountainous"],
   # waypoints: ,
   videos_url: "https://youtu.be/Omf5kd-EK0M?si=B79VP_lMx5YlYbAM",
   user: eric
@@ -433,6 +433,29 @@ mika_response_to_bill = Comment.create!(
   user: mika
 )
 
+bill_to_eric_route = Comment.create!(
+  description: "This looks great! I know someone that lives in the area. I'm gonna let him know about this.",
+  route: eric_route,
+  user: bill
+)
+
+eric_response_to_bill = Comment.create!(
+  description: "Wait! Are you friends with Ray? I remember him mentioning he knew a Bill that lives in Hokkaido",
+  route: eric_route,
+  user: eric
+)
+
+bill_to_eric = Comment.create!(
+  description: "Ha! Yes, that's him! We went to college together. We got our motorcycle licenses at the same time too!",
+  route: eric_route,
+  user: bill
+)
+eric_response_to_bill2 = Comment.create!(
+  description: "Small world!",
+  route: eric_route,
+  user: eric
+)
+
 puts "Comments created"
 
 puts "Creating Reviews"
@@ -513,6 +536,45 @@ review_for_eric_route = Review.create!(
   route: eric_route,
   bike_id: mika.bikes.first.id,
   user: mika
+)
+
+review_for_eric_route = Review.create!(
+  date: DateTime.new(2024,7,16,17),
+  title: "Beautiful during sunrise.",
+  description: "Rode here during the early morning. Highly recommend it. The sun peaks right over the mountains, but not directly into your eyes.",
+  rating: 5,
+  videos_url: "",
+  used_bike: "2022 Kawasaki Z900",
+  road_condition: "",
+  route: eric_route,
+  bike_id: vincenzo.bikes.first.id,
+  user: vincenzo
+)
+
+review_for_hideo_route = Review.create!(
+  date: DateTime.new(2024,7,30,17),
+  title: "Nice getaway ride",
+  description: "Sometimes I just want to get away from city life and this ride definitely does the job. I didn't run into any trucks during my entire ride.",
+  rating: 5,
+  videos_url: "",
+  used_bike: "2017 Kawasaki 250TR",
+  road_condition: "",
+  route: hideo_route,
+  bike_id: ami.bikes.first.id,
+  user: ami
+)
+
+review_for_hideo_route = Review.create!(
+  date: DateTime.new(2024,8,15,17),
+  title: "Calm ride with minimal traffic lights",
+  description: "There are tunnels! VROOM!",
+  rating: 5,
+  videos_url: "",
+  used_bike: "2004 Yamaha V-MAX",
+  road_condition: "",
+  route: hideo_route,
+  bike_id: angel.bikes.first.id,
+  user: angel
 )
 
 puts "Reviews Created"
