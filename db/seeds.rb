@@ -13,7 +13,7 @@ User.destroy_all
 
 puts 'Creating admin user...'
 
-User.create!(
+admin = User.create!(
   email: 'admin@mail.com',
   password: 'admin123',
   first_name: 'Admin',
@@ -118,6 +118,13 @@ ami = User.create!(
 puts "Users created"
 
 puts "Creating bikes"
+
+admin_bikes = Bike.create!(
+  name: 'ADMIN',
+  year: 2024,
+  brand: 'ADMIN',
+  user: admin
+)
 
 bill_bikes = Bike.create!(
   name: 'Z900',
