@@ -57,6 +57,7 @@ gem 'acts_as_favoritor'
 # Added manually
 
 gem "pundit"
+gem "uri"
 
 group :development, :test do
   gem "dotenv-rails"
