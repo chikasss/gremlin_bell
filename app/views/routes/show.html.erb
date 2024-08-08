@@ -1,3 +1,4 @@
+
 <div class="container mt-4">
   <div class="banner-show-route">
     <h1><%= @route.title %></h1>
@@ -9,8 +10,6 @@
         <%= link_to @route.videos_url, target: "_blank" do %>
           <div class="d-flex align-items-center">
             <i class="fas fa-play-circle me-2"></i>Play Video
-            <%# <iframe width="560" height="315" src="<%= @route.videos_url" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> %>
-            <%# This is for imbedding the video, but the link needs to be an embed link not a watch link %>
           </div>
         <% end %>
       </div>
@@ -23,5 +22,6 @@
         </div>
       </div>
     <% end %>
+    <%= button_to 'Save to My Trips', save_route_path(@route),
+    method: :post, class: 'btn btn-primary' %>
   </div>
-</div>
