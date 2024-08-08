@@ -1,0 +1,5 @@
+<%= simple_form_for [@route, @comment] do |f| %>
+  <%= f.label 'Insert your comment:' %>
+  <%= f.input :description, label: false %>
+  <%= f.button :submit, "Submit your comment", class: "btn btn-info" %>
+<% end %>

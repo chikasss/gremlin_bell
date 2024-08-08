@@ -27,12 +27,9 @@
         </div>
       </div>
     <% end %>
-    <% if @route.comments.present? %>
-      <div class="m-4 px-4">
-        <h3>Route <strong><%= @route.title %></strong> Comments:</h3>
-        <%= render 'comments/comments_show_route' %>
-      </div>
-    <% end %>
+    <div class="m-4 px-4">
+      <%= render 'comments/comments_show_route' %>
+    </div>
     <div class="route-reviews">
       <%= render 'reviews/reviews_show_route' %>
     </div>
