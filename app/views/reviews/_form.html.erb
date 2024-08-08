@@ -1,9 +1,10 @@
 <%= simple_form_for [@route, @review] do |f| %>
+  <%= f.input :date, label: "Date" %>
   <%= f.input :title, label: "Title" %>
   <%= f.input :description, label: "Description" %>
   <%= f.input :rating, label: "Rating", as: :select, collection: 1..5 %>
-  <%= f.input :used_bike, label: "Bike Used" %>
   <%= f.input :road_condition, label: "Road Condition" %>
+  <%= f.input :used_bike, label: "Bike Used" %>
   <%= f.association :bike, collection: current_user.bikes, label: "Select Bike", prompt: "Choose a bike" %>
   <%= f.button :submit, "Submit Review", class: "btn btn-primary" %>
 <% end %>

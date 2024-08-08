@@ -10,13 +10,8 @@ before_action :set_route
   end
   def create
     @review = @route.reviews.build(review_params)
-    @review.user = current_user  # Set the current user as the review's user
+    @review.user = current_user 
     authorize @review  # Pundit authorization
-
-    # Log the review attributes and errors if any
-    Rails.logger.info "Review attributes: #{@review.attributes.inspect}"
-    Rails.logger.info "Review valid? #{@review.valid?}"
-    Rails.logger.info "Review errors: #{@review.errors.full_messages.join(', ')}" unless @review.valid?
 
     if @review.save
       Rails.logger.info "Review was successfully saved."
@@ -34,6 +29,6 @@ before_action :set_route
   end
 
   def review_params
-    params.require(:review).permit(:date, :title, :description, :rating, :videos_url, :used_bike, :road_condition)
+    params.require(:review).permit(:date, :title, :description, :rating, :videos_url, :used_bike, :road_condition, :bike_id)
   end
 end

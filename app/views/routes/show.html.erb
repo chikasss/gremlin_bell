@@ -41,8 +41,11 @@
               <% end %>
             </div>
             <p><%= review.description %></p>
-            <div>
-              <p class="my-4">Bike Used: <strong><%= review.used_bike %></strong></p>
+            <div class="d-flex my-4">
+              <p class="me-4">Bike Used: <strong><%= review.used_bike %></strong></p>
+              <% if @review.road_condition.present? %>
+                <p class="ms-4">Road Condition: <strong><%= review.road_condition %></strong></p>
+              <% end %>
             </div>
             <div class="d-flex align-items-center">
               <% if review.user.avatar.present? %>
