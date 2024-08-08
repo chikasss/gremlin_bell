@@ -43,8 +43,13 @@
             </div>
             <p><%= review.description %></p>
             <div class="d-flex my-4">
-              <p class="me-4">Bike Used: <strong><%= review.used_bike %></strong></p>
-              <% if @review.road_condition.present? %>
+              <% if review.bike.present? %>
+                <p class="me-2">Bike Used:</p>
+                <p class="d-flex bike-details">
+                  <strong><%= review.bike.name %> <%= review.bike.year %>, <%= review.bike.brand %></strong>
+                </p>
+              <% end %>
+              <% if review.road_condition.present? %>
                 <p class="ms-4">Road Condition: <strong><%= review.road_condition %></strong></p>
               <% end %>
             </div>

@@ -1,10 +1,18 @@
 <%= simple_form_for [@route, @review] do |f| %>
-  <%= f.input :date, label: "Date" %>
   <%= f.input :title, label: "Title" %>
   <%= f.input :description, label: "Description" %>
-  <%= f.input :rating, label: "Rating", as: :select, collection: 1..5 %>
+  <div class="d-flex">
+    <div class="col-6 me-2">
+      <%= f.input :date,
+            label: "Date",
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
+    </div>
+    <div class="col">
+      <%= f.input :rating, label: "Rating", as: :select, collection: 1..5 %>
+    </div>
+  </div>
   <%= f.input :road_condition, label: "Road Condition" %>
-  <%= f.input :used_bike, label: "Bike Used" %>
   <%= f.association :bike, collection: current_user.bikes, label: "Select Bike", prompt: "Choose a bike" %>
-  <%= f.button :submit, "Submit Review", class: "btn btn-primary" %>
+  <%= f.button :submit, "Submit Review", class: "btn btn-info" %>
 <% end %>
