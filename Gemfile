@@ -58,6 +58,7 @@ gem 'acts_as_favoritor'
 
 gem "pundit"
 gem "uri"
+gem "ffi", "< 1.17.0"
 
 group :development, :test do
   gem "dotenv-rails"

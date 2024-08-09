@@ -28,5 +28,31 @@
       border-radius: 6px;
       margin-right: 5px;
     }
+
+    .review-form{
+      transition: opacity 1.3s ease, max-height 1.3s ease;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+    }
+    
+    .review-form.visible {
+        opacity: 1;
+        max-height: 500px;
+    }
+  }
+
+  .comments-routes-show {
+    .comment-form  {
+      transition: opacity 1.3s ease, max-height 1.3s ease;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+    }
+  
+    .comment-form.visible {
+      opacity: 1;
+      max-height: 300px;
+    }
   }
 }

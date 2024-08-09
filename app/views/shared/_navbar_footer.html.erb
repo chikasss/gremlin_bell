@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <footer class="nav-footer mt-auto py-3">
   <div class="container">
     <div class="d-inline-flex">
@@ -6,8 +7,10 @@
           <%= link_to root_path, {style: "text-decoration: none"} do %>
             <i class="fa-solid fa-house fa-lg p-4"></i>
           <% end %>
+          <% if user_signed_in? %>
           <%= link_to user_bikes_path(current_user), {style: "text-decoration: none"} do %>
             <i class="fa-solid fa-motorcycle"></i>
+          <% end %>
           <% end %>
           <%= link_to routes_path, {style: "text-decoration: none"} do %>
             <i class="fas fa-search fa-lg p-4"></i>
@@ -19,3 +22,4 @@
     </div>
   </div>
 </footer>
+  <% end %>
