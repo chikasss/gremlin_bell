@@ -12,9 +12,9 @@
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="d-flex align-items-center">
           <% if current_user.avatar.present? %>
-            <div class="p-2"><%= image_tag current_user.avatar, class: "avatar-bordered" %></div>
+            <div class="p-2"><%= image_tag current_user.avatar.key, class: "avatar-bordered" %></div>
           <% else %>
-            <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-bordered" %></div>
+            <div class="p-2"><%= cl_image_tag "user-photo_paaiho", class: "avatar-bordered" %></div>
           <% end %>
           <div class="profile-info">
             <h2 class="mb-0"><strong><%= current_user.first_name %></strong>'s profile</h2>
@@ -23,7 +23,7 @@
         </div>
         <div class="local-user"><button><i class="fa-solid fa-location-dot"></i> <%= current_user.prefecture %></button></div>
       </div>
-      <div class="bike-garage">
+      <div class="">
         <div class="d-flex justify-content-between mb-4">
           <h3><strong><%= @user.first_name %>'s Garage:</strong></h3>
           <% if @user == current_user %>

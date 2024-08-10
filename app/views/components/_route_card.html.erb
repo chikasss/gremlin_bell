@@ -1,6 +1,6 @@
 <div class="route-card m-2">
   <%= link_to route_path(route) do %>
-    <%= image_tag 'route-bg.jpg', class: "card-img" %>
+    <%= cl_image_tag route.photos.first.key, class: "card-img" %>
     <div class="card-body">
       <h5 class="card-title"><%= route.title %></h5>
       <div class="d-flex justify-content-between">
