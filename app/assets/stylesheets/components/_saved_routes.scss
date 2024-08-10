@@ -12,7 +12,7 @@
 
   h5 {
     color: $black;
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   p{
@@ -54,4 +54,8 @@
   color: $white;
   padding: 0.3rem 1rem;
   font-weight: 600;
+}
+
+.logo-icon {
+  float: right;
 }

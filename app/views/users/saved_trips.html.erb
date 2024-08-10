@@ -1,18 +1,18 @@
 
-<div class="container">
-  <h1>Saved Trips for <%= @user.first_name %></h1>
+<div class="container mt-5">
+      <%= image_tag 'logo-red.svg', class: 'logo-icon float-end' %>
 
-<% if @saved_trips.any? %>
-  <ul>
-    <% @saved_trips.each do |route| %>
-      <li>
-        <h2><%= link_to route.title, route_path(route) %></h2>
-        <p><%= route.description %></p>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No saved trips found.</p>
-<% end %>
-</div>
+  <h1 class="text-center">Saved Trips for <%= @user.first_name.capitalize %></h1>
+    <div class="container mt-3">
+        <% if @saved_trips.any? %>
+          <% @saved_trips.each do |route| %>
+           <div class="d-flex flex-column saved-route-card">
+            <%= render "components/saved_routes_card", route: route %>
+              </div>
+            <% end %>
+      <% else %>
+        <p>No saved trips found.</p>
+      <% end %>
+    </div>
+  </div>
 
