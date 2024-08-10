@@ -1,13 +1,6 @@
 <div class="container mt-4">
   <div class="index-routes">
-    <div class="d-flex justify-content-between mb-4">
-      <div class="d-flex justify-content-start back-btn">
-        <%= link_to (request.referrer || root_path) do %>
-          <i class="fa-solid fa-circle-chevron-left"></i>
-        <% end %>
-      </div>
-      <%= image_tag 'logo-red.svg', class:"logo-icon" %>
-    </div>
+    <%= render 'shared/logo_btn_top' %>
     <div class="row d-flex justify-content-center">
       <div class="col-10 d-flex">
         <div class="col-11">
