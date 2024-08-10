@@ -1,13 +1,9 @@
 <div class="col-md-4 mb-4">
   <div class="bike-card">
-    <div class="d-flex flex-column align-items-center">
-      <div class="bg-image card shadow-1-strong"
-      style="background-image: url(/assets/bike_garage.jpg)">
-        <div class="mask" style="background-color: rgba(0, 0, 0, 0, 0.6);">
-          <div class="card-body text-white">
-            <h5 class="text-center mt-3"><%= bike.year %> <%= bike.brand %> <%= bike.name %></h5>
-          </div>
-        </div>
+    <div class="card shadow-1-strong">
+      <%= image_tag 'bike_garage.jpg', class: 'bg-image' %>
+      <div class="card-body text-white">
+        <h5 class="text-center mt-3"><%= bike.year %> <%= bike.brand %> <%= bike.name %></h5>
       </div>
     </div>
   </div>
