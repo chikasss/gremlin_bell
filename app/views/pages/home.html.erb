@@ -1,42 +1,63 @@
-<div class="container">
-  <% if user_signed_in? %>
-    <div class="p-2">
-      <div class="user-banner d-flex">
-        <% if current_user.avatar.present? %>
-          <div class="p-2"><%= image_tag current_user.avatar, class: "avatar-image" %></div>
-        <% else %>
-          <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-image" %></div>
-        <% end %>
-        <div class="p-2 align-self-center col">
-          <h2 class="">Hello <strong><%= current_user.first_name.capitalize %></strong>!</h2>
-          <%= link_to "Edit profile", edit_user_path(current_user), class:"card-button" %>
-        </div>
-        <div class="p-2 align-self-center col-1"><button><%= current_user.prefecture %></button></div>
-      </div>
-      <div class="search-bar my-4">
-        <%= link_to "Search for new routes:", routes_path, class:"card-button" %>
-      </div>
-      <div class="bike-garage">
+<div class="bg-home">
+  <div class="container">
+    <div class="d-flex justify-content-end p-4">
+      <%= image_tag 'logo-white.svg', class:"logo-icon" %>
+    </div>
+    <% if user_signed_in? %>
+      <div class="p-2">
         <div class="d-flex justify-content-between">
-          <h3><strong>Your Garage:</strong></h3>
-          <%= link_to "Modify your bikes", user_bikes_path(current_user), class:"card-button" %>
+          <div class="d-flex align-items-center">
+            <% if current_user.avatar.present? %>
+              <div class="p-2"><%= image_tag current_user.avatar, class: "avatar-bordered" %></div>
+            <% else %>
+              <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-bordered" %></div>
+            <% end %>
+            <div>
+              <h2 class="mb-0">Hello <strong><%= current_user.first_name.capitalize %></strong>!</h2>
+              <%= link_to "See your profile", user_path(current_user), class:"card-button" %>
+            </div>
+          </div>
+          <div class="local-user"><button><i class="fa-solid fa-location-dot"></i> <%= current_user.prefecture %></button></div>
         </div>
-        <ul>
-          <% @bikes.each do |bike| %>
-            <li><%= bike.year %> <%= bike.brand %> <%= bike.name %></li>
+        <div class="discover-routes">
+          <h3 class="mb-0 pb-0">Discover new routes</h3>
+          <p class='pb-0'>Find the best route for you</p>
+        </div>
+      </div>
+    </div>
+    <div class="routes-home-page">
+      <div class="container">
+        <div class='pt-4'>
+          <%= link_to routes_path do %>
+            <div class="row d-flex justify-content-center">
+              <div class="col-10">
+                <%= render 'components/search_bar' %>
+              </div>
+            </div>
           <% end %>
-        </ul>
-      </div>
-      <div class="saved-routes">
-        <div class="d-flex justify-content-between">
-          <h3><strong>Your saved routes:</strong></h3>
-          <%= link_to "See all your Routes", saved_trips_user_path(current_user), class:"card-button" %>
         </div>
-      </div>
-      <div class="reviews">
-        <div class="d-flex justify-content-between">
-          <h3><strong>Your reviews</strong></h3>
-          <%= link_to "See all your reviews", class:"card-button" %>
+        <div class="d-flex justify-content-between mt-4 mx-2">
+          <h3>Nearby</h3>
+          <%= link_to routes_path  do %>
+            <p>See all</p>
+          <% end %>
+        </div>
+        <div class="home-page-route-cards">
+          <%= render 'components/route_card' %>
+        </div>
+        <div class="my-4 pt-4">
+          <h3 class="my-4">Search for...</h3>
+          <div class="routes-tags">
+            <div class="container">
+              <div class="row justify-content-center">
+                <% @ride_types.each do |type| %>
+                  <div class="col-md-3 col-6 text-center mb-2">
+                    <span class="route-tag rounded-pill"><%= type %></span>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
