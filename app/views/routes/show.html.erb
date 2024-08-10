@@ -24,17 +24,11 @@
       <i class="fa-solid fa-quote-right"></i>
     </div>
     <% if @route.videos_url.present? %>
-      <div class="my-2">
+      <div class="my-2 p-4">
         <h5>Route video:</h5>
-        <%= link_to @route.videos_url, target: "_blank" do %>
-          <div class="video-container">
-            <%= image_tag 'video-img', class: "img-video" %>
-            <div class="overlay"></div>
-            <div class="play-icon-container">
-              <i class="fas fa-play-circle play-icon"></i>
-            </div>
-          </div>
-        <% end %>
+        <div class="d-flex justify-content-center align-items-center">
+          <iframe width="300" height="150" src="http://www.youtube.com/embed/<%= @tail %>" frameborder="0"></iframe>
+        </div>
       </div>
     <% end %>
     <div class="border-bottom mx-4 mb-4"></div>
