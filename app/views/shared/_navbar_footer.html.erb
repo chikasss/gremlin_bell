@@ -15,7 +15,9 @@
             <%= link_to routes_path, {style: "text-decoration: none"} do %>
               <i class="fas fa-search fa-lg p-4"></i>
             <% end %>
-            <i class="fa-solid fa-location-dot fa-lg p-4"></i>
+            <%= link_to saved_trips_user_path(current_user), {style: "text-decoration: none"} do %>
+              <i class="fa-duotone fa-solid fa-route" style="--fa-primary-color: #960801; --fa-secondary-color: #960801;"></i>
+            <% end %>
             <i class="fa-solid fa-square-plus fa-lg p-4"></i>
           </span>
         </div>
