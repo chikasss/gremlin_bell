@@ -1,0 +1,19 @@
+<div class="saved-route-card m-2">
+  <%= link_to route_path(route) do %>
+
+    <%= image_tag 'route-bg.jpg', class: "card-img" %>
+
+    <div class="card-body" >
+      <h5 class=""><%= route.title %></h5>
+      <p class="card-text"><%= route.description %></p>
+
+      <div class="d-flex align-item-center">
+        <div class="d-flex align-items-center">
+          <i class="fa-solid fa-location-dot"></i>
+          <p class='ms-2 pb-0 mb-0'>Japan</p>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

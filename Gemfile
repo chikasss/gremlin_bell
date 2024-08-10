@@ -52,6 +52,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "cloudinary"
 gem 'acts_as_favoritor'
+gem 'youtube_rails'
 # gem "dotenv-rails"
 
 # Added manually
