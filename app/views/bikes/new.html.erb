@@ -1,6 +1,6 @@
 <%= simple_form_for [@user, @bike] do |f| %>
-  <%= f.input :year, label: 'Year', required: true %>
-  <%= f.input :brand, label: 'Brand', required: true %>
+  <%= f.input :year, collection: @year, required: true %>
+  <%= f.input :brand, collection: @brand.sort, required: true %>
   <%= f.input :name, label: 'Name', required: true %>
 
   <%= f.button :submit, 'Create Bike', class: 'btn btn-primary' %>

@@ -136,7 +136,7 @@ bill_bikes = Bike.create!(
 hideo_bikes = Bike.create!(
   name: 'XL1200R',
   year: 2004,
-  brand: 'Harley Davidson',
+  brand: 'Harley-Davidson',
   user: hideo
 )
 
@@ -164,7 +164,7 @@ eric_bikes2 = Bike.create!(
 eric_bikes3 = Bike.create!(
   name: 'XL1200R',
   year: 2004,
-  brand: 'Harley Davidson',
+  brand: 'Harley-Davidson',
   user: eric
 )
 
