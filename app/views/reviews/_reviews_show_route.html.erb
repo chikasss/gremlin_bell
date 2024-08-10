@@ -1,19 +1,7 @@
 <div class="reviews-show-route">
-  <div data-controller="new-review" class="mb-0 pb-0">
-    <div class="mt-4 me-4 d-flex justify-content-end" data-action="click->new-review#newReview">
-      <button class="btn btn-warning" data-new-review-target="writeReviewBtn">Write a Route Review</button>
-    </div>
-    <div class="my-4 review-form" data-new-review-target="reviewForm">
-      <h3>Write a review:</h3>
-      <%= simple_form_for [@route, @review] do |f| %>
-        <%= render "reviews/form", f: f %>
-        <%= f.button :submit, "Submit Review", class: "btn btn-info" %>
-      <% end %>
-    </div>
-  </div>
   <% if @reviews.present? %>
     <h3>Reviews:</h3>
-    <% @reviews.each do |review| %>
+    <% @reviews.limit(3).each do |review| %>
       <div class="border p-4 mt-4">
         <div>
           <% review.rating.times do %>
@@ -24,13 +12,15 @@
           </div>
         </div>
         <p><%= review.description %></p>
-        <div class="d-flex my-4">
-          <% if review.bike.present? %>
-            <p class="me-2">Bike Used:</p>
-            <p class="d-flex bike-details">
-              <strong><%= review.bike.name %> <%= review.bike.year %>, <%= review.bike.brand %></strong>
-            </p>
-          <% end %>
+        <div class="d-flex my-2 bike-p">
+          <div class="me-2">
+            <% if review.bike.present? %>
+              <p class="mb-0">Bike Used:</p>
+              <p class="d-flex bike-details">
+                <strong><%= review.bike.name %> <%= review.bike.year %>, <%= review.bike.brand %></strong>
+              </p>
+            <% end %>
+          </div>
           <% if review.road_condition.present? %>
             <p class="ms-4">Road Condition: <strong><%= review.road_condition %></strong></p>
           <% end %>
@@ -43,7 +33,7 @@
             <% end %>
           <% end %>
         </div>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between align-items-center">
           <div class="d-flex align-items-center">
             <% if review.user.avatar.present? %>
               <div class="me-2">
@@ -72,4 +62,18 @@
       </div>
     <% end %>
   <% end %>
+  <div data-controller="new-review" class="mb-0 pb-0">
+    <div class="mt-4 d-flex justify-content-center" data-action="click->new-review#newReview">
+      <button class="btn-light-gray " data-new-review-target="writeReviewBtn">Write a Route Review</button>
+    </div>
+    <div class="my-4 review-form" data-new-review-target="reviewForm">
+      <h3>Write a review:</h3>
+      <%= simple_form_for [@route, @review] do |f| %>
+        <%= render "reviews/form", f: f %>
+        <div class="d-flex justify-content-center">
+          <%= f.button :submit, "Submit Review", class: "btn-yellow" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
