@@ -212,6 +212,118 @@ ami_bikes = Bike.create!(
 
 puts "Bikes created"
 
+puts "Attaching bike photos to Bikes"
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270682/Z900_bill_bike_bnw7yx.webp")
+
+bill_bikes.photos.attach(
+  io: file,
+  filename: "bill_bike",
+  content_type: "image/jpg"
+)
+bill_bikes.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270686/XL1200R_hideo_bike_atoc33.png")
+
+hideo_bikes.photos.attach(
+  io: file,
+  filename: "hideo_bike",
+  content_type: "image/jpg"
+)
+hideo_bikes.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270682/GL1500_mike_bike_mpcigh.jpg")
+
+mika_bikes.photos.attach(
+  io: file,
+  filename: "mika_bike",
+  content_type: "image/jpg"
+)
+mika_bikes.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270683/VMAX_eric_bike_iudh6b.jpg")
+
+eric_bikes.photos.attach(
+  io: file,
+  filename: "eric_bike",
+  content_type: "image/jpg"
+)
+eric_bikes.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270680/GL1500_eric_bike2_gkgc2v.jpg")
+
+eric_bikes2.photos.attach(
+  io: file,
+  filename: "eric_bike2",
+  content_type: "image/jpg"
+)
+eric_bikes2.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270688/XL1200R_eric_bike3_ln2mkv.jpg")
+
+eric_bikes3.photos.attach(
+  io: file,
+  filename: "eric_bike3",
+  content_type: "image/jpg"
+)
+eric_bikes3.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270684/Z900_eric_bike4_kbryde.jpg")
+
+eric_bikes4.photos.attach(
+  io: file,
+  filename: "eric_bike4",
+  content_type: "image/jpg"
+)
+eric_bikes4.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270687/Trail125_mary_bike_eekx21.jpg")
+
+mary_bikes.photos.attach(
+  io: file,
+  filename: "mary_bike",
+  content_type: "image/jpg"
+)
+mary_bikes.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270685/Z900_mary_bike2_slozex.webp")
+
+mary_bikes2.photos.attach(
+  io: file,
+  filename: "mary_bike2",
+  content_type: "image/jpg"
+)
+mary_bikes2.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270683/VMAX_angel_bike_ckebu8.jpg")
+
+angel_bikes.photos.attach(
+  io: file,
+  filename: "angel_bike",
+  content_type: "image/jpg"
+)
+angel_bikes.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270681/Z900_vincenzo_bike_syrsgb.jpg")
+
+vincenzo_bikes.photos.attach(
+  io: file,
+  filename: "vincenzo_bike",
+  content_type: "image/jpg"
+)
+vincenzo_bikes.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270686/250TR_ami_bike_t81mjv.jpg")
+
+ami_bikes.photos.attach(
+  io: file,
+  filename: "ami_bike",
+  content_type: "image/jpg"
+)
+ami_bikes.save
+
+puts "Photos attached to Bikes"
+
 puts "Attaching avatars to Users"
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/bill_cgxobm.jpg")
