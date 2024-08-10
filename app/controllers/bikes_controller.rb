@@ -4,6 +4,7 @@ class BikesController < ApplicationController
 
   def index
     @bikes = policy_scope(Bike)
+    @bikes = @user.bikes
   end
 
   def show
