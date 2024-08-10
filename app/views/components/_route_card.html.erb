@@ -1,7 +1,7 @@
 <div class="route-card m-2">
   <%= link_to route_path(route) do %>
     <% if route.photos.attached? && route.photos.any? %>
-      <%= image_tag(route.photos.first, class: "card-img") %>
+      <%= cl_image_tag route.photos.first.key, class: "card-img" %>
     <% else %>
       <%= image_tag('route-bg.jpg', class: "card-img") %>
     <% end %>

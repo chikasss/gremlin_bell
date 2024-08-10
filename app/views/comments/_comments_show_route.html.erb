@@ -8,11 +8,11 @@
         <% if comment.user.avatar.present? %>
           <div class="d-flex mt-2">
             <div class="me-2">
-              <%= image_tag comment.user.avatar, class: "avatar" %>
+              <%= cl_image_tag comment.user.avatar.key, class: "avatar" %>
             </div>
           <% else %>
             <div class="me-2">
-              <%= image_tag 'user-photo.png', class: "avatar" %>
+              <%= image_tag "user-photo.png", class: "avatar" %>
             </div>
           <% end %>
           <div>
