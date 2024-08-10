@@ -5,16 +5,13 @@ export default class extends Controller {
   static targets = [ "commentForm", "insertCommentBtn" ]
 
   connect() {
-    document.addEventListener('DOMContentLoaded', () => {
-      this.insertRouteComment();
-    });
+    this.updateButtonText();
   }
 
   insertRouteComment() {
     this.commentFormTarget.classList.toggle('visible');
     this.updateButtonText();
   }
-  
 
   updateButtonText() {
     if (this.commentFormTarget.classList.contains('visible')) {
