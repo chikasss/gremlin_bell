@@ -1,17 +1,36 @@
 <div class="container mt-4">
-  <h1>Routes</h1>
-  <div class="row">
-    <% @routes.each do |route| %>
-      <div class="col-md-4">
-        <div class="card card-routes" style="width: 18rem;">
-          <%= image_tag 'route-bg.jpg', class: 'card-img-top' %>
-          <div class="card-body">
-            <h5 class="card-title"><%= route.title %></h5>
-            <p class="card-text"><%= route.description %></p>
-            <%= link_to 'See Details', route_path(route), class: 'btn btn-primary' %>
-          </div>
+  <div class="index-routes">
+    <div class="d-flex justify-content-between mb-4">
+      <div class="d-flex justify-content-start back-btn">
+        <%= link_to (request.referrer || rooth_path) do %>
+          <i class="fa-solid fa-circle-chevron-left"></i>
+        <% end %>
+      </div>
+      <%= image_tag 'logo-red.svg', class:"logo-icon" %>
+    </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-10 d-flex">
+        <div class="col-11">
+          <%= link_to routes_path do %>
+            <%= render 'components/search_bar' %>
+          <% end %>
+        </div>
+        <div class="col ms-2 d-flex align-items-center justify-content-center">
+          <%= link_to '#' do %>
+            <i class="fa-solid fa-bars"></i>
+          <% end %>
         </div>
       </div>
-    <% end %>
+    </div>
+    <h1 class="mt-4">Routes</h1>
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <% @routes.each do |route| %>
+          <div class="col-12 col-md-3 mb-4 d-flex justify-content-center">
+            <%= render 'components/route_card', route: route %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

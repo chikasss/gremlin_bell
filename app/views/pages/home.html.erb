@@ -43,7 +43,11 @@
           <% end %>
         </div>
         <div class="home-page-route-cards">
-          <%= render 'components/route_card' %>
+          <div class="d-flex flex-row flex-nowrap overflow-auto">
+            <% @routes.sort_by { |i| -i.created_at.to_i }.last(5).each do |route| %>
+              <%= render 'components/route_card', route: route %>
+            <% end %>
+          </div>
         </div>
         <div class="my-4 pt-4">
           <h3 class="my-4">Search for...</h3>
