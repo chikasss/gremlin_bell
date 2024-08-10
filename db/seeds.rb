@@ -371,7 +371,90 @@ ami_route = Route.create!(
   user: ami
 )
 
-puts "Routes created"
+puts "Attaching photo to Routes"
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/bill_route_fsoo9i.jpg")
+
+bill_route.photos.attach(
+  io: file,
+  filename: "bill_route",
+  content_type: "image/jpg"
+)
+bill_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/bill_route2_xx67qj.jpg")
+
+bill_route2.photos.attach(
+  io: file,
+  filename: "bill_route2",
+  content_type: "image/jpg"
+)
+bill_route2.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/hideo_route_czusnj.jpg")
+
+hideo_route.photos.attach(
+  io: file,
+  filename: "hideo_route",
+  content_type: "image/jpg"
+)
+hideo_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/mika_route_tlwkpy.jpg")
+
+mika_route.photos.attach(
+  io: file,
+  filename: "mika_route ",
+  content_type: "image/jpg"
+)
+mika_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267376/eric_route_geqdmx.jpg")
+
+eric_route.photos.attach(
+  io: file,
+  filename: "eric_route",
+  content_type: "image/jpg"
+)
+eric_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267376/eric_route_geqdmx.jpg")
+
+mary_route.photos.attach(
+  io: file,
+  filename: "mary_route",
+  content_type: "image/jpg"
+)
+mary_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/angel_route_o7kll8.jpg")
+
+angel_route.photos.attach(
+  io: file,
+  filename: "angel_route",
+  content_type: "image/jpg"
+)
+mary_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/vincenzo_route_uh5ipa.jpg")
+
+vincenzo_route.photos.attach(
+  io: file,
+  filename: "vincenzo_route",
+  content_type: "image/jpg"
+)
+vincenzo_route.save
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/ami_route_exocln.jpg")
+
+ami_route .photos.attach(
+  io: file,
+  filename: "ami_route ",
+  content_type: "image/jpg"
+)
+ami_route.save
+
+puts "Routes photos attached"
 
 puts "Creating comments"
 
