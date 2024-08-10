@@ -1,8 +1,10 @@
-<%= link_to "Add a bike", new_user_bike_path, class:"card-button" %>
-
-
-<ul>
+<div class="container">
+  <%= render 'shared/logo_btn_top' %>
+  <div class="d-flex justify-content-between mt-4">
+    <h3><strong><%= current_user.first_name %></strong>'s Bikes</h3>
+    <%= link_to "Add a bike", new_user_bike_path, class:"btn-yellow " %>
+  </div>
   <% @bikes.each do |bike| %>
-  <li><%= bike.year %> <%= bike.brand %> <%= bike.name %></li>
+    <%= render 'components/bike_card',  bike: bike  %>
   <% end %>
-</ul>
+</div>
