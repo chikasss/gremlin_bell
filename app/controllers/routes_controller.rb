@@ -31,7 +31,7 @@ class RoutesController < ApplicationController
     @comments = @route.comments.includes(:user).order(created_at: :desc)
     # @comments_last_3 = @route.comments.includes(:user).order(created_at: :desc).limit(3)
     @comment = @route.comments.new
-    @tail = YouTubeAddy.extract_video_id(@route.videos_url)
+    @tail = YouTubeRails.extract_video_id(@route.videos_url)
   end
 
   def save
