@@ -1,6 +1,8 @@
 <div class="container mt-5">
+      <%= image_tag 'logo-red.svg', class: 'logo-icon float-end' %>
+
   <h1 class="text-center">Saved Trips for <%= @user.first_name.capitalize %></h1>
-    <div class="container mt-5">
+    <div class="container mt-3">
         <% if @saved_trips.any? %>
           <% @saved_trips.each do |route| %>
            <div class="d-flex flex-column saved-route-card">
