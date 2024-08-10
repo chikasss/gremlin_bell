@@ -9,5 +9,4 @@ class PagesController < ApplicationController
     @ride_types = Route::RIDE_TYPE
     # @saved_trips = current_user.all_favorited
   end
-
 end
