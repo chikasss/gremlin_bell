@@ -1,0 +1,27 @@
+<div class="container m-4 p-2">
+  <div class="review-card">
+    <div class="d-flex">
+      <div class="col-3">
+        <% if @review.photos.any? %>
+          <%= image_tag @review.photos.first, class: "review-photo" %>
+        <% else %>
+          <%= image_tag 'review-photo.png', class: "review-photo" %>
+        <% end %>
+      </div>
+      <div class="ms-2 col">
+        <div class="d-flex">
+          <i class="fa-solid fa-location-dot me-2"></i>
+          <h5><%= @review.route.title %></h5>
+        </div>
+        <div>
+          <% @review.rating.times do %>
+            <i class="fa-solid fa-star"></i>
+          <% end %>
+        </div>
+        <div>
+          <p><%= @review.description %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
