@@ -304,7 +304,7 @@ bill_route2 = Route.create!(
   description: "Beautiful ride along the coast in Hokkaido.",
   ride_type: ["Coastal"],
   # waypoints: ,
-  videos_url: "https://www.youtube.com/live/DuurJdmyMtQ?si=ECtrX_jTUf4q6woY",
+  videos_url: "https://www.youtube.com/watch/DuurJdmyMtQ?si=ECtrX_jTUf4q6woY",
   user: bill
 )
 
