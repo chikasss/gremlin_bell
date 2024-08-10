@@ -6,11 +6,9 @@
     <% if @route.videos_url.present? %>
       <div class="mt-4">
         <h5>Route video:</h5>
-        <%= link_to @route.videos_url, target: "_blank" do %>
           <div class="d-flex align-items-center">
-            <i class="fas fa-play-circle me-2"></i>Play Video
+           <iframe width="560" height="315" src="http://www.youtube.com/embed/<%= @tail %>"  frameborder="0"></iframe>
           </div>
-        <% end %>
       </div>
     <% end %>
     <% if @route.ride_type.present? %>

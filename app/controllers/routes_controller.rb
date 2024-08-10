@@ -30,6 +30,7 @@ class RoutesController < ApplicationController
     @review = @route.reviews.new
     @comments = @route.comments.includes(:user).order(created_at: :desc)
     @comment = @route.comments.new
+    @tail = YouTubeAddy.extract_video_id(@route.videos_url)
   end
 
   def save
