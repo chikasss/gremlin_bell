@@ -45,7 +45,9 @@
         <div class="home-page-route-cards">
           <div class="d-flex flex-row flex-nowrap overflow-auto">
             <% @routes.sort_by { |i| -i.created_at.to_i }.last(5).each do |route| %>
-              <%= render 'components/route_card', route: route %>
+              <div class="col-8 col-md-3">
+                <%= render 'components/route_card', route: route %>
+              </div>
             <% end %>
           </div>
         </div>
@@ -57,7 +59,7 @@
                 <% @ride_types.each do |type| %>
                   <div class="col-md-3 col-6 text-center mb-2">
                     <%= link_to routes_path(query: {ride_type: type }) do %>
-                    <span class="route-tag rounded-pill"><%= type %></span>
+                      <span class="route-tag rounded-pill"><%= type %></span>
                     <% end %>
                   </div>
                 <% end %>
