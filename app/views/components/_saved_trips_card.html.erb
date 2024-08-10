@@ -1,0 +1,19 @@
+<div class="col-md-4 mb-4">
+  <div class="bike-card">
+    <div class="d-flex flex-column align-items-center">
+      <div class="bg-image card shadow-1-strong"
+      style="background-image: url(/assets/bike_route.jpg)">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0, 0.6);">
+          <div class="card-body text-white">
+            <h5 class="text-center mt-3"><%= route.title %></h5>
+            <div><p><%= route.description %></p>
+            </div>
+                <div class="see-more-link mt-2 d-flex justify-content-center card-button">
+                  <%= link_to 'Check Route', route_path(route) %>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
