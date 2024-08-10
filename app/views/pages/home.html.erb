@@ -13,7 +13,7 @@
               <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-bordered" %></div>
             <% end %>
             <div>
-              <h2 class="mb-0">Hello <strong><%= current_user.first_name.capitalize %></strong>!</h2>
+              <h2 class="mb-0">Hello <strong><%= current_user.first_name %></strong>!</h2>
               <%= link_to "See your profile", user_path(current_user), class:"card-button" %>
             </div>
           </div>
