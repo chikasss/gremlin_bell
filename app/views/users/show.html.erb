@@ -58,6 +58,9 @@
           <% end %>
         </div>
       </div>
+      <div class="mt-4 d-flex justify-content-end">
+        <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-light-gray-sm" %>
+      </div>
     </div>
   <% else %>
     <div class="m-4">
