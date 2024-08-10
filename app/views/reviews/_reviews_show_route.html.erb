@@ -3,12 +3,17 @@
     <h3>Reviews:</h3>
     <% @reviews.limit(3).each do |review| %>
       <div class="border p-4 mt-4">
-        <div>
-          <% review.rating.times do %>
-            <i class="fa-solid fa-star"></i>
-          <% end %>
+        <div class="d-flex justify-content-between">
           <div>
-            <h5><%= review.title %></h5>
+            <% review.rating.times do %>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+            <div>
+              <h5><%= review.title %></h5>
+            </div>
+          </div>
+          <div>
+            <%= link_to 'Read', route_review_path(review), class: "btn-yellow-sm" %>
           </div>
         </div>
         <p><%= review.description %></p>

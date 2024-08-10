@@ -29,6 +29,10 @@ before_action :set_route, only: [:new, :create, :edit, :update]
     authorize @review
   end
   
+  def show
+    @review = Review.find(params[:id])
+    authorize @review
+  end
 
   def update
     @review = Review.find(params[:id])

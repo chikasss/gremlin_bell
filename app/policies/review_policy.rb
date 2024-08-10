@@ -4,7 +4,7 @@ class ReviewPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    user.present?
   end
 
   def edit?
