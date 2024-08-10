@@ -212,6 +212,118 @@ ami_bikes = Bike.create!(
 
 puts "Bikes created"
 
+puts "Attaching bike photos to Bikes"
+
+file = URI.open("")
+
+bill_bikes.photos.attach(
+  io: file,
+  filename: "bill_bike",
+  content_type: "image/jpg"
+)
+bill_bikes.save
+
+file = URI.open("")
+
+hideo_bikes.photos.attach(
+  io: file,
+  filename: "hideo_bike",
+  content_type: "image/jpg"
+)
+hideo_bikes.save
+
+file = URI.open("")
+
+mika_bikes.photos.attach(
+  io: file,
+  filename: "mika_bike",
+  content_type: "image/jpg"
+)
+mika_bikes.save
+
+file = URI.open("")
+
+eric_bikes.photos.attach(
+  io: file,
+  filename: "eric_bike",
+  content_type: "image/jpg"
+)
+eric_bikes.save
+
+file = URI.open("")
+
+eric_bikes2.photos.attach(
+  io: file,
+  filename: "eric_bike2",
+  content_type: "image/jpg"
+)
+eric_bikes2.save
+
+file = URI.open("")
+
+eric_bikes3.photos.attach(
+  io: file,
+  filename: "eric_bike3",
+  content_type: "image/jpg"
+)
+eric_bikes3.save
+
+file = URI.open("")
+
+eric_bikes4.photos.attach(
+  io: file,
+  filename: "eric_bike4",
+  content_type: "image/jpg"
+)
+eric_bikes4.save
+
+file = URI.open("")
+
+mary_bikes.photos.attach(
+  io: file,
+  filename: "mary_bike",
+  content_type: "image/jpg"
+)
+mary_bikes.save
+
+file = URI.open("")
+
+mary_bikes2.photos.attach(
+  io: file,
+  filename: "mary_bike2",
+  content_type: "image/jpg"
+)
+mary_bikes2.save
+
+file = URI.open("")
+
+angel_bikes.photos.attach(
+  io: file,
+  filename: "angel_bike",
+  content_type: "image/jpg"
+)
+angel_bikes.save
+
+file = URI.open("")
+
+vincenzo_bikes.photos.attach(
+  io: file,
+  filename: "vincenzo_bike",
+  content_type: "image/jpg"
+)
+vincenzo_bikes.save
+
+file = URI.open("")
+
+ami_bikes.photos.attach(
+  io: file,
+  filename: "ami_bike",
+  content_type: "image/jpg"
+)
+ami_bikes.save
+
+puts "Photos attached to Bikes"
+
 puts "Attaching avatars to Users"
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/bill_cgxobm.jpg")
