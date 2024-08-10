@@ -1,18 +1,20 @@
 <%= f.input :title, label: "Title" %>
 <%= f.input :description, label: "Description" %>
-<div class="d-flex">
-  <div class="col-3 me-2">
+<div class="row">
+  <div class="col-6 col-md-6 mb-2">
     <%= f.input :date,
             label: "Date",
             as: :string,
             input_html: { data: { controller: "datepicker" } } %>
   </div>
-  <div class="col-3">
+  <div class="col-6 col-md-6 mb-2">
     <%= f.input :rating, label: "Rating", as: :select, collection: 1..5 %>
   </div>
-  <div class="col ms-2">
-    <div class="d-flex justify-content-between">
-      <%= f.label :photos, "Upload Photos", class: 'form-label' %>
+  <div class="col-12 mb-2">
+    <div class="d-flex flex-column flex-md-row justify-content-between">
+      <div class="mb-2 mb-md-0">
+        <%= f.label :photos, "Upload Photos", class: 'form-label' %>
+      </div>
       <div class="form-text">
         <strong>Note:</strong> Maximum file size is 10MB per photo.
       </div>
@@ -20,7 +22,7 @@
     <%= f.file_field :photos, multiple: true, accept: 'image/*', class: 'form-control' %>
   </div>
 </div>
-<div class="d-flex">
+<div class="d-flex mt-2">
   <div class="col-6 me-2">
     <%= f.input :road_condition, label: "Road Condition" %>
   </div>
