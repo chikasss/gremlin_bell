@@ -17,6 +17,10 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
+    @bikes = @user.bikes
+    # @saved_trips = @user.all_favorited
+    @routes = @user.routes
+    @reviews = @user.reviews
   end
 
   def saved_trips
