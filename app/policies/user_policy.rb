@@ -11,6 +11,14 @@ class UserPolicy < ApplicationPolicy
     record == user
   end
 
+  def created_routes?
+    true
+  end
+
+  def created_reviews?
+    true
+  end
+
   def show?
     true
   end

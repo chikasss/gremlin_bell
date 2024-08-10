@@ -31,8 +31,8 @@
       </div>
       <div class="saved-routes">
         <div class="d-flex justify-content-between">
-          <h3><strong><%= @user.first_name %>'s created routes:</strong></h3>
-          <%= link_to "See all of #{@user.first_name}'s created routes" , saved_trips_user_path(current_user), class:"card-button" %>
+          <h3><strong><%= @user.first_name %>'s routes:</strong></h3>
+          <%= link_to "See all of #{@user.first_name}'s created routes" , created_routes_user_path(@user), class:"card-button" %>
         </div>
         <div class="d-flex flex-row flex-nowrap overflow-auto">
           <% @routes.each do |route| %>
@@ -43,7 +43,7 @@
       <div class="reviews">
         <div class="d-flex justify-content-between">
           <h3><strong><%= @user.first_name %>'s reviews</strong></h3>
-          <%= link_to "See all of #{@user.first_name}'s reviews", class:"card-button" %>
+          <%= link_to "See all of #{@user.first_name}'s reviews", created_reviews_user_path(@user), class:"card-button" %>
         </div>
         <div class="d-flex flex-row flex-nowrap overflow-auto">
           <% @reviews.each do |review| %>

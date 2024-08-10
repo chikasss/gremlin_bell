@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     member do
       get 'follow', to: 'users#follow', as: 'follow'
       get 'saved_trips', to: 'users#saved_trips', as: 'saved_trips'
+      get 'created_routes', to: 'users#created_routes', as: 'created_routes'
+      get 'created_reviews', to: 'users#created_reviews', as: 'created_reviews'
     end
   end
 

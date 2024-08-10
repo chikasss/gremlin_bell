@@ -1,0 +1,5 @@
+<div class="d-flex flex-row flex-nowrap overflow-auto">
+          <% @reviews.each do |review| %>
+            <%= render 'components/route_card', route: review %>
+          <% end %>
+        </div>
