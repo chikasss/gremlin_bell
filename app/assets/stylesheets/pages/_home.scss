@@ -1,1 +1,50 @@
 // Specific CSS for your home-page
+
+.bg-home {
+  background-image: image-url('bg-app.png');
+  background-size: cover;
+  background-position: center;
+
+  a {
+    text-decoration: none;
+    color: $white;
+  }
+
+  .local-user {
+    button {
+      background: $white;
+      border: none;
+      border-radius: 6px;
+      color: $dark-red;
+      font-weight: 600;
+      padding: 0.2rem 1rem;
+    }
+  }
+
+  h2 {
+    color: $white;
+    font-weight: 400;
+  }
+
+  .discover-routes {
+    margin-top: 3rem;
+
+    h3 {
+      color: $white;
+    }
+    
+    p {
+      color: $white;
+      font-weight: 300;
+    }
+  }
+
+  .routes-home-page {
+    background: $light-gray;
+    border-radius: 32px 32px 0 0;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
