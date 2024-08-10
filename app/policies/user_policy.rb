@@ -11,6 +11,18 @@ class UserPolicy < ApplicationPolicy
     record == user
   end
 
+  def created_routes?
+    true
+  end
+
+  def created_reviews?
+    true
+  end
+
+  def show?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all
@@ -23,9 +35,6 @@ class UserPolicy < ApplicationPolicy
   # https://gist.github.com/Burgestrand/4b4bc22f31c8a95c425fc0e30d7ef1f5
 
 
-  def show?
-    true
-  end
 
     class Scope < ApplicationPolicy::Scope
       # NOTE: Be explicit about which records you allow access to!

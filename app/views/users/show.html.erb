@@ -1,1 +1,63 @@
-<h1>User show page</h1>
+<div class="container col-sm-auto col-lg-6">
+  <% if user_signed_in? %>
+    <div class="p-2">
+      <div class="user-banner d-flex">
+        <% if @user.avatar.present? %>
+          <div class="p-2"><%= image_tag current_user.avatar, class: "avatar-image" %></div>
+        <% else %>
+          <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-image" %></div>
+        <% end %>
+        <% if @user == current_user %>
+          <div class="p-2 align-self-center col">
+            <h2 class=""><strong><%= current_user.first_name.capitalize %></strong></h2>
+            <%= link_to "Edit profile", edit_user_path(current_user), class:"card-button" %>
+          </div>
+        <% end %>
+        <div class="p-2 align-self-center col-1 rounded-pill border-info bg-info"><i class="fa-solid fa-map-pin"> <%= current_user.prefecture %></i>
+      </div>
+      </div>
+      <div class="bike-garage">
+        <div class="d-flex justify-content-between">
+          <h3><strong><%= @user.first_name %>'s Garage:</strong></h3>
+          <% if @user == current_user %>
+            <%= link_to "Modify your bikes", user_bikes_path(current_user), class:"card-button" %>
+          <% end %>
+        </div>
+        <div class="d-flex flex-row flex-nowrap overflow-auto">
+          <% @bikes.each do |bike| %>
+            <%= render 'components/bike_card', bike: bike %>
+          <% end %>
+          </div>
+      </div>
+      <div class="saved-routes">
+        <div class="d-flex justify-content-between">
+          <h3><strong><%= @user.first_name %>'s routes:</strong></h3>
+          <%= link_to "See all of #{@user.first_name}'s created routes" , created_routes_user_path(@user), class:"card-button" %>
+        </div>
+        <div class="d-flex flex-row flex-nowrap overflow-auto">
+          <% @routes.each do |route| %>
+            <%= render 'components/route_card', route: route %>
+          <% end %>
+        </div>
+      </div>
+      <div class="reviews">
+        <div class="d-flex justify-content-between">
+          <h3><strong><%= @user.first_name %>'s reviews</strong></h3>
+          <%= link_to "See all of #{@user.first_name}'s reviews", created_reviews_user_path(@user), class:"card-button" %>
+        </div>
+        <div class="d-flex flex-row flex-nowrap overflow-auto">
+          <% @reviews.each do |review| %>
+            <%= render 'components/route_card', route: review %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="m-4">
+      <%= link_to "Login", new_user_session_path %>
+    </div>
+    <div class="m-4">
+      <%= link_to "Register", new_user_registration_path %>
+    </div>
+  <% end %>
+</div>

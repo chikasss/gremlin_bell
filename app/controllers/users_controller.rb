@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :saved_trips]
+  before_action :set_user, only: [:edit, :update, :show, :saved_trips, :created_routes, :created_reviews]
 
 
   def edit
@@ -17,12 +17,26 @@ class UsersController < ApplicationController
 
   def show
     authorize @user
+    @bikes = @user.bikes
+    # @saved_trips = @user.all_favorited
+    @routes = @user.routes
+    @reviews = @user.reviews
   end
 
   def saved_trips
     authorize @user
     @saved_trips = @user.all_favorited
     # @user.favorited_routes
+  end
+
+  def created_routes
+    authorize @user
+    @routes = @user.routes
+  end
+
+  def created_reviews
+    authorize @user
+    @reviews = @user.reviews
   end
 
   private
