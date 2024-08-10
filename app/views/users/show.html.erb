@@ -5,9 +5,9 @@
       <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="d-flex align-items-center">
           <% if @user.avatar.present? %>
-            <div class="p-2"><%= image_tag current_user.avatar.key, class: "avatar-bordered" %></div>
+            <div class="p-2"><%= cl_image_tag @user.avatar.key, class: "avatar-bordered" %></div>
           <% else %>
-            <div class="p-2"><%= cl_image_tag "user-photo_paaiho", class: "avatar-bordered" %></div>
+            <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-bordered" %></div>
           <% end %>
           <div class="profile-info">
             <h2 class="mb-0"><strong><%= @user.first_name %></strong>'s profile</h2>
