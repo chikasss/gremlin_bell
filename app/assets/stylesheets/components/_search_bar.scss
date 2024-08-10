@@ -1,4 +1,7 @@
 .search-bar {
+  display: flex;
+  width: 100%;
+  
   .form-control {
     background: #E0E0E2;
     border-radius: 6px;
@@ -21,5 +24,9 @@
 
   .btn i {
     margin: 0;
+  }
+
+  a {
+    text-decoration: none;
   }
 }
