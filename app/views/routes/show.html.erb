@@ -16,7 +16,13 @@
       </div>
     </div>
     <div>
-      <%= image_tag 'route-bg.jpg', class: "route-img" %>
+      <% if @route.photos.attached? %>
+      <div class="p-2"><%= cl_image_tag @route.photos.first.key%>
+      </div>
+      <% else %>
+        <div class="p-2"><%= image_tag 'route-bg.jpg', class: "route-img" %>
+        </div>
+      <% end %>
     </div>
     <div class="route-description d-flex mt-4">
       <i class="fa-solid fa-quote-left me-2"></i>
