@@ -25,9 +25,12 @@ class RoutesController < ApplicationController
 
   def create
     @route = Route.new(route_params)
-    @route.save
-    redirect_to route_path(@route)
     authorize @route
+    if @route.save
+      redirect_to route_path(@route)
+    else
+      render :new
+    end
   end
 
   def show
@@ -52,6 +55,6 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:title, :description, :videos_url, waypoints: [], ride_type: [])
+    params.require(:route).permit(:title, :description, :videos_url, :ride_type, waypoints: [])
   end
 end
