@@ -13,8 +13,9 @@ export default class extends Controller {
       zoom: 4.5
     });
 
-    let start = null;
-    let end = null;
+    // let start = null;
+    // let end = null;
+    let waypoints = [];
 
     async function getRoute(start, end) {
       // make a directions request using cycling profile
@@ -101,22 +102,27 @@ export default class extends Controller {
       // this is where the code from the next step will go
       map.on('click', (event) => {
         const coords = [event.lngLat.lng, event.lngLat.lat];
+        waypoints.push(coords); // Store each clicked point as a waypoint
 
-        if (!start) {
-        start = coords;
-        addMarker(start, 'start', '#3887be');
-      } else if (!end) {
-        end = coords;
-        addMarker(end, 'end', '#f30');
-        getRoute(start, end);
+        if (waypoints.length === 1) {
+        addMarker(coords, 'start', '#3887be');
+      } else if (waypoints.length === 2)  {
+        addMarker(coords, 'end', '#f30');
+        getRoute(waypoints[0], waypoints[1]);
       } else {
-        start = coords;
-        end = null;
+        waypoints = [coords]; // Reset the waypoints and start a new route
         addMarker(start, 'start', '#3887be');
         map.removeLayer('end');
         map.removeSource('route');
       }
+    });
 
+      // Select the form using the generated form ID from Simple Form
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', function(event) {
+      const waypointsInput = document.querySelector('#waypoints_input');
+      waypointsInput.value = JSON.stringify(waypoints); // Populate hidden field with JSON string of waypoints
     });
   }
 }

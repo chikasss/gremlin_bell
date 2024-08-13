@@ -25,6 +25,7 @@ class RoutesController < ApplicationController
 
   def create
     @route = Route.new(route_params)
+    @route.user = current_user
     authorize @route
     if @route.save
       redirect_to route_path(@route)
@@ -55,6 +56,6 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:title, :description, :videos_url, :ride_type, waypoints: [])
+    params.require(:route).permit(:title, :description, :videos_url, :waypoints, ride_type: [])
   end
 end

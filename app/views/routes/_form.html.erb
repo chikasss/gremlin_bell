@@ -1,0 +1,20 @@
+ <%= simple_form_for(@route) do |f| %>
+    <%= f.input :title %>
+
+    <%= f.input :description %>
+    <%= f.label :waypoints, "Waypoints" %>
+
+    <%= f.hidden_field :waypoints, id: 'waypoints_input' %>
+    <%= render 'shared/map'%>
+
+    <%#= f.text_area :waypoints, value: @route.waypoints.join(', '), class: "form-control mb-3" %>
+
+    <%= f.input :videos_url, label: "Youtube Link"%>
+
+    <%= f.label :ride_type %>
+    <%= f.collection_check_boxes :ride_type, Route::RIDE_TYPE.compact, :to_s, :to_s, include_hidden: false %>
+
+    <div class="d-flex justify-content-center">
+      <%= f.submit "Create", class: "btn btn-primary btn-block w-25 mt-3 custom-rounded-button" %>
+    </div>
+  <% end %>
