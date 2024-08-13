@@ -19,6 +19,7 @@
         <div class="local-user"><button><i class="fa-solid fa-location-dot"></i> <%= current_user.prefecture %></button></div>
       </div>
       <div class="">
+      <% if @user.bikes.present? %>
         <div class="d-flex justify-content-between mb-4">
           <h3><strong><%= @user.first_name %>'s Garage:</strong></h3>
           <% if @user == current_user %>
@@ -31,6 +32,7 @@
           <% end %>
         </div>
       </div>
+      <% end %>
       <div class="saved-routes">
         <div class="d-flex justify-content-between">
           <h3><strong><%= @user.first_name %>'s routes:</strong></h3>
