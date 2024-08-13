@@ -6,24 +6,5 @@
 
   <h1 class="text-center">Create New Route</h1>
 
-  <%= simple_form_for(@route) do |f| %>
-    <%= f.input :title %>
-
-    <%= f.input :description %>
-    <%= f.label :waypoints, "Waypoints" %>
-
-    <%= f.hidden_field :waypoints, id: 'waypoints_input' %>
-    <%= render 'shared/map'%>
-
-    <%#= f.text_area :waypoints, value: @route.waypoints.join(', '), class: "form-control mb-3" %>
-
-    <%= f.input :videos_url, label: "Youtube Link"%>
-
-    <%= f.label :ride_type %>
-    <%= f.select :ride_type, ["Mountainous", "Trail", "Urban", "Scenic", "Calm", "Coastal", "Twisty", "Day Trip", "Long and Straight", "Other"], {}, class: "form-control" %>
-
-    <div class="d-flex justify-content-center">
-      <%= f.submit "Create", class: "btn btn-primary btn-block w-25 mt-3 custom-rounded-button" %>
-    </div>
-  <% end %>
+   <%= render 'form' %>
 </div>

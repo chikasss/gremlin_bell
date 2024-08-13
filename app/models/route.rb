@@ -1,6 +1,5 @@
 class Route < ApplicationRecord
-  geocoded_by :address
-  after_validation :geocode, if: :will_save_change_to_waypoints?
+  #after_validation :geocode, if: :will_save_change_to_waypoints?
 
   belongs_to :user
 
