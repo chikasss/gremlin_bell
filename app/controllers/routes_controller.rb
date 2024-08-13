@@ -3,11 +3,6 @@ class RoutesController < ApplicationController
 
   RIDE_TYPE = Route::RIDE_TYPE
 
-  def new
-    @route = Route.new
-    authorize @route
-  end
-
   def index
     @routes = policy_scope(Route)
     @routes = Route.all
@@ -20,6 +15,21 @@ class RoutesController < ApplicationController
       @routes = results
     else
       @routes
+    end
+  end
+
+  def new
+    @route = Route.new
+    authorize @route
+  end
+
+  def create
+    @route = Route.new(route_params)
+    authorize @route
+    if @route.save
+      redirect_to route_path(@route)
+    else
+      render :new
     end
   end
 
@@ -45,6 +55,6 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:title, :description, :waypoints, :videos_url, ride_type: [])
+    params.require(:route).permit(:title, :description, :videos_url, :ride_type, waypoints: [])
   end
 end

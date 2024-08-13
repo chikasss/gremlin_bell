@@ -7,6 +7,14 @@ class RoutePolicy < ApplicationPolicy
     true
   end
 
+  def create?
+    user.present?
+  end
+
+  def new?
+    create?
+  end
+
   def save?
     true
   end

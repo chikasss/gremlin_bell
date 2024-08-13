@@ -8,6 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+puts "Deleting Routes"
+Route.destroy_all
+
 puts "Deleting Users"
 User.destroy_all
 
@@ -546,7 +549,7 @@ angel_route.photos.attach(
   filename: "angel_route",
   content_type: "image/jpg"
 )
-mary_route.save
+angel_route.save
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/vincenzo_route_uh5ipa.jpg")
 
