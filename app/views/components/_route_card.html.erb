@@ -6,11 +6,23 @@
       <%= image_tag('route-bg.jpg', class: "card-img") %>
     <% end %>
     <div class="card-body">
-      <h5 class="card-title"><%= route.title %></h5>
       <div class="row">
-        <div class="d-flex align-items-center">
-          <i class="fa-solid fa-location-dot"></i>
-          <p class='ms-2 pb-0 mb-0'>Japan</p>
+        <div class="d-flex justify-content-between">
+          <div class="">
+            <h5 class="card-title"><%= route.title %></h5>
+            <div class="d-flex align-items-center">
+              <i class="fa-solid fa-location-dot"></i>
+              <p class='ms-2 pb-0 mb-0'>Japan</p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-end">
+            <% if route.reviews.present? %>
+              <i class="fa-solid fa-star"></i>
+              <h4 class="ms-2 mb-0 pb-0"><%= route.average_rating %></h4>
+            <% else %>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+          </div>
         </div>
         <div class="mt-2">
           <% route.ride_type.each do |type| %>

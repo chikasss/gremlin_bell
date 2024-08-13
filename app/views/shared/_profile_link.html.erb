@@ -1,0 +1,7 @@
+<% if current_page?(user_path(user)) %>
+  <%= link_to "Edit your profile", edit_user_path(user), class: "card-button" %>
+<% elsif current_page?(new_route_path) %>
+  <%= link_to "See your routes", created_routes_user_path(user), class: "card-button" %>
+<% else %>
+  <%= link_to "See your profile", user_path(user), class: "card-button" %>
+<% end %>

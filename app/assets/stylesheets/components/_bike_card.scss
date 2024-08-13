@@ -1,9 +1,9 @@
 .bike-card {
-  height: 100%;
-  width: 200px;
+  height: auto;
+  width: 100%;
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 12px;
 
   .bg-image {
     width: 100%;
@@ -29,4 +29,9 @@
       color: #fff;
     }
   }
+}
+
+.fa-circle-plus {
+  color: $yellow;
+  font-size: 2rem;
 }
