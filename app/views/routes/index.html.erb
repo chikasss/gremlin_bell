@@ -1,25 +1,27 @@
-<div class="container mt-4">
-  <div class="index-routes">
-    <%= render 'shared/logo_btn_top' %>
-    <div class="row d-flex justify-content-center">
-      <div class="col-10 d-flex">
-        <div class="col-11">
-          <%= link_to routes_path do %>
-            <%= render 'components/search_bar' %>
-          <% end %>
-        </div>
-        <div class="col ms-2 d-flex align-items-center justify-content-center">
-          <%= link_to '#' do %>
-            <i class="fa-solid fa-bars"></i>
-          <% end %>
+<div class="bg-red">
+  <div class="container pt-2">
+    <%= render 'shared/logo_btn_top_white' %>
+  </div>
+  <div class="index-routes bg-white py-4 mb-4">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-10 d-flex">
+          <div class="col-11">
+            <%= link_to routes_path do %>
+              <%= render 'components/search_bar' %>
+            <% end %>
+          </div>
+          <div class="col ms-2 d-flex align-items-center justify-content-center">
+            <%= link_to '#' do %>
+              <i class="fa-solid fa-bars"></i>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
-    <h1 class="mt-4">Routes</h1>
-    <div class="container">
-      <div class="row">
+      <h2 class="mt-4">All Routes</h2>
+      <div class="row d-flex justify-content-center">
         <% @routes.each do |route| %>
-          <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+          <div class="col-11 col-md-4">
             <%= render 'components/route_card', route: route %>
           </div>
         <% end %>

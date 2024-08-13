@@ -1,31 +1,18 @@
-<div class="bg-home">
+<div class="home bg-red">
   <div class="container">
-    <div class="d-flex justify-content-end p-4">
+    <div class="d-flex justify-content-end pt-4 pe-2">
       <%= image_tag 'logo-white.svg', class:"logo-icon" %>
     </div>
     <% if user_signed_in? %>
       <div class="p-2">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            <% if current_user.avatar.present? %>
-              <div class="p-2"><%= image_tag current_user.avatar, class: "avatar-bordered" %></div>
-            <% else %>
-              <div class="p-2"><%= cl_image_tag "user-photo_paaiho", class: "avatar-bordered" %></div>
-            <% end %>
-            <div>
-              <h2 class="mb-0">Hello <strong><%= current_user.first_name %></strong>!</h2>
-              <%= link_to "See your profile", user_path(current_user), class:"card-button" %>
-            </div>
-          </div>
-          <div class="local-user"><button><i class="fa-solid fa-location-dot"></i> <%= current_user.prefecture %></button></div>
-        </div>
+        <%= render 'shared/link_user_profile' %>
         <div class="discover-routes">
           <h3 class="mb-0 pb-0">Discover new routes</h3>
           <p class='pb-0'>Find the best route for you</p>
         </div>
       </div>
     </div>
-    <div class="routes-home-page">
+    <div class="bg-white">
       <div class="container">
         <div class='pt-4'>
           <%= link_to routes_path do %>
@@ -45,7 +32,7 @@
         <div class="home-page-route-cards">
           <div class="d-flex flex-row flex-nowrap overflow-auto">
             <% @routes.sort_by { |i| -i.created_at.to_i }.last(5).each do |route| %>
-              <div class="col-8 col-md-3">
+              <div class="col-9 col-md-3 me-2">
                 <%= render 'components/route_card', route: route %>
               </div>
             <% end %>

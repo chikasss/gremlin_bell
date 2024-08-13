@@ -1,10 +1,13 @@
-
-<div class="container">
-  <div class="d-flex justify-content-end p-4">
-    <%= image_tag 'logo-red.svg', class:"logo-icon" %>
+<div class="bg-red">
+  <div class="container mb-4">
+    <%= render 'shared/logo_btn_top_white' %>
+    <%= render 'shared/link_user_profile' %>
   </div>
-
-  <h1 class="text-center">Create New Route</h1>
-
-   <%= render 'form' %>
+  <div class="bg-white">
+    <div class="container p-4">
+      <h1 class="text-center">Create New Route</h1>
+      <%= render 'form' %>
+    </div>
+  </div>
 </div>
+

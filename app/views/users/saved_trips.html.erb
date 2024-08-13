@@ -1,17 +1,26 @@
-
-<div class="container mt-5">
-      <%= image_tag 'logo-red.svg', class: 'logo-icon float-end' %>
-
-  <h1 class="text-center">Saved Trips for <%= @user.first_name %></h1>
-    <div class="container mt-3">
-        <% if @saved_trips.any? %>
+<div class="bg-red">
+  <div class="container">
+    <%= render 'shared/logo_btn_top_white' %>
+    <%= render 'shared/link_user_profile' %>
+  </div>
+  <div class="bg-white mt-4 py-4">
+    <div class="container">
+      <h1 class="text-center">My saved trips</h1>
+      <% if @saved_trips.any? %>
+        <div class="row d-flex justify-content-center">
           <% @saved_trips.each do |route| %>
-           <div class="d-flex flex-column saved-route-card">
-            <%= render "components/saved_routes_card", route: route %>
-              </div>
-            <% end %>
+            <div class="col-11 col-md-4 m-2">
+              <%= render "components/saved_routes_card", route: route %>
+            </div>
+          <% end %>
+        </div>
       <% else %>
         <p>No saved trips found.</p>
       <% end %>
+      <div class="d-flex justify-content-center my-4">
+        <%= link_to "Explore Routes", routes_path, class: "btn-red" %>
+      </div>
     </div>
   </div>
+</div>
+</div>

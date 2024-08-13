@@ -1,0 +1,17 @@
+.bg-red {
+  background-image: image-url('bg-app.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+
+  .bg-white {
+    background: $light-gray;
+    border-radius: 36px 36px 0 0;
+    height: 100%;
+  }
+
+  a {
+    text-decoration: none;
+    color: $white;
+  }
+}

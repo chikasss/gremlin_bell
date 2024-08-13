@@ -9,14 +9,14 @@
             <% end %>
             <% if user_signed_in? %>
               <%= link_to user_bikes_path(current_user), {style: "text-decoration: none"} do %>
-                <i class="fa-solid fa-motorcycle"></i>
+                <i class="fa-solid fa-motorcycle fa-lg p-4"></i>
               <% end %>
             <% end %>
             <%= link_to routes_path, {style: "text-decoration: none"} do %>
               <i class="fas fa-search fa-lg p-4"></i>
             <% end %>
             <%= link_to saved_trips_user_path(current_user), {style: "text-decoration: none"} do %>
-              <i class="fa-duotone fa-solid fa-route" style="--fa-primary-color: #960801; --fa-secondary-color: #960801;"></i>
+              <i class="fa-duotone fa-solid fa-route fa-lg p-4" style="--fa-primary-color: #960801; --fa-secondary-color: #960801;"></i>
             <% end %>
             <%= link_to new_route_path, {style: "text-decoration: none"} do %>
             <i class="fa-solid fa-square-plus fa-lg p-4"></i>

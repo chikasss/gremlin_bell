@@ -15,3 +15,12 @@ h1, h2, h3, h4, h5, h6, h7, p, small {
 a {
   text-decoration: none;
 }
+
+.content-body {
+  background: $white;
+  padding-bottom: 400px; 
+
+  @media (max-width: 768px) {
+    padding-bottom: 16rem; 
+  }
+}
