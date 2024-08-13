@@ -1,11 +1,13 @@
 class Route < ApplicationRecord
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
+
   belongs_to :user
-  
+
   has_many :comments, dependent: :destroy
   has_many :reviews, dependent: :destroy
   acts_as_favoritable
   has_many_attached :photos
-  acts_as_favoritable
 
   RIDE_TYPE = ["Mountainous", "Trail", "Urban", "Scenic", "Calm", "Coastal", "Twisty", "Day Trip", "Long and Straight", "Other"]
 
@@ -14,4 +16,5 @@ class Route < ApplicationRecord
   def average_rating
     reviews.average(:rating).to_f.round(2)
   end
+
 end
