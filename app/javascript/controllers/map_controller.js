@@ -12,17 +12,6 @@ export default class extends Controller {
       center: [139.759455, 38.6828391], // starting position
       zoom: 4.5
     });
-    // set the bounds of the map
-    // const bounds = [
-    //   [-123.069003, 45.395273],
-    //   [-122.303707, 45.612333]
-    // ];
-
-    // map.setMaxBounds(bounds);
-
-    // an arbitrary start will always be the same
-    // only the end or destination will change
-    // const start = [-122.662323, 45.523751];
 
     let start = null;
     let end = null;
@@ -32,7 +21,7 @@ export default class extends Controller {
       // an arbitrary start will always be the same
       // only the end or destination will change
       const query = await fetch(
-        `https://api.mapbox.com/directions/v5/mapbox/cycling/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+        `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
         { method: 'GET' }
       );
       const json = await query.json();
@@ -73,12 +62,6 @@ export default class extends Controller {
       // add turn instructions here at the end
     }
 
-    // map.on('load', () => {
-    //   // make an initial directions request that
-    //   // starts and ends at the same location
-    //   getRoute(start);
-
-      // Add starting point to the map
     function addMarker(coords, id, color) {
       if (map.getLayer(id)) {
         map.getSource(id).setData({
@@ -133,50 +116,6 @@ export default class extends Controller {
         map.removeLayer('end');
         map.removeSource('route');
       }
-
-      //   const end = {
-      //     type: 'FeatureCollection',
-      //     features: [
-      //       {
-      //         type: 'Feature',
-      //         properties: {},
-      //         geometry: {
-      //           type: 'Point',
-      //           coordinates: coords
-      //         }
-      //       }
-      //     ]
-      //   };
-      //   if (map.getLayer('end')) {
-      //     map.getSource('end').setData(end);
-      //   } else {
-      //     map.addLayer({
-      //       id: 'end',
-      //       type: 'circle',
-      //       source: {
-      //         type: 'geojson',
-      //         data: {
-      //           type: 'FeatureCollection',
-      //           features: [
-      //             {
-      //               type: 'Feature',
-      //               properties: {},
-      //               geometry: {
-      //                 type: 'Point',
-      //                 coordinates: coords
-      //               }
-      //             }
-      //           ]
-      //         }
-      //       },
-      //       paint: {
-      //         'circle-radius': 10,
-      //         'circle-color': '#f30'
-      //       }
-      //     });
-      //   }
-      //   getRoute(coords);
-      // });
 
     });
   }
