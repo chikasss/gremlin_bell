@@ -21,6 +21,7 @@ class UsersController < ApplicationController
     # @saved_trips = @user.all_favorited
     @routes = @user.routes
     @reviews = @user.reviews
+    @user = User.find(params[:id])
   end
 
   def saved_trips

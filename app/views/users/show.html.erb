@@ -2,7 +2,7 @@
   <% if user_signed_in? %>
     <div class="container mb-4">
       <%= render 'shared/logo_btn_top_white' %>
-      <%= render 'shared/link_user_profile' %>
+      <%= render 'shared/link_user_profile', user: (@user || current_user) %>
     </div>
     <div class="bg-white p-2">
       <div class="container mt-4">
