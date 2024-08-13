@@ -1,0 +1,17 @@
+<% user = local_assigns[:user] || current_user %>
+<div class="d-flex justify-content-between align-items-center user-top-profile">
+  <div class="d-flex align-items-center">
+    <% if user&.avatar.present? %>
+      <div class="p-2"><%= cl_image_tag user&.avatar.key, class: "avatar-bordered" %></div>
+    <% else %>
+      <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-bordered" %></div>
+    <% end %>
+    <div>
+      <h2 class="mb-0">Hello <strong><%= user&.first_name %></strong>!</h2>
+      <% if user == current_user %>
+        <%= render 'shared/profile_link', user: current_user %>
+      <% end %>
+    </div>
+  </div>
+  <div class="local-user"><button><i class="fa-solid fa-location-dot"></i> <%= user&.prefecture %></button></div>
+</div>

@@ -1,75 +1,69 @@
-<div class="container col-sm-auto col-lg-6">
+<div class="bg-red user-profile">
   <% if user_signed_in? %>
-    <div class="mt-4 user-profile">
-      <%= render 'shared/logo_btn_top' %>
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="d-flex align-items-center">
-          <% if @user.avatar.present? %>
-            <div class="p-2"><%= cl_image_tag @user.avatar.key, class: "avatar-bordered" %></div>
-          <% else %>
-            <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-bordered" %></div>
-          <% end %>
-          <div class="profile-info">
-            <h2 class="mb-0"><strong><%= @user.first_name %></strong>'s profile</h2>
-            <% if @user == current_user %>
-              <%= link_to "Edit your profile", edit_user_path(current_user) %>
-            <% end %>
-          </div>
-        </div>
-        <div class="local-user"><button><i class="fa-solid fa-location-dot"></i> <%= current_user.prefecture %></button></div>
-      </div>
-      <div class="">
-      <% if @user.bikes.present? %>
+    <div class="container mb-4">
+      <%= render 'shared/logo_btn_top_white' %>
+      <%= render 'shared/link_user_profile', user: (@user || current_user) %>
+    </div>
+    <div class="bg-white p-2">
+      <div class="container mt-4">
         <div class="d-flex justify-content-between mb-4">
           <h3><strong><%= @user.first_name %>'s Garage:</strong></h3>
           <% if @user == current_user %>
-            <%= link_to "Modify your bikes", user_bikes_path(current_user), class:"btn-light-gray-sm" %>
+            <%= link_to user_bikes_path(current_user) do %>
+              <i class="fa-solid fa-pen-to-square me-2"></i>
+            <% end %>
           <% end %>
         </div>
         <div class="d-flex flex-row flex-nowrap overflow-auto">
           <% @bikes.each do |bike| %>
-            <%= render 'components/bike_card', bike: bike %>
-          <% end %>
-        </div>
-      </div>
-      <% end %>
-      <div class="saved-routes">
-        <div class="d-flex justify-content-between">
-          <h3><strong><%= @user.first_name %>'s routes:</strong></h3>
-          <%= link_to "See all" , created_routes_user_path(@user), class:"btn-light-gray-sm" %>
-        </div>
-        <div class="d-flex flex-row flex-nowrap overflow-auto mb-4">
-          <% @routes.each do |route| %>
-            <div class="col-8 col-md-3 me-2">
-              <%= render 'components/route_card', route: route %>
+            <div class="col-8 col-md-4">
+              <%= render 'components/bike_card', bike: bike %>
             </div>
           <% end %>
         </div>
-      </div>
-      <div class="reviews">
-        <div class="d-flex justify-content-between">
-          <h3><strong><%= @user.first_name %>'s reviews</strong></h3>
-        </div>
-        <div class="d-flex flex-row flex-nowrap overflow-auto">
-          <% if @reviews.present? %>
-            <% @reviews.each do |review| %>
-              <%= render 'components/review_card', review: review %>
+        <div class="saved-routes mt-4 pt-4">
+          <div class="d-flex justify-content-between">
+            <h3><strong><%= @user.first_name %>'s routes:</strong></h3>
+            <%= link_to created_routes_user_path(@user) do %>
+              <i class="fa-solid fa-circle-chevron-right me-2"></i>
             <% end %>
-          <% else %>
-            <p><%= @user.first_name %> has not written any reviews yet.</p>
-          <% end %>
+          </div>
+          <div class="d-flex flex-row flex-nowrap overflow-auto">
+            <% @routes.each do |route| %>
+              <div class="col-8 col-md-3 me-2">
+                <%= render 'components/route_card', route: route %>
+              </div>
+            <% end %>
+          </div>
         </div>
-      </div>
-      <div class="mt-4 d-flex justify-content-center">
-        <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-light-gray-sm" %>
-      </div>
+        <div class="reviews mt-4 pt-4">
+          <div class="d-flex justify-content-between">
+            <h3><strong><%= @user.first_name %>'s reviews</strong></h3>
+            <%= link_to '#' do %>
+              <i class="fa-solid fa-circle-chevron-right me-2"></i>
+            <% end %>
+          </div>
+          <div class="d-flex flex-row flex-nowrap overflow-auto">
+            <% if @reviews.present? %>
+              <% @reviews.each do |review| %>
+                <%= render 'components/review_card', review: review %>
+              <% end %>
+            <% else %>
+              <p><%= @user.first_name %> has not written any reviews yet.</p>
+            <% end %>
+          </div>
+        </div>
+        <div class="my-4 d-flex justify-content-center pb-4">
+          <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-light-gray-sm" %>
+        </div>
+      <% else %>
+        <div class="m-4">
+          <%= link_to "Login", new_user_session_path %>
+        </div>
+        <div class="m-4">
+          <%= link_to "Register", new_user_registration_path %>
+        </div>
+      <% end %>
     </div>
-  <% else %>
-    <div class="m-4">
-      <%= link_to "Login", new_user_session_path %>
-    </div>
-    <div class="m-4">
-      <%= link_to "Register", new_user_registration_path %>
-    </div>
-  <% end %>
+  </div>
 </div>
