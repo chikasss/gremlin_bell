@@ -7,10 +7,17 @@
     <% end %>
     <div class="card-body">
       <h5 class="card-title"><%= route.title %></h5>
-      <div class="d-flex justify-content-between">
+      <div class="row">
         <div class="d-flex align-items-center">
           <i class="fa-solid fa-location-dot"></i>
           <p class='ms-2 pb-0 mb-0'>Japan</p>
+        </div>
+        <div class="mt-2">
+          <% route.ride_type.each do |type| %>
+            <%= link_to routes_path(query: {ride_type: type }) do %>
+              <span class="tag-card"><%= type %></span>
+            <% end %>
+          <% end %>
         </div>
       </div>
     <% end %>

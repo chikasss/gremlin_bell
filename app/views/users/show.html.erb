@@ -38,7 +38,7 @@
         </div>
         <div class="d-flex flex-row flex-nowrap overflow-auto mb-4">
           <% @routes.each do |route| %>
-            <div class="col-8 col-md-3">
+            <div class="col-8 col-md-3 me-2">
               <%= render 'components/route_card', route: route %>
             </div>
           <% end %>
@@ -58,7 +58,7 @@
           <% end %>
         </div>
       </div>
-      <div class="mt-4 d-flex justify-content-end">
+      <div class="mt-4 d-flex justify-content-center">
         <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-light-gray-sm" %>
       </div>
     </div>
