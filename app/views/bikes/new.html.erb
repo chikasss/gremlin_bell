@@ -1,9 +1,19 @@
-<%= simple_form_for [@user, @bike] do |f| %>
-  <%= f.input :year, collection: @year, required: true %>
-  <%= f.input :brand, collection: @brand.sort, required: true %>
-  <%= f.input :name, label: 'Name', required: true %>
-
-  <%= f.button :submit, 'Create Bike', class: 'btn btn-primary' %>
-<% end %>
-
-<%= link_to 'Back', user_bikes_path(current_user), class: 'btn btn-secondary' %>
+<div class="bg-red">
+  <div class="container mb-4">
+    <%= render 'shared/logo_btn_top_white' %>
+    <%= render 'shared/link_user_profile', user: (@user || current_user) %>
+  </div>
+  <div class="bg-white">
+    <div class="container">
+      <h4 class="text-center">Register a new bike</h4>
+      <%= simple_form_for [@user, @bike] do |f| %>
+        <%= f.input :year, collection: @year, required: true %>
+        <%= f.input :brand, collection: @brand.sort, required: true %>
+        <%= f.input :name, label: 'Name', required: true %>
+        <div class="d-flex justify-content-center mt-4">
+          <%= f.button :submit, 'Create Bike', class: 'btn-red' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

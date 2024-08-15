@@ -4,8 +4,8 @@
   border-radius: 12px;
 
   .review-photo {
-    width: 100%;
-    height: 100%;
+    width: 350px;
+    height: auto;
     object-fit: cover;
     border-radius: 8px;
   }
@@ -27,6 +27,20 @@
   @media (max-width: 768px) {
     p {
       font-size: 0.9rem;
+    }
+  }
+}
+
+// SHOW REVIEW 
+
+.review-show-details {
+  h4 {
+    a {
+      color: $dark-red;
+      transition: color 0.3s;
+      &:hover {
+        color: $gray-hover;
+      }
     }
   }
 }
