@@ -1,17 +1,22 @@
-<div class="container">
-  <%= render 'shared/logo_btn_top' %>
-  <div class="my-4">
-    <h3><strong><%= @user.first_name %>'s routes:</strong></h3>
-    <% if @routes.present? %>
-      <div class="d-flex flex-row flex-nowrap overflow-auto">
-        <% @routes.each do |route| %>
-          <div class="col-sm-12 col-md-3">
-            <%= render 'components/route_card', route: route %>
-          </div>
-        <% end %>
-      </div>
-    <% else %>
-      <p>No routes found.</p>
-    <% end %>
+<div class="bg-red">
+  <div class="container mb-4">
+    <%= render 'shared/logo_btn_top_white' %>
+    <%= render 'shared/link_user_profile', user: (@user || current_user) %>
+  </div>
+  <div class="bg-white">
+    <div class="container">
+      <h3 class="text-center"><strong><%= @user.first_name %>'s routes:</strong></h3>
+      <% if @routes.present? %>
+        <div class="d-flex flex-row flex-nowrap overflow-auto">
+          <% @routes.each do |route| %>
+            <div class="col-sm-12 col-md-3">
+              <%= render 'components/route_card', route: route %>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p>No routes found.</p>
+      <% end %>
+    </div>
   </div>
 </div>

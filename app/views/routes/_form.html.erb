@@ -1,20 +1,29 @@
- <%= simple_form_for(@route) do |f| %>
+<div class="form-new-review px-3">
+  <%= simple_form_for(@route) do |f| %>
     <%= f.input :title %>
-
     <%= f.input :description %>
     <%= f.label :waypoints, "Waypoints" %>
-
     <%= f.hidden_field :waypoints, id: 'waypoints_input' %>
     <%= render 'shared/map'%>
-
     <%#= f.text_area :waypoints, value: @route.waypoints.join(', '), class: "form-control mb-3" %>
-
-    <%= f.input :videos_url, label: "Youtube Link"%>
-
+    <div class="mt-4">
+      <%= f.input :videos_url, label: "Youtube Link"%>
+    </div>
     <%= f.label :ride_type %>
-    <%= f.collection_check_boxes :ride_type, Route::RIDE_TYPE.compact, :to_s, :to_s, include_hidden: false %>
-
-    <div class="d-flex justify-content-center">
-      <%= f.submit "Create", class: "btn btn-primary btn-block w-25 mt-3 custom-rounded-button" %>
+    <div class="row mt-3">
+      <% Route::RIDE_TYPE.compact.each_slice(3) do |ride_types| %>
+        <div class="col-6 col-md-4">
+          <% ride_types.each do |ride_type| %>
+            <div class="form-check">
+              <%= f.check_box :ride_type, { multiple: true, class: "form-check-input" }, ride_type, nil %>
+              <%= f.label :ride_type, ride_type, class: "form-check-label mb-2" %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="d-flex justify-content-center mt-3 pb-3">
+      <%= f.submit "Create a route", class: "btn-red  " %>
     </div>
   <% end %>
+</div>

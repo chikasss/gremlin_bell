@@ -33,9 +33,11 @@
         <div class="mb-4">
           <% if review.photos.present? %>
             <p>Photos:</p>
-            <% review.photos.each do |photo| %>
-              <%= image_tag(photo, class: "review-photo") %>
-            <% end %>
+            <div class="d-flex flex-row flex-nowrap overflow-auto">
+              <% review.photos.each do |photo| %>
+                <%= image_tag(photo, class: "review-photo-sm me-2") %>
+              <% end %>
+            </div>
           <% end %>
         </div>
         <div class="d-flex justify-content-between align-items-center">
