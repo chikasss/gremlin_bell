@@ -4,7 +4,7 @@
     <%= f.input :description %>
     <%= f.label :waypoints, "Waypoints" %>
 
-    <%= f.hidden_field :waypoints, id: 'waypoints_input' %>
+    <%= f.hidden_field :waypoints, id: 'waypoints_input', multiple: true %>
     <%= render 'shared/map'%>
 
     <%#= f.text_area :waypoints, value: @route.waypoints.join(', '), class: "form-control mb-3" %>
