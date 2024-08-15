@@ -109,6 +109,9 @@ export default class extends Controller {
       } else if (waypoints.length === 2)  {
         addMarker(coords, 'end', '#f30');
         getRoute(waypoints[0], waypoints[1]);
+        const form = document.querySelector('form');
+        const waypointsInput = document.querySelector('#waypoints_input');
+        waypointsInput.value = JSON.stringify(waypoints);
       } else {
         waypoints = [coords]; // Reset the waypoints and start a new route
         addMarker(start, 'start', '#3887be');
@@ -117,12 +120,6 @@ export default class extends Controller {
       }
     });
 
-      // Select the form using the generated form ID from Simple Form
-    const form = document.querySelector('form');
-
-    form.addEventListener('submit', function(event) {
-      const waypointsInput = document.querySelector('#waypoints_input');
-      waypointsInput.value = JSON.stringify(waypoints); // Populate hidden field with JSON string of waypoints
-    });
+      // Select the form using the generated form ID from Simple For
   }
 }
