@@ -7,6 +7,10 @@ class UserPolicy < ApplicationPolicy
     true
   end
 
+  def index?
+    true
+  end
+
   def saved_trips?
     record == user
   end
@@ -21,6 +25,18 @@ class UserPolicy < ApplicationPolicy
 
   def show?
     true
+  end
+
+  def user_reviews?
+    true
+  end
+
+  def follow?
+    user != record
+  end
+
+  def unfollow?
+    user.following.include?(record)
   end
 
   class Scope < Scope

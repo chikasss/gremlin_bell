@@ -1,14 +1,12 @@
-<div class="home bg-red">
-  <div class="container">
-    <div class="d-flex justify-content-end pt-4 pe-2">
-      <%= image_tag 'logo-white.svg', class:"logo-icon" %>
-    </div>
     <% if user_signed_in? %>
-      <div class="p-2">
-        <%= render 'shared/link_user_profile' %>
+  <div class="home bg-red">
+    <div class="container">
+      <%= render 'shared/logo_btn_top_white' %>
+      <%= render 'shared/link_user_profile', user: (@user || current_user) %>
+      <div class="px-2">
         <div class="discover-routes">
-          <h3 class="mb-0 pb-0">Discover new routes</h3>
-          <p class='pb-0'>Find the best route for you</p>
+          <h3 class="m-0 p-0">Discover new routes</h3>
+          <p class="pb-0">Find the best route for you</p>
         </div>
       </div>
     </div>

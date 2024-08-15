@@ -44,3 +44,51 @@
     }
   }
 }
+
+.review-user-profile {
+  border: 1px solid $border;
+  padding: 1rem;
+  border-radius: 12px;
+  // flex: 0 0 auto;
+  // width: 250px;
+
+  .review-card-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  h5 {
+    color: $black;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .fa-location-dot {
+    color: $dark-red;
+    font-size: 1.3rem;
+  }
+
+  .fa-star {
+    color: $yellow;
+  }
+
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 4.5rem;
+  }
+
+  @media (max-width: 768px) {
+    p {
+      font-size: 0.9rem;
+    }
+  }
+}

@@ -1,9 +1,26 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :saved_trips, :created_routes, :created_reviews]
+  before_action :set_user, only: [:edit, :update, :show, :saved_trips, :created_routes, :created_reviews, :follow, :unfollow, :user_reviews]
 
 
   def edit
     authorize @user
+  end
+
+  def index
+    @users = policy_scope(User)
+    authorize @users
+  end
+
+  def follow
+    authorize @user, :follow?
+    current_user.following << @user unless current_user == @user || current_user.following.include?(@user)
+    redirect_to request.path
+  end
+
+  def unfollow
+    authorize @user, :unfollow?
+    current_user.following.delete(@user)
+    redirect_to request.path
   end
 
   def update
@@ -21,7 +38,7 @@ class UsersController < ApplicationController
     # @saved_trips = @user.all_favorited
     @routes = @user.routes
     @reviews = @user.reviews
-    @user = User.find(params[:id])
+    @last_review = @reviews.last
   end
 
   def saved_trips
@@ -33,6 +50,11 @@ class UsersController < ApplicationController
   def created_routes
     authorize @user
     @routes = @user.routes
+  end
+
+  def user_reviews
+    authorize @user
+    @reviews = @user.reviews.order(created_at: :desc)
   end
 
   def created_reviews

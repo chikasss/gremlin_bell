@@ -7,13 +7,15 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :users, only: %i[edit show update] do
+  resources :users, only: %i[index edit show update] do
     resources :bikes, only: %i[create edit update show index new]
     member do
-      get 'follow', to: 'users#follow', as: 'follow'
+      post 'follow', to: 'users#follow', as: 'follow'
+      delete 'unfollow', to: 'users#unfollow', as: 'unfollow'
       get 'saved_trips', to: 'users#saved_trips', as: 'saved_trips'
       get 'created_routes', to: 'users#created_routes', as: 'created_routes'
       get 'created_reviews', to: 'users#created_reviews', as: 'created_reviews'
+      get 'user_reviews', to: 'users#user_reviews', as: :user_reviews
     end
   end
 
