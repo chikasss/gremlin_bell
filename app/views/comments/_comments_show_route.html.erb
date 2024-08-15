@@ -1,4 +1,12 @@
 <div class="comments-routes-show">
+  <div data-controller="insert-route-comment">
+    <div class="d-flex justify-content-center" data-action="click->insert-route-comment#insertRouteComment">
+      <button class="btn-light-gray" data-insert-route-comment-target="insertCommentBtn">Insert a Route Comment</button>
+    </div>
+    <div class="my-2 comment-form" data-insert-route-comment-target="commentForm">
+      <%= render 'comments/form' %>
+    </div>
+  </div>
   <% if @route.comments.present? %>
     <h3>Route Comments:</h3>
     <% @comments.limit(3).each do |comment| %>
@@ -25,12 +33,4 @@
       </div>
     <% end %>
   <% end %>
-  <div data-controller="insert-route-comment">
-    <div class="d-flex justify-content-center mt-4" data-action="click->insert-route-comment#insertRouteComment">
-      <button class="btn-light-gray" data-insert-route-comment-target="insertCommentBtn">Insert a Route Comment</button>
-    </div>
-    <div class="my-4 comment-form" data-insert-route-comment-target="commentForm">
-      <%= render 'comments/form' %>
-    </div>
-  </div>
 </div>

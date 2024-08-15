@@ -14,15 +14,13 @@
     </div>
     <div class="bg-white">
       <div class="container">
-        <div class='pt-4'>
-          <%= link_to routes_path do %>
-            <div class="row d-flex justify-content-center">
-              <div class="col-10">
-                <%= render 'components/search_bar' %>
-              </div>
+        <%= link_to routes_path do %>
+          <div class="row d-flex justify-content-center">
+            <div class="col-10">
+              <%= render 'components/search_bar' %>
             </div>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
         <div class="d-flex justify-content-between mt-4 mx-2">
           <h3>Nearby</h3>
           <%= link_to routes_path  do %>
