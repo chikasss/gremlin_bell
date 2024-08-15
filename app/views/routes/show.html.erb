@@ -101,9 +101,20 @@
         </div>
       </div>
     <% end %>
+
+<!-- map -->
+    <div data-controller="route-show-map"
+         data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
+         data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
+         data-route-show-map-target="map"
+         class="map-container"
+         style="height: 500px;">
+    </div>
   </div>
+
   <div class="my-4 d-flex justify-content-center">
     <%= button_to 'Save to My Trips', save_route_path(@route),
     method: :post, class: 'btn-red-lg' %>
   </div>
+
 </div>
