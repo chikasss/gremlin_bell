@@ -38,23 +38,23 @@
           <% end %>
         </div>
         <div class="d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            <% if @review.user.avatar.present? %>
-              <div class="me-2">
-                <%= image_tag @review.user.avatar, class: "avatar" %>
-              </div>
-            <% else %>
-              <div class="me-2">
-                <%= image_tag "user-photo.png", class: "avatar" %>
-              </div>
-            <% end %>
-            <div>
-              <%= link_to user_path(@review.user) do %>
-                <p class="mb-0"><%= @review.user.first_name %></p>
+          <%= link_to user_path(@review.user) do %>
+            <div class="d-flex align-items-center">
+              <% if @review.user.avatar.present? %>
+                <div class="me-2">
+                  <%= image_tag @review.user.avatar, class: "avatar" %>
+                </div>
+              <% else %>
+                <div class="me-2">
+                  <%= image_tag "user-photo.png", class: "avatar" %>
+                </div>
               <% end %>
-              <p class="mb-0"><%= @review.created_at.strftime("%B %d, %Y") %></p>
+              <div>
+                <p class="mb-0"><%= @review.user.first_name %></p>
+                <p class="mb-0"><%= @review.created_at.strftime("%B %d, %Y") %></p>
+              </div>
             </div>
-          </div>
+          <% end %>
           <div>
             <% if current_user == @review.user %>
               <%= link_to edit_route_review_path(route_id: @route, id: review.id) do %>
