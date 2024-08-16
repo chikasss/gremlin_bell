@@ -5,8 +5,7 @@ class PagesController < ApplicationController
 
   def home
     # @bikes = current_user.bikes
-    @routes = Route.all
-    @ride_types = Route::RIDE_TYPE
+    @routes = Route.all.order(created_at: :desc)
     # @saved_trips = current_user.all_favorited
   end
 end

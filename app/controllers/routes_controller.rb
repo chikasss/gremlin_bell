@@ -5,7 +5,7 @@ class RoutesController < ApplicationController
 
   def index
     @routes = policy_scope(Route)
-    @routes = Route.all
+    @routes = Route.all.order(created_at: :desc)
 
     results = []
     if params[:query]

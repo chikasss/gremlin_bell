@@ -3,8 +3,8 @@
     <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
     <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
-  <div class="bg-white mt-4">
-    <div class="container">
+  <div class="bg-white">
+    <div class="container px-4">
       <% if @user == current_user %>
         <div class="d-flex justify-content-between">
           <h3>Your Bikes</h3>

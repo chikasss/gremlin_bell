@@ -1,6 +1,7 @@
 .user-card {
   border-radius: 8px;
   position: relative;
+  padding: 0.5rem;
 
   .follower-icon {
     position: absolute;
@@ -40,7 +41,8 @@
     background: $dark-red;
     padding: 0.3rem 0.8rem;
     color: white;
-    display: flex;
+    display: inline-flex;
+    max-width: max-content;
     justify-content: center;
     align-items: center;
     border-radius: 6px;
@@ -54,6 +56,12 @@
 
     i {
       font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    h4 {
+      font-size: 1.2rem;
     }
   }
 }
