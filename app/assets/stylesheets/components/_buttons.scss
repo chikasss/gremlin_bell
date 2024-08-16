@@ -79,3 +79,23 @@
     }
   }
 }
+
+.logo-btn-top {
+  button {
+    background: none;
+    border: none;
+  }
+
+  .dropdown-menu {
+    background: $white;
+    border-radius: 8px;
+    a {
+      color: $dark-red;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $black;
+      }
+    }
+  }
+}
