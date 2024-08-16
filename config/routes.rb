@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     member do
       post 'follow', to: 'users#follow', as: 'follow'
       delete 'unfollow', to: 'users#unfollow', as: 'unfollow'
+      get 'followers', to: 'users#followers', as: 'followers'
+      get 'following', to: 'users#following', as: 'following'
       get 'saved_trips', to: 'users#saved_trips', as: 'saved_trips'
       get 'created_routes', to: 'users#created_routes', as: 'created_routes'
       get 'created_reviews', to: 'users#created_reviews', as: 'created_reviews'

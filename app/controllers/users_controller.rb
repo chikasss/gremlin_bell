@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update, :show, :saved_trips, :created_routes, :created_reviews, :follow, :unfollow, :user_reviews]
+  before_action :set_user, only: [:edit, :update, :show, :saved_trips, :created_routes, :created_reviews, :follow, :unfollow, :user_reviews, :followers, :following]
 
 
   def edit
@@ -21,6 +21,16 @@ class UsersController < ApplicationController
     authorize @user, :unfollow?
     current_user.following.delete(@user)
     redirect_to request.path
+  end
+
+  def followers
+    authorize @user
+    @followers = @user.followers
+  end
+
+  def following
+    authorize @user
+    @following = @user.following
   end
 
   def update

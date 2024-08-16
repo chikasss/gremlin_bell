@@ -39,6 +39,14 @@ class UserPolicy < ApplicationPolicy
     user.following.include?(record)
   end
 
+  def followers? 
+    true
+  end
+
+  def following?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.all

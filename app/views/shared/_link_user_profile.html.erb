@@ -14,8 +14,16 @@
         <h2 class="mb-0"><strong><%= user.first_name %> <%= user.last_name %></strong></h2>
       <% end %>
       <div class="d-flex mt-2">
-        <p class="me-3 mb-0"><strong><%= user.followers.count %></strong> followers</p>
-        <p class="mb-0"><strong><%= user.following.count %></strong> following</p>
+        <p class="me-3 mb-0">
+          <%= link_to followers_user_path(user) do %>
+            <strong><%= user.followers.count %></strong> followers
+          <% end %>
+        </p>
+        <p class="mb-0">
+          <%= link_to following_user_path(user) do %>
+            <strong><%= user.following.count %></strong> following
+          <% end %>
+        </p>
       </div>
     </div>
   </div>
