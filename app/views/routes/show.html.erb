@@ -91,24 +91,36 @@
           </div>
         </div>
       <% end %>
-      <% if @route.comments.present? %>
-        <div>
-          <%= render 'comments/comments_show_route' %>
-        </div>
-      <% else %>
-        <div data-controller="insert-route-comment">
-          <div class="d-flex justify-content-center mt-4" data-action="click->insert-route-comment#insertRouteComment">
-            <button class="btn-light-gray" data-insert-route-comment-target="insertCommentBtn">Insert a Route Comment</button>
-          </div>
-          <div class="my-4 comment-form" data-insert-route-comment-target="commentForm">
-            <%= render 'comments/form' %>
-          </div>
-        </div>
-      <% end %>
-      <div class="my-4 d-flex justify-content-center">
-        <%= button_to 'Save to My Trips', save_route_path(@route),
-    method: :post, class: 'btn-red-lg' %>
+       <% if @route.comments.present? %>
+      <div>
+        <%= render 'comments/comments_show_route' %>
       </div>
+    <% else %>
+      <div data-controller="insert-route-comment">
+        <div class="d-flex justify-content-center mt-4" data-action="click->insert-route-comment#insertRouteComment">
+          <button class="btn-light-gray" data-insert-route-comment-target="insertCommentBtn">Insert a Route Comment</button>
+        </div>
+        <div class="my-4 comment-form" data-insert-route-comment-target="commentForm">
+          <%= render 'comments/form' %>
+        </div>
+      </div>
+    <% end %>
+      
+      
+      
+<!-- map -->
+    <div data-controller="route-show-map"
+         data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
+         data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
+         data-route-show-map-target="map"
+         class="map-container"
+         style="height: 500px;">
     </div>
   </div>
+
+  <div class="my-4 d-flex justify-content-center">
+    <%= button_to 'Save to My Trips', save_route_path(@route),
+    method: :post, class: 'btn-red-lg' %>
+  </div>
+
 </div>
