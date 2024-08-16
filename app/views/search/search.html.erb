@@ -12,7 +12,12 @@
       </div>
       <div class="px-3">
         <div class="last_routes mb-4">
-          <h3>Last Routes...</h3>
+          <div class="d-flex justify-content-between">
+            <h3>Last Routes...</h3>
+            <%= link_to routes_path do %>
+              <i class="fa-solid fa-circle-chevron-right"></i>
+            <% end %>
+          </div>
           <div class="d-flex flex-row flex-nowrap overflow-auto">
             <% @last_routes.each do |route| %>
               <div class="col-9 col-md-3 me-2">
@@ -22,7 +27,12 @@
           </div>
         </div>
         <div class="last_users">
-          <h3 class="mb-4">Last Users...</h3>
+          <div class="d-flex justify-content-between">
+            <h3 class="mb-4">Last Users...</h3>
+            <%= link_to users_path do %>
+              <i class="fa-solid fa-circle-chevron-right"></i>
+            <% end %>
+          </div>
           <div class="d-flex flex-row flex-nowrap overflow-auto">
             <% @last_users.each do |user| %>
               <div class="col-6 col-md-4 me-2">

@@ -5,14 +5,20 @@
   </div>
   <div class="bg-white">
     <div class="container">
-      <h3 class="text-center mb-4"><strong><%= @user.first_name %>'s reviews</strong></h3>
-      <% @reviews.each do |review| %>
-        <%= link_to route_review_path(review.route, review) do %>
-          <div class="mb-2">
-            <%= render 'components/review_card', review: review %>
-          </div>
-        <% end %>
+      <% if @user == current_user %>
+        <h3 class="text-center mb-4">Your reviews</h3>
+      <% else %>
+        <h3 class="text-center mb-4"><strong><%= @user.first_name %>'s reviews</strong></h3>
       <% end %>
+      <div class="px-2">
+        <% @reviews.each do |review| %>
+          <%= link_to route_review_path(review.route, review) do %>
+            <div class="mb-2">
+              <%= render 'components/review_mini_card', review: review %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

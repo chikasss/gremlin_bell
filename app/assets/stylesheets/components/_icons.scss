@@ -12,3 +12,17 @@
     font-size: 1.5rem;
   }
 }
+
+.fa-circle-plus {
+  color: $yellow;
+  font-size: 2rem;
+}
+
+.fa-pen-to-square {
+  color: $gray-icon;
+  transition: color 0.3s;
+
+  &:hover {
+    color: $gray-hover;
+  }
+}
