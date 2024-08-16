@@ -10,8 +10,11 @@
     </div>
     <div class="bg-white">
       <div class="container">
-        <div class="d-flex justify-content-between mx-2">
+        <div class="d-flex justify-content-between mx-2" data-controller="current-location">
+        <div class="d-flex">
           <h3>Nearby</h3>
+          <i class="fa-solid fa-location-arrow p-2" data-action="click->current-location#searchByCurrentLocation"></i>
+        </div>
           <%= link_to routes_path  do %>
             <i class="fa-solid fa-circle-chevron-right"></i>
           <% end %>

@@ -18,6 +18,15 @@
   font-size: 2rem;
 }
 
+.fa-location-arrow {
+  color: $dark-red;
+  transition: color 0.3s;
+
+  &:hover {
+    color: lighten($dark-red, 10%);
+  }
+}
+
 .fa-pen-to-square {
   color: $gray-icon;
   transition: color 0.3s;
