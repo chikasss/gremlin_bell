@@ -1,93 +1,97 @@
-<div class="container">
-  <div class="show-route">
-    <div class="d-flex justify-content-between my-4">
-      <div class="d-flex justify-content-start back-btn">
-        <%= link_to (request.referrer || routes_path) do %>
-          <i class="fa-solid fa-circle-chevron-left"></i>
-        <% end %>
-      </div>
-      <%= image_tag 'logo-red.svg', class:"logo-icon" %>
-    </div>
-    <div class="mb-4">
-      <h2><%= @route.title %></h2>
-      <div class="d-flex align-items-center location-route">
-        <i class="fa-solid fa-location-dot"></i>
-        <p class='ms-2 pb-0 mb-0'>Japan</p>
-      </div>
-    </div>
-    <div>
-      <% if @route.photos.attached? %>
-        <div class="p-2"><%= cl_image_tag @route.photos.first.key, class: "route-img"%>
-        </div>
-      <% else %>
-        <div class="p-2"><%= cl_image_tag ("route-bg_gto4ry"), class: "route-img" %>
-        </div>
-      <% end %>
-    </div>
-    <div class="route-description d-flex mt-4">
-      <i class="fa-solid fa-quote-left me-2"></i>
-      <p><%= @route.description %></p>
-      <i class="fa-solid fa-quote-right"></i>
-    </div>
-    <% if @route.videos_url.present? %>
-      <div class="my-2 p-4">
-        <h5>Route video:</h5>
-        <div class="d-flex justify-content-center align-items-center">
-          <iframe width="500" height="250" src="http://www.youtube.com/embed/<%= @tail %>" frameborder="0"></iframe>
-        </div>
-      </div>
-    <% end %>
-    <div class="border-bottom mx-4 mb-4"></div>
-    <div class="route-reviews" data-controller="show-reviews">
+<div class="show-route bg-red">
+  <div class="container mb-4">
+    <%= render 'shared/logo_btn_top_white' %>
+    <%= render 'shared/link_user_profile', user: (@user || current_user) %>
+  </div>
+  <div class="bg-white">
+    <div class="container">
       <div class="d-flex justify-content-between">
-        <div class="reviews-rating d-flex">
-          <% if @reviews.present? %>
-            <i class="fa-solid fa-star"></i>
-            <h3 class="ms-2 mb-0 pb-0"><%= @route.average_rating %></h3>
-          <% else %>
-            <i class="fa-solid fa-star"></i>
+        <div class="mb-4">
+          <h2><%= @route.title %></h2>
+          <div class="d-flex align-items-center location-route">
+            <i class="fa-solid fa-location-dot"></i>
+            <p class='ms-2 pb-0 mb-0'>Japan</p>
+          </div>
+        </div>
+        <div>
+          <%= button_to save_route_path(@route), method: :post, class: "btn-plus" do %>
+            <i class="fa-solid fa-circle-plus"></i>
           <% end %>
         </div>
-        <% if @reviews.present? %>
-          <div class=" d-flex justify-content-end" data-action="click->show-reviews#showReviews">
-            <button class="btn-light-gray" data-show-reviews-target="showReviewBtn">Road Reviews</button>
+      </div>
+      <div>
+        <% if @route.photos.attached? %>
+          <div class="p-2"><%= cl_image_tag @route.photos.first.key, class: "route-img"%>
           </div>
         <% else %>
-          <div data-controller="new-review" class="mb-0 pb-0">
-            <div class="mt-4 d-flex justify-content-center" data-action="click->new-review#newReview">
-              <button class="btn-light-gray " data-new-review-target="writeReviewBtn">Write a Route Review</button>
-            </div>
-            <div class="my-4 review-form" data-new-review-target="reviewForm">
-              <h3>Write a review:</h3>
-              <%= simple_form_for [@route, @review] do |f| %>
-                <%= render "reviews/form", f: f %>
-                <div class="d-flex justify-content-center">
-                  <%= f.button :submit, "Submit Review", class: "btn-yellow" %>
-                </div>
-              <% end %>
-            </div>
+          <div class="p-2"><%= cl_image_tag ("route-bg_gto4ry"), class: "route-img" %>
           </div>
         <% end %>
       </div>
-      <div class="review-box" data-show-reviews-target="showLastFiveReviews">
-        <%= render 'reviews/reviews_show_route' %>
+      <div class="route-description d-flex mt-4">
+        <i class="fa-solid fa-quote-left me-2"></i>
+        <p><%= @route.description %></p>
+        <i class="fa-solid fa-quote-right"></i>
       </div>
-    </div>
-    <% if @route.ride_type.present? %>
-      <div class="my-4">
-        <h3>Tags:</h3>
-        <div class="d-flex justify-content-center">
-          <% if @route.ride_type.is_a?(Array) %>
-            <% @route.ride_type.each do |type| %>
-              <div class="route-tag rounded-pill me-2"><%= type %></div>
+      <% if @route.videos_url.present? %>
+        <div class="my-2 p-4">
+          <h5>Route video:</h5>
+          <div class="d-flex justify-content-center align-items-center">
+            <iframe width="500" height="250" src="http://www.youtube.com/embed/<%= @tail %>" frameborder="0"></iframe>
+          </div>
+        </div>
+      <% end %>
+      <div class="border-bottom mx-4 mb-4"></div>
+      <div class="route-reviews" data-controller="show-reviews">
+        <div class="d-flex justify-content-between">
+          <div class="reviews-rating d-flex">
+            <% if @reviews.present? %>
+              <i class="fa-solid fa-star"></i>
+              <h3 class="ms-2 mb-0 pb-0"><%= @route.average_rating %></h3>
+            <% else %>
+              <i class="fa-solid fa-star"></i>
             <% end %>
+          </div>
+          <% if @reviews.present? %>
+            <div class=" d-flex justify-content-end" data-action="click->show-reviews#showReviews">
+              <button class="btn-light-gray" data-show-reviews-target="showReviewBtn">Road Reviews</button>
+            </div>
           <% else %>
-            <div class="route-tag rounded-pill me-2"><%= @route.ride_type %></div>
+            <div data-controller="new-review" class="mb-0 pb-0">
+              <div class="mt-4 d-flex justify-content-center" data-action="click->new-review#newReview">
+                <button class="btn-light-gray " data-new-review-target="writeReviewBtn">Write a Route Review</button>
+              </div>
+              <div class="my-4 review-form" data-new-review-target="reviewForm">
+                <h3>Write a review:</h3>
+                <%= simple_form_for [@route, @review] do |f| %>
+                  <%= render "reviews/form", f: f %>
+                  <div class="d-flex justify-content-center">
+                    <%= f.button :submit, "Submit Review", class: "btn-yellow" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
           <% end %>
         </div>
+        <div class="review-box" data-show-reviews-target="showLastFiveReviews">
+          <%= render 'reviews/reviews_show_route' %>
+        </div>
       </div>
-    <% end %>
-    <% if @route.comments.present? %>
+      <% if @route.ride_type.present? %>
+        <div class="my-4">
+          <h3>Tags:</h3>
+          <div class="d-flex justify-content-center">
+            <% if @route.ride_type.is_a?(Array) %>
+              <% @route.ride_type.each do |type| %>
+                <div class="route-tag rounded-pill me-2"><%= type %></div>
+              <% end %>
+            <% else %>
+              <div class="route-tag rounded-pill me-2"><%= @route.ride_type %></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+       <% if @route.comments.present? %>
       <div>
         <%= render 'comments/comments_show_route' %>
       </div>
@@ -101,7 +105,9 @@
         </div>
       </div>
     <% end %>
-
+      
+      
+      
 <!-- map -->
     <div data-controller="route-show-map"
          data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"

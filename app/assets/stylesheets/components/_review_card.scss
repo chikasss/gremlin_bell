@@ -4,8 +4,8 @@
   border-radius: 12px;
 
   .review-photo {
-    width: 100%;
-    height: 100%;
+    width: 350px;
+    height: auto;
     object-fit: cover;
     border-radius: 8px;
   }
@@ -22,6 +22,66 @@
 
   .fa-star {
     color: $yellow;
+  }
+
+  @media (max-width: 768px) {
+    p {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// SHOW REVIEW 
+
+.review-show-details {
+  h4 {
+    a {
+      color: $dark-red;
+      transition: color 0.3s;
+      &:hover {
+        color: $gray-hover;
+      }
+    }
+  }
+}
+
+.review-user-profile {
+  border: 1px solid $border;
+  padding: 1rem;
+  border-radius: 12px;
+  
+  .review-card-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  h5 {
+    color: $black;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .fa-location-dot {
+    color: $dark-red;
+    font-size: 1.3rem;
+  }
+
+  .fa-star {
+    color: $yellow;
+  }
+
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 4.5rem;
   }
 
   @media (max-width: 768px) {
