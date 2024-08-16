@@ -57,7 +57,7 @@
           <% end %>
           <div>
             <% if current_user == @review.user %>
-              <%= link_to edit_route_review_path(route_id: @route, id: review.id) do %>
+              <%= link_to edit_route_review_path(route_id: @route, id: @review.id) do %>
                 <i class="fa-solid fa-pen-to-square"></i>
               <% end %>
             <% end %>

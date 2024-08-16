@@ -11,7 +11,11 @@
           <p class="p-2"><%= @user.about %></p>
         <% end %>
         <div class="d-flex justify-content-between mb-2">
-          <h3><%= @user.first_name %>'s <strong>Garage:</strong></h3>
+          <% if @user ==current_user %>
+            <h3><strong>Your</strong> Garage:</h3>
+          <% else %>
+            <h3><%= @user.first_name %>'s <strong>Garage:</strong></h3>
+          <% end %>
           <%= link_to user_bikes_path(@user) do %>
             <i class="fa-solid fa-circle-chevron-right"></i>
           <% end %>
@@ -29,7 +33,11 @@
         </div>
         <div class="saved-routes mt-4 pt-4">
           <div class="d-flex justify-content-between">
-            <h3><%= @user.first_name %>'s <strong>routes:</strong></h3>
+            <% if @user == current_user %>
+              <h3><strong>Your</strong> routes:</h3>
+            <% else %>
+              <h3><%= @user.first_name %>'s <strong>routes:</strong></h3>
+            <% end %>
             <% if @user.routes.any? %>
               <%= link_to created_routes_user_path(@user) do %>
                 <i class="fa-solid fa-circle-chevron-right"></i>
@@ -46,27 +54,29 @@
             <% end %>
           </div>
         </div>
-        <div class="my-4 py-4">
+        <div class="my-4">
           <div class="d-flex justify-content-between">
-            <h3>Last <%= @user.first_name %>'s <strong>review</strong></h3>
+            <% if @user == current_user %>
+              <h3>Your <strong>last review</strong></h3>
+            <% else %>
+              <h3>Last <%= @user.first_name %>'s <strong>review</strong></h3>
+            <% end %>
             <%= link_to user_reviews_user_path(@user) do %>
               <i class="fa-solid fa-circle-chevron-right"></i>
             <% end %>
           </div>
           <% if @reviews.present? %>
-            <div class="d-flex flex-row flex-nowrap overflow-auto">
-              <%= link_to route_review_path(@last_review.route, @last_review) do %>
-                <div class="mb-2">
-                  <%= render 'components/review_card', review: @last_review %>
-                </div>
-              <% end %>
-            </div>
+            <%= link_to route_review_path(@last_review.route, @last_review) do %>
+              <div class="my-3">
+                <%= render 'components/review_mini_card', review: @last_review %>
+              </div>
+            <% end %>
           <% else %>
             <p><%= @user.first_name %> has not written any reviews yet.</p>
           <% end %>
         </div>
         <% if @user == current_user %>
-          <div class="my-4 d-flex justify-content-center">
+          <div class="my-2 d-flex justify-content-center">
             <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-light-gray-sm" %>
           </div>
         <% end %>
