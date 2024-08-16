@@ -7,6 +7,14 @@
       color: $dark-red;
       font-weight: 600;
       padding: 0.2rem 1rem;
+
+      @media (max-width: 768px) {
+        font-size: 0.8rem;
+        
+        i {
+          font-size: 0.8rem;
+        }
+      }
     }
   }
 
@@ -19,5 +27,9 @@
   a {
     text-decoration: none;
     color: $white;
+  }
+
+  p {
+    color: #fff;
   }
 }

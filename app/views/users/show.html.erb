@@ -36,26 +36,30 @@
             <% end %>
           </div>
         </div>
-        <div class="reviews mt-4 pt-4">
+        <div class="mt-4 pt-4">
           <div class="d-flex justify-content-between">
-            <h3><strong><%= @user.first_name %>'s reviews</strong></h3>
-            <%= link_to '#' do %>
+            <h3>Last <strong><%= @user.first_name %>'s review</strong></h3>
+            <%= link_to user_reviews_user_path(@user) do %>
               <i class="fa-solid fa-circle-chevron-right me-2"></i>
             <% end %>
           </div>
-          <div class="d-flex flex-row flex-nowrap overflow-auto">
-            <% if @reviews.present? %>
-              <% @reviews.each do |review| %>
-                <%= render 'components/review_card', review: review %>
+          <% if @reviews.present? %>
+            <div class="d-flex flex-row flex-nowrap overflow-auto">
+              <%= link_to route_review_path(@last_review.route, @last_review) do %>
+                <div class="mb-2">
+                  <%= render 'components/review_card', review: @last_review %>
+                </div>
               <% end %>
-            <% else %>
-              <p><%= @user.first_name %> has not written any reviews yet.</p>
-            <% end %>
+            </div>
+          <% else %>
+            <p><%= @user.first_name %> has not written any reviews yet.</p>
+          <% end %>
+        </div>
+        <% if @user == current_user %>
+          <div class="my-4 d-flex justify-content-center pb-4 btn-sign-out">
+            <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-light-gray-sm" %>
           </div>
-        </div>
-        <div class="my-4 d-flex justify-content-center pb-4">
-          <%= link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn-light-gray-sm" %>
-        </div>
+        <% end %>
       <% else %>
         <div class="m-4">
           <%= link_to "Login", new_user_session_path %>
