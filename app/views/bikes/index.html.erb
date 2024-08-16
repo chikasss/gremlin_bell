@@ -4,16 +4,16 @@
     <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
   <div class="bg-white">
-    <div class="container px-4">
+    <div class="container px-2">
       <% if @user == current_user %>
         <div class="d-flex justify-content-between">
-          <h3>Your Bikes</h3>
+          <h3 class="ms-2">Your Bikes</h3>
           <%= link_to new_user_bike_path do %>
             <i class="fa-solid fa-circle-plus me-2"></i>
           <% end %>
         </div>
       <% else %>
-        <h3><strong><%= @user.first_name %></strong>'s Bikes</h3>
+        <h3 class="text-center"><strong><%= @user.first_name %></strong>'s Bikes</h3>
       <% end %>
       <div class="mt-4 d-flex row justify-content-center">
         <% @bikes.each do |bike| %>

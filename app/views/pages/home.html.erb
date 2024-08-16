@@ -10,12 +10,7 @@
     </div>
     <div class="bg-white">
       <div class="container">
-        <div class="row d-flex justify-content-center">
-          <div class="col-10">
-            <%= render 'components/search_bar' %>
-          </div>
-        </div>
-        <div class="d-flex justify-content-between mt-4 mx-2">
+        <div class="d-flex justify-content-between mx-2">
           <h3>Nearby</h3>
           <%= link_to routes_path  do %>
             <i class="fa-solid fa-circle-chevron-right"></i>
@@ -30,39 +25,39 @@
             <% end %>
           </div>
         </div>
-        <div class="my-4 pt-4">
-          <h3 class="my-4">Search for...</h3>
+        <div class="my-4">
+          <div class="d-flex justify-content-between mb-2">
+            <h3>Discover</h3>
+            <%= link_to users_path  do %>
+              <i class="fa-solid fa-circle-chevron-right"></i>
+            <% end %>
+          </div>
+          <div class="d-flex flex-row flex-nowrap overflow-auto">
+            <% @users.each do |user| %>
+              <div class="col-7 col-md-3 me-2">
+                <%= render 'users/user_card', user: user %>
+              </div>
+            <% end %>
+          </div>
         </div>
-        <div class="feed-photos">
-          <h3>Your friends..</h3>
-          <% if @routes_with_photos.any? %>
-            <div class="row d-flex justify-content-center">
-              <% @routes_with_photos.each do |route| %>
-                <% route.photos.each do |photo| %>
-                  <div class="border photo-item col-10 col-md-4">
-                    <%= link_to route_path(route) do %>
-                      <div class="photo-container">
-                        <%= image_tag(photo, alt: "Photo from #{route.title} by #{route.user.first_name}", class: "photo") %>
-                      </div>
-                    <% end %>
-                    <div class="d-flex mt-2">
-                      <div class="user-avatar me-2">
-                        <% if route.user.avatar.present? %>
-                          <div class="p-2"><%= cl_image_tag route.user.avatar.key, class: "avatar" %></div>
-                        <% else %>
-                          <div class="p-2"><%= image_tag "user-photo.png", class: "avatar" %></div>
-                        <% end %>
-                      </div>
-                      <p>Posted by <%= link_to route.user.first_name, user_path(route.user) %> on <%= link_to route.title, route_path(route) %></p>
+        <h3>Your friends</h3>
+        <% if current_user.following.any? %>
+          <div class="feed-photos">
+            <% if @routes_with_photos.any? %>
+              <div class="row d-flex justify-content-center">
+                <% @routes_with_photos.each do |route| %>
+                  <% route.photos.each do |photo| %>
+                    <div class="col-10 col-md-4">
+                      <%= render 'components/photo_feed', route: route, photo: photo %>
                     </div>
-                  </div>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </div>
-          <% else %>
-            <p>No photos from users you follow.</p>
-          <% end %>
-        </div>
+              </div>
+            <% else %>
+              <p>No photos from users you follow.</p>
+            <% end %>
+          </div>
+        <% end %>
       </div>
     </div>
   <% else %>
