@@ -32,11 +32,13 @@
               <i class="fa-solid fa-circle-chevron-right"></i>
             <% end %>
           </div>
-          <% @users.each do |user| %>
-            <div class="col-7 col-md-3 me-2">
-              <%= render 'users/user_card', user: user %>
-            </div>
-          <% end %>
+          <div class="d-flex flex-row flex-nowrap overflow-auto">
+            <% @users.each do |user| %>
+              <div class="col-7 col-md-3 me-2">
+                <%= render 'users/user_card', user: user %>
+              </div>
+            <% end %>
+          </div>
         </div>
         <h3>Your friends</h3>
         <% if current_user.following.any? %>
