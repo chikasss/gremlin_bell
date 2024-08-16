@@ -19,6 +19,10 @@ class RoutePolicy < ApplicationPolicy
     true
   end
 
+  def search?
+    true 
+  end
+
   class Scope < Scope
     def resolve
       scope.all

@@ -1,15 +1,12 @@
 <div class="bg-red">
-  <div class="container mb-4">
+  <div class="container">
     <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
     <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
   <div class="bg-white">
     <div class="container">
-      <h3 class="text-center"><%= @user.first_name %> following</h3>
-      <div class="d-flex justify-content-center mb-4 pt-2">
-        <div class="col-10">
-          <%= render 'components/search_bar' %>
-        </div>
+      <h3 class="text-center"><%= @user.first_name %> is following:</h3>
+      <div class="d-flex justify-content-center mb-4">
       </div>
       <div class="row">
         <% if @user.following.any? %>

@@ -1,0 +1,42 @@
+<div class="bg-red">
+  <div class="container">
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
+    <%= render 'shared/link_user_profile', user: (@user || current_user) %>
+  </div>
+  <div class="bg-white">
+    <div class="container">
+      <div class="row d-flex justify-content-center mb-4">
+        <div class="col-10">
+          <%= render 'components/search_bar' %>
+        </div>
+      </div>
+      <h3>Search results for <strong>'<%= @query %>'</strong></h3>
+      <% if @users.any? || @routes.any? %>
+        <div class="border-bottom mx-4 mb-4"></div>
+        <% if @routes.any? %>
+          <h4>Routes:</h4>
+          <div class="routes row d-flex justify-content-center mb-2">
+            <% @routes.each do |route| %>
+              <div class="col-10 col-md-4 me-2">
+                <%= render 'components/route_card', route: route %>
+              </div>
+            <% end %>
+          </div>
+          <div class="border-bottom m-4"></div>
+        <% end %>
+        <% if @users.any? %>
+          <h4>Users:</h4>
+          <div class="users row d-flex flex-wrap justify-content-start mt-3 px-2">
+            <% @users.each do |user| %>
+              <div class="col-6 col-md-4 mb-3">
+                <%= render 'users/user_card', user: user %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      <% else %>
+        <p>No results found</p>
+      <% end %>
+    </div>
+  </div>
+</div>

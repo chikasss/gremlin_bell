@@ -3,28 +3,29 @@
     <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
     <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
-  <div class="index-routes bg-white mb-4">
+  <div class="index-routes bg-white">
     <div class="container">
       <div class="row d-flex justify-content-center">
-        <div class="col-10 d-flex">
-          <div class="col-11">
-            <%= link_to routes_path do %>
-              <%= render 'components/search_bar' %>
-            <% end %>
-          </div>
-          <div class="col ms-2 d-flex align-items-center justify-content-center">
-            <%= link_to '#' do %>
-              <i class="fa-solid fa-bars"></i>
-            <% end %>
-          </div>
+        <div class="col-10">
+          <%= render 'components/search_bar' %>
         </div>
       </div>
-      <h2 class="mt-4">All Routes</h2>
-      <div class="row d-flex justify-content-center">
-        <% @routes.each do |route| %>
-          <div class="col-11 col-md-4">
-            <%= render 'components/route_card', route: route %>
+      <div class="px-2">
+        <% if params[:query].present? && params[:query][:ride_type].present? %>
+          <h2 class="mt-4"><strong><%= params[:query][:ride_type] %></strong> Routes</h2>
+        <% else %>
+          <h2 class="mt-4">All Routes</h2>
+        <% end %>
+        <% if @routes.any? %>
+          <div class="row d-flex justify-content-center">
+            <% @routes.each do |route| %>
+              <div class="col-11 col-md-4">
+                <%= render 'components/route_card', route: route %>
+              </div>
+            <% end %>
           </div>
+        <% else %>
+          <p class="text-center mt-4">No routes found for this search.</p>
         <% end %>
       </div>
     </div>

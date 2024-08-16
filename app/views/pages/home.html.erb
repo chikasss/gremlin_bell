@@ -3,26 +3,22 @@
     <div class="container">
       <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
       <%= render 'shared/link_user_profile', user: (@user || current_user) %>
-      <div class="px-2">
-        <div class="discover-routes">
-          <h3 class="m-0 p-0">Discover new routes</h3>
-          <p class="pb-0">Find the best route for you</p>
-        </div>
+      <div class="discover-routes">
+        <h3 class="m-0 p-0">Discover new routes</h3>
+        <p class="pb-0">Find the best route for you</p>
       </div>
     </div>
     <div class="bg-white">
       <div class="container">
-        <%= link_to routes_path do %>
-          <div class="row d-flex justify-content-center">
-            <div class="col-10">
-              <%= render 'components/search_bar' %>
-            </div>
+        <div class="row d-flex justify-content-center">
+          <div class="col-10">
+            <%= render 'components/search_bar' %>
           </div>
-        <% end %>
+        </div>
         <div class="d-flex justify-content-between mt-4 mx-2">
           <h3>Nearby</h3>
           <%= link_to routes_path  do %>
-            <p>See all</p>
+            <i class="fa-solid fa-circle-chevron-right"></i>
           <% end %>
         </div>
         <div class="home-page-route-cards">
