@@ -10,6 +10,6 @@ class PagesController < ApplicationController
     
     followed_users_ids = current_user.following.pluck(:id)
     @routes = Route.where(user_id: followed_users_ids).order(created_at: :desc)
-    @routes_with_photos = @routes.select { |route| route.photos.attached? }
+    @routes_with_photos = @routes.select { |route| route.photos.attached? }.last(5)
   end
 end
