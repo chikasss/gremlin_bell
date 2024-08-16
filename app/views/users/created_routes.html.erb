@@ -1,6 +1,6 @@
 <div class="bg-red">
   <div class="container mb-4">
-    <%= render 'shared/logo_btn_top_white' %>
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
     <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
   <div class="bg-white">

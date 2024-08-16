@@ -1,11 +1,8 @@
 .user-profile {
-  
-  .fa-pen-to-square, .fa-circle-chevron-right {
+  padding: 0.5rem 1rem;
+
+  .fa-circle-chevron-right {
     color: $gray-icon;
     font-size: 1.5rem;
-  }
-
-  .btn-sign-out {
-    padding-bottom: 200px;
   }
 }

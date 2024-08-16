@@ -1,7 +1,7 @@
     <% if user_signed_in? %>
   <div class="home bg-red">
     <div class="container">
-      <%= render 'shared/logo_btn_top_white' %>
+      <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
       <%= render 'shared/link_user_profile', user: (@user || current_user) %>
       <div class="px-2">
         <div class="discover-routes">

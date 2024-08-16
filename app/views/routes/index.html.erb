@@ -1,6 +1,7 @@
 <div class="bg-red">
   <div class="container pt-2">
-    <%= render 'shared/logo_btn_top_white' %>
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
+    <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
   <div class="index-routes bg-white mb-4">
     <div class="container">

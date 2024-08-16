@@ -1,11 +1,11 @@
 <div class="bg-red">
   <div class="container mb-4">
-    <%= render 'shared/logo_btn_top_white' %>
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
     <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
   <div class="bg-white">
     <div class="container">
-      <h1>Edit Profile</h1>
+      <h3>Edit Your Profile</h3>
       <%= simple_form_for(@user) do |f| %>
         <%= f.input :first_name %>
         <%= f.input :last_name %>
@@ -19,8 +19,8 @@
           <%= social_site.input :tiktok, label: "TikTok Username", input_html: {value: @socials&.dig("tiktok")} %>
         <% end %>
         <%= f.input :avatar %>
-        <div class="submit-form my-4 pt-4 text-center">
-          <%= f.submit %>
+        <div class="submit-form my-4 text-center">
+          <%= f.submit class: "btn-red" %>
         </div>
       <% end %>
     </div>

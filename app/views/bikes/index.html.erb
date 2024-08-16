@@ -1,19 +1,23 @@
 <div class="bg-red">
   <div class="container">
-    <%= render 'shared/logo_btn_top_white' %>
-    <%= render 'shared/link_user_profile' %>
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
+    <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
   <div class="bg-white mt-4">
     <div class="container">
-      <div class="d-flex justify-content-between">
-        <h3><strong><%= current_user.first_name %></strong>'s Bikes</h3>
-        <%= link_to new_user_bike_path do %>
-          <i class="fa-solid fa-circle-plus me-2"></i>
-        <% end %>
-      </div>
+      <% if @user == current_user %>
+        <div class="d-flex justify-content-between">
+          <h3>Your Bikes</h3>
+          <%= link_to new_user_bike_path do %>
+            <i class="fa-solid fa-circle-plus me-2"></i>
+          <% end %>
+        </div>
+      <% else %>
+        <h3><strong><%= @user.first_name %></strong>'s Bikes</h3>
+      <% end %>
       <div class="mt-4 d-flex row justify-content-center">
         <% @bikes.each do |bike| %>
-          <div class="col-9 col-md-4">
+          <div class="col-9 col-md-4 m-2">
             <%= render 'components/bike_card',  bike: bike  %>
           </div>
         <% end %>

@@ -1,6 +1,6 @@
 <div class="bg-red">
   <div class="container mb-4">
-    <%= render 'shared/logo_btn_top_white' %>
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
     <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
   <div class="bg-white">
@@ -12,10 +12,14 @@
         </div>
       </div>
       <div class="row">
-        <% @following.each do |user| %>
-          <div class="col-6 col-md-4 mb-2">
-            <%= render 'user_card', user: user %>
-          </div>
+        <% if @user.following.any? %>
+          <% @following.each do |user| %>
+            <div class="col-6 col-md-4 mb-2">
+              <%= render 'user_card', user: user %>
+            </div>
+          <% end %>
+        <% else %>
+          <p>No following yet</p>
         <% end %>
       </div>
     </div>
