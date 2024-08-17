@@ -2,19 +2,15 @@ class RoutesController < ApplicationController
   before_action :authenticate_user!
 
   RIDE_TYPE = Route::RIDE_TYPE
+  PREFECTURE = User::PREFECTURES
 
   def index
-    @routes = policy_scope(Route)
-    @routes = Route.all.order(created_at: :desc)
-
-    results = []
-    if params[:query]
-      @routes.each do |route|
-        results << route if route.ride_type.include?(params[:query][:ride_type])
-      end
-      @routes = results
-    else
-      @routes
+    @routes = policy_scope(Route).order(:created_at)
+    if params[:query][:prefecture].present?
+      @routes = @routes.where(prefecture: params[:query][:prefecture])
+    end
+    if params[:query][:ride_type].present?
+      @routes = @routes.where("'#{params[:query][:ride_type]}' = ANY (ride_type)")
     end
   end
 
@@ -58,7 +54,7 @@ class RoutesController < ApplicationController
     @route = Route.find(params[:id])
     current_user.unfavorite(@route)
     authorize @route
-  
+
     if request.referer.include?(saved_trips_user_path(current_user))
       flash[:notice] = "Route removed from your saved trips"
       redirect_to saved_trips_user_path(current_user)
@@ -71,7 +67,6 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:title, :description, :videos_url, waypoints: [], ride_type: [], photos: [])
+    params.require(:route).permit(:title, :description, :prefecture, :videos_url, waypoints: [], ride_type: [], photos: [])
   end
-
 end
