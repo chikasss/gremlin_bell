@@ -17,6 +17,11 @@
     font-weight: 600;
   }
 
+  .road-condition p {
+      color: $dark-red;
+      font-weight: 600;
+  }
+
   .route-img {
     width: 100%;
     height: auto;
@@ -47,7 +52,7 @@
     max-height: 0;
     opacity: 0;
   }
-  
+
   .review-box.visible {
       opacity: 1;
       max-height: 2000px;
@@ -59,7 +64,7 @@
     max-height: 0;
     opacity: 0;
   }
-  
+
   .review-form.visible {
       opacity: 1;
       max-height: 700px;
@@ -71,7 +76,7 @@
     max-height: 0;
     opacity: 0;
   }
-  
+
   .comment-form.visible {
     opacity: 1;
     max-height: 300px;

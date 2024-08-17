@@ -40,6 +40,12 @@ class RoutesController < ApplicationController
     @reviews = @route.reviews.includes(:user).order(created_at: :desc)
     @review = @route.reviews.new
     @comments = @route.comments.includes(:user).order(created_at: :desc)
+    @road_condition =
+      if @reviews.any?
+        @reviews.last.road_condition
+      else
+        @route.road_condition
+      end
     # @comments_last_3 = @route.comments.includes(:user).order(created_at: :desc).limit(3)
     @comment = @route.comments.new
     @tail = YouTubeRails.extract_video_id(@route.videos_url)
@@ -71,6 +77,6 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:title, :description, :prefecture, :videos_url, waypoints: [], ride_type: [], photos: [])
+    params.require(:route).permit(:title, :description, :prefecture, :videos_url, :road_condition, waypoints: [], ride_type: [], photos: [])
   end
 end
