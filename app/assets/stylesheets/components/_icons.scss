@@ -69,3 +69,38 @@
     }
   }
 }
+
+.follower-icon-show-user {
+
+  button {
+    border: none;
+    background: none;
+    text-decoration: none;
+
+    .fa-user-plus {
+      color: $white;
+      transition: color 0.3s;
+      
+      &:hover {
+        color: lighten($gray-icon, 10%);
+      }
+    }
+
+    .fa-user-check {
+      color: $gray-icon;
+      transition: color 0.3s;
+
+      &:hover {
+        color: lighten($gray-icon, 10%);
+      }
+    }
+
+    i {
+      font-size: 30px;
+      @media (max-width: 768px) {
+        font-size: 20px;
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

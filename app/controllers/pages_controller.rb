@@ -11,12 +11,16 @@ class PagesController < ApplicationController
     
     followed_users_ids = current_user.following.pluck(:id)
     @routes = Route.where(user_id: followed_users_ids).order(created_at: :desc)
-    @routes_with_photos = @routes.select { |route| route.photos.attached? }.last(5)
-    @users = User.all.order(created_at: :desc).last(5)
+    @routes_with_photos = @routes.select { |route| route.photos.attached? }.last(3)
+    @users = User.where.not(id: current_user.following.pluck(:id)).order(created_at: :desc).limit(3)
+    @reviews = Review.where(user_id: followed_users_ids).order(created_at: :desc).limit(3)
+    @bikes = Bike.where(user_id: followed_users_ids).order(created_at: :desc).limit(3)
     else
       @routes = Route.none
       @routes_with_photos = []
       @users = User.none
+      @bikes = Bike.none
+      @reviews = Review.none
     end
   end
 end

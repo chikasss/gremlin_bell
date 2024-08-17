@@ -54,6 +54,15 @@ class RoutesController < ApplicationController
     authorize @route
   end
 
+  def unsave
+    @route = Route.find(params[:id])
+    current_user.unfavorite(@route)
+    redirect_to @route
+    flash[:notice] = "Route removed from your trips"
+    authorize @route
+  end
+  
+
   private
 
   def route_params

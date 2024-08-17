@@ -19,6 +19,10 @@ class RoutePolicy < ApplicationPolicy
     true
   end
 
+  def unsave?
+    true
+  end
+
   def search?
     true 
   end
