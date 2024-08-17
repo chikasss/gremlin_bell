@@ -1,5 +1,5 @@
-    <% if user_signed_in? %>
-  <div class="home bg-red">
+<div class="home bg-red">
+  <% if user_signed_in? %>
     <div class="container">
       <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
       <%= render 'shared/link_user_profile', user: (@user || current_user) %>
@@ -64,11 +64,42 @@
       </div>
     </div>
   <% else %>
-    <div class="m-4">
-      <%= link_to "Login", new_user_session_path %>
+    <div class="container">
+      <div class="d-flex justify-content-between py-4 logo-btn-top">
+        <div class="d-flex justify-content-start back-btn">
+          <%= link_to (request.referrer || root_path) do %>
+            <i class="fa-solid fa-circle-chevron-left"></i>
+          <% end %>
+        </div>
+        <%= image_tag 'logo-white.svg', class:"logo-icon" %>
+      </div>
+      <div class="d-flex justify-content-between align-items-start user-top-profile">
+        <div class="d-flex align-items-center">
+          <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-bordered" %></div>
+          <div>
+            <h2 class="mb-0">Hello <strong>New User</strong>!</h2>
+            <div class="d-flex mt-2">
+              <p class="me-3 mb-0">
+                <%= link_to "Login", new_user_session_path %>
+              </p>
+              <p class="mb-0">
+                <%= link_to "Register", new_user_registration_path %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="m-4">
-      <%= link_to "Register", new_user_registration_path %>
+    <div class="bg-white">
+      <div class="m-4">
+        <h3 class="text-center">Welcome to GremlinBell</h3>
+        <p>If you already have an account, please login.</p>
+        <%= link_to "Login", new_user_session_path %>
+      </div>
+      <div class="m-4">
+        <p>If you don't have an account, please register.</p>
+        <%= link_to "Register", new_user_registration_path %>
+      </div>
     </div>
   <% end %>
 </div>
