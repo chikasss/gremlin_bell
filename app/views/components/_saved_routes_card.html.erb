@@ -1,12 +1,17 @@
 <div class="saved-route-card">
-  <%= link_to route_path(route) do %>
-    <% if route.photos.any? %>
-      <%= cl_image_tag route.photos.first.key, class: "card-img" %>
-    <% else %>
-      <%= image_tag "route-bg.jpg", class: "card-img" %>
+  <% if route.photos.any? %>
+    <%= cl_image_tag route.photos.first.key, class: "card-img" %>
+  <% else %>
+    <%= image_tag "route-bg.jpg", class: "card-img" %>
+  <% end %>
+  <div class="card-body" >
+    <%= link_to route_path(route) do %>
+      <h5 class="col-11"><%= route.title %></h5>
     <% end %>
-    <div class="card-body" >
-      <h5><%= route.title %></h5>
+    <%= button_to unsave_route_path(route), method: :delete do %>
+      <i class="fa-solid fa-trash-can"></i>
+    <% end %>
+    <%= link_to route_path(route) do %>
       <div class="d-flex align-items-center mb-4">
         <i class="fa-solid fa-location-dot"></i>
         <p class='ms-2 pb-0 mb-0'>Japan</p>
@@ -19,6 +24,6 @@
           <% end %>
         <% end %>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
