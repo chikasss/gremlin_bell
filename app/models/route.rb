@@ -10,7 +10,16 @@ class Route < ApplicationRecord
 
   RIDE_TYPE = ["Mountainous", "Trail", "Urban", "Scenic", "Calm", "Coastal", "Twisty", "Day Trip", "Long and Straight", "Other"]
 
+  PREFECTURES = [
+    'Hokkaido', 'Aomori', 'Akita', 'Iwate', 'Yamagata', 'Miyagi', 'Niigata', 'Fukushima', 'Tochigi',
+    'Gunma', 'Ibaraki', 'Chiba', 'Kanagawa', 'Tokyo', 'Saitama', 'Yamanashi', 'Nagano', 'Toyama', 'Ishikawa', 'Fukui',
+    'Gifu', 'Aichi', 'Shizuoka', 'Shiga', 'Mie', 'Kyoto', 'Nara', 'Wakayama', 'Osaka', 'Hyogo', 'Tottori',
+    'Okayama', 'Hiroshima', 'Shimane', 'Yamaguchi', 'Tokushima', 'Kagawa', 'Ehime', 'Kochi', 'Fukuoka',
+    'Oita', 'Saga', 'Miyazaki', 'Kumamoto', 'Nagasaki', 'Kagoshima', 'Okinawa'
+  ]
+
   validates :ride_type, inclusion: { in: RIDE_TYPE }
+  validates :prefecture, inclusion: { in: PREFECTURES }
 
   def average_rating
     reviews.average(:rating).to_f.round(2)

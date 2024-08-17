@@ -2,10 +2,15 @@ class RoutesController < ApplicationController
   before_action :authenticate_user!
 
   RIDE_TYPE = Route::RIDE_TYPE
-  PREFECTURE = User::PREFECTURES
+  PREFECTURE = Route::PREFECTURES
+  PREFECTURES_HASH = User::PREFECTURES_HASH
 
   def index
     @routes = policy_scope(Route).order(:created_at)
+    @region_prefectures = PREFECTURES_HASH
+    if params[:query][:region].present?
+      @routes = @routes.where(prefecture: @region_prefectures[params[:query][:region].to_sym])
+    end
     if params[:query][:prefecture].present?
       @routes = @routes.where(prefecture: params[:query][:prefecture])
     end
