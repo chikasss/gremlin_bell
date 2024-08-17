@@ -41,6 +41,7 @@ class RoutesController < ApplicationController
     @reviews = @route.reviews.includes(:user).order(created_at: :desc)
     @review = @route.reviews.new
     @comments = @route.comments.includes(:user).order(created_at: :desc)
+    @road_condition = @reviews.last.road_condition
     # @comments_last_3 = @route.comments.includes(:user).order(created_at: :desc).limit(3)
     @comment = @route.comments.new
     @tail = YouTubeRails.extract_video_id(@route.videos_url)
@@ -58,7 +59,7 @@ class RoutesController < ApplicationController
     @route = Route.find(params[:id])
     current_user.unfavorite(@route)
     authorize @route
-  
+
     if request.referer.include?(saved_trips_user_path(current_user))
       flash[:notice] = "Route removed from your saved trips"
       redirect_to saved_trips_user_path(current_user)
