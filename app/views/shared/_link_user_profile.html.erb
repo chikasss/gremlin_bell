@@ -9,7 +9,6 @@
     <div class="ms-2">
       <% if user == current_user %>
         <h2 class="mb-0">Hello <strong><%= user.first_name %></strong>!</h2>
-        <%= render 'shared/profile_link', user: current_user %>
       <% else %>
         <h2 class="mb-0"><strong><%= user.first_name %> <%= user.last_name %></strong></h2>
       <% end %>
@@ -31,7 +30,9 @@
     </div>
   </div>
   <div class="follower-icon-show-user">
-    <% if user != current_user %>
+    <% if user == current_user %>
+      <%= render 'shared/profile_link', user: current_user %>
+    <% else %>
       <% if current_user.following.include?(user) %>
         <%= button_to unfollow_user_path(user), method: :delete, remote: true do %>
           <i class="fa-solid fa-user-check"></i>

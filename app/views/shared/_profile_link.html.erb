@@ -1,7 +1,15 @@
-<% if current_page?(user_path(user)) %>
-  <%= link_to "Edit your profile", edit_user_path(user), class: "card-button" %>
-<% elsif current_page?(new_route_path) %>
-  <%= link_to "See your routes", created_routes_user_path(user), class: "card-button" %>
-<% else %>
-  <%= link_to "See your profile", user_path(user), class: "card-button" %>
-<% end %>
+<div class="profile-link">
+  <% if current_page?(user_path(user)) %>
+    <%= link_to edit_user_path(user) do %>
+      <i class="fa-solid fa-pen-to-square"></i>
+    <% end %>
+  <% elsif current_page?(new_route_path) %>
+    <%= link_to created_routes_user_path(user) do %>
+      <i class="fa-solid fa-map-location-dot"></i>
+    <% end %>
+  <% else %>
+    <%= link_to user_path(user) do %>
+      <i class="fa-solid fa-user"></i>
+    <% end %>
+  <% end %>
+</div>

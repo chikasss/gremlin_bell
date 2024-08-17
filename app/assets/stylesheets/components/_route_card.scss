@@ -42,6 +42,7 @@
     align-items: start;
     padding: 1rem;
     box-sizing: border-box;
+    transition: background 0.3s;
 
     .fa-star{
       color: $yellow;
@@ -50,6 +51,30 @@
 
     h4 {
       font-size: 1.2rem;
+    }
+  }
+
+  small {
+    position: absolute;
+    bottom: 10px;
+    right: 1rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    font-weight: 600;
+    background: rgba(250, 250, 250, 0.8);
+    transition: color 0.3s background 0.3s;
+    color: $gray-hover;
+  }
+
+  &:hover {
+    .card-body {
+      background: rgba(250, 250, 250, 0.9);
+      cursor: pointer;
+    }
+
+    small {
+      color: $dark-red;
+      background: rgba(250, 250, 250, 0.9);
     }
   }
 }
