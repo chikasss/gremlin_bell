@@ -6,11 +6,13 @@ class RoutesController < ApplicationController
 
   def index
     @routes = policy_scope(Route).order(:created_at)
-    if params[:query][:prefecture].present?
-      @routes = @routes.where(prefecture: params[:query][:prefecture])
-    end
-    if params[:query][:ride_type].present?
-      @routes = @routes.where("'#{params[:query][:ride_type]}' = ANY (ride_type)")
+    if params[:query].present?
+      if params[:query][:prefecture].present?
+        @routes = @routes.where(prefecture: params[:query][:prefecture])
+      end
+      if params[:query][:ride_type].present?
+        @routes = @routes.where("'#{params[:query][:ride_type]}' = ANY (ride_type)")
+      end
     end
   end
 
