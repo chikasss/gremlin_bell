@@ -6,11 +6,11 @@
 
     <%= f.hidden_field :waypoints, id: 'waypoints_input', multiple: true %>
 
-    <div class="d-flex justify-content-between mt-3">
+    <%# <div class="d-flex justify-content-between mt-3">
       <button type="button" data-action="click->current-location#startTracking" class="btn btn-primary">
         Fetch Current Location
       </button>
-    </div>
+    </div> %>
 
     <%= render 'shared/map'%>
     <div class="mt-4">
