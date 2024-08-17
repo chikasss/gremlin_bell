@@ -26,6 +26,7 @@ class RoutesController < ApplicationController
   def create
     @route = Route.new(route_params)
     @route.waypoints = JSON.parse(route_params[:waypoints][0])
+    #@route.waypoints = JSON.parse(route_params[:waypoints].to_s) rescue []
     @route.user = current_user
     authorize @route
     if @route.save
@@ -44,6 +45,7 @@ class RoutesController < ApplicationController
     # @comments_last_3 = @route.comments.includes(:user).order(created_at: :desc).limit(3)
     @comment = @route.comments.new
     @tail = YouTubeRails.extract_video_id(@route.videos_url)
+    ##@waypoints_json = @route.waypoints.to_json
   end
 
   def save

@@ -5,8 +5,14 @@
     <%= f.label :waypoints, "Waypoints" %>
 
     <%= f.hidden_field :waypoints, id: 'waypoints_input', multiple: true %>
+
+    <div class="d-flex justify-content-between mt-3">
+      <button type="button" data-action="click->current-location#startTracking" class="btn btn-primary">
+        Fetch Current Location
+      </button>
+    </div>
+
     <%= render 'shared/map'%>
-    <%#= f.text_area :waypoints, value: @route.waypoints.join(', '), class: "form-control mb-3" %>
     <div class="mt-4">
       <%= f.input :videos_url, label: "Youtube Link"%>
     </div>
