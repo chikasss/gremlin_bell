@@ -135,6 +135,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_15_114804) do
     t.datetime "updated_at", null: false
     t.string "ride_type", array: true
     t.string "waypoints", default: [], array: true
+    t.string "prefecture"
     t.index ["user_id"], name: "index_routes_on_user_id"
   end
 
