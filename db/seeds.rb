@@ -427,7 +427,7 @@ hideo_route = Route.create!(
   title: "Jozankei",
   description: "Just a calm ride by the tree covered mountains.",
   ride_type: ["Calm", "Mountainous"],
-  # waypoints: ,
+  waypoints: [["42.961095, 141.281196"], ["42.877933, 141.146212"]],
   videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
   user: hideo
 )
