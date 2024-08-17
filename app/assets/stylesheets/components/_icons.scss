@@ -21,6 +21,7 @@
 .fa-location-arrow {
   color: $dark-red;
   transition: color 0.3s;
+  font-size: 25px;
 
   &:hover {
     color: lighten($dark-red, 10%);

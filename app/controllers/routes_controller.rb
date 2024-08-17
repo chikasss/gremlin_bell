@@ -2,19 +2,17 @@ class RoutesController < ApplicationController
   before_action :authenticate_user!
 
   RIDE_TYPE = Route::RIDE_TYPE
+  PREFECTURE = User::PREFECTURES
 
   def index
-    @routes = policy_scope(Route)
-    @routes = Route.all.order(created_at: :desc)
-
-    results = []
-    if params[:query]
-      @routes.each do |route|
-        results << route if route.ride_type.include?(params[:query][:ride_type])
+    @routes = policy_scope(Route).order(:created_at)
+    if params[:query].present?
+      if params[:query][:prefecture].present?
+        @routes = @routes.where(prefecture: params[:query][:prefecture])
       end
-      @routes = results
-    else
-      @routes
+      if params[:query][:ride_type].present?
+        @routes = @routes.where("'#{params[:query][:ride_type]}' = ANY (ride_type)")
+      end
     end
   end
 
@@ -26,6 +24,7 @@ class RoutesController < ApplicationController
   def create
     @route = Route.new(route_params)
     @route.waypoints = JSON.parse(route_params[:waypoints][0])
+    #@route.waypoints = JSON.parse(route_params[:waypoints].to_s) rescue []
     @route.user = current_user
     authorize @route
     if @route.save
@@ -50,6 +49,7 @@ class RoutesController < ApplicationController
     # @comments_last_3 = @route.comments.includes(:user).order(created_at: :desc).limit(3)
     @comment = @route.comments.new
     @tail = YouTubeRails.extract_video_id(@route.videos_url)
+    ##@waypoints_json = @route.waypoints.to_json
   end
 
   def save
@@ -77,7 +77,6 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:title, :description, :videos_url, :road_condition, waypoints: [], ride_type: [], photos: [])
+    params.require(:route).permit(:title, :description, :prefecture, :videos_url, :road_condition, waypoints: [], ride_type: [], photos: [])
   end
-
 end

@@ -2,6 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="map"
 export default class extends Controller {
+  static targets = ["waypointsInput", "mapContainer"];
+
   connect() {
     const mapboxAccessToken = this.element.dataset.mapboxApiKey;
     mapboxgl.accessToken = mapboxAccessToken;
@@ -18,23 +20,17 @@ export default class extends Controller {
           positionOptions: {
               enableHighAccuracy: true
           },
-          // When active the map will receive updates to the device's location as it changes.
           trackUserLocation: true,
-          // Draw an arrow next to the location dot to indicate which direction the device is heading.
           showUserHeading: false
       })
     );
 
-    // let start = null;
-    // let end = null;
     let waypoints = [];
 
-    async function getRoute(start, end) {
-      // make a directions request using cycling profile
-      // an arbitrary start will always be the same
-      // only the end or destination will change
+    async function getRoute(waypoints) {
+      const waypointsString = waypoints.map(p => p.join(',')).join(';');
       const query = await fetch(
-        `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+        `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${waypointsString}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
         { method: 'GET' }
       );
       const json = await query.json();
@@ -116,22 +112,28 @@ export default class extends Controller {
         const coords = [event.lngLat.lng, event.lngLat.lat];
         waypoints.push(coords); // Store each clicked point as a waypoint
 
-        if (waypoints.length === 1) {
-        addMarker(coords, 'start', '#3887be');
-      } else if (waypoints.length === 2)  {
-        addMarker(coords, 'end', '#f30');
-        getRoute(waypoints[0], waypoints[1]);
-        const form = document.querySelector('form');
-        const waypointsInput = document.querySelector('#waypoints_input');
-        waypointsInput.value = JSON.stringify(waypoints);
-      } else {
-        waypoints = [coords]; // Reset the waypoints and start a new route
-        addMarker(start, 'start', '#3887be');
-        map.removeLayer('end');
-        map.removeSource('route');
-      }
-    });
+        ['start', 'end'].forEach(id => {
+          if (map.getLayer(id)) {
+            map.removeLayer(id);
+            map.removeSource(id);
+          }
+        });
 
-      // Select the form using the generated form ID from Simple For
+        // Add markers for all waypoints
+        waypoints.forEach((point, index) => {
+          addMarker(point, `waypoint-${index}`, index === 0 ? '#3887be' : '#f30');
+        });
+
+        if (waypoints.length > 1) {
+          getRoute(waypoints);
+        }
+
+    //     this.waypointsInputTarget.value = JSON.stringify(waypoints);
+    // });
+ const form = document.querySelector('form');
+ const waypointsInput = document.querySelector('#waypoints_input');
+waypointsInput.value = JSON.stringify(waypoints);
+});
+    }
+
   }
-}
