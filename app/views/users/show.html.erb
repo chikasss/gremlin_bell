@@ -66,11 +66,11 @@
             <% end %>
           </div>
           <% if @reviews.present? %>
-            <%= link_to route_review_path(@last_review.route, @last_review) do %>
-              <div class="my-3">
+            <div class="my-3">
+              <%= link_to route_review_path(@last_review.route, @last_review) do %>
                 <%= render 'components/review_mini_card', review: @last_review %>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           <% else %>
             <p><%= @user.first_name %> has not written any reviews yet.</p>
           <% end %>

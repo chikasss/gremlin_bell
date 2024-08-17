@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i[index create]
     member do
       post 'save', to: 'routes#save', as: 'save'
+      delete 'unsave', to: 'routes#unsave', as: 'unsave'
       get 'map', to: 'routes#map', as: 'map'
       get 'export', to: 'routes#export', as: 'export'
     end

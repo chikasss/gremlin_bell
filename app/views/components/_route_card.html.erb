@@ -30,8 +30,11 @@
               <span class="tag-card"><%= type %></span>
             <% end %>
           <% end %>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
+  <%= link_to user_path(route.user) do %>
+    <small>Created by <%= route.user.first_name %></small>
+  <% end %>
 </div>

@@ -45,6 +45,8 @@
   }
 }
 
+// REVIEW MINI CARD 
+
 .review-mini-card {
   border: 1px solid $border;
   padding: 1rem;
@@ -72,6 +74,10 @@
     color: $yellow;
   }
 
+  small {
+    color: $gray-icon;
+  }
+
   p {
     margin-top: 0.5rem;
     display: -webkit-box;
@@ -80,6 +86,7 @@
     line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+    word-break: break-word;
 }
 
 

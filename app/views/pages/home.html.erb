@@ -43,9 +43,9 @@
             <% end %>
           </div>
         </div>
-        <h3>Your friends</h3>
-        <% if current_user.following.any? %>
-          <div class="feed-photos">
+        <div class="feed-photos pt-3">
+          <h4>Last friends photos</h4>
+          <% if current_user.following.any? %>
             <% if @routes_with_photos.any? %>
               <div class="row d-flex justify-content-center">
                 <% @routes_with_photos.each do |route| %>
@@ -60,10 +60,55 @@
               <p>No photos from users you follow.</p>
             <% end %>
           </div>
+          <div class="friends-review mt-4">
+            <h4>Last friends reviews</h4>
+            <% if @reviews.any? %>
+              <div class="row d-flex justify-content-center">
+                <% @reviews.each do |review| %>
+                  <div class="col-10 col-md-4 mb-2">
+                    <%= link_to route_review_path(review.route_id, review.id) do %>
+                      <%= render 'components/review_mini_card', review: review %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <p>No reviews from users you follow.</p>
+            <% end %>
+          </div>
+          <div class="friends-routes mt-4">
+            <h4>Last friends routes</h4>
+            <% if @routes.any? %>
+              <div class="row d-flex justify-content-center">
+                <% @routes.last(3).each do |route| %>
+                  <div class="col-10 col-md-4 mb-2">
+                    <%= render 'components/route_card', route: route %>
+                  </div>
+                <% end %>
+              </div>
+            <% else %>
+              <p>No routes from users you follow.</p>
+            <% end %>
+          </div>
+          <div class="friends-bikes mt-4">
+            <h4>Last friends bikes</h4>
+            <% if @bikes.any? %>
+              <div class="row d-flex justify-content-center">
+                <% @bikes.each do |bike| %>
+                  <div class="col-8 col-md-4 mb-2">
+                    <%= render 'components/bike_card', bike: bike %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p>You are not following anyone yet.</p>
         <% end %>
       </div>
     </div>
   <% else %>
+    <!-- LOGIN PAGE -->
     <div class="container">
       <div class="d-flex justify-content-between py-4 logo-btn-top">
         <div class="d-flex justify-content-start back-btn">

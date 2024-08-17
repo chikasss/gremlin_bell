@@ -7,9 +7,9 @@
     <div class="container">
       <h3 class="text-center"><strong><%= @user.first_name %>'s routes:</strong></h3>
       <% if @routes.present? %>
-        <div class="d-flex flex-row flex-nowrap overflow-auto">
+        <div class="row d-flex justify-content-center">
           <% @routes.each do |route| %>
-            <div class="col-sm-12 col-md-3">
+            <div class="col-10 col-md-4 mb-2">
               <%= render 'components/route_card', route: route %>
             </div>
           <% end %>

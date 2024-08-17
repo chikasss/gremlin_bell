@@ -14,8 +14,14 @@
           </div>
         </div>
         <div>
-          <%= button_to save_route_path(@route), method: :post, class: "btn-plus" do %>
-            <i class="fa-solid fa-circle-plus"></i>
+          <% if current_user.favorited?(@route) %>
+            <%= button_to unsave_route_path(@route), method: :delete, class: "btn-plus" do %>
+              <i class="fa-solid fa-circle-check"></i>
+            <% end %>
+          <% else %>
+            <%= button_to save_route_path(@route), method: :post, class: "btn-plus" do %>
+              <i class="fa-regular fa-circle-check"></i>
+            <% end %>
           <% end %>
         </div>
       </div>

@@ -19,6 +19,10 @@
           <% end %>
         </div>
         <p><%= review.description %></p>
+        <div class="d-flex justify-content-between">
+          <small><%= review.user.first_name %></small>
+          <small><%= review.created_at.strftime("%B %d, %Y") %></small>
+        </div>
       </div>
     </div>
   </div>
