@@ -42,26 +42,54 @@
               </div>
               <div class="d-flex flex-row flex-nowrap overflow-auto">
                 <% @users.each do |user| %>
-                  <div class="col-7 col-md-3 me-2">
+                  <div class="col-6 col-md-3 me-2">
                     <%= render 'users/user_card', user: user %>
                   </div>
                 <% end %>
               </div>
             </div>
-          </div>
-          <!-- PHOTOS -->
-          <div class="tab-pane fade" id="pills-photos" role="tabpanel" aria-labelledby="pills-photos-tab" tabindex="0">
-            <div class="feed-photos pt-3">
-              <h4>Last friends photos</h4>
-              <% if current_user.following.any? %>
+            <!-- ALL ITEMS -->
+            <% if current_user.following.any? %>
+              <div class="my-4">
+                <h4>Last updates:</h4>
+                <div class="mt-4 row d-flex justify-content-center">
+                  <% @feed_items.each do |item| %>
+                    <% if item.is_a?(Route) %>
+                      <div class="mb-2 col-md-8">
+                        <%= render 'components/feed_card', item: item, action_text: "created a new route", item_title: item.title, item_link: route_path(item) %>
+                      </div>
+                    <% elsif item.is_a?(Review) %>
+                      <div class="mb-2 col-md-8">
+                        <%= render 'components/feed_card', item: item, action_text: "posted a new review in", item_title: item.route.title, item_link: route_path(item.route) %>
+                      </div>
+                    <% elsif item.is_a?(Bike) %>
+                      <div class="mb-2 col-md-8">
+                        <%= render 'components/feed_img_card', item: item, action_text: "added a new bike", item_name: item.name, item_path: user_bikes_path(item.user), default_image: "bike_garage.jpg" %>
+                      </div>
+                    <% elsif item.is_a?(Comment) %>
+                      <div class="mb-2 col-md-8">
+                        <%= render 'components/feed_card', item: item, action_text: "commented on", item_title: item.route.title, item_link: route_path(item.route) %>
+                      </div>
+                    <% elsif item.is_a?(Hash) && item[:photo].present? %>
+                      <!-- Debugging -->
+                      <div class="mb-2 col-md-8">
+                        <%= render 'components/feed_img_card', item: item[:route], action_text: "posted a new photo in", item_name: item[:route].title, item_path: route_path(item[:route]), default_image: "route_default.jpg", photo: item[:photo] %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <!-- PHOTOS -->
+            <div class="tab-pane fade" id="pills-photos" role="tabpanel" aria-labelledby="pills-photos-tab" tabindex="0">
+              <div class="feed-photos pt-3">
+                <h4>Last friends photos</h4>
                 <% if @routes_with_photos.any? %>
-                  <div class="row d-flex justify-content-center">
-                    <% @routes_with_photos.each do |route| %>
-                      <% route.photos.each do |photo| %>
-                        <div class="col-10 col-md-4">
-                          <%= render 'components/photo_feed', route: route, photo: photo %>
-                        </div>
-                      <% end %>
+                  <div class="row d-flex justify-content-center mt-4">
+                    <% @routes_with_photos.each do |item| %>
+                      <div class="col-11 col-md-4 mb-3">
+                        <%= render 'components/feed_img_card', item: item[:route], action_text: "posted a new photo in", item_name: item[:route].title, item_path: route_path(item[:route]), default_image: "route_default.jpg", photo: item[:photo] %>
+                      </div>
                     <% end %>
                   </div>
                 <% else %>
@@ -104,13 +132,13 @@
                   <p>No reviews from users you follow.</p>
                 <% end %>
               </div>
-              <div class="friends-coments mt-4">
-                <h4>Last friends coments</h4>
-                <% if @coments.any? %>
+              <div class="friends-comments mt-4">
+                <h4>Last friends comments</h4>
+                <% if @comments.any? %>
                   <div class="row d-flex justify-content-center mt-4">
-                    <% @coments.each do |coment| %>
+                    <% @comments.each do |comment| %>
                       <div class="col-11 col-md-4 mb-2">
-                        <%= render 'components/feed_card', item: coment, action_text: "created a new coment in route", item_title: coment.route.title, item_link: route_path(coment.route) %>
+                        <%= render 'components/feed_card', item: comment, action_text: "created a new coment in route", item_title: comment.route.title, item_link: route_path(comment.route) %>
                       </div>
                     <% end %>
                   </div>
@@ -124,11 +152,8 @@
                 <% if @bikes.any? %>
                   <div class="row d-flex justify-content-center">
                     <% @bikes.each do |bike| %>
-                      <div class="col-8 col-md-4 mb-2">
-                        <div class="border">
-                          <div>
-                          </div>
-                        </div>
+                      <div class="col-11 col-md-4 mb-3">
+                        <%= render 'components/feed_img_card', item: bike, action_text: "added a new bike", item_name: bike.name, item_path: user_bikes_path(bike.user), default_image: "bike_garage.jpg" %>
                       </div>
                     <% end %>
                   </div>
