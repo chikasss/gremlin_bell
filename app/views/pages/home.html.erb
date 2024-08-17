@@ -71,7 +71,6 @@
                         <%= render 'components/feed_card', item: item, action_text: "commented on", item_title: item.route.title, item_link: route_path(item.route) %>
                       </div>
                     <% elsif item.is_a?(Hash) && item[:photo].present? %>
-                      <!-- Debugging -->
                       <div class="mb-2 col-md-8">
                         <%= render 'components/feed_img_card', item: item[:route], action_text: "posted a new photo in", item_name: item[:route].title, item_path: route_path(item[:route]), default_image: "route_default.jpg", photo: item[:photo] %>
                       </div>
