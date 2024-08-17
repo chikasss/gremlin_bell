@@ -3,40 +3,6 @@
   position: relative;
   padding: 0.5rem;
 
-  .follower-icon {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-
-    button {
-      border: none;
-      background: none;
-      text-decoration: none;
-
-      .fa-user-plus {
-        color: $dark-red;
-        transition: color 0.3s;
-        
-        &:hover {
-          color: lighten($dark-red, 10%);
-        }
-      }
-
-      .fa-user-check {
-        color: $gray-icon;
-        transition: color 0.3s;
-
-        &:hover {
-          color: $gray-hover;
-        }
-      }
-
-      i {
-        font-size: 20px;
-      }
-    }
-  }
-
   .location {
     background: $dark-red;
     padding: 0.3rem 0.8rem;
