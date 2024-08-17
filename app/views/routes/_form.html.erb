@@ -10,8 +10,19 @@
     <div class="mt-4">
       <%= f.input :videos_url, label: "Youtube Link"%>
     </div>
+      <div class="col-12 mb-2">
+    <div class="d-flex flex-column flex-md-row justify-content-between">
+      <div class="mb-2 mb-md-0">
+        <%= f.label :photos, "Upload Photos", class: 'form-label' %>
+      </div>
+      <div class="form-text">
+        <strong>Note:</strong> Maximum file size is 10MB per photo.
+      </div>
+    </div>
+    <%= f.file_field :photos, multiple: true, accept: 'image/*', class: 'form-control' %>
+  </div>
     <%= f.label :ride_type %>
-    <div class="row mt-3">
+    <div class="row mt-6">
       <% Route::RIDE_TYPE.compact.each_slice(3) do |ride_types| %>
         <div class="col-6 col-md-4">
           <% ride_types.each do |ride_type| %>
