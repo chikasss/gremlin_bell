@@ -409,7 +409,7 @@ bill_route = Route.create!(
   title: "Nakayama Pass",
   description: "Do you like making your bike go VROOM in tunnels? This route has a ton of em haha.",
   ride_type: ["Scenic"],
-  # waypoints: ,
+  waypoints: [["140.93342678338806", "42.79543274892502"], ["141.09836986142776", "42.86675427633369"], ["141.1490391486532", "42.95572467766607"]],
   videos_url: "https://youtu.be/TZezHtKiq-Y?si=fcgT01QuDZ5EkteT",
   user: bill
 )
@@ -418,7 +418,7 @@ bill_route2 = Route.create!(
   title: "Ocean Drive",
   description: "Beautiful ride along the coast in Hokkaido.",
   ride_type: ["Coastal"],
-  # waypoints: ,
+  waypoints: [["141.74839805413814", "44.889475992211054"], ["140.1090450503816", "41.43603698754825"],["139.78044474084138", "42.27220980149337"]],
   videos_url: "https://www.youtube.com/watch/DuurJdmyMtQ?si=ECtrX_jTUf4q6woY",
   user: bill
 )
@@ -436,7 +436,7 @@ mika_route = Route.create!(
   title: "Kyushu",
   description: "If you're a fan of the ocean, definitely ride here. ",
   ride_type: ["Coastal"],
-  # waypoints: ,
+  waypoints: [["131.3981", "31.5105"], ["129.4230", "33.0262"]],
   videos_url: "https://youtu.be/oF6xabrZblA?si=3yfWVI3uHowPjAX4",
   user: mika
 )
@@ -445,7 +445,7 @@ eric_route = Route.create!(
   title: "Highway 38",
   description: "Calm ride surrounded by nature. I recommend going during the autumn months to enjoy various autumn colors. Cops love hanging around here so best not to speed. Small downside, but the view is worth it.",
   ride_type: ["Scenic", "Mountainous"],
-  # waypoints: ,
+  waypoints: [["142.3826", "43.3430"], ["143.1966", "42.9236"]],
   videos_url: "https://youtu.be/Omf5kd-EK0M?si=B79VP_lMx5YlYbAM",
   user: eric
 )
@@ -454,7 +454,7 @@ mary_route = Route.create!(
   title: "W800 Street on Mikuni Pass",
   description: "A nice ride with lots of trees surrounding the road. Good ride if you want to just get a good whiff of trees.",
   ride_type: ["Calm", "Scenic"],
-  # waypoints: ,
+  waypoints: [["138.7392", "36.8343"], ["138.7104", "36.7627"]],
   videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
   user: mary
 )
@@ -463,7 +463,7 @@ angel_route = Route.create!(
   title: "Ride in Kyushu",
   description: "This is a nice and relaxing ride I took in the summer in Kyushu with a nice mix of urban and nature.",
   ride_type: ["Calm", "Mountainous", "Urban"],
-  # waypoints: ,
+  waypoints: [["138.7392", "36.8343"], ["138.7104", "36.7627"]],
   videos_url: "https://youtu.be/Hjx9_m2-ItE?si=FjwsTDV4GBQ0V9on",
   user: angel
 )
@@ -472,7 +472,7 @@ vincenzo_route = Route.create!(
   title: "Ride Along West Coast of Hokkaido",
   description: "I was visiting a friend up in Hokkaido and we went for a ride along the coast. If you're a fan of the ocean, definitely ride here.",
   ride_type: ["Coastal"],
-  # waypoints: ,
+  waypoints: [["130.3765", "33.5868"], ["130.3515", "33.5934"]],
   videos_url: "https://youtu.be/NFII_nKKB5c?si=HpAm347NhKU1Di7z",
   user: vincenzo
 )
@@ -481,7 +481,7 @@ ami_route = Route.create!(
   title: "Noborito to Yokohama",
   description: "This is a fun ride that starts in Kawasaki and runs through into Yokohama.",
   ride_type: ["Urban"],
-  # waypoints: ,
+  waypoints: [["139.6537", "35.5812"], ["139.6400", "35.4522"]],
   videos_url: "https://youtu.be/OpF7UOxqqSU?si=ZIg4BU_kcRwEwEMR",
   user: ami
 )
@@ -699,7 +699,7 @@ review_for_ami_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "smooth",
+  road_condition: "bumpy",
   route: ami_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
@@ -725,7 +725,7 @@ review_for_mika_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "bumpy",
+  road_condition: "smooth",
   route: mika_route,
   bike_id: angel.bikes.first.id,
   user: angel
@@ -738,7 +738,7 @@ review_for_eric_route = Review.create!(
   rating: 4,
   videos_url: "",
   used_bike: "1998 Honda GL1500",
-  road_condition: "cops",
+  road_condition: "smooth",
   route: eric_route,
   bike_id: mika.bikes.first.id,
   user: mika
@@ -751,7 +751,7 @@ review_for_eric_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "smooth",
+  road_condition: "construction",
   route: eric_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
@@ -764,7 +764,7 @@ review_for_hideo_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2017 Kawasaki 250TR",
-  road_condition: "smooth",
+  road_condition: "bumpy",
   route: hideo_route,
   bike_id: ami.bikes.first.id,
   user: ami
@@ -777,7 +777,7 @@ review_for_hideo_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "construction",
+  road_condition: "cops",
   route: hideo_route,
   bike_id: angel.bikes.first.id,
   user: angel
