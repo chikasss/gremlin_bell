@@ -4,7 +4,7 @@
       <% if bike.photos.attached? %>
         <%= cl_image_tag bike.photos.first.key, class: "card-img" %>
       <% else %>
-        <%= image_tag "bike_garage.jpg", class: 'bg-image' %>
+        <%= image_tag "bike_garage.jpg", class: 'card-img' %>
       <% end %>
       <div class="card-body text-white">
         <h5 class="text-center mt-3"><%= bike.year %> <%= bike.brand %> <%= bike.name %></h5>

@@ -2,6 +2,7 @@
 @import "home";
 @import "routes_show";
 @import "show_user";
+@import "routes_new";
 
 .content-body {
   padding-bottom: 120px;
@@ -17,9 +18,9 @@ a {
 
 .content-body {
   background: $white;
-  padding-bottom: 400px; 
+  padding-bottom: 400px;
 
   @media (max-width: 768px) {
-    padding-bottom: 16rem; 
+    padding-bottom: 16rem;
   }
 }

@@ -5,22 +5,33 @@ class PagesController < ApplicationController
 
   def home
     if user_signed_in?
-    # @bikes = current_user.bikes
-    @routes = Route.all.order(created_at: :desc)
-    # @saved_trips = current_user.all_favorited
-    
-    followed_users_ids = current_user.following.pluck(:id)
-    @routes = Route.where(user_id: followed_users_ids).order(created_at: :desc)
-    @routes_with_photos = @routes.select { |route| route.photos.attached? }.last(3)
-    @users = User.where.not(id: current_user.following.pluck(:id)).order(created_at: :desc).limit(3)
-    @reviews = Review.where(user_id: followed_users_ids).order(created_at: :desc).limit(3)
-    @bikes = Bike.where(user_id: followed_users_ids).order(created_at: :desc).limit(3)
+      followed_users_ids = current_user.following.pluck(:id)
+      @users = User.where.not(id: current_user.following.pluck(:id)).order(created_at: :desc).limit(5)
+      @routes = Route.where(user_id: followed_users_ids).order(created_at: :desc).to_a
+      @reviews = Review.where(user_id: followed_users_ids).order(created_at: :desc).to_a
+      @bikes = Bike.where(user_id: followed_users_ids).order(created_at: :desc).to_a
+      @comments = Comment.where(user_id: followed_users_ids).order(created_at: :desc).to_a
+  
+      @routes_with_photos = @routes.select { |route| route.photos.attached? }.flat_map do |route|
+        route.photos.map { |photo| { route: route, photo: photo } }
+      end
+      # sorted by created_at and shuffled
+      @feed_items = (@routes + @reviews + @bikes + @comments + @routes_with_photos)
+      .group_by do |item|
+        item.is_a?(Hash) ? item[:route].created_at : item.created_at
+      end
+      .flat_map do |created_at, items|
+        items.shuffle
+      end
+      .sort_by { |item| item.is_a?(Hash) ? item[:route].created_at : item.created_at }
+      .reverse
+
     else
-      @routes = Route.none
-      @routes_with_photos = []
-      @users = User.none
-      @bikes = Bike.none
-      @reviews = Review.none
+      @routes = []
+      @reviews = []
+      @bikes = []
+      @comments = []
+      @feed_items = []
     end
   end
 end
