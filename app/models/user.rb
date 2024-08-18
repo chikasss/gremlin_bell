@@ -24,9 +24,24 @@ class User < ApplicationRecord
     'Gunma', 'Ibaraki', 'Chiba', 'Tokyo', 'Saitama', 'Yamanashi', 'Nagano', 'Toyama', 'Ishikawa', 'Fukui',
     'Gifu', 'Aichi', 'Shizuoka', 'Shiga', 'Mie', 'Kyoto', 'Nara', 'Wakayama', 'Osaka', 'Hyogo', 'Tottori',
     'Okayama', 'Hiroshima', 'Shimane', 'Yamaguchi', 'Tokushima', 'Kagawa', 'Ehime', 'Kochi', 'Fukuoka',
-    'Oita', 'Saga', 'Miyazaki', 'Kumamoto', 'Nagasaki', 'Kagoshima', 'Okinawa'
+    'Oita', 'Saga', 'Miyazaki', 'Kumamoto', 'Nagasaki', 'Kagoshima', 'Okinawa', 'Kanagawa'
   ]
 
+  PREFECTURES_HASH = {
+    Hokkaido: ['Hokkaido'],
+    Tohoku: ['Aomori', 'Akita', 'Iwate', 'Yamagata', 'Miyagi', 'Fukushima'],
+    Kanto: ['Tochigi', 'Gunma', 'Ibaraki', 'Chiba', 'Tokyo', 'Saitama', 'Kanagawa'],
+    Chubu: ['Yamanashi', 'Nagano', 'Toyama', 'Ishikawa', 'Fukui', 'Niigata', 'Gifu', 'Aichi', 'Shizuoka'],
+    Kansai: ['Shiga', 'Mie', 'Kyoto', 'Nara', 'Wakayama', 'Osaka', 'Hyogo'],
+    Chugoku: ['Tottori', 'Okayama', 'Hiroshima', 'Shimane', 'Yamaguchi'],
+    Shikoku: ['Tokushima', 'Kagawa', 'Ehime', 'Kochi'],
+    Kyushu: ['Fukuoka', 'Oita', 'Saga', 'Miyazaki', 'Kumamoto', 'Nagasaki', 'Kagoshima'],
+    Okinawa: ['Okinawa']
+  }
+
+  REGIONS = [
+    'Hokkaido', 'Tohoku', 'Kanto', 'Chubu', 'Kansai', 'Chugoku', 'Shikoku', 'Kyushu', 'Okinawa'
+  ]
   def capitalize_name
     self.first_name = first_name.capitalize if first_name.present?
     self.last_name = last_name.capitalize if last_name.present?

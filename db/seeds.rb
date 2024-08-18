@@ -411,6 +411,7 @@ bill_route = Route.create!(
   ride_type: ["Scenic"],
   # waypoints: ,
   videos_url: "https://youtu.be/TZezHtKiq-Y?si=fcgT01QuDZ5EkteT",
+  prefecture: "Hokkaido",
   user: bill
 )
 
@@ -420,6 +421,7 @@ bill_route2 = Route.create!(
   ride_type: ["Coastal"],
   # waypoints: ,
   videos_url: "https://www.youtube.com/watch/DuurJdmyMtQ?si=ECtrX_jTUf4q6woY",
+  prefecture: "Hokkaido",
   user: bill
 )
 
@@ -429,6 +431,7 @@ hideo_route = Route.create!(
   ride_type: ["Calm", "Mountainous"],
   waypoints: [["141.281196", "42.961095"], ["141.146212", "42.877933"]],
   videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
+  prefecture: "Hokkaido",
   user: hideo
 )
 
@@ -438,6 +441,7 @@ mika_route = Route.create!(
   ride_type: ["Coastal"],
   # waypoints: ,
   videos_url: "https://youtu.be/oF6xabrZblA?si=3yfWVI3uHowPjAX4",
+  prefecture: "Fukuoka",
   user: mika
 )
 
@@ -447,6 +451,7 @@ eric_route = Route.create!(
   ride_type: ["Scenic", "Mountainous"],
   # waypoints: ,
   videos_url: "https://youtu.be/Omf5kd-EK0M?si=B79VP_lMx5YlYbAM",
+  prefecture: "Hokkaido",
   user: eric
 )
 
@@ -456,6 +461,7 @@ mary_route = Route.create!(
   ride_type: ["Calm", "Scenic"],
   # waypoints: ,
   videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
+  prefecture: "Hokkaido",
   user: mary
 )
 
@@ -465,6 +471,7 @@ angel_route = Route.create!(
   ride_type: ["Calm", "Mountainous", "Urban"],
   # waypoints: ,
   videos_url: "https://youtu.be/Hjx9_m2-ItE?si=FjwsTDV4GBQ0V9on",
+  prefecture: "Oita",
   user: angel
 )
 
@@ -474,6 +481,7 @@ vincenzo_route = Route.create!(
   ride_type: ["Coastal"],
   # waypoints: ,
   videos_url: "https://youtu.be/NFII_nKKB5c?si=HpAm347NhKU1Di7z",
+  prefecture: "Hokkaido",
   user: vincenzo
 )
 
@@ -483,6 +491,7 @@ ami_route = Route.create!(
   ride_type: ["Urban"],
   # waypoints: ,
   videos_url: "https://youtu.be/OpF7UOxqqSU?si=ZIg4BU_kcRwEwEMR",
+  prefecture: "Kanagawa",
   user: ami
 )
 
