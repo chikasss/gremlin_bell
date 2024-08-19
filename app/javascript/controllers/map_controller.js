@@ -128,12 +128,42 @@ export default class extends Controller {
           getRoute(waypoints);
         }
 
-    //     this.waypointsInputTarget.value = JSON.stringify(waypoints);
-    // });
- const form = document.querySelector('form');
- const waypointsInput = document.querySelector('#waypoints_input');
-waypointsInput.value = JSON.stringify(waypoints);
-});
+        const form = document.querySelector('form');
+        const waypointsInput = document.querySelector('#waypoints_input');
+        waypointsInput.value = JSON.stringify(waypoints);
+      });
+
+      //Landmarks
+      this.map.on('contextmenu', (event) => {
+        console.log(event);
+        // this.direction.setOrigin([event.lngLat.lng, event.lngLat.lat]);
+        new mapboxgl.Marker()
+          .setLngLat([event.lngLat.lng, event.lngLat.lat])
+          .addTo(this.map);
+
+        const formData = new FormData();
+        formData.append('landmark[latitude]', event.lngLat.lat);
+        formData.append('landmark[longitude]', event.lngLat.lng);
+        formData.append('landmark[name]', 'New Landmark');
+
+        const csrfToken = document.querySelector("[name='csrf-token']").content
+
+        const options = {
+          method: 'POST',
+          headers: { "Accept": "text/plain" },
+          headers: {
+            "X-CSRF-Token": csrfToken, // 👈👈👈 Set the token
+          },
+          body: formData,
+        };
+
+        fetch(`/routes/${this.routeIdTarget}/landmarks`, options)
+          .then(response => response.text())
+          .then((data) => {
+            console.log(data);
+            this.landmarksTarget.insertAdjacentHTML('beforeend',data)
+          });
+      });
     }
 
   }
