@@ -41,8 +41,8 @@ class RoutesController < ApplicationController
     @review = @route.reviews.new
     @comments = @route.comments.includes(:user).order(created_at: :desc)
     @road_condition =
-      if @reviews.any?
-        @reviews.last.road_condition
+      if @route.reviews.any?
+        @route.reviews.last.road_condition
       else
         @route.road_condition
       end
