@@ -1,0 +1,157 @@
+.road-condition-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.road-condition-item {
+  width: 50%;
+}
+
+.road-condition-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.road-condition-selector + label {
+  display: block;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 12px;
+  text-align: left;
+  padding: 10px 10px 30px 10px;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.road-condition-selector:checked + label {
+  color: white !important;
+}
+
+
+#review_road_condition_paved + label,
+#route_road_condition_paved + label {
+  color: rgb(255, 255, 255);
+  background-image: image-url('road_condition/paved_road.jpeg');
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  opacity: 0.7;
+  @media (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+#review_road_condition_paved:checked + label,
+#route_road_condition_paved:checked + label {
+  background-image: image-url('road_condition/paved_road.jpeg');
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  opacity: 1;
+    @media (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+#review_road_condition_gravel + label,
+#route_road_condition_gravel + label {
+  color: rgb(255, 255, 255);
+  background-image: image-url('road_condition/gravel_road.png');
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  opacity: 0.7;
+  @media (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+#review_road_condition_gravel:checked + label,
+#route_road_condition_gravel:checked + label {
+  background-image: image-url('road_condition/gravel_road.png');
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  opacity: 1;
+  @media (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+#review_road_condition_dirt + label,
+#route_road_condition_dirt + label {
+  color: rgb(255, 255, 255);
+  background-image: image-url('road_condition/dirt_road.png');
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  opacity: 0.7;
+  @media (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+#review_road_condition_dirt:checked + label,
+#route_road_condition_dirt:checked + label {
+  background-image: image-url('road_condition/dirt_road.png');
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  opacity: 1;
+  @media (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+#review_road_condition_poor + label,
+#route_road_condition_poor + label {
+  color: rgb(255, 255, 255);
+  background-image: image-url('road_condition/poor_road.png');
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  opacity: 0.7;
+  @media (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+#review_road_condition_poor:checked + label,
+#route_road_condition_poor:checked + label {
+  background-image: image-url('road_condition/poor_road.png');
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  opacity: 1;
+  @media (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+#review_road_condition_construction + label,
+#route_road_condition_construction + label {
+  color: rgb(255, 255, 255);
+  background-image: image-url('road_condition/construction_road.png');
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  opacity: 0.7;
+  @media (max-width: 768px) {
+    height: 100px;
+  }
+}
+
+#review_road_condition_construction:checked + label,
+#route_road_condition_construction:checked + label {
+  background-image: image-url('road_condition/construction_road.png');
+  background-size: cover;
+  height: 200px;
+  background-position: center;
+  opacity: 1;
+  @media (max-width: 768px) {
+    height: 100px;
+  }
+}

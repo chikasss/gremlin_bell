@@ -409,8 +409,10 @@ bill_route = Route.create!(
   title: "Nakayama Pass",
   description: "Do you like making your bike go VROOM in tunnels? This route has a ton of em haha.",
   ride_type: ["Scenic"],
-  # waypoints: ,
+  waypoints: [["140.93342678338806", "42.79543274892502"], ["141.09836986142776", "42.86675427633369"], ["141.1490391486532", "42.95572467766607"]],
   videos_url: "https://youtu.be/TZezHtKiq-Y?si=fcgT01QuDZ5EkteT",
+  prefecture: "Hokkaido",
+  road_condition: "Paved",
   user: bill
 )
 
@@ -418,8 +420,10 @@ bill_route2 = Route.create!(
   title: "Ocean Drive",
   description: "Beautiful ride along the coast in Hokkaido.",
   ride_type: ["Coastal"],
-  # waypoints: ,
+  waypoints: [["141.74839805413814", "44.889475992211054"], ["140.1090450503816", "41.43603698754825"],["139.78044474084138", "42.27220980149337"]],
   videos_url: "https://www.youtube.com/watch/DuurJdmyMtQ?si=ECtrX_jTUf4q6woY",
+  prefecture: "Hokkaido",
+  road_condition: "Paved",
   user: bill
 )
 
@@ -429,6 +433,8 @@ hideo_route = Route.create!(
   ride_type: ["Calm", "Mountainous"],
   waypoints: [["141.281196", "42.961095"], ["141.146212", "42.877933"]],
   videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
+  prefecture: "Hokkaido",
+  road_condition: "Construction",
   user: hideo
 )
 
@@ -436,8 +442,10 @@ mika_route = Route.create!(
   title: "Kyushu",
   description: "If you're a fan of the ocean, definitely ride here. ",
   ride_type: ["Coastal"],
-  # waypoints: ,
+  waypoints: [["131.3981", "31.5105"], ["129.4230", "33.0262"]],
   videos_url: "https://youtu.be/oF6xabrZblA?si=3yfWVI3uHowPjAX4",
+  prefecture: "Fukuoka",
+  road_condition: "Paved",
   user: mika
 )
 
@@ -445,8 +453,10 @@ eric_route = Route.create!(
   title: "Highway 38",
   description: "Calm ride surrounded by nature. I recommend going during the autumn months to enjoy various autumn colors. Cops love hanging around here so best not to speed. Small downside, but the view is worth it.",
   ride_type: ["Scenic", "Mountainous"],
-  # waypoints: ,
+  waypoints: [["142.3826", "43.3430"], ["143.1966", "42.9236"]],
   videos_url: "https://youtu.be/Omf5kd-EK0M?si=B79VP_lMx5YlYbAM",
+  prefecture: "Hokkaido",
+  road_condition: "Dirt",
   user: eric
 )
 
@@ -454,8 +464,10 @@ mary_route = Route.create!(
   title: "W800 Street on Mikuni Pass",
   description: "A nice ride with lots of trees surrounding the road. Good ride if you want to just get a good whiff of trees.",
   ride_type: ["Calm", "Scenic"],
-  # waypoints: ,
+  waypoints: [["138.7392", "36.8343"], ["138.7104", "36.7627"]],
   videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
+  prefecture: "Hokkaido",
+  road_condition: "Poor",
   user: mary
 )
 
@@ -463,8 +475,10 @@ angel_route = Route.create!(
   title: "Ride in Kyushu",
   description: "This is a nice and relaxing ride I took in the summer in Kyushu with a nice mix of urban and nature.",
   ride_type: ["Calm", "Mountainous", "Urban"],
-  # waypoints: ,
+  waypoints: [["138.7392", "36.8343"], ["138.7104", "36.7627"]],
   videos_url: "https://youtu.be/Hjx9_m2-ItE?si=FjwsTDV4GBQ0V9on",
+  prefecture: "Oita",
+  road_condition: "Paved",
   user: angel
 )
 
@@ -472,8 +486,10 @@ vincenzo_route = Route.create!(
   title: "Ride Along West Coast of Hokkaido",
   description: "I was visiting a friend up in Hokkaido and we went for a ride along the coast. If you're a fan of the ocean, definitely ride here.",
   ride_type: ["Coastal"],
-  # waypoints: ,
+  waypoints: [["130.3765", "33.5868"], ["130.3515", "33.5934"]],
   videos_url: "https://youtu.be/NFII_nKKB5c?si=HpAm347NhKU1Di7z",
+  prefecture: "Hokkaido",
+  road_condition: "Poor",
   user: vincenzo
 )
 
@@ -481,14 +497,16 @@ ami_route = Route.create!(
   title: "Noborito to Yokohama",
   description: "This is a fun ride that starts in Kawasaki and runs through into Yokohama.",
   ride_type: ["Urban"],
-  # waypoints: ,
+  waypoints: [["139.6537", "35.5812"], ["139.6400", "35.4522"]],
   videos_url: "https://youtu.be/OpF7UOxqqSU?si=ZIg4BU_kcRwEwEMR",
+  prefecture: "Kanagawa",
+  road_condition: "Gravel",
   user: ami
 )
 
 puts "Attaching photo to Routes"
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/bill_route_fsoo9i.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/nakayama_jmgip6.jpg")
 
 bill_route.photos.attach(
   io: file,
@@ -497,7 +515,7 @@ bill_route.photos.attach(
 )
 bill_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/bill_route2_xx67qj.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047911/ocean_y0fdqn.jpg")
 
 bill_route2.photos.attach(
   io: file,
@@ -506,7 +524,7 @@ bill_route2.photos.attach(
 )
 bill_route2.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/hideo_route_czusnj.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047430/jozankei_guuq2s.jpg")
 
 hideo_route.photos.attach(
   io: file,
@@ -515,7 +533,7 @@ hideo_route.photos.attach(
 )
 hideo_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/mika_route_tlwkpy.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047966/kyusyu_jjfzn0.jpg")
 
 mika_route.photos.attach(
   io: file,
@@ -524,7 +542,7 @@ mika_route.photos.attach(
 )
 mika_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267376/eric_route_geqdmx.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/highway38_zanqdw.jpg")
 
 eric_route.photos.attach(
   io: file,
@@ -533,7 +551,7 @@ eric_route.photos.attach(
 )
 eric_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267376/eric_route_geqdmx.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047441/mikuni_kyf2gb.jpg")
 
 mary_route.photos.attach(
   io: file,
@@ -542,7 +560,7 @@ mary_route.photos.attach(
 )
 mary_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/angel_route_o7kll8.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047433/summer_kyusyu_r5g56r.jpg")
 
 angel_route.photos.attach(
   io: file,
@@ -551,7 +569,7 @@ angel_route.photos.attach(
 )
 angel_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/vincenzo_route_uh5ipa.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/west_coast_hokkaido_b4pv70.jpg")
 
 vincenzo_route.photos.attach(
   io: file,
@@ -560,9 +578,9 @@ vincenzo_route.photos.attach(
 )
 vincenzo_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/ami_route_exocln.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/noborito_a9eebx.jpg")
 
-ami_route .photos.attach(
+ami_route.photos.attach(
   io: file,
   filename: "ami_route ",
   content_type: "image/jpg"
@@ -673,7 +691,7 @@ review_for_bill_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2002 Yamaha VMAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: bill_route,
   bike_id: eric.bikes.first.id,
   user: eric
@@ -686,7 +704,7 @@ review_for_mary_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2002 Yamaha VMAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: mary_route,
   bike_id: eric.bikes.first.id,
   user: eric
@@ -699,7 +717,7 @@ review_for_ami_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "smooth",
+  road_condition: "Poor",
   route: ami_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
@@ -712,7 +730,7 @@ review_for_ami_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: ami_route,
   bike_id: angel.bikes.first.id,
   user: angel
@@ -725,7 +743,7 @@ review_for_mika_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "bumpy",
+  road_condition: "Paved",
   route: mika_route,
   bike_id: angel.bikes.first.id,
   user: angel
@@ -738,7 +756,7 @@ review_for_eric_route = Review.create!(
   rating: 4,
   videos_url: "",
   used_bike: "1998 Honda GL1500",
-  road_condition: "cops",
+  road_condition: "Paved",
   route: eric_route,
   bike_id: mika.bikes.first.id,
   user: mika
@@ -751,7 +769,7 @@ review_for_eric_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "smooth",
+  road_condition: "Construction",
   route: eric_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
@@ -764,7 +782,7 @@ review_for_hideo_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2017 Kawasaki 250TR",
-  road_condition: "smooth",
+  road_condition: "Dirt",
   route: hideo_route,
   bike_id: ami.bikes.first.id,
   user: ami
@@ -777,7 +795,7 @@ review_for_hideo_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "construction",
+  road_condition: "Paved",
   route: hideo_route,
   bike_id: angel.bikes.first.id,
   user: angel

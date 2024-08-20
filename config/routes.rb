@@ -24,11 +24,12 @@ Rails.application.routes.draw do
   resources :messages, only: %i[index show]
 
   get 'search', to: 'search#index', as: 'search_results'
-  get 'search/advanced', to: 'search#search', as: 'advanced_search'  
+  get 'search/advanced', to: 'search#search', as: 'advanced_search'
 
   resources :routes, only: %i[new create index show edit update] do
     resources :reviews, only: %i[index create show edit update]
     resources :comments, only: %i[index create]
+    resources :landmarks, only: [:create]
     member do
       post 'save', to: 'routes#save', as: 'save'
       delete 'unsave', to: 'routes#unsave', as: 'unsave'
@@ -36,4 +37,5 @@ Rails.application.routes.draw do
       get 'export', to: 'routes#export', as: 'export'
     end
   end
+  resources :landmarks, only: [:update]
 end

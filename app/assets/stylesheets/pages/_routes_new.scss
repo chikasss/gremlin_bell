@@ -1,147 +1,27 @@
-.road-condition-wrapper {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+.ride-type-item {
+  display: inline-block;
+  align-items: space-between;
 }
 
-.road-condition-item {
-  width: 50%;
-}
-
-.road-condition-selector {
+.ride-type-selector {
   position: absolute;
   transform: scale(0);
 }
 
-.road-condition-selector + label {
-  display: block;
+.ride-type-selector + label {
   cursor: pointer;
-  box-sizing: border-box;
-  width: 100%;
-  font-size: 12px;
-  text-align: left;
-  padding: 10px 10px 30px 10px;
-  border: 1px solid #EAEAEA;
-  border-radius: 4px;
+  display: inline-block;
+  font-size: 0.7rem;
+  border-radius: 50rem;
+  padding: 0.1rem 0.5rem;
   background-color: white;
+  color: #960808;
+  border: 1px solid #960808;
+  margin-right: 0.6rem;
+  margin-bottom: 0.4rem;
 }
 
-.road-condition-selector:checked + label {
-  color: white !important;
-}
-
-
-#route_road_condition_paved + label {
-  color: rgb(255, 255, 255);
-  background-image: image-url('road_condition/paved_road.jpeg');
-  background-size: cover;
-  height: 200px;
-  background-position: center;
-  opacity: 0.7;
-  @media (max-width: 768px) {
-    height: 100px;
-  }
-}
-
-#route_road_condition_paved:checked + label {
-  background-image: image-url('road_condition/paved_road.jpeg');
-  background-size: cover;
-  height: 200px;
-  background-position: center;
-  opacity: 1;
-    @media (max-width: 768px) {
-    height: 100px;
-  }
-}
-
-#route_road_condition_gravel + label {
-  color: rgb(255, 255, 255);
-  background-image: image-url('road_condition/gravel_road.png');
-  background-size: cover;
-  height: 200px;
-  background-position: center;
-  opacity: 0.7;
-  @media (max-width: 768px) {
-    height: 100px;
-  }
-}
-
-#route_road_condition_gravel:checked + label {
-  background-image: image-url('road_condition/gravel_road.png');
-  background-size: cover;
-  height: 200px;
-  background-position: center;
-  opacity: 1;
-  @media (max-width: 768px) {
-    height: 100px;
-  }
-}
-
-#route_road_condition_dirt + label {
-  color: rgb(255, 255, 255);
-  background-image: image-url('road_condition/dirt_road.png');
-  background-size: cover;
-  height: 200px;
-  background-position: center;
-  opacity: 0.7;
-  @media (max-width: 768px) {
-    height: 100px;
-  }
-}
-
-#route_road_condition_dirt:checked + label {
-  background-image: image-url('road_condition/dirt_road.png');
-  background-size: cover;
-  height: 200px;
-  background-position: center;
-  opacity: 1;
-  @media (max-width: 768px) {
-    height: 100px;
-  }
-}
-
-#route_road_condition_poor + label {
-  color: rgb(255, 255, 255);
-  background-image: image-url('road_condition/poor_road.png');
-  background-size: cover;
-  height: 200px;
-  background-position: center;
-  opacity: 0.7;
-  @media (max-width: 768px) {
-    height: 100px;
-  }
-}
-
-#route_road_condition_poor:checked + label {
-  background-image: image-url('road_condition/poor_road.png');
-  background-size: cover;
-  height: 200px;
-  background-position: center;
-  opacity: 1;
-  @media (max-width: 768px) {
-    height: 100px;
-  }
-}
-
-#route_road_condition_construction + label {
-  color: rgb(255, 255, 255);
-  background-image: image-url('road_condition/construction_road.png');
-  background-size: cover;
-  height: 200px;
-  background-position: center;
-  opacity: 0.7;
-  @media (max-width: 768px) {
-    height: 100px;
-  }
-}
-
-#route_road_condition_construction:checked + label {
-  background-image: image-url('road_condition/construction_road.png');
-  background-size: cover;
-  height: 200px;
-  background-position: center;
-  opacity: 1;
-  @media (max-width: 768px) {
-    height: 100px;
-  }
+.ride-type-selector:checked + label {
+  background-color: #960808;
+  color: white;
 }
