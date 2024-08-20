@@ -2,13 +2,27 @@ import { Controller } from "@hotwired/stimulus"
 
 
 export default class extends Controller {
-  static targets = ["prefectures"]
+  static targets = ["prefectures", "rideTypeSearchButton", "searchBars"]
   static values = {
     prefectures: Object
   }
   connect() {
-
+    document.addEventListener('DOMContentLoaded', () => {
+      this.expandRideTypes();
+    });
   }
+
+  //
+  expandRideTypes() {
+    this.searchBarsTarget.classList.toggle("visible");
+    if (this.rideTypeSearchButtonTarget.classList.contains("fa-caret-down")) {
+      this.rideTypeSearchButtonTarget.classList.remove("fa-caret-down");
+      this.rideTypeSearchButtonTarget.classList.add("fa-caret-up");
+    } else {
+      this.rideTypeSearchButtonTarget.classList.add("fa-caret-down")
+    }
+  }
+
 
   expandPrefectures (event) {
     this.prefecturesTargets.forEach ( prefectureElement => {

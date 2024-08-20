@@ -18,7 +18,7 @@ export default class extends Controller {
     if (this.showLastFiveReviewsTarget.classList.contains('visible')) {
       this.showReviewBtnTarget.innerText = 'Hide Reviews';
     } else {
-      this.showReviewBtnTarget.innerText = 'Road Reviews';
+      this.showReviewBtnTarget.innerText = 'Read Reviews';
     }
   }
 }
