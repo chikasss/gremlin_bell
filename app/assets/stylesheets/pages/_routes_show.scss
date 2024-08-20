@@ -55,7 +55,7 @@
 
   .review-box.visible {
       opacity: 1;
-      max-height: 2000px;
+      max-height: fit-content;
   }
 
   .review-form{
@@ -67,7 +67,7 @@
 
   .review-form.visible {
       opacity: 1;
-      max-height: 700px;
+      max-height: fit-content;
   }
 
   .comment-form  {
