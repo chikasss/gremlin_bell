@@ -77,6 +77,14 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:title, :description, :prefecture, :videos_url, :road_condition, waypoints: [], ride_type: [], photos: [])
+    params.require(:route).permit(
+      :title,
+      :description,
+      :prefecture, :videos_url,
+      :road_condition,
+      waypoints: [],
+      ride_type: [],
+      photos: []
+    )
   end
 end
