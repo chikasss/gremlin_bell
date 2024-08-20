@@ -1,0 +1,9 @@
+<div class="road-condition">
+    <%= f.input :road_condition,
+                as: :radio_buttons,
+                collection_wrapper_tag: 'div',
+                collection_wrapper_class: 'road-condition-wrapper',
+                item_wrapper_class: 'road-condition-item',
+                input_html: {class: 'road-condition-selector'},
+                collection: Route::ROAD_CONDITION %>
+</div>
