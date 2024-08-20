@@ -37,12 +37,12 @@ class RoutesController < ApplicationController
   def show
     @route = Route.find(params[:id])
     authorize @route
-    @reviews = @route.reviews.includes(:user).order(created_at: :desc)
+    @reviews = @route.reviews.includes(:user).order(date: :desc, created_at: :desc)
     @review = @route.reviews.new
     @comments = @route.comments.includes(:user).order(created_at: :desc)
     @road_condition =
       if @reviews.any?
-        @reviews.last.road_condition
+        @reviews.first.road_condition
       else
         @route.road_condition
       end
@@ -77,6 +77,14 @@ class RoutesController < ApplicationController
   private
 
   def route_params
-    params.require(:route).permit(:title, :description, :prefecture, :videos_url, :road_condition, waypoints: [], ride_type: [], photos: [])
+    params.require(:route).permit(
+      :title,
+      :description,
+      :prefecture, :videos_url,
+      :road_condition,
+      waypoints: [],
+      ride_type: [],
+      photos: []
+    )
   end
 end
