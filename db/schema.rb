@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_19_084703) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_20_112330) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -143,8 +143,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_19_084703) do
     t.datetime "updated_at", null: false
     t.string "ride_type", array: true
     t.string "waypoints", default: [], array: true
-    t.string "road_condition"
     t.string "prefecture"
+    t.string "road_condition"
+    t.string "recomended_bikes"
     t.index ["user_id"], name: "index_routes_on_user_id"
   end
 

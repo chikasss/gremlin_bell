@@ -11,6 +11,7 @@ class Route < ApplicationRecord
 
   RIDE_TYPE = ["Mountainous", "Trail", "Urban", "Scenic", "Calm", "Coastal", "Twisty", "Day Trip", "Long and Straight", "Other"]
   ROAD_CONDITION = ["Paved", "Gravel", "Dirt", "Poor", "Construction"]
+  RECOMENDED_BIKES = ["Cruiser", "Touring", "Sport Bike", "Standard", "Dual Sport", "ADV", "Adventure", "Naked"]
 
   PREFECTURES = [
     'Hokkaido', 'Aomori', 'Akita', 'Iwate', 'Yamagata', 'Miyagi', 'Niigata', 'Fukushima', 'Tochigi',
@@ -22,6 +23,7 @@ class Route < ApplicationRecord
 
   validates :ride_type, inclusion: { in: RIDE_TYPE }
   validates :prefecture, inclusion: { in: PREFECTURES }
+  validates :recomended_bikes, inclusion: { in: RECOMENDED_BIKES }
 
   def average_rating
     reviews.average(:rating).to_f.round(2)

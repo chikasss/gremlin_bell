@@ -101,6 +101,16 @@
           </div>
         </div>
       <% end %>
+      <% if @route.recomended_bikes.present? %>
+        <div class="my-4">
+          <h3>Recomended bikes:</h3>
+          <div class="d-flex justify-content-center">
+            <% @route.recomended_bikes.each do |bike| %>
+              <div class="route-tag me-2"><%= bike %></div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
       <!-- map -->
       <div class="map-container my-4">
         <h3 class="mb-3">Route map:</h3>
