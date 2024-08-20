@@ -21,8 +21,9 @@ class Route < ApplicationRecord
   validates :ride_type, inclusion: { in: RIDE_TYPE }
   validates :prefecture, inclusion: { in: PREFECTURES }
 
-  ROAD_CONDITION = ["Paved", "Gravel", "Dirt", "Poor", "Construction"]
-  validates :road_condition, inclusion: { in: ROAD_CONDITION }
+  #uncomment below after you add road_condition for route in seed
+  #ROAD_CONDITION = ["Paved", "Gravel", "Dirt", "Poor", "Construction"]
+  #validates :road_condition, inclusion: { in: ROAD_CONDITION }
 
   def average_rating
     reviews.average(:rating).to_f.round(2)
