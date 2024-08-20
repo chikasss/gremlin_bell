@@ -412,6 +412,7 @@ bill_route = Route.create!(
   waypoints: [["140.93342678338806", "42.79543274892502"], ["141.09836986142776", "42.86675427633369"], ["141.1490391486532", "42.95572467766607"]],
   videos_url: "https://youtu.be/TZezHtKiq-Y?si=fcgT01QuDZ5EkteT",
   prefecture: "Hokkaido",
+  road_condition: "Paved",
   user: bill
 )
 
@@ -422,6 +423,7 @@ bill_route2 = Route.create!(
   waypoints: [["141.74839805413814", "44.889475992211054"], ["140.1090450503816", "41.43603698754825"],["139.78044474084138", "42.27220980149337"]],
   videos_url: "https://www.youtube.com/watch/DuurJdmyMtQ?si=ECtrX_jTUf4q6woY",
   prefecture: "Hokkaido",
+  road_condition: "Paved",
   user: bill
 )
 
@@ -432,6 +434,7 @@ hideo_route = Route.create!(
   waypoints: [["141.281196", "42.961095"], ["141.146212", "42.877933"]],
   videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
   prefecture: "Hokkaido",
+  road_condition: "Construction",
   user: hideo
 )
 
@@ -442,6 +445,7 @@ mika_route = Route.create!(
   waypoints: [["131.3981", "31.5105"], ["129.4230", "33.0262"]],
   videos_url: "https://youtu.be/oF6xabrZblA?si=3yfWVI3uHowPjAX4",
   prefecture: "Fukuoka",
+  road_condition: "Paved",
   user: mika
 )
 
@@ -452,6 +456,7 @@ eric_route = Route.create!(
   waypoints: [["142.3826", "43.3430"], ["143.1966", "42.9236"]],
   videos_url: "https://youtu.be/Omf5kd-EK0M?si=B79VP_lMx5YlYbAM",
   prefecture: "Hokkaido",
+  road_condition: "Dirt",
   user: eric
 )
 
@@ -462,6 +467,7 @@ mary_route = Route.create!(
   waypoints: [["138.7392", "36.8343"], ["138.7104", "36.7627"]],
   videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
   prefecture: "Hokkaido",
+  road_condition: "Poor",
   user: mary
 )
 
@@ -472,6 +478,7 @@ angel_route = Route.create!(
   waypoints: [["138.7392", "36.8343"], ["138.7104", "36.7627"]],
   videos_url: "https://youtu.be/Hjx9_m2-ItE?si=FjwsTDV4GBQ0V9on",
   prefecture: "Oita",
+  road_condition: "Paved",
   user: angel
 )
 
@@ -482,6 +489,7 @@ vincenzo_route = Route.create!(
   waypoints: [["130.3765", "33.5868"], ["130.3515", "33.5934"]],
   videos_url: "https://youtu.be/NFII_nKKB5c?si=HpAm347NhKU1Di7z",
   prefecture: "Hokkaido",
+  road_condition: "Poor",
   user: vincenzo
 )
 
@@ -492,6 +500,7 @@ ami_route = Route.create!(
   waypoints: [["139.6537", "35.5812"], ["139.6400", "35.4522"]],
   videos_url: "https://youtu.be/OpF7UOxqqSU?si=ZIg4BU_kcRwEwEMR",
   prefecture: "Kanagawa",
+  road_condition: "Gravel",
   user: ami
 )
 
