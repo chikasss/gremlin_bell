@@ -2,7 +2,19 @@
   <%= simple_form_for(@route) do |f| %>
     <%= f.input :title %>
     <%= f.input :description %>
-    <%= f.label :waypoints, "Waypoints" %>
+
+    <div data-controller="address-autocomplete"
+      data-address-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        <%= f.input :address,
+        input_html: {
+        data: {address_autocomplete_target: "address"},
+        id: "address-input",
+        style: "display: none;",
+        placeholder: "Search for an address...",
+        class: "form-control"}%>
+    </div>
+
+    <%#= f.label :waypoints, "Waypoints" %>
 
     <%= f.hidden_field :waypoints, id: 'waypoints_input', multiple: true %>
     <%= render 'shared/map'%>
