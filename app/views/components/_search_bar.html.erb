@@ -25,7 +25,7 @@
           <p>Start by Selecting your Region:</p>
             <% @region_prefectures.keys.each do |region| %>
             <div class="col-md-3 col-6 text-center mb-2">
-                <button class="route-tag rounded-pill" data-action="click->route-search#expandPrefectures"><%= region %></button>
+                <span class="route-tag rounded-pill" data-action="click->route-search#expandPrefectures"><%= region %></span>
               </div>
           <% end %>
           <p>Next filter by Prefecture:</p>
