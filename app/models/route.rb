@@ -10,7 +10,7 @@ class Route < ApplicationRecord
   has_many_attached :photos
 
   RIDE_TYPE = ["Mountainous", "Trail", "Urban", "Scenic", "Calm", "Coastal", "Twisty", "Day Trip", "Long and Straight", "Other"]
-  ROAD_CONDITION = []
+  ROAD_CONDITION = ["Paved", "Gravel", "Dirt", "Poor", "Construction"]
 
   PREFECTURES = [
     'Hokkaido', 'Aomori', 'Akita', 'Iwate', 'Yamagata', 'Miyagi', 'Niigata', 'Fukushima', 'Tochigi',
@@ -19,13 +19,9 @@ class Route < ApplicationRecord
     'Okayama', 'Hiroshima', 'Shimane', 'Yamaguchi', 'Tokushima', 'Kagawa', 'Ehime', 'Kochi', 'Fukuoka',
     'Oita', 'Saga', 'Miyazaki', 'Kumamoto', 'Nagasaki', 'Kagoshima', 'Okinawa'
   ]
-  
+
   validates :ride_type, inclusion: { in: RIDE_TYPE }
   validates :prefecture, inclusion: { in: PREFECTURES }
-
-  #uncomment below after you add road_condition for route in seed
-  #ROAD_CONDITION = ["Paved", "Gravel", "Dirt", "Poor", "Construction"]
-  #validates :road_condition, inclusion: { in: ROAD_CONDITION }
 
   def average_rating
     reviews.average(:rating).to_f.round(2)

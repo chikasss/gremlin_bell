@@ -691,7 +691,7 @@ review_for_bill_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2002 Yamaha VMAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: bill_route,
   bike_id: eric.bikes.first.id,
   user: eric
@@ -704,7 +704,7 @@ review_for_mary_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2002 Yamaha VMAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: mary_route,
   bike_id: eric.bikes.first.id,
   user: eric
@@ -717,7 +717,7 @@ review_for_ami_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "bumpy",
+  road_condition: "Poor",
   route: ami_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
@@ -730,7 +730,7 @@ review_for_ami_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: ami_route,
   bike_id: angel.bikes.first.id,
   user: angel
@@ -743,7 +743,7 @@ review_for_mika_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: mika_route,
   bike_id: angel.bikes.first.id,
   user: angel
@@ -756,7 +756,7 @@ review_for_eric_route = Review.create!(
   rating: 4,
   videos_url: "",
   used_bike: "1998 Honda GL1500",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: eric_route,
   bike_id: mika.bikes.first.id,
   user: mika
@@ -769,7 +769,7 @@ review_for_eric_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "construction",
+  road_condition: "Construction",
   route: eric_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
@@ -782,7 +782,7 @@ review_for_hideo_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2017 Kawasaki 250TR",
-  road_condition: "bumpy",
+  road_condition: "Dirt",
   route: hideo_route,
   bike_id: ami.bikes.first.id,
   user: ami
@@ -795,7 +795,7 @@ review_for_hideo_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "cops",
+  road_condition: "Paved",
   route: hideo_route,
   bike_id: angel.bikes.first.id,
   user: angel
