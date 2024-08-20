@@ -711,13 +711,13 @@ review_for_mary_route = Review.create!(
 )
 
 review_for_ami_route = Review.create!(
-  date: DateTime.new(2024,8,10,17),
+  date: DateTime.new(2024,8,20,17),
   title: "A chill ride through the cities",
   description: "I normally ride to Yokohama from my home a different way so I figured I switch it up and take this route. Boy was I glad. I'm a big coffee fan and I ended up stumbling across a cafe while riding this route. The name is cafe+cake Baloo. I'm not normally a cake person, but their strawberry shortcake slapped! Thanks Ami for sharing this route!",
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "Poor",
+  road_condition: "Construction",
   route: ami_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
