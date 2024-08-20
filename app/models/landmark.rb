@@ -1,4 +1,4 @@
 class Landmark < ApplicationRecord
-  belongs :route
+  belongs_to :route
   validates :name, presence: true
 end
