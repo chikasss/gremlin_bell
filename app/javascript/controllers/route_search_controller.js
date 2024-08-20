@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 
 export default class extends Controller {
-  static targets = ["prefectures", "rideTypeSearchButton", "searchBars"]
+  static targets = ["prefectures", "rideTypeSearchButton", "searchBars", "pElement"]
   static values = {
     prefectures: Object
   }
@@ -25,8 +25,10 @@ export default class extends Controller {
 
 
   expandPrefectures (event) {
+    this.pElementTarget.innerText = "Next filter by Prefecture:";
     this.prefecturesTargets.forEach ( prefectureElement => {
       prefectureElement.classList.add("d-none")})
+
 
     this.prefecturesValue[event.currentTarget.innerText].forEach (prefecture => {
       this.prefecturesTargets.forEach (prefectureElement => {

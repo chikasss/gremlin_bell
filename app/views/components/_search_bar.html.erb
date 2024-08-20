@@ -28,7 +28,7 @@
                 <span class="route-tag rounded-pill" data-action="click->route-search#expandPrefectures"><%= region %></span>
               </div>
           <% end %>
-          <p>Next filter by Prefecture:</p>
+          <p data-route-search-target="pElement"></p>
             <% @prefectures.each do |prefecture| %>
             <div id="<%= prefecture %>" class="col-md-3 col-6 text-center mb-2 d-none" data-route-search-target="prefectures">
               <%= link_to routes_path(query: {prefecture: prefecture }) do %>
