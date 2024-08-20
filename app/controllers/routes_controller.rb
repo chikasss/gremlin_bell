@@ -44,12 +44,12 @@ end
   def show
     @route = Route.find(params[:id])
     authorize @route
-    @reviews = @route.reviews.includes(:user).order(created_at: :desc)
+    @reviews = @route.reviews.includes(:user).order(date: :desc, created_at: :desc)
     @review = @route.reviews.new
     @comments = @route.comments.includes(:user).order(created_at: :desc)
     @road_condition =
-      if @route.reviews.any?
-        @route.reviews.last.road_condition
+      if @reviews.any?
+        @reviews.first.road_condition
       else
         @route.road_condition
       end

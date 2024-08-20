@@ -11,7 +11,7 @@ before_action :set_route, only: [:new, :create, :edit, :update]
 
   def create
     @review = @route.reviews.build(review_params)
-    @review.user = current_user 
+    @review.user = current_user
     authorize @review  # Pundit authorization
 
     if @review.save
@@ -28,7 +28,7 @@ before_action :set_route, only: [:new, :create, :edit, :update]
     @review = @route.reviews.find(params[:id])
     authorize @review
   end
-  
+
   def show
     @review = Review.find(params[:id])
     @route = @review.route
