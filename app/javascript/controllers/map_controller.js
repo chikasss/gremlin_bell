@@ -1,39 +1,94 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
+import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 // Connects to data-controller="map"
 export default class extends Controller {
-  static targets = ["waypointsInput", "mapContainer"];
+  static targets = ["waypointsInput", "mapContainer"]
 
   connect() {
     const mapboxAccessToken = this.element.dataset.mapboxApiKey;
     mapboxgl.accessToken = mapboxAccessToken;
 
-    const map = new mapboxgl.Map({
+    this.map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v12',
+      style: 'mapbox://styles/chikas/cm00elyc0007101pw2mloe5uw',
       center: [139.759455, 38.6828391], // starting position
       zoom: 4.5
     });
 
-    map.addControl(
+    this.map.addControl(
       new mapboxgl.GeolocateControl({
-          positionOptions: {
-              enableHighAccuracy: true
-          },
-          trackUserLocation: true,
-          showUserHeading: false
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserHeading: false
       })
     );
 
-    let waypoints = [];
+    this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
 
-    async function getRoute(waypoints) {
-      const waypointsString = waypoints.map(p => p.join(',')).join(';');
-      const query = await fetch(
-        `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${waypointsString}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
-        { method: 'GET' }
-      );
-      const json = await query.json();
+    this.waypoints = [];
+
+    this.map.on('click', (event) => {
+      const coords = [event.lngLat.lng, event.lngLat.lat];
+      this.waypoints.push(coords);
+
+      ['start', 'end'].forEach(id => {
+        if (this.map.getLayer(id)) {
+          this.map.removeLayer(id);
+          this.map.removeSource(id);
+        }
+      });
+
+      this.waypoints.forEach((point, index) => {
+        this.addMarker(point, `waypoint-${index}`, index === 0 ? '#3887be' : '#f30', true);
+      });
+
+      if (this.waypoints.length > 1) {
+        this.getRoute(this.waypoints);
+      }
+
+      const waypointsInput = this.waypointsInputTarget;
+      waypointsInput.value = JSON.stringify(this.waypoints);
+    });
+
+    this.map.on('contextmenu', (event) => {
+      this.addMarker([event.lngLat.lng, event.lngLat.lat], 'landmark', '#000', true);
+
+      const formData = new FormData();
+      formData.append('landmark[latitude]', event.lngLat.lat);
+      formData.append('landmark[longitude]', event.lngLat.lng);
+      formData.append('landmark[name]', 'New Landmark');
+
+      const csrfToken = document.querySelector("[name='csrf-token']").content;
+
+      const options = {
+        method: 'POST',
+        headers: {
+          "Accept": "text/plain",
+          "X-CSRF-Token": csrfToken,
+        },
+        body: formData,
+      };
+
+      fetch(`/routes/${this.routeIdTarget}/landmarks`, options)
+        .then(response => response.text())
+        .then((data) => {
+          this.landmarksTarget.insertAdjacentHTML('beforeend', data);
+        });
+    });
+  }
+
+  getRoute(waypoints) {
+    const waypointsString = waypoints.map(p => p.join(',')).join(';');
+    fetch(
+      `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${waypointsString}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+      { method: 'GET' }
+    )
+    .then(response => response.json())
+    .then(json => {
       const data = json.routes[0];
       const route = data.geometry.coordinates;
       const geojson = {
@@ -44,13 +99,11 @@ export default class extends Controller {
           coordinates: route
         }
       };
-      // if the route already exists on the map, we'll reset it using setData
-      if (map.getSource('route')) {
-        map.getSource('route').setData(geojson);
-      }
-      // otherwise, we'll make a new request
-      else {
-        map.addLayer({
+
+      if (this.map.getSource('route')) {
+        this.map.getSource('route').setData(geojson);
+      } else {
+        this.map.addLayer({
           id: 'route',
           type: 'line',
           source: {
@@ -62,108 +115,36 @@ export default class extends Controller {
             'line-cap': 'round'
           },
           paint: {
-            'line-color': '#3887be',
-            'line-width': 5,
-            'line-opacity': 0.75
+            'line-color': '#6699ff',
+            'line-width': 4
           }
         });
       }
-      // add turn instructions here at the end
-    }
-
-    function addMarker(coords, id, color) {
-      if (map.getLayer(id)) {
-        map.getSource(id).setData({
-          type: 'FeatureCollection',
-          features: [{
-            type: 'Feature',
-            geometry: { type: 'Point', coordinates: coords },
-            properties: {}
-          }]
-        });
-      } else {
-      map.addLayer({
-        id: id,
-        type: 'circle',
-        source: {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: [
-              {
-                type: 'Feature',
-                geometry: {
-                  type: 'Point',
-                  coordinates: coords
-                },
-                properties: {}
-              }]
-          }
-        },
-        paint: {
-          'circle-radius': 10,
-          'circle-color': color
-        }
-      });
-      }
-    }
-      // this is where the code from the next step will go
-      map.on('click', (event) => {
-        const coords = [event.lngLat.lng, event.lngLat.lat];
-        waypoints.push(coords); // Store each clicked point as a waypoint
-
-        ['start', 'end'].forEach(id => {
-          if (map.getLayer(id)) {
-            map.removeLayer(id);
-            map.removeSource(id);
-          }
-        });
-
-        // Add markers for all waypoints
-        waypoints.forEach((point, index) => {
-          addMarker(point, `waypoint-${index}`, index === 0 ? '#3887be' : '#f30');
-        });
-
-        if (waypoints.length > 1) {
-          getRoute(waypoints);
-        }
-
-        const form = document.querySelector('form');
-        const waypointsInput = document.querySelector('#waypoints_input');
-        waypointsInput.value = JSON.stringify(waypoints);
-      });
-
-      //Landmarks
-      this.map.on('contextmenu', (event) => {
-        console.log(event);
-        // this.direction.setOrigin([event.lngLat.lng, event.lngLat.lat]);
-        new mapboxgl.Marker()
-          .setLngLat([event.lngLat.lng, event.lngLat.lat])
-          .addTo(this.map);
-
-        const formData = new FormData();
-        formData.append('landmark[latitude]', event.lngLat.lat);
-        formData.append('landmark[longitude]', event.lngLat.lng);
-        formData.append('landmark[name]', 'New Landmark');
-
-        const csrfToken = document.querySelector("[name='csrf-token']").content
-
-        const options = {
-          method: 'POST',
-          headers: { "Accept": "text/plain" },
-          headers: {
-            "X-CSRF-Token": csrfToken, // 👈👈👈 Set the token
-          },
-          body: formData,
-        };
-
-        fetch(`/routes/${this.routeIdTarget}/landmarks`, options)
-          .then(response => response.text())
-          .then((data) => {
-            console.log(data);
-            this.landmarksTarget.insertAdjacentHTML('beforeend',data)
-          });
-      });
-    }
-
+    });
   }
+
+  addMarker(coords, id, color, useCustomMarker = false) {
+    console.log('Adding marker at', coords);
+    const markerElement = useCustomMarker ? this.createCustomMarkerElement() : null;
+    new mapboxgl.Marker(markerElement || { color })
+      .setLngLat(coords)
+      .addTo(this.map);
+  }
+
+  createCustomMarkerElement() {
+    const el = document.createElement('div');
+    el.className = 'custom-marker';
+    el.style.backgroundImage = `url(${this.data.get("logoUrl")})`; // URL to your custom icon
+    el.style.width = '42px'; // Size of the icon
+    el.style.height = '42px';
+    el.style.backgroundSize = '100%';
+    return el;
+  }
+
+  updateMap(coordinates) {
+    this.map.flyTo({ center: coordinates, zoom: 12 });
+    new mapboxgl.Marker()
+      .setLngLat(coordinates)
+      .addTo(this.map);
+  }
+}
