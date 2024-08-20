@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   before_action :set_ride_types
   before_action :set_prefectures
+  before_action :set_regions
+  before_action :set_regions_and_prefectures
 
   # Pundit: allow-list approach
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -27,5 +29,13 @@ class ApplicationController < ActionController::Base
 
   def set_prefectures
     @prefectures = User::PREFECTURES
+  end
+
+  def set_regions
+    @regions = User::REGIONS
+  end
+
+  def set_regions_and_prefectures
+    @region_prefectures = User::PREFECTURES_HASH
   end
 end

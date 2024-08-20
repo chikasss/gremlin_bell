@@ -22,10 +22,10 @@
     <%= f.file_field :photos, multiple: true, accept: 'image/*', class: 'form-control' %>
   </div>
 </div>
+<div class="row mt-6 col-12">
+  <%= render 'shared/road_condition_form', f: f %>
+</div>
 <div class="d-flex mt-2">
-  <div class="col-6 me-2">
-    <%= f.input :road_condition, label: "Road Condition" %>
-  </div>
   <div class="col">
     <%= f.association :bike, collection: current_user.bikes, label: "Select Bike", prompt: "Choose a bike" %>
   </div>
