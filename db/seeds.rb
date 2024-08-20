@@ -497,7 +497,7 @@ ami_route = Route.create!(
 
 puts "Attaching photo to Routes"
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/bill_route_fsoo9i.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/nakayama_jmgip6.jpg")
 
 bill_route.photos.attach(
   io: file,
@@ -506,7 +506,7 @@ bill_route.photos.attach(
 )
 bill_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/bill_route2_xx67qj.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047911/ocean_y0fdqn.jpg")
 
 bill_route2.photos.attach(
   io: file,
@@ -515,7 +515,7 @@ bill_route2.photos.attach(
 )
 bill_route2.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/hideo_route_czusnj.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047430/jozankei_guuq2s.jpg")
 
 hideo_route.photos.attach(
   io: file,
@@ -524,7 +524,7 @@ hideo_route.photos.attach(
 )
 hideo_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/mika_route_tlwkpy.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047966/kyusyu_jjfzn0.jpg")
 
 mika_route.photos.attach(
   io: file,
@@ -533,7 +533,7 @@ mika_route.photos.attach(
 )
 mika_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267376/eric_route_geqdmx.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/highway38_zanqdw.jpg")
 
 eric_route.photos.attach(
   io: file,
@@ -542,7 +542,7 @@ eric_route.photos.attach(
 )
 eric_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267376/eric_route_geqdmx.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047441/mikuni_kyf2gb.jpg")
 
 mary_route.photos.attach(
   io: file,
@@ -551,7 +551,7 @@ mary_route.photos.attach(
 )
 mary_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/angel_route_o7kll8.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047433/summer_kyusyu_r5g56r.jpg")
 
 angel_route.photos.attach(
   io: file,
@@ -560,7 +560,7 @@ angel_route.photos.attach(
 )
 angel_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/vincenzo_route_uh5ipa.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/west_coast_hokkaido_b4pv70.jpg")
 
 vincenzo_route.photos.attach(
   io: file,
@@ -569,9 +569,9 @@ vincenzo_route.photos.attach(
 )
 vincenzo_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723267375/ami_route_exocln.jpg")
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/noborito_a9eebx.jpg")
 
-ami_route .photos.attach(
+ami_route.photos.attach(
   io: file,
   filename: "ami_route ",
   content_type: "image/jpg"

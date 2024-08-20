@@ -10,7 +10,7 @@ export default class extends Controller {
 
     const map = new mapboxgl.Map({
       container: this.mapTarget,
-      style: "mapbox://styles/mapbox/streets-v11",
+      style: "mapbox://styles/chikas/cm00elyc0007101pw2mloe5uw",
       center: [139.6503, 35.6762], // Default center
       zoom: 10, // Default zoom
     });
@@ -21,7 +21,9 @@ export default class extends Controller {
 
     // Add markers for waypoints
     waypoints.forEach((waypoint) => {
-      new mapboxgl.Marker()
+      new mapboxgl.Marker({
+        element: this.createCustomMarkerElement()
+      })
         .setLngLat(waypoint)
         .addTo(map);
     });
@@ -29,6 +31,18 @@ export default class extends Controller {
     map.on("load", () => {
       this.getRoute(waypoints, map);
     });
+  }
+
+   // Create custom marker element
+   createCustomMarkerElement() {
+    const el = document.createElement('div');
+    el.className = 'custom-marker';
+    el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`; // URL to your custom icon
+    el.style.width = '32px'; // Size of the icon
+    el.style.height = '32px';
+    el.style.backgroundSize = '100%';
+
+    return el;
   }
 
   async getRoute(waypoints, map) {
@@ -68,7 +82,7 @@ export default class extends Controller {
             'line-cap': 'round'
           },
           paint: {
-            'line-color': '#FF0000',
+            'line-color': '#6699ff',
             'line-width': 4
           }
         });
