@@ -3,31 +3,60 @@
     <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
     <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
+
   <div class="index-routes bg-white">
     <div class="container">
       <div class="row d-flex justify-content-center">
-        <div class="col-10">
+        <div class="col-10 pb-4">
           <%= render 'components/search_bar' %>
         </div>
-      </div>
-      <div class="px-2">
-        <% if params[:query].present? && params[:query][:ride_type].present? %>
-          <h2 class="mt-4"><strong><%= params[:query][:ride_type] %></strong> Routes</h2>
-        <% else %>
-          <h2 class="mt-4">All Routes</h2>
-        <% end %>
-        <% if @routes.any? %>
-          <div class="row d-flex justify-content-center">
-            <% @routes.each do |route| %>
-              <div class="col-11 col-md-4">
-                <%= render 'components/route_card', route: route %>
-              </div>
-            <% end %>
+
+        <div class="px-2">
+          <div class="text-center" data-controller="route-search">
+
+            <div class="row">
+            <div class="ride-types drop-down-search" data-route-search-target="searchBars">
+              <% @ride_types.each_with_index do |type, index| %>
+                <% if index.even? %>
+                  <div class="col-md-6 px-2 col-12 mb-2">
+                    <div class="d-flex justify-content-between">
+                      <% end %>
+                <div class="col-md-3 col-6 px-2 text-center mb-2">
+                  <%= link_to routes_path(query: {ride_type: type }) do %>
+                    <span class="route-tag rounded-pill"><%= type %></span>
+                  <% end %>
+                  </div>
+                  <% if index.odd? %>
+                </div>
+                </div>
+                <% end %>
+              <% end %>
+            </div>
+              <i class="fa fa-caret-down fa-2xl" aria-hidden="true" class="btn-light-gray"
+              data-route-search-target="rideTypeSearchButton"
+              data-action="click->route-search#expandRideTypes">
+            </i>
+            </div>
           </div>
-        <% else %>
-          <p class="text-center mt-4">No routes found for this search.</p>
-        <% end %>
+
+          <% if params[:query].present? && params[:query][:ride_type].present? %>
+            <h2 class="mt-4"><strong><%= params[:query][:ride_type] %></strong> Routes</h2>
+          <% else %>
+            <h2 class="mt-4">All Routes</h2>
+          <% end %>
+
+          <% if @routes.any? %>
+            <div class="row d-flex justify-content-center">
+              <% @routes.each do |route| %>
+                <div class="col-11 col-md-4">
+                  <%= render 'components/route_card', route: route %>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p class="text-center mt-4">No routes found for this search.</p>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
