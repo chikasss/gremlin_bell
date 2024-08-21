@@ -17,9 +17,19 @@
     font-weight: 600;
   }
 
-  .road-condition p {
+  .road-condition-show {
+    p {
+      color: $gray-hover;
+
+      strong {
+        color: $dark-red;
+        font-weight: 600;
+      }
+    }
+
+    i {
       color: $dark-red;
-      font-weight: 600;
+    }
   }
 
   .route-img {

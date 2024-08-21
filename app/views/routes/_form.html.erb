@@ -2,6 +2,7 @@
   <%= simple_form_for(@route) do |f| %>
     <%= f.input :title %>
     <%= f.input :description %>
+    <%= f.input :prefecture, collection: Route::PREFECTURES, label: "Route prefecture" %>
     <%= f.label :waypoints, "Waypoints" %>
     <%= f.hidden_field :waypoints, id: 'waypoints_input', multiple: true %>
     <%= render 'shared/map'%>

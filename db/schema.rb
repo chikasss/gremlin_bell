@@ -111,11 +111,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_20_112330) do
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
-  create_table "photos", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "reviews", force: :cascade do |t|
     t.date "date"
     t.string "title"
@@ -145,7 +140,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_20_112330) do
     t.string "waypoints", default: [], array: true
     t.string "prefecture"
     t.string "road_condition"
-    t.string "recomended_bikes"
+    t.text "recomended_bikes", default: [], array: true
     t.index ["user_id"], name: "index_routes_on_user_id"
   end
 
@@ -164,7 +159,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_20_112330) do
     t.json "social_links"
     t.string "avatar"
     t.boolean "admin", default: false
-    t.text "bio"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

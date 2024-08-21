@@ -8,13 +8,13 @@
       <div class="d-flex justify-content-between">
         <div class="mb-4">
           <h2><%= @route.title %></h2>
-          <div class="d-flex align-items-center location-route">
+          <div class="ms-1 d-flex align-items-center location-route">
             <i class="fa-solid fa-location-dot"></i>
-            <p class='ms-2 pb-0 mb-0'>Japan</p>
+            <p class='ms-2 pb-0 mb-0'><%= @route.prefecture %></p>
           </div>
-          <div class="d-flex align-items-center road-condition">
+          <div class="mt-2 d-flex align-items-center road-condition-show">
             <i class="fa-solid fa-road"></i>
-            <p class='ms-2 pb-0 mb-0'>Latest known road condition: <%= @road_condition %></p>
+            <p class='ms-2 pb-0 mb-0'>Latest known road condition: <strong><%= @road_condition %></strong></p>
           </div>
         </div>
         <div>
@@ -41,7 +41,7 @@
       <div class="route-description d-flex mt-4">
         <i class="fa-solid fa-quote-left me-2"></i>
         <p><%= @route.description %></p>
-        <i class="fa-solid fa-quote-right"></i>
+        <i class="fa-solid fa-quote-right ms-1"></i>
       </div>
       <% if @route.videos_url.present? %>
         <div class="my-2 p-4">
@@ -103,10 +103,12 @@
       <% end %>
       <% if @route.recomended_bikes.present? %>
         <div class="my-4">
-          <h3>Recomended bikes:</h3>
-          <div class="d-flex justify-content-center">
+          <h3 class="py-4">Recomended bikes:</h3>
+          <div class="row d-flex justify-content-center mx-2">
             <% @route.recomended_bikes.each do |bike| %>
-              <div class="route-tag me-2"><%= bike %></div>
+              <div class="col-md-3 col-4 mb-2 ps-0 pe-0">
+                <%= render partial: "components/recomended_bikes_tag", locals: { bike: bike } %>
+              </div>
             <% end %>
           </div>
         </div>
