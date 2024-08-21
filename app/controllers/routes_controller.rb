@@ -31,12 +31,12 @@ end
   def create
     @route = Route.new(route_params)
     @route.waypoints = JSON.parse(route_params[:waypoints][0])
-    #@route.waypoints = JSON.parse(route_params[:waypoints].to_s) rescue []
     @route.user = current_user
     authorize @route
     if @route.save
       redirect_to route_path(@route)
     else
+      puts "Route not saved: #{@route.errors.full_messages.join(', ')}"
       render :new
     end
   end
@@ -91,7 +91,8 @@ end
       :road_condition,
       waypoints: [],
       ride_type: [],
-      photos: []
+      photos: [],
+      recomended_bikes: []
     )
   end
 end

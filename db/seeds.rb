@@ -213,6 +213,22 @@ ami_bikes = Bike.create!(
   user: ami
 )
 
+puts "Users following each other"
+
+users = User.all
+
+users.each do |user|
+  number_of_follows = rand(3..6)
+  users_to_follow = users.where.not(id: user.id).sample(number_of_follows)
+  
+  users_to_follow.each do |followed|
+    user.following << followed unless user.following?(followed)
+  end
+end
+
+puts "Users are now following each other"
+
+
 puts "Bikes created"
 
 puts "Attaching bike photos to Bikes"
@@ -405,6 +421,8 @@ puts "Avatars attached to Users"
 
 puts "Creating routes"
 
+recomended_bikes = Route::RECOMENDED_BIKES
+
 bill_route = Route.create!(
   title: "Nakayama Pass",
   description: "Do you like making your bike go VROOM in tunnels? This route has a ton of em haha.",
@@ -413,7 +431,8 @@ bill_route = Route.create!(
   videos_url: "https://youtu.be/TZezHtKiq-Y?si=fcgT01QuDZ5EkteT",
   prefecture: "Hokkaido",
   road_condition: "Paved",
-  user: bill
+  user: bill,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 bill_route2 = Route.create!(
@@ -424,7 +443,8 @@ bill_route2 = Route.create!(
   videos_url: "https://www.youtube.com/watch/DuurJdmyMtQ?si=ECtrX_jTUf4q6woY",
   prefecture: "Hokkaido",
   road_condition: "Paved",
-  user: bill
+  user: bill,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 hideo_route = Route.create!(
@@ -435,7 +455,8 @@ hideo_route = Route.create!(
   videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
   prefecture: "Hokkaido",
   road_condition: "Construction",
-  user: hideo
+  user: hideo,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 mika_route = Route.create!(
@@ -446,7 +467,8 @@ mika_route = Route.create!(
   videos_url: "https://youtu.be/oF6xabrZblA?si=3yfWVI3uHowPjAX4",
   prefecture: "Fukuoka",
   road_condition: "Paved",
-  user: mika
+  user: mika,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 eric_route = Route.create!(
@@ -457,7 +479,8 @@ eric_route = Route.create!(
   videos_url: "https://youtu.be/Omf5kd-EK0M?si=B79VP_lMx5YlYbAM",
   prefecture: "Hokkaido",
   road_condition: "Dirt",
-  user: eric
+  user: eric,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 mary_route = Route.create!(
@@ -468,7 +491,8 @@ mary_route = Route.create!(
   videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
   prefecture: "Hokkaido",
   road_condition: "Poor",
-  user: mary
+  user: mary,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 angel_route = Route.create!(
@@ -479,7 +503,8 @@ angel_route = Route.create!(
   videos_url: "https://youtu.be/Hjx9_m2-ItE?si=FjwsTDV4GBQ0V9on",
   prefecture: "Oita",
   road_condition: "Paved",
-  user: angel
+  user: angel,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 vincenzo_route = Route.create!(
@@ -490,7 +515,8 @@ vincenzo_route = Route.create!(
   videos_url: "https://youtu.be/NFII_nKKB5c?si=HpAm347NhKU1Di7z",
   prefecture: "Hokkaido",
   road_condition: "Poor",
-  user: vincenzo
+  user: vincenzo,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 ami_route = Route.create!(
@@ -501,7 +527,8 @@ ami_route = Route.create!(
   videos_url: "https://youtu.be/OpF7UOxqqSU?si=ZIg4BU_kcRwEwEMR",
   prefecture: "Kanagawa",
   road_condition: "Gravel",
-  user: ami
+  user: ami,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 puts "Attaching photo to Routes"
@@ -588,6 +615,8 @@ ami_route.photos.attach(
 ami_route.save
 
 puts "Routes photos attached"
+
+puts "Routes created"
 
 puts "Creating comments"
 

@@ -1,0 +1,9 @@
+<div class="recomended-bikes">
+  <%= f.input :recomended_bikes,
+                as: :check_boxes,
+                collection_wrapper_tag: 'div',
+                collection_wrapper_class: 'recomended-bikes-wrapper',
+                item_wrapper_class: 'recomended-bikes-item',
+                input_html: {class: 'recomended-bikes-selector'},
+                collection: Route::RECOMENDED_BIKES %>
+</div>

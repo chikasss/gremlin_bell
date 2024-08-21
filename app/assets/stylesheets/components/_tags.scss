@@ -13,3 +13,32 @@
   font-size: 0.7rem;
   border-radius: 12px;
 }
+
+.recomended-bike-tag {
+  padding: 0.5rem;
+  border: 1px solid $border;
+  border-radius: 6px;
+  position: relative;
+  height: 100px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+
+  .bike-type {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    color: $dark-red;
+    font-weight: 700;
+    @media (max-width: 768px) {
+      font-size: 0.8rem;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+}
