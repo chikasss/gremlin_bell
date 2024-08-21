@@ -64,15 +64,29 @@
                       </div>
                     <% elsif item.is_a?(Bike) %>
                       <div class="mb-2 col-md-8">
-                        <%= render 'components/feed_img_card', item: item, action_text: "added a new bike", item_name: item.name, item_path: user_bikes_path(item.user), default_image: "bike_garage.jpg" %>
+                        <%= render 'components/feed_img_card', 
+                            item: item, 
+                            user: item.user, 
+                            action_text: "added a new bike", 
+                            item_name: item.name, 
+                            item_path: user_bikes_path(item.user), 
+                            default_image: "bike_garage.jpg",
+                            photo: nil %>
                       </div>
                     <% elsif item.is_a?(Comment) %>
                       <div class="mb-2 col-md-8">
                         <%= render 'components/feed_card', item: item, action_text: "commented on", item_title: item.route.title, item_link: route_path(item.route) %>
                       </div>
-                    <% elsif item.is_a?(Hash) && item[:photo].present? %>
+                    <% elsif item.is_a?(Hash) && item[:photo].is_a?(Photo) %>
                       <div class="mb-2 col-md-8">
-                        <%= render 'components/feed_img_card', item: item[:route], action_text: "posted a new photo in", item_name: item[:route].title, item_path: route_path(item[:route]), default_image: "route_default.jpg", photo: item[:photo] %>
+                        <%= render 'components/feed_img_card', 
+                            item: item[:route], 
+                            user: item[:photo].user, 
+                            action_text: "posted a new photo in", 
+                            item_name: item[:route].title, 
+                            item_path: route_path(item[:route]), 
+                            default_image: "route_default.jpg", 
+                            photo: item[:photo] %>
                       </div>
                     <% end %>
                   <% end %>
@@ -87,7 +101,14 @@
                   <div class="row d-flex justify-content-center mt-4">
                     <% @routes_with_photos.each do |item| %>
                       <div class="col-11 col-md-4 mb-3">
-                        <%= render 'components/feed_img_card', item: item[:route], action_text: "posted a new photo in", item_name: item[:route].title, item_path: route_path(item[:route]), default_image: "route_default.jpg", photo: item[:photo] %>
+                        <%= render 'components/feed_img_card', 
+                            item: item[:route], 
+                            user: item[:user], 
+                            action_text: "posted a new photo in", 
+                            item_name: item[:route].title, 
+                            item_path: route_path(item[:route]), 
+                            default_image: "route_default.jpg", 
+                            photo: item[:photo] %>
                       </div>
                     <% end %>
                   </div>
@@ -152,7 +173,14 @@
                   <div class="row d-flex justify-content-center">
                     <% @bikes.each do |bike| %>
                       <div class="col-11 col-md-4 mb-3">
-                        <%= render 'components/feed_img_card', item: bike, action_text: "added a new bike", item_name: bike.name, item_path: user_bikes_path(bike.user), default_image: "bike_garage.jpg" %>
+                        <%= render 'components/feed_img_card', 
+                            item: bike, 
+                            user: bike.user, 
+                            action_text: "added a new bike", 
+                            item_name: bike.name, 
+                            item_path: user_bikes_path(bike.user), 
+                            default_image: "bike_garage.jpg",
+                            photo: nil %> <!-- for bikes photo is nil because bikes dont use model Photo -->
                       </div>
                     <% end %>
                   </div>

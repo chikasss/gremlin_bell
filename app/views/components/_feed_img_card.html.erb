@@ -1,9 +1,9 @@
 <div class="border feed-img-card">
   <div class="d-flex">
-    <%= link_to user_path(item.user) do %>
-      <% if item.user.avatar.present? %>
+    <%= link_to user_path(user) do %>
+      <% if user.avatar.present? %>
         <div class="me-2">
-          <%= image_tag item.user.avatar, class: "avatar" %>
+          <%= image_tag user.avatar, class: "avatar" %>
         </div>
       <% else %>
         <div class="me-2">
@@ -13,7 +13,7 @@
     <% end %>
     <div>
       <p class="mb-0">
-        <strong><%= link_to user_path(item.user) do %><%= item.user.first_name %><% end %></strong>
+        <strong><%= link_to user_path(user) do %><%= user.first_name %><% end %></strong>
         <%= action_text %>
         <strong><%= link_to item_path do %><%= item_name %><% end %></strong>
       </p>
@@ -21,8 +21,12 @@
     </div>
   </div>
   <div class="img-card mt-2">
-    <% if item.photos.attached? %>
-      <%= cl_image_tag item.photos.first.key, class: "card-img" %>
+    <% if photo.present? %>
+      <!-- Using model photo -->
+      <%= cl_image_tag photo.image.key, class: "card-img" %>
+    <% elsif item.respond_to?(:images) && item.images.attached? %>
+      <!-- Using Active Storage in Bikes -->
+      <%= image_tag url_for(item.images.first), class: "card-img" %>
     <% else %>
       <%= image_tag default_image, class: 'card-img' %>
     <% end %>
