@@ -24,9 +24,9 @@
     <% if photo.present? %>
       <!-- Using model photo -->
       <%= cl_image_tag photo.image.key, class: "card-img" %>
-    <% elsif item.respond_to?(:images) && item.images.attached? %>
+    <% elsif item.respond_to?(:photos) && item.photos.attached? %>
       <!-- Using Active Storage in Bikes -->
-      <%= image_tag url_for(item.images.first), class: "card-img" %>
+      <%= image_tag url_for(item.photos.first), class: "card-img" %>
     <% else %>
       <%= image_tag default_image, class: 'card-img' %>
     <% end %>
