@@ -37,7 +37,7 @@ export default class extends Controller {
    createCustomMarkerElement() {
     const el = document.createElement('div');
     el.className = 'custom-marker';
-    el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`; // URL to your custom icon
+    el.style.backgroundImage =  `url(${this.data.get("pin_route")})`; // URL to your custom icon
     el.style.width = '32px'; // Size of the icon
     el.style.height = '32px';
     el.style.backgroundSize = '100%';
