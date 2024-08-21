@@ -12,9 +12,10 @@ class PagesController < ApplicationController
       @bikes = Bike.where(user_id: followed_users_ids).order(created_at: :desc).to_a
       @comments = Comment.where(user_id: followed_users_ids).order(created_at: :desc).to_a
   
-      @routes_with_photos = @routes.select { |route| route.photos.attached? }.flat_map do |route|
-        route.photos.map { |photo| { route: route, photo: photo } }
+      @routes_with_photos = @routes.select { |route| route.photos.any? }.flat_map do |route|
+        route.photos
       end
+      
       # sorted by created_at and shuffled
       @feed_items = (@routes + @reviews + @bikes + @comments + @routes_with_photos)
       .group_by do |item|

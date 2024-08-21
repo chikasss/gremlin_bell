@@ -7,7 +7,7 @@ class Route < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :landmarks, dependent: :destroy
   acts_as_favoritable
-  has_many_attached :photos
+  has_many :photos, dependent: :destroy
 
   RIDE_TYPE = ["Mountainous", "Trail", "Urban", "Scenic", "Calm", "Coastal", "Twisty", "Day Trip", "Long and Straight", "Other"]
   ROAD_CONDITION = ["Paved", "Gravel", "Dirt", "Poor", "Construction"]
@@ -49,5 +49,6 @@ class Route < ApplicationRecord
     end
     
     self.recomended_bikes.reject!(&:blank?)
+
   end
 end

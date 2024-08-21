@@ -15,6 +15,11 @@
   font-size: 1rem;
   font-weight: 500;
   color: $black;
+  transition: color 0.3s, background 0.3s;
+    &:hover {
+      background: $gray-hover;
+      color: $white;
+    }
 }
 
 .btn-light-gray-sm {
@@ -25,6 +30,11 @@
   font-size: 0.9rem;
   font-weight: 500;
   color: $black;
+  transition: color 0.3s, background 0.3s;
+    &:hover {
+      background: $gray-hover;
+      color: $white;
+    }
 }
 
 .btn-red {
@@ -35,6 +45,10 @@
   font-size: 1.2rem;
   font-weight: 500;
   color: $white;
+  transition: background 0.3s;
+  &:hover {
+    background: lighten($dark-red, 10%);
+  }
 }
 
 .btn-red-lg {
@@ -45,6 +59,10 @@
   font-size: 1.5rem;
   font-weight: 500;
   color: $white;
+  transition: background 0.3s;
+  &:hover {
+    background: lighten($dark-red, 10%);
+  }
 }
 
 .btn-yellow {
