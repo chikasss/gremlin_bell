@@ -6,21 +6,22 @@ class RoutesController < ApplicationController
   PREFECTURES_HASH = User::PREFECTURES_HASH
 
   def index
-  @routes = policy_scope(Route).order(:created_at)
-  @region_prefectures = PREFECTURES_HASH
+    @routes = policy_scope(Route).order(:created_at)
+    @region_prefectures = PREFECTURES_HASH
 
-  if params[:query].present?
-    if params[:query][:region].present?
-      @routes = @routes.where(prefecture: @region_prefectures[params[:query][:region].to_sym])
-    end
-    if params[:query][:prefecture].present?
-      @routes = @routes.where(prefecture: params[:query][:prefecture])
-    end
-    if params[:query][:ride_type].present?
-      @routes = @routes.where("'#{params[:query][:ride_type]}' = ANY (ride_type)")
+    if params[:query].present?
+      if params[:query][:region].present?
+        @routes = @routes.where(prefecture: @region_prefectures[params[:query][:region].to_sym])
+      end
+      if params[:query][:prefecture].present?
+        @routes = @routes.where(prefecture: params[:query][:prefecture])
+        @prefecture_routes = @routes.where(prefecture: params[:query][:prefecture])
+      end
+      if params[:query][:ride_type].present?
+        @routes = @routes.where("'#{params[:query][:ride_type]}' = ANY (ride_type)")
+      end
     end
   end
-end
 
 
   def new
