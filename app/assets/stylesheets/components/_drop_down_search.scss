@@ -1,0 +1,11 @@
+.drop-down-search {
+  transition: opacity 1.3s ease, max-height 1.3s ease;
+  opacity: 0;
+  max-height:0;
+  overflow: hidden;
+}
+
+.drop-down-search.visible {
+  opacity: 1;
+  max-height: 1000px;
+}

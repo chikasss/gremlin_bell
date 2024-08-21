@@ -10,7 +10,8 @@ class Route < ApplicationRecord
   has_many_attached :photos
 
   RIDE_TYPE = ["Mountainous", "Trail", "Urban", "Scenic", "Calm", "Coastal", "Twisty", "Day Trip", "Long and Straight", "Other"]
-  ROAD_CONDITION = []
+  ROAD_CONDITION = ["Paved", "Gravel", "Dirt", "Poor", "Construction"]
+  RECOMENDED_BIKES = ["Cruiser", "Touring", "Sport Bike", "Standard", "Dual Sport", "ADV", "Adventure", "Naked"]
 
   PREFECTURES = [
     'Hokkaido', 'Aomori', 'Akita', 'Iwate', 'Yamagata', 'Miyagi', 'Niigata', 'Fukushima', 'Tochigi',
@@ -19,16 +20,34 @@ class Route < ApplicationRecord
     'Okayama', 'Hiroshima', 'Shimane', 'Yamaguchi', 'Tokushima', 'Kagawa', 'Ehime', 'Kochi', 'Fukuoka',
     'Oita', 'Saga', 'Miyazaki', 'Kumamoto', 'Nagasaki', 'Kagoshima', 'Okinawa'
   ]
-  
+
+  BIKE_IMAGES = {
+    "Sport Bike" => "recomended_bikes/sport_bike.png",
+    "Standard" => "recomended_bikes/standard_bike.png",
+    "Touring" => "recomended_bikes/touring_bike.png",
+    "Dual Sport" => "recomended_bikes/dual_sport_bike.png",
+    "ADV" => "recomended_bikes/ADV_bike.png",
+    "Adventure" => "recomended_bikes/adventure_bike.png",
+    "Naked" => "recomended_bikes/naked_bike.png",
+    "Cruiser" => "recomended_bikes/cruiser_bike.png"
+  }
+
   validates :ride_type, inclusion: { in: RIDE_TYPE }
   validates :prefecture, inclusion: { in: PREFECTURES }
-
-  #uncomment below after you add road_condition for route in seed
-  #ROAD_CONDITION = ["Paved", "Gravel", "Dirt", "Poor", "Construction"]
-  #validates :road_condition, inclusion: { in: ROAD_CONDITION }
+  validates :recomended_bikes, presence: true
+  before_save :ensure_recomended_bikes_is_array
 
   def average_rating
     reviews.average(:rating).to_f.round(2)
   end
 
+  private
+
+  def ensure_recomended_bikes_is_array
+    if self.recomended_bikes.is_a?(String)
+      self.recomended_bikes = self.recomended_bikes.gsub(/[\{\}]/, '').split(',').map(&:strip)
+    end
+    
+    self.recomended_bikes.reject!(&:blank?)
+  end
 end

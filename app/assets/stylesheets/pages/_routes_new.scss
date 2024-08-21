@@ -1,0 +1,27 @@
+.ride-type-item {
+  display: inline-block;
+  align-items: space-between;
+}
+
+.ride-type-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+.ride-type-selector + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.7rem;
+  border-radius: 50rem;
+  padding: 0.1rem 0.5rem;
+  background-color: white;
+  color: #960808;
+  border: 1px solid #960808;
+  margin-right: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.ride-type-selector:checked + label {
+  background-color: #960808;
+  color: white;
+}

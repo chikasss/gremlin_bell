@@ -1,0 +1,250 @@
+.recomended-bikes {
+  .recomended-bikes-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+
+  .recomended-bikes-item {
+    width: calc(50% - 3px);
+  }
+
+  .recomended-bikes-selector {
+    position: absolute;
+    transform: scale(0);
+  }
+
+  .recomended-bikes-selector + label {
+    display: block;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 12px;
+    text-align: left;
+    padding: 10px 10px 30px 10px;
+    border: 1px solid #EAEAEA;
+    border-radius: 4px;
+    background-color: white;
+  }
+
+  .recomended-bikes-selector:checked + label {
+    color: white !important;
+  }
+
+  #route_recomended_bikes_sport_bike + label {
+    color: black;
+    font-weight: 600;
+    font-size: 1rem;
+    background-image: image-url('recomended_bikes/sport_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 0.7;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_sport_bike:checked + label {
+    background-image: image-url('recomended_bikes/sport_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 1;
+      @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_standard + label {
+    color: black;
+    font-weight: 600;
+    font-size: 1rem;
+    background-image: image-url('recomended_bikes/standard_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 0.7;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_standard:checked + label {
+    background-image: image-url('recomended_bikes/standard_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 1;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_touring + label {
+    color: black;
+    font-weight: 600;
+    font-size: 1rem;
+    background-image: image-url('recomended_bikes/touring_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 0.7;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_touring:checked + label {
+    background-image: image-url('recomended_bikes/touring_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 1;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_dual_sport + label {
+    color: black;
+    font-weight: 600;
+    font-size: 1rem;
+    background-image: image-url('recomended_bikes/dual_sport_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 0.7;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_dual_sport:checked + label {
+    background-image: image-url('recomended_bikes/dual_sport_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 1;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_adv + label {
+    color: black;
+    font-weight: 600;
+    font-size: 1rem;
+    background-image: image-url('recomended_bikes/ADV_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 0.7;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_adv:checked + label {
+    background-image: image-url('recomended_bikes/ADV_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 1;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_cruiser + label {
+    color: black;
+    font-weight: 600;
+    font-size: 1rem;
+    background-image: image-url('recomended_bikes/cruiser_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 0.7;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_cruiser:checked + label {
+    background-image: image-url('recomended_bikes/cruiser_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 1;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_adventure + label {
+    color: black;
+    font-weight: 600;
+    font-size: 1rem;
+    background-image: image-url('recomended_bikes/adventure_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 0.7;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_adventure:checked + label {
+    background-image: image-url('recomended_bikes/adventure_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 1;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_naked + label {
+    color: black;
+    font-weight: 600;
+    font-size: 1rem;
+    background-image: image-url('recomended_bikes/naked_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 0.7;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+
+  #route_recomended_bikes_naked:checked + label {
+    background-image: image-url('recomended_bikes/naked_bike.png');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 150px;
+    background-position: center;
+    opacity: 1;
+    @media (max-width: 768px) {
+      height: 100px;
+    }
+  }
+}

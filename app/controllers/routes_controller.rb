@@ -31,12 +31,12 @@ end
   def create
     @route = Route.new(route_params)
     @route.waypoints = JSON.parse(route_params[:waypoints][0])
-    #@route.waypoints = JSON.parse(route_params[:waypoints].to_s) rescue []
     @route.user = current_user
     authorize @route
     if @route.save
       redirect_to route_path(@route)
     else
+      puts "Route not saved: #{@route.errors.full_messages.join(', ')}"
       render :new
     end
   end
@@ -44,12 +44,12 @@ end
   def show
     @route = Route.find(params[:id])
     authorize @route
-    @reviews = @route.reviews.includes(:user).order(created_at: :desc)
+    @reviews = @route.reviews.includes(:user).order(date: :desc, created_at: :desc)
     @review = @route.reviews.new
     @comments = @route.comments.includes(:user).order(created_at: :desc)
     @road_condition =
       if @reviews.any?
-        @reviews.last.road_condition
+        @reviews.first.road_condition
       else
         @route.road_condition
       end
@@ -84,6 +84,15 @@ end
   private
 
   def route_params
-    params.require(:route).permit(:title, :description, :prefecture, :videos_url, :road_condition, waypoints: [], ride_type: [], photos: [])
+    params.require(:route).permit(
+      :title,
+      :description,
+      :prefecture, :videos_url,
+      :road_condition,
+      waypoints: [],
+      ride_type: [],
+      photos: [],
+      recomended_bikes: []
+    )
   end
 end

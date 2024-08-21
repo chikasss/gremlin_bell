@@ -213,6 +213,22 @@ ami_bikes = Bike.create!(
   user: ami
 )
 
+puts "Users following each other"
+
+users = User.all
+
+users.each do |user|
+  number_of_follows = rand(3..6)
+  users_to_follow = users.where.not(id: user.id).sample(number_of_follows)
+  
+  users_to_follow.each do |followed|
+    user.following << followed unless user.following?(followed)
+  end
+end
+
+puts "Users are now following each other"
+
+
 puts "Bikes created"
 
 puts "Attaching bike photos to Bikes"
@@ -405,6 +421,8 @@ puts "Avatars attached to Users"
 
 puts "Creating routes"
 
+recomended_bikes = Route::RECOMENDED_BIKES
+
 bill_route = Route.create!(
   title: "Nakayama Pass",
   description: "Do you like making your bike go VROOM in tunnels? This route has a ton of em haha.",
@@ -413,7 +431,8 @@ bill_route = Route.create!(
   videos_url: "https://youtu.be/TZezHtKiq-Y?si=fcgT01QuDZ5EkteT",
   prefecture: "Hokkaido",
   road_condition: "Paved",
-  user: bill
+  user: bill,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 bill_route2 = Route.create!(
@@ -424,7 +443,8 @@ bill_route2 = Route.create!(
   videos_url: "https://www.youtube.com/watch/DuurJdmyMtQ?si=ECtrX_jTUf4q6woY",
   prefecture: "Hokkaido",
   road_condition: "Paved",
-  user: bill
+  user: bill,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 hideo_route = Route.create!(
@@ -435,7 +455,8 @@ hideo_route = Route.create!(
   videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
   prefecture: "Hokkaido",
   road_condition: "Construction",
-  user: hideo
+  user: hideo,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 mika_route = Route.create!(
@@ -446,7 +467,8 @@ mika_route = Route.create!(
   videos_url: "https://youtu.be/oF6xabrZblA?si=3yfWVI3uHowPjAX4",
   prefecture: "Fukuoka",
   road_condition: "Paved",
-  user: mika
+  user: mika,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 eric_route = Route.create!(
@@ -457,7 +479,8 @@ eric_route = Route.create!(
   videos_url: "https://youtu.be/Omf5kd-EK0M?si=B79VP_lMx5YlYbAM",
   prefecture: "Hokkaido",
   road_condition: "Dirt",
-  user: eric
+  user: eric,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 mary_route = Route.create!(
@@ -468,7 +491,8 @@ mary_route = Route.create!(
   videos_url: "https://youtu.be/UNK4Zwg6W3E?si=Z-nWMjmrvM6if4sQ",
   prefecture: "Hokkaido",
   road_condition: "Poor",
-  user: mary
+  user: mary,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 angel_route = Route.create!(
@@ -479,7 +503,8 @@ angel_route = Route.create!(
   videos_url: "https://youtu.be/Hjx9_m2-ItE?si=FjwsTDV4GBQ0V9on",
   prefecture: "Oita",
   road_condition: "Paved",
-  user: angel
+  user: angel,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 vincenzo_route = Route.create!(
@@ -490,7 +515,8 @@ vincenzo_route = Route.create!(
   videos_url: "https://youtu.be/NFII_nKKB5c?si=HpAm347NhKU1Di7z",
   prefecture: "Hokkaido",
   road_condition: "Poor",
-  user: vincenzo
+  user: vincenzo,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 ami_route = Route.create!(
@@ -501,7 +527,8 @@ ami_route = Route.create!(
   videos_url: "https://youtu.be/OpF7UOxqqSU?si=ZIg4BU_kcRwEwEMR",
   prefecture: "Kanagawa",
   road_condition: "Gravel",
-  user: ami
+  user: ami,
+  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
 puts "Attaching photo to Routes"
@@ -588,6 +615,8 @@ ami_route.photos.attach(
 ami_route.save
 
 puts "Routes photos attached"
+
+puts "Routes created"
 
 puts "Creating comments"
 
@@ -691,7 +720,7 @@ review_for_bill_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2002 Yamaha VMAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: bill_route,
   bike_id: eric.bikes.first.id,
   user: eric
@@ -704,20 +733,20 @@ review_for_mary_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2002 Yamaha VMAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: mary_route,
   bike_id: eric.bikes.first.id,
   user: eric
 )
 
 review_for_ami_route = Review.create!(
-  date: DateTime.new(2024,8,10,17),
+  date: DateTime.new(2024,8,20,17),
   title: "A chill ride through the cities",
   description: "I normally ride to Yokohama from my home a different way so I figured I switch it up and take this route. Boy was I glad. I'm a big coffee fan and I ended up stumbling across a cafe while riding this route. The name is cafe+cake Baloo. I'm not normally a cake person, but their strawberry shortcake slapped! Thanks Ami for sharing this route!",
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "bumpy",
+  road_condition: "Construction",
   route: ami_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
@@ -730,7 +759,7 @@ review_for_ami_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: ami_route,
   bike_id: angel.bikes.first.id,
   user: angel
@@ -743,7 +772,7 @@ review_for_mika_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: mika_route,
   bike_id: angel.bikes.first.id,
   user: angel
@@ -756,7 +785,7 @@ review_for_eric_route = Review.create!(
   rating: 4,
   videos_url: "",
   used_bike: "1998 Honda GL1500",
-  road_condition: "smooth",
+  road_condition: "Paved",
   route: eric_route,
   bike_id: mika.bikes.first.id,
   user: mika
@@ -769,7 +798,7 @@ review_for_eric_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2022 Kawasaki Z900",
-  road_condition: "construction",
+  road_condition: "Construction",
   route: eric_route,
   bike_id: vincenzo.bikes.first.id,
   user: vincenzo
@@ -782,7 +811,7 @@ review_for_hideo_route = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2017 Kawasaki 250TR",
-  road_condition: "bumpy",
+  road_condition: "Dirt",
   route: hideo_route,
   bike_id: ami.bikes.first.id,
   user: ami
@@ -795,7 +824,7 @@ review_for_hideo_route2 = Review.create!(
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",
-  road_condition: "cops",
+  road_condition: "Paved",
   route: hideo_route,
   bike_id: angel.bikes.first.id,
   user: angel
