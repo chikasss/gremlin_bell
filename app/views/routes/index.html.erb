@@ -17,13 +17,13 @@
                   <% if index.even? %>
                     <div class="col-md-6 px-2 col-12 mb-2">
                       <div class="d-flex justify-content-between">
-                      <% end %>
+                  <% end %>
                       <div class="col-md-3 col-6 px-2 text-center mb-2">
-                        <% if params[:query][:prefecture].present? %>
+                        <% if params[:query].present? && params[:query][:prefecture].present? %>
                           <% current_prefecture = params[:query][:prefecture] %>
                           <% current_ride_type = type %>
                           <%= link_to routes_path(query: {prefecture: current_prefecture, ride_type: current_ride_type }) do %>
-                          <span class="route-tag rounded-pill"><%= type %></span>
+                            <span class="route-tag rounded-pill"><%= type %></span>
                           <% end %>
                         <% else %>
                           <%= link_to routes_path(query: {ride_type: type }) do %>
@@ -33,8 +33,8 @@
                       </div>
                       <% if index.odd? %>
                       </div>
-                    </div>
-                  <% end %>
+                      </div>
+                      <% end %>
                 <% end %>
               </div>
               <i class="fa fa-caret-down fa-2xl" aria-hidden="true" class="btn-light-gray"
@@ -43,11 +43,11 @@
               </i>
             </div>
           </div>
-          <% if params[:query].present? && params[:query][:ride_type].present? %>
+          <% if params[:query].present? && params[:query][:prefecture].present?  && params[:query][:ride_type].present? %>
+            <h2 class="mt-4"><strong><%= params[:query][:ride_type] %></strong> Routes in <strong><%= params[:query][:prefecture] %></strong></h2>
+          <% elsif params[:query].present? && params[:query][:ride_type].present? %>
             <h2 class="mt-4"><strong><%= params[:query][:ride_type] %></strong> Routes</h2>
           <% elsif params[:query].present? && params[:query][:prefecture].present?%>
-            <h2 class="mt-4">Routes in <strong><%= params[:query][:prefecture] %></strong></h2>
-          <% elsif params[:query].present? && params[:query][:prefecture].present? %>
             <h2 class="mt-4">Routes in <strong><%= params[:query][:prefecture] %></strong></h2>
           <% else %>
             <h2 class="mt-4">All Routes</h2>
