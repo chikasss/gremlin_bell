@@ -31,7 +31,8 @@ class RoutesController < ApplicationController
 
   def create
     @route = Route.new(route_params)
-    # @route.waypoints = JSON.parse(route_params[:waypoints][0])
+    #@route.waypoints = JSON.parse(route_params[:waypoints][0])
+
     if route_params[:waypoints].present? && route_params[:waypoints][0].present?
       @route.waypoints = JSON.parse(route_params[:waypoints][0])
     else

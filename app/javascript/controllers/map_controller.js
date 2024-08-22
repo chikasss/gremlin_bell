@@ -4,7 +4,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 // Connects to data-controller="map"
 export default class extends Controller {
-  static targets = ["waypointsInput", "mapContainer"]
+  static targets = ["waypoints", "mapContainer"]
 
   connect() {
     const mapboxAccessToken = this.element.dataset.mapboxApiKey;
@@ -24,10 +24,18 @@ export default class extends Controller {
         },
         trackUserLocation: true,
         showUserHeading: false
-      })
+      }),
+      'top-left'
     );
 
-    this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
+    this.map.addControl(
+      new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl,
+      placeholder: 'Search for a place',
+      className: 'custom-geocoder'
+    }),
+  );
 
     this.waypoints = [];
 
@@ -50,9 +58,12 @@ export default class extends Controller {
         this.getRoute(this.waypoints);
       }
 
-      const waypointsInput = this.waypointsInputTarget;
+      const form = document.querySelector('form');
+      const waypointsInput = document.querySelector('#waypoints_input');
+     //const waypointsInput = this.waypointsTarget;
       waypointsInput.value = JSON.stringify(this.waypoints);
     });
+
 
     this.map.on('contextmenu', (event) => {
       this.addMarker([event.lngLat.lng, event.lngLat.lat], 'landmark', '#000', true);
@@ -115,7 +126,7 @@ export default class extends Controller {
             'line-cap': 'round'
           },
           paint: {
-            'line-color': '#6699ff',
+            'line-color': '#ff5e5e',
             'line-width': 4
           }
         });
