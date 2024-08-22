@@ -10,7 +10,7 @@
 
   img {
     position: absolute;
-    width: 50%;
+    width: 40%;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
@@ -27,16 +27,31 @@
   }
 }
 
+
 .login-screen.new {
   .bg-white {
     padding-bottom: 50px;
   }
   img {
-    width: 45%;
+    width: 35%;
     top: 60px;
     @media (max-width: 768px) {
       width: 90%;
       top: 130px;
+    }
+  }
+}
+
+.login-screen.register {
+  .bg-white {
+    padding-bottom: 20px;
+  }
+  img {
+    width: 25%;
+    top: 20px;
+    @media (max-width: 768px) {
+      width: 50%;
+      top: 40px;
     }
   }
 }
