@@ -94,6 +94,28 @@ class RoutesController < ApplicationController
     end
   end
 
+  def edit
+    @route = Route.find(params[:id])
+    authorize @route
+  end
+
+  def update
+    @route = Route.find(params[:id])
+    authorize @route
+    if @route.update(route_params)
+      if params[:route][:photos].present?
+        params[:route][:photos].each do |uploaded_file|
+          new_photo = @route.photos.build(user: current_user)
+          new_photo.image.attach(uploaded_file)
+          new_photo.save!
+        end
+      end
+      redirect_to @route, notice: 'Route was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
   private
 
   def route_params

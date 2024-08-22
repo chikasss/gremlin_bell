@@ -6,16 +6,13 @@
   <div class="bg-white">
     <div class="container">
       <div class="d-flex justify-content-between">
-        <div class="mb-4">
+        <div class="d-flex">
+          <% if current_user == @route.user %>
+            <%= link_to edit_route_path(@route), class: "btn btn-link" do %>
+              <i class="fa-solid fa-pen-to-square"></i>
+            <% end %>
+          <% end %>
           <h2><%= @route.title %></h2>
-          <div class="ms-1 d-flex align-items-center location-route">
-            <i class="fa-solid fa-location-dot"></i>
-            <p class='ms-2 pb-0 mb-0'><%= @route.prefecture %></p>
-          </div>
-          <div class="mt-2 d-flex align-items-center road-condition-show">
-            <i class="fa-solid fa-road"></i>
-            <p class='ms-2 pb-0 mb-0'>Latest known road condition: <strong><%= @road_condition %></strong></p>
-          </div>
         </div>
         <div>
           <% if current_user.favorited?(@route) %>
@@ -27,6 +24,16 @@
               <i class="fa-regular fa-circle-check"></i>
             <% end %>
           <% end %>
+        </div>
+      </div>
+      <div class="my-4">
+        <div class="ms-1 d-flex align-items-center location-route">
+          <i class="fa-solid fa-location-dot"></i>
+          <p class='ms-2 pb-0 mb-0'><%= @route.prefecture %></p>
+        </div>
+        <div class="mt-2 d-flex align-items-center road-condition-show">
+          <i class="fa-solid fa-road"></i>
+          <p class='ms-2 pb-0 mb-0'>Latest known road condition: <strong><%= @road_condition %></strong></p>
         </div>
       </div>
       <div class="route-photo d-flex row justify-content-center">
@@ -154,8 +161,9 @@
          style="height: 500px;">
         </div>
       </div>
-      <% if @route.comments.present? %>
+      <% if @route.comments.any? %>
         <div>
+          <h3>Route Comments:</h3>
           <%= render 'comments/comments_show_route' %>
         </div>
       <% else %>
@@ -170,7 +178,7 @@
       <% end %>
       <div class="my-4 d-flex justify-content-center">
         <%= button_to 'Save to My Trips', save_route_path(@route),
-    method: :post, class: 'btn-red-lg' %>
+            method: :post, class: 'btn-red-lg' %>
       </div>
     </div>
   </div>

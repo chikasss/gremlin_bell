@@ -7,30 +7,27 @@
       <%= render 'comments/form' %>
     </div>
   </div>
-  <% if @route.comments.present? %>
-    <h3>Route Comments:</h3>
-    <% @comments.limit(3).each do |comment| %>
-      <div class="border p-3 my-2">
-        <h5><%= comment.description %></h5>
-        <div class="border-bottom"></div>
-        <% if comment.user.avatar.present? %>
-          <div class="d-flex mt-2">
-            <div class="me-2">
-              <%= cl_image_tag comment.user.avatar.key, class: "avatar" %>
-            </div>
-          <% else %>
-            <div class="me-2">
-              <%= image_tag "user-photo.png", class: "avatar" %>
-            </div>
-          <% end %>
-          <div>
-            <%= link_to user_path(comment.user) do %>
-              <p class="mb-0"><%= comment.user.first_name %></p>
-            <% end %>
-            <p class="mb-0"><%= comment.created_at.strftime("%B %d, %Y") %></p>
+  <% @comments.limit(3).each do |comment| %>
+    <div class="border p-3 my-2">
+      <h5><%= comment.description %></h5>
+      <div class="border-bottom"></div>
+      <% if comment.user.avatar.present? %>
+        <div class="d-flex mt-2">
+          <div class="me-2">
+            <%= cl_image_tag comment.user.avatar.key, class: "avatar" %>
           </div>
+        <% else %>
+          <div class="me-2">
+            <%= image_tag "user-photo.png", class: "avatar" %>
+          </div>
+        <% end %>
+        <div>
+          <%= link_to user_path(comment.user) do %>
+            <p class="mb-0"><%= comment.user.first_name %></p>
+          <% end %>
+          <p class="mb-0"><%= comment.created_at.strftime("%B %d, %Y") %></p>
         </div>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
