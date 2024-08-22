@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show, :saved_trips, :created_routes, :created_reviews, :follow, :unfollow, :user_reviews, :followers, :following]
 
-
   def edit
     authorize @user
   end
