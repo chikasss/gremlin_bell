@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = policy_scope(User).order(created_at: :desc)
+    @users = policy_scope(User).where.not(id: current_user.id).order(created_at: :desc)
     authorize @users
   end
 
