@@ -1,4 +1,5 @@
 class RoutesController < ApplicationController
+  require_relative '../services/weather_service'
   before_action :authenticate_user!
 
   RIDE_TYPE = Route::RIDE_TYPE
@@ -69,7 +70,9 @@ class RoutesController < ApplicationController
     # @comments_last_3 = @route.comments.includes(:user).order(created_at: :desc).limit(3)
     @comment = @route.comments.new
     @tail = YouTubeRails.extract_video_id(@route.videos_url)
-    ##@waypoints_json = @route.waypoints.to_json
+    @weather = WeatherService.new(@route.waypoints[0][1], @route.waypoints[0][0], "metric").get_forecast
+    # @waypoints_json = @route.waypoints.to_json
+    console
   end
 
   def save
