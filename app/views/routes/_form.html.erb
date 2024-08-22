@@ -3,7 +3,6 @@
     <%= f.input :title %>
     <%= f.input :description %>
     <%= f.input :prefecture, collection: Route::PREFECTURES, label: "Route prefecture" %>
-
     <div data-controller="address-autocomplete" data-address-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
       <%= f.input :address, 
                   label: false,
@@ -15,27 +14,21 @@
                     class: "form-control d-none"
                   } %>
     </div>
-  
     <%= f.hidden_field :waypoints, id: 'waypoints_input', multiple: true %>
     <%= f.label :waypoints, "Map", class: "mb-2" %>
     <%= render 'shared/map' %>
-
     <div class="mt-4">
       <%= f.input :videos_url, label: "Youtube Link" %>
     </div>
-
     <div class="col-12 mb-2">
       <%= file_field_tag 'route[photos][]', multiple: true, accept: 'image/*', class: 'form-control' %>
     </div>
-    
     <div class="form-text">
       <strong>Note:</strong> Maximum file size is 10MB per photo.
     </div>
-
     <div class="row mt-6">
       <%= render 'shared/road_condition_form', f: f %>
     </div>
-
     <div class="row mt-6">
       <div class="ride-type-item">
         <%= f.input :ride_type,
@@ -48,13 +41,11 @@
                     include_hidden: false %>
       </div>
     </div>
-
     <div class="row mt-4">
       <%= render 'recomended_bikes_form', f: f %>
     </div>
-
     <div class="d-flex justify-content-center mt-3 pb-3">
-      <%= f.submit "Create a route", class: "btn-red" %>
+      <%= f.submit button_text, class: "btn-red" %>
     </div>
   <% end %>
 </div>

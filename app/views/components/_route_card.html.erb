@@ -37,4 +37,9 @@
   <%= link_to user_path(route.user) do %>
     <small>Created by <%= route.user.first_name %></small>
   <% end %>
+  <% if current_user == route.user %>
+    <%= link_to edit_route_path(route), class: "btn btn-link" do %>
+      <i class="fa-solid fa-pen-to-square"></i>
+    <% end %>
+  <% end %>
 </div>

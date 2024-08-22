@@ -1,0 +1,15 @@
+<div class="bg-red">
+  <div class="container">
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
+    <%= render 'shared/link_user_profile', user: (@user || current_user) %>
+  </div>
+  <div class="bg-white">
+    <div class="container edit-route">
+      <h4 class="text-center">Edit your route <br>
+        <%= link_to route_path(@route) do %><strong><%= @route.title %></strong><% end %></h4>
+      <div>
+        <%= render 'form', route: @route, button_text: "Update a route" %>
+      </div>
+    </div>
+  </div>
+</div>

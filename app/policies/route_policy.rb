@@ -27,6 +27,14 @@ class RoutePolicy < ApplicationPolicy
     true 
   end
 
+  def edit?
+    update?
+  end
+
+  def update?
+    user.present? && (user == record.user || user.admin?)
+  end
+
   class Scope < Scope
     def resolve
       scope.all
