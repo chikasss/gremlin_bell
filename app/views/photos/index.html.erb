@@ -1,0 +1,66 @@
+<div class="bg-red">
+  <div class="container">
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
+    <%= render 'shared/link_user_profile', user: (@user || current_user) %>
+  </div>
+  <div class="bg-white">
+    <div class="container route-photo">
+      <% if @route.photos.any? %>
+        <h4>All photos from route <%= link_to route_path(@route) do %> <strong><%= @route.title %></strong><% end %></h4>
+        <div class="d-flex row justify-content-center">
+          <div class="col-md-10">
+            <div id="photoCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <% @route.photos.each_with_index do |photo, index| %>
+                  <% if photo.image.attached? && photo.image.variable? %>
+                    <div class="carousel-item <%= 'active' if index == 0 %>">
+                      <%= cl_image_tag photo.image.key, class: " px-1", data: { bs_toggle: "modal", bs_target: "#photoModal", photo_key: photo.image.key } %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+            <div class="mt-4 d-flex row justify-content-center">
+              <% @route.photos.each do |photo| %>
+                <% if photo.image.attached? && photo.image.variable? %>
+                  <div class="col-6 mb-2 route-img-index">
+                    <%= cl_image_tag photo.image.key %>
+                    <%= link_to user_path(photo.user) do %>
+                      <p class="user">by <%= photo.user.first_name %></p>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <div class="row d-flex justify-content-center text-center">
+          <div class="col-12">
+            <h5>No photos uploaded yet on <br>
+              <%= link_to route_path(@route) do %> <strong><%= @route.title %></strong><% end %></h5>
+            <p class="mt-2">Upload a photo for this route.</p>
+            <div class="btn-upload mt-4">
+              <%= simple_form_for([@route, Photo.new], html: { multipart: true, data: { controller: "photo-upload" } }, remote: true) do |form| %>
+                <%= form.file_field :image, id: "photo-upload", data: { target: "photo-upload.fileInput", action: "change->photo-upload#submitForm" }, style: "display:none;" %>
+                <%= form.submit "Add Photo", data: { target: "photo-upload.submitButton" }, style: "display:none;" %>
+                <button type="button" class="btn btn-primary" data-action="click->photo-upload#selectFile">
+                  <i class="fa-solid fa-image me-1"></i>
+                  Upload Photo
+                </button>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

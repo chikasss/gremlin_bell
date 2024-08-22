@@ -29,16 +29,46 @@
           <% end %>
         </div>
       </div>
-      <div>
-        <% if @route.photos.attached? %>
-          <div class="p-2"><%= cl_image_tag @route.photos.first.key, class: "route-img"%>
+      <div class="route-photo d-flex row justify-content-center">
+        <div class="col-11 col-md-10">
+          <% if @route.photos.any? %>
+            <!-- First route foto (big size) -->
+            <div><%= cl_image_tag @route.photos.first.image.key, class: "route-img" %></div>
+            <!-- All route photos on carousel -->
+            <div class="row d-flex justify-content-center mt-2">
+              <div class="col-md-10 d-flex flex-row flex-nowrap overflow-auto">
+                <% @route.photos.each do |photo| %>
+                  <% if photo.image.attached? && photo.image.variable? %>
+                    <div class="col-5 col-md-5 me-1">
+                      <%= cl_image_tag photo.image.key, class: "route-imgs" %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% else %>
+            <!-- Default msg and default img -->
+            <div><%= image_tag "route-bg.jpg", class: "route-img" %></div>
+            <small class="mt-2 text-center">Upload a photo for this route.</small>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+          <div class="btn-img">
+            <%= simple_form_for([@route, Photo.new], html: { multipart: true, data: { controller: "photo-upload" } }, remote: true) do |form| %>
+              <%= form.file_field :image, id: "photo-upload", data: { target: "photo-upload.fileInput", action: "change->photo-upload#submitForm" }, style: "display:none;" %>
+              <%= form.submit "Add Photo", data: { target: "photo-upload.submitButton" }, style: "display:none;" %>
+              <button type="button" data-action="click->photo-upload#selectFile">
+                <i class="fa-regular fa-image"></i>
+              </button>
+            <% end %>
           </div>
-        <% else %>
-          <div class="p-2"><%= image_tag "route-bg.jpg", class: "route-img" %>
+          <div>
+            <%= link_to 'See all', route_photos_path(@route), class: "btn btn-light-gray-sm" %>
           </div>
-        <% end %>
+        </div>
       </div>
-      <div class="route-description d-flex mt-4">
+      <div class="my-4 border-bottom mx-4"></div>
+      <div class="route-description d-flex mt-2">
         <i class="fa-solid fa-quote-left me-2"></i>
         <p><%= @route.description %></p>
         <i class="fa-solid fa-quote-right ms-1"></i>
@@ -64,7 +94,7 @@
           </div>
           <% if @reviews.present? %>
             <div class=" d-flex justify-content-end" data-action="click->show-reviews#showReviews">
-              <button class="btn-light-gray" data-show-reviews-target="showReviewBtn">Road Reviews</button>
+              <button class="btn-light-gray-sm" data-show-reviews-target="showReviewBtn">Road Reviews</button>
             </div>
           <% else %>
             <div data-controller="new-review" class="mb-0 pb-0">

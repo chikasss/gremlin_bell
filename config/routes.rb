@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resources :reviews, only: %i[index create show edit update]
     resources :comments, only: %i[index create]
     resources :landmarks, only: [:create]
+    resources :photos, only: [:index, :create]
     member do
       post 'save', to: 'routes#save', as: 'save'
       delete 'unsave', to: 'routes#unsave', as: 'unsave'

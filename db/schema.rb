@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_20_112330) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_21_053521) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -111,6 +112,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_20_112330) do
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
+  create_table "photos", force: :cascade do |t|
+    t.bigint "route_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
+    t.index ["route_id"], name: "index_photos_on_route_id"
+    t.index ["user_id"], name: "index_photos_on_user_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.date "date"
     t.string "title"
@@ -140,8 +151,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_20_112330) do
     t.string "waypoints", default: [], array: true
     t.string "prefecture"
     t.string "road_condition"
-    t.string "address"
     t.text "recomended_bikes", default: [], array: true
+    t.string "address"
     t.index ["user_id"], name: "index_routes_on_user_id"
   end
 
@@ -174,6 +185,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_20_112330) do
   add_foreign_key "landmarks", "routes"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "photos", "routes"
+  add_foreign_key "photos", "users"
   add_foreign_key "reviews", "bikes"
   add_foreign_key "reviews", "routes"
   add_foreign_key "reviews", "users"

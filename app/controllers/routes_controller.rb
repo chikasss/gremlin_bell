@@ -31,14 +31,26 @@ class RoutesController < ApplicationController
 
   def create
     @route = Route.new(route_params)
-    @route.waypoints = JSON.parse(route_params[:waypoints][0])
+    # @route.waypoints = JSON.parse(route_params[:waypoints][0])
+    if route_params[:waypoints].present? && route_params[:waypoints][0].present?
+      @route.waypoints = JSON.parse(route_params[:waypoints][0])
+    else
+      @route.waypoints = []
+    end
+
     @route.user = current_user
     authorize @route
     if @route.save
-      redirect_to route_path(@route)
+      if params[:route][:photos].present?
+        params[:route][:photos].each do |uploaded_file|
+          new_photo = @route.photos.build(user: current_user)
+          new_photo.image.attach(uploaded_file)
+          new_photo.save!
+        end
+      end
+      redirect_to @route, notice: 'Route was successfully created.'
     else
-      puts "Route not saved: #{@route.errors.full_messages.join(', ')}"
-      render :new
+      render :new, alert: @route.errors.full_messages.to_sentence
     end
   end
 
@@ -88,11 +100,11 @@ class RoutesController < ApplicationController
     params.require(:route).permit(
       :title,
       :description,
+      :address,
       :prefecture, :videos_url,
       :road_condition,
       waypoints: [],
       ride_type: [],
-      photos: [],
       recomended_bikes: []
     )
   end

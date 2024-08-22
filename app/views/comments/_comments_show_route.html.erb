@@ -10,7 +10,7 @@
   <% if @route.comments.present? %>
     <h3>Route Comments:</h3>
     <% @comments.limit(3).each do |comment| %>
-      <div class="border p-4 my-2">
+      <div class="border p-3 my-2">
         <h5><%= comment.description %></h5>
         <div class="border-bottom"></div>
         <% if comment.user.avatar.present? %>
