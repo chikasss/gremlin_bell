@@ -1,0 +1,9 @@
+<!-- app/views/chatrooms/new.html.erb -->
+<h1>Send a Message to <%= @recipient.first_name %></h1>
+<%= simple_form_for @chatroom, url: chatrooms_path do |f| %>
+  <%= f.hidden_field :recipient_id, value: @recipient.id %>
+  <div class="form-group">
+    <%= text_area_tag :description, nil, placeholder: "Your message", class: "form-control", rows: 3 %>
+  </div>
+  <%= f.submit "Send Message", class: "btn btn-primary" %>
+<% end %>
