@@ -118,6 +118,18 @@
   }
 }
 
+.btn-upload {
+  button {
+    background-color: $dark-red;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+
 // PROFILE LINKS 
 
 .profile-link {

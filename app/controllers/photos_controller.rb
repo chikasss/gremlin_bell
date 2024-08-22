@@ -24,6 +24,10 @@ class PhotosController < ApplicationController
     end
   end
 
+  def index
+    @photos = policy_scope(@route.photos)
+  end
+
   private
 
   def set_route

@@ -30,30 +30,30 @@
         </div>
       </div>
       <div class="route-photo d-flex row justify-content-center">
-        <div class="col-11 col-md-8">
+        <div class="col-11 col-md-10">
           <% if @route.photos.any? %>
+            <!-- First route foto (big size) -->
             <div><%= cl_image_tag @route.photos.first.image.key, class: "route-img" %></div>
+            <!-- All route photos on carousel -->
+            <div class="row d-flex justify-content-center mt-2">
+              <div class="col-md-10 d-flex flex-row flex-nowrap overflow-auto">
+                <% @route.photos.each do |photo| %>
+                  <% if photo.image.attached? && photo.image.variable? %>
+                    <div class="col-5 col-md-5 me-1">
+                      <%= cl_image_tag photo.image.key, class: "route-imgs" %>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
           <% else %>
+            <!-- Default msg and default img -->
             <div><%= image_tag "route-bg.jpg", class: "route-img" %></div>
+            <small class="mt-2 text-center">Upload a photo for this route.</small>
           <% end %>
         </div>
-        <% if @route.photos.any? %>
-          <div class="row d-flex justify-content-center mt-2">
-            <div class="col-md-10 d-flex flex-row flex-nowrap overflow-auto">
-              <% @route.photos.each do |photo| %>
-                <% if photo.image.attached? && photo.image.variable? %>
-                  <div class="col-5 col-md-5 me-1">
-                    <%= cl_image_tag photo.image.key, class: "route-imgs" %>
-                  </div>
-                <% end %>
-              <% end %>
-            </div>
-          </div>
-        <% else %>
-          <small class="mt-2 text-center">Upload a photo for this route.</small>
-        <% end %>
-        <div class="d-flex justify-content-between mt-4 px-4">
-          <div>
+        <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+          <div class="btn-img">
             <%= simple_form_for([@route, Photo.new], html: { multipart: true, data: { controller: "photo-upload" } }, remote: true) do |form| %>
               <%= form.file_field :image, id: "photo-upload", data: { target: "photo-upload.fileInput", action: "change->photo-upload#submitForm" }, style: "display:none;" %>
               <%= form.submit "Add Photo", data: { target: "photo-upload.submitButton" }, style: "display:none;" %>
@@ -63,7 +63,7 @@
             <% end %>
           </div>
           <div>
-            <%= link_to 'See all', '#', class: "btn-light-gray-sm" %>
+            <%= link_to 'See all', route_photos_path(@route), class: "btn btn-light-gray-sm" %>
           </div>
         </div>
       </div>
