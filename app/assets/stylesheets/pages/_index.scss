@@ -4,10 +4,7 @@
 @import "show_user";
 @import "routes_new";
 @import "route_edit";
-
-.content-body {
-  padding-bottom: 120px;
-}
+@import "login";
 
 h1, h2, h3, h4, h5, h6, h7, p, small {
   color: $black;
@@ -17,11 +14,3 @@ a {
   text-decoration: none;
 }
 
-.content-body {
-  background: $white;
-  padding-bottom: 400px;
-
-  @media (max-width: 768px) {
-    padding-bottom: 16rem;
-  }
-}
