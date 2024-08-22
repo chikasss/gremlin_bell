@@ -6,6 +6,26 @@
     </div>
     <div class="bg-white">
       <div class="container user-profile">
+        <div class="social-links">
+          <% @user.social_links.each do |platform, url| %>
+            <% if url.present? %>
+              <%= link_to url, target: "_blank", rel: "noopener" do %>
+                <% case platform %>
+                <% when "facebook" %>
+                  <i class="fa-brands fa-facebook"></i>
+                <% when "instagram" %>
+                  <i class="fa-brands fa-instagram"></i>
+                <% when "youtube" %>
+                  <i class="fa-brands fa-youtube"></i>
+                <% when "tiktok" %>
+                  <i class="fa-brands fa-tiktok"></i>
+                <% when "twitter" %>
+                  <i class="fa-brands fa-x-twitter"></i>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
         <% if @user.about.present? %>
           <h3><strong>About:</strong></h3>
           <p class="p-2"><%= @user.about %></p>

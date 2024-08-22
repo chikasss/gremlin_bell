@@ -5,24 +5,28 @@
   </div>
   <div class="bg-white">
     <div class="container">
-      <h3>Edit Your Profile</h3>
-      <%= simple_form_for(@user) do |f| %>
-        <%= f.input :first_name %>
-        <%= f.input :last_name %>
-        <%= f.input :about, label: "About You" %>
-        <%= f.input :prefecture, as: :select, collection: User::PREFECTURES %>
-        <%= simple_fields_for :social_links do |social_site| %>
-          <%= social_site.input :twitter, label: "Twitter Username", input_html: {value: @socials&.dig("twitter")} %>
-          <%= social_site.input :facebook, label: "Facebook Username", input_html: {value: @socials&.dig("facebook")} %>
-          <%= social_site.input :instagram, label: "Instagram Username", input_html: {value: @socials&.dig("instagram")} %>
-          <%= social_site.input :youtube, label: "YouTube Username", input_html: {value: @socials&.dig("youtube")} %>
-          <%= social_site.input :tiktok, label: "TikTok Username", input_html: {value: @socials&.dig("tiktok")} %>
-        <% end %>
-        <%= f.input :avatar %>
-        <div class="submit-form my-4 text-center">
-          <%= f.submit class: "btn-red" %>
+      <div class="row justify-content-center">
+        <div class="col-11 col-md-8">
+          <h3 class="text-center mb-4">Edit Your Profile</h3>
+          <%= simple_form_for(@user) do |f| %>
+            <%= f.input :first_name %>
+            <%= f.input :last_name %>
+            <%= f.input :about, label: "About You" %>
+            <%= f.input :prefecture, as: :select, collection: User::PREFECTURES %>
+            <%= simple_fields_for :social_links do |social_site| %>
+              <%= social_site.input :twitter, label: "Twitter Username", input_html: {value: @socials&.dig("twitter")} %>
+              <%= social_site.input :facebook, label: "Facebook Username", input_html: {value: @socials&.dig("facebook")} %>
+              <%= social_site.input :instagram, label: "Instagram Username", input_html: {value: @socials&.dig("instagram")} %>
+              <%= social_site.input :youtube, label: "YouTube Username", input_html: {value: @socials&.dig("youtube")} %>
+              <%= social_site.input :tiktok, label: "TikTok Username", input_html: {value: @socials&.dig("tiktok")} %>
+            <% end %>
+            <%= f.input :avatar %>
+            <div class="submit-form my-4 text-center">
+              <%= f.submit class: "btn-red" %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>

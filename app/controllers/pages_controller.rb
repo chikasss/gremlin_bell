@@ -6,7 +6,9 @@ class PagesController < ApplicationController
   def home
     if user_signed_in?
       followed_users_ids = current_user.following.pluck(:id)
-      @users = User.where.not(id: current_user.following.pluck(:id)).order(created_at: :desc).limit(5)
+      @users = User.where.not(id: current_user.following.pluck(:id) + [current_user.id])
+              .order(created_at: :desc)
+              .limit(5)
       @routes = Route.where(user_id: followed_users_ids).order(created_at: :desc).to_a
       @reviews = Review.where(user_id: followed_users_ids).order(created_at: :desc).to_a
       @bikes = Bike.where(user_id: followed_users_ids).order(created_at: :desc).to_a

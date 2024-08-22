@@ -43,3 +43,29 @@
     }
   }
 }
+
+// USER SHOW PAGE
+
+.user-profile{
+  .social-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+
+    i {
+      color: $dark-red;
+      font-size: 2rem;
+      margin: 0 0.5rem;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $gray-hover;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
