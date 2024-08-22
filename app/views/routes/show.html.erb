@@ -101,7 +101,7 @@
           </div>
           <% if @reviews.present? %>
             <div class=" d-flex justify-content-end" data-action="click->show-reviews#showReviews">
-              <button class="btn-light-gray-sm" data-show-reviews-target="showReviewBtn">Road Reviews</button>
+              <button class="btn-light-gray-sm" data-show-reviews-target="showReviewBtn">Read Reviews</button>
             </div>
           <% else %>
             <div data-controller="new-review" class="mb-0 pb-0">
@@ -140,7 +140,7 @@
       <% end %>
       <% if @route.recomended_bikes.present? %>
         <div class="my-4">
-          <h3 class="py-4">Recomended bikes:</h3>
+          <h3 class="py-4">Recommended bikes:</h3>
           <div class="row d-flex justify-content-center mx-2">
             <% @route.recomended_bikes.each do |bike| %>
               <div class="col-md-3 col-4 mb-2 ps-0 pe-0">
@@ -169,7 +169,7 @@
       <% else %>
         <div data-controller="insert-route-comment">
           <div class="d-flex justify-content-center mt-4" data-action="click->insert-route-comment#insertRouteComment">
-            <button class="btn-light-gray" data-insert-route-comment-target="insertCommentBtn">Insert a Route Comment</button>
+            <button class="btn-light-gray" data-insert-route-comment-target="insertCommentBtn">Write your own comment or question</button>
           </div>
           <div class="my-4 comment-form" data-insert-route-comment-target="commentForm">
             <%= render 'comments/form' %>
