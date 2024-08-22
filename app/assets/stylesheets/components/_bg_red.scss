@@ -1,16 +1,54 @@
+// .bg-red {
+//   background-image: image-url('bg-app.png');
+//   background-size: cover;
+//   background-position: center;
+//   min-height: 100vh;
+//   position: relative;
+
+//   .bg-white {
+//     background: $light-gray;
+//     border-radius: 42px 42px 0 0;
+//     // min-height: 100vh;
+//     flex-grow: 1;
+//     padding-top: 2.5rem;
+//     padding-bottom: 100px;
+//     margin-top: 2rem;
+//     position: absolute;
+//     top: 20%;
+//     left: 0;
+//     width: 100%;
+//     z-index: 1;
+//     @media (max-width: 768px) {
+//       top: 18%;
+//     }
+
+//     * {
+//       z-index: 2;
+//     }
+//   }
+
+  // a {
+  //   text-decoration: none;
+  // }
+// }
+
 .bg-red {
   background-image: image-url('bg-app.png');
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  background-attachment: fixed;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 
   .bg-white {
+    margin-top: 0px;
     background: $light-gray;
     border-radius: 42px 42px 0 0;
-    min-height: 100vh;
     padding-top: 2.5rem;
     padding-bottom: 100px;
-    margin-top: 2rem;
+    flex-grow: 1;
   }
 
   a {
