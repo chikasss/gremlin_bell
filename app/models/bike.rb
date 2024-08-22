@@ -8,7 +8,7 @@ class Bike < ApplicationRecord
     "Yamaha", "KTM", "Husqvarna", "Mutt", "CF-Moto", "Ducati",
     "Aprillia", "Motoguzzi", "BMW", "Royal Enfield", "Indian",
     "Benelli", "Bimota", "Energica", "Gas Gas", "Zero", "MV Agusta",
-    "Arch", "ADMIN"
+    "Arch"
   ]
 
   validates :brand, inclusion: { in: BRAND }
