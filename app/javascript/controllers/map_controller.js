@@ -4,7 +4,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 
 // Connects to data-controller="map"
 export default class extends Controller {
-  static targets = ["waypoints", "mapContainer"]
+  static targets = ["waypointsInput", "mapContainer"]
 
   connect() {
     const mapboxAccessToken = this.element.dataset.mapboxApiKey;
