@@ -635,6 +635,18 @@ puts "Route photos attached successfully!"
 
 puts "Routes created"
 
+puts "Adding random favorites routes for users..."
+
+User.find_each do |user|
+  routes = Route.order('RANDOM()').limit(rand(1..3))
+  routes.each do |route|
+    user.favorite(route)
+  end
+end
+
+puts "Random favorites routes added successfully!"
+
+
 puts "Creating comments"
 
 hideo_to_bill_route = Comment.create!(
