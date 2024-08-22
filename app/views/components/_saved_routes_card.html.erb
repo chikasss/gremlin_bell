@@ -1,8 +1,8 @@
 <div class="saved-route-card">
-  <% if route.photos.any? %>
-    <%= cl_image_tag route.photos.first.key, class: "card-img" %>
+  <% if route.photos.any? && route.photos.first.image.attached? %>
+    <%= cl_image_tag route.photos.first.image.key, class: "card-img" %>
   <% else %>
-    <%= image_tag "route-bg.jpg", class: "card-img" %>
+    <%= image_tag "default-route-image.jpg", class: "card-img" %>
   <% end %>
   <div class="card-body" >
     <%= link_to route_path(route) do %>
@@ -17,7 +17,7 @@
         <p class='ms-2 pb-0 mb-0'>Japan</p>
       </div>
       <p class="card-text"><%= route.description %></p>
-      <div class="mt-2">
+      <div class="my-2">
         <% route.ride_type.each do |type| %>
           <%= link_to routes_path(query: {ride_type: type }) do %>
             <span class="tag-card me-2"><%= type %></span>

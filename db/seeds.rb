@@ -228,7 +228,6 @@ end
 
 puts "Users are now following each other"
 
-
 puts "Bikes created"
 
 puts "Attaching bike photos to Bikes"
@@ -531,92 +530,122 @@ ami_route = Route.create!(
   recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
 )
 
-puts "Attaching photo to Routes"
+puts "Attaching photos to Routes"
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/nakayama_jmgip6.jpg")
-
-bill_route.photos.attach(
-  io: file,
-  filename: "bill_route",
-  content_type: "image/jpg"
+Photo.create!(
+  image: {
+    io: file,
+    filename: "bill_route",
+    content_type: "image/jpg"
+  },
+  route: bill_route,
+  user: bill_route.user
 )
-bill_route.save
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047911/ocean_y0fdqn.jpg")
-
-bill_route2.photos.attach(
-  io: file,
-  filename: "bill_route2",
-  content_type: "image/jpg"
+Photo.create!(
+  image: {
+    io: file,
+    filename: "bill_route2",
+    content_type: "image/jpg"
+  },
+  route: bill_route2,
+  user: bill_route2.user
 )
-bill_route2.save
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047430/jozankei_guuq2s.jpg")
-
-hideo_route.photos.attach(
-  io: file,
-  filename: "hideo_route",
-  content_type: "image/jpg"
+Photo.create!(
+  image: {
+    io: file,
+    filename: "hideo_route",
+    content_type: "image/jpg"
+  },
+  route: hideo_route,
+  user: hideo_route.user
 )
-hideo_route.save
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047966/kyusyu_jjfzn0.jpg")
-
-mika_route.photos.attach(
-  io: file,
-  filename: "mika_route ",
-  content_type: "image/jpg"
+Photo.create!(
+  image: {
+    io: file,
+    filename: "mika_route",
+    content_type: "image/jpg"
+  },
+  route: mika_route,
+  user: mika_route.user
 )
-mika_route.save
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/highway38_zanqdw.jpg")
-
-eric_route.photos.attach(
-  io: file,
-  filename: "eric_route",
-  content_type: "image/jpg"
+Photo.create!(
+  image: {
+    io: file,
+    filename: "eric_route",
+    content_type: "image/jpg"
+  },
+  route: eric_route,
+  user: eric_route.user
 )
-eric_route.save
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047441/mikuni_kyf2gb.jpg")
-
-mary_route.photos.attach(
-  io: file,
-  filename: "mary_route",
-  content_type: "image/jpg"
+Photo.create!(
+  image: {
+    io: file,
+    filename: "mary_route",
+    content_type: "image/jpg"
+  },
+  route: mary_route,
+  user: mary_route.user
 )
-mary_route.save
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047433/summer_kyusyu_r5g56r.jpg")
-
-angel_route.photos.attach(
-  io: file,
-  filename: "angel_route",
-  content_type: "image/jpg"
+Photo.create!(
+  image: {
+    io: file,
+    filename: "angel_route",
+    content_type: "image/jpg"
+  },
+  route: angel_route,
+  user: angel_route.user
 )
-angel_route.save
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/west_coast_hokkaido_b4pv70.jpg")
-
-vincenzo_route.photos.attach(
-  io: file,
-  filename: "vincenzo_route",
-  content_type: "image/jpg"
+Photo.create!(
+  image: {
+    io: file,
+    filename: "vincenzo_route",
+    content_type: "image/jpg"
+  },
+  route: vincenzo_route,
+  user: vincenzo_route.user
 )
-vincenzo_route.save
 
 file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/noborito_a9eebx.jpg")
-
-ami_route.photos.attach(
-  io: file,
-  filename: "ami_route ",
-  content_type: "image/jpg"
+Photo.create!(
+  image: {
+    io: file,
+    filename: "ami_route",
+    content_type: "image/jpg"
+  },
+  route: ami_route,
+  user: ami_route.user
 )
-ami_route.save
 
-puts "Routes photos attached"
+puts "Route photos attached successfully!"
 
 puts "Routes created"
+
+puts "Adding random favorites routes for users..."
+
+User.find_each do |user|
+  routes = Route.order('RANDOM()').limit(rand(1..3))
+  routes.each do |route|
+    user.favorite(route)
+  end
+end
+
+puts "Random favorites routes added successfully!"
+
 
 puts "Creating comments"
 

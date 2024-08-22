@@ -29,7 +29,7 @@
   }
 
   .recomended-bikes-selector:checked + label {
-    color: white !important;
+    color: $dark-red !important;
   }
 
   #route_recomended_bikes_sport_bike + label {
