@@ -162,9 +162,7 @@
         </div>
       </div>
       <!-- weather -->
-      <div class="weather">
-        <%= @weather["list"][0]["main"]["temp"] %>
-      </div>
+      <%= render 'components/weather_card', weather: @weather %>
       <% if @route.comments.any? %>
         <div>
           <h3>Route Comments:</h3>
