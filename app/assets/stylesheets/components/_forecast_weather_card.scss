@@ -1,6 +1,7 @@
-.weather-container {
+.forecast-weather-container {
+  display: flex;
   color: white;
-  .weather {
+  .forecast-weather {
     padding: 5px;
     background-color: #960808;
     border: 2px solid #000000;

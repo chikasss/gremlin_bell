@@ -162,13 +162,16 @@
         </div>
       </div>
       <!-- weather -->
-      <%= render 'components/weather_card', current_weather: @current_weather %>
-
+      <div>
+        <h3>Weather:</h3>
+        <%= render 'components/weather_card', current_weather: @current_weather %>
+        <%= render 'components/forecast_weather_card' , forecast: @forecast %>
+      </div>
       <% if @route.comments.any? %>
         <div>
           <h3>Route Comments:</h3>
           <%= render 'comments/comments_show_route' %>
-        </div>
+      </div>
       <% else %>
         <div data-controller="insert-route-comment">
           <div class="d-flex justify-content-center mt-4" data-action="click->insert-route-comment#insertRouteComment">
