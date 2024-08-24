@@ -150,8 +150,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_21_053521) do
     t.string "waypoints", default: [], array: true
     t.string "prefecture"
     t.string "road_condition"
-    t.text "recomended_bikes", default: [], array: true
     t.string "address"
+    t.text "recomended_bikes", default: [], array: true
     t.index ["user_id"], name: "index_routes_on_user_id"
   end
 

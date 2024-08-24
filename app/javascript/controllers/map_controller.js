@@ -156,7 +156,7 @@ export default class extends Controller {
       this.waypoints.splice(index, 1);
 
       this.updateWaypoints(); // Ensure map markers and route are updated
-      this.updateWaypointList(); // Update the lis
+      //this.updateWaypointList(); // Update the lis
     }
 
     updateWaypointList() {
