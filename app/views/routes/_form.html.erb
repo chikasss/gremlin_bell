@@ -3,6 +3,7 @@
     <%= f.input :title %>
     <%= f.input :description %>
     <%= f.input :prefecture, collection: Route::PREFECTURES, label: "Route prefecture" %>
+
     <div data-controller="address-autocomplete" data-address-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
       <%= f.input :address,
                   label: false,
@@ -14,10 +15,14 @@
                     class: "form-control"
                   } %>
     </div>
+
     <%= f.hidden_field :waypoints, id: 'waypoints_input',
-    data: { target: "map.waypoints" }, multiple: true %>
+    data: { target: "waypointsInput" }, multiple: true %>
+
     <%= f.label :waypoints, "Map", class: "mb-2" %>
     <%= render 'shared/map' %>
+
+
     <div class="mt-4">
       <%= f.input :videos_url, label: "Youtube Link" %>
     </div>
