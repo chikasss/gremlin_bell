@@ -1,5 +1,5 @@
-<div class="forecast-weather-container d-flex col-8 mb-4">
-  <div class="forecast-weather col-4 me-2">
+<div class="forecast-weather-container d-flex">
+  <div class="forecast-weather col-4 mb-4 me-2">
     <h6> <%= Date.tomorrow.strftime("%A") %> </h6>
     <div class="justify-content-center">
       <h3 class="text-center text-light pt-1 mb-0"><%= @forecast["list"].slice(5)["main"]["temp"].to_i %>°C</h3>
@@ -10,7 +10,7 @@
     </div>
     <%# <%= @forecast["list"][0]["main"]["temp"]  %>
   </div>
-  <div class="forecast-weather col-4 me-2">
+  <div class="forecast-weather col-4 mb-4 me-2">
     <h6><%= Date.tomorrow.tomorrow.strftime("%A") %></h6>
     <div class="justify-content-center">
       <h3 class="text-center text-light pt-1 mb-0"><%= @forecast["list"].slice(13)["main"]["temp"].to_i %>°C</h3>
@@ -20,4 +20,5 @@
       <h6 id="description"><%= @forecast["list"].slice(13)["weather"][0]["description"]  %></h6>
     </div>
     <%# <%= @forecast["list"][0]["main"]["temp"]  %>
+  </div>
 </div>
