@@ -163,7 +163,7 @@
                   </div>
                 </div>
                 <div class="my-4 review-form toggle-form" data-new-review-target="reviewForm">
-                  <h3 class="mb-3">Write a review:</h3>
+                  <h3 class="mb-3">Write the first review:</h3>
                   <%= simple_form_for [@route, @review] do |f| %>
                     <%= render "reviews/form", f: f %>
                     <div class="d-flex justify-content-center">
@@ -173,8 +173,36 @@
                 </div>
               </div>
             <% end %>
-            <div class="toggle-form review-box" data-show-reviews-target="showLastFiveReviews">
-              <%= render 'reviews/reviews_show_route' %>
+            <div class="toggle-form" data-show-reviews-target="showLastFiveReviews">
+              <div class="reviews-route-show-page mt-4">
+                <% if @reviews.present? %>
+                  <h3>Last reviews:</h3>
+                  <% @reviews.limit(3).each do |review| %>
+                    <div class="mt-4">
+                      <%= render 'components/review_card_show', review: review %>
+                    </div>
+                  <% end %>
+                <% end %>
+                <div data-controller="new-review" class="mb-0 pb-0">
+                  <div class="d-flex justify-content-between mt-4">
+                    <div data-action="click->new-review#newReview">
+                      <button class="btn-light-gray " data-new-review-target="writeReviewBtn">Write a Route Review</button>
+                    </div>
+                    <div>
+                      <%= link_to 'see all', route_reviews_path(@route), class: 'btn-yellow-sm' %>
+                    </div>
+                  </div>
+                  <div class="mt-4 toggle-form" data-new-review-target="reviewForm">
+                    <h3>Write a review:</h3>
+                    <%= simple_form_for [@route, @review] do |f| %>
+                      <%= render "reviews/form", f: f %>
+                      <div class="d-flex justify-content-center">
+                        <%= f.button :submit, "Submit Review", class: "btn-yellow" %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
               <div class="border-bottom mx-4 my-4"></div>
             </div>
           </div>

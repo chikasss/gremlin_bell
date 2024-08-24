@@ -61,29 +61,9 @@
     }
   }
 
-  .review-box {
-
-    .fa-star {
-      font-size: 1.1em;
-      color: $yellow;
-      }
-
-    .review-photo-sm {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 6px;
-      margin-right: 5px;
-    }
-  }
-
   @media (max-width: 768px) {
     h3 {
       font-size: 1.2em;
-    }
-
-    .bike-p p {
-      font-size: 0.8rem;
     }
 
     h5 {
@@ -200,9 +180,5 @@
     background: none;
     border: none;
     color: $gray-icon;
-  }
-
-  .btn-yellow {
-    font-size: 1rem;
   }
 }
