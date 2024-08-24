@@ -40,45 +40,48 @@ export default class extends Controller {
 
     this.waypoints = this.initializeWaypoints();
     //this.updateWaypoints();
-    let isLongPress = false;
+    //let isLongPress = false;
 
     this.map.on('click', (event) => {
-      if (!isLongPress) {
         const coords = [event.lngLat.lng, event.lngLat.lat];
         this.waypoints.push(coords);
         this.updateWaypoints();
-      }
-      isLongPress = false;
+      // if (!isLongPress) {
+      //   const coords = [event.lngLat.lng, event.lngLat.lat];
+      //   this.waypoints.push(coords);
+      //   this.updateWaypoints();
+      // }
+      //isLongPress = false;
     });
 
-    let touchTimer, mouseTimer;
+    // let touchTimer, mouseTimer;
 
-    this.map.on('touchstart', (event) => {
-      touchTimer = setTimeout(() => {
-        isLongPress = true;
-        this.handleLandmark(event);
-      }, 1500);
-    });
+    // this.map.on('touchstart', (event) => {
+    //   touchTimer = setTimeout(() => {
+    //     isLongPress = true;
+    //     this.handleLandmark(event);
+    //   }, 1500);
+    // });
 
-    this.map.on('touchend', () => {
-      clearTimeout(touchTimer);
-    });
+    // this.map.on('touchend', () => {
+    //   clearTimeout(touchTimer);
+    // });
 
-    this.map.getCanvas().addEventListener('mousedown', (event) => {
-      mouseTimer = setTimeout(() => {
-        isLongPress = true;
-        //const mapboxPoint = this.map.unproject([event.clientX, event.clientY]);
-        this.handleLandmark(event); //
-      }, 1500);
-    });
+    // this.map.getCanvas().addEventListener('mousedown', (event) => {
+    //   mouseTimer = setTimeout(() => {
+    //     isLongPress = true;
+    //     //const mapboxPoint = this.map.unproject([event.clientX, event.clientY]);
+    //     this.handleLandmark(event); //
+    //   }, 1500);
+    // });
 
-    this.map.getCanvas().addEventListener('mouseup', () => {
-      clearTimeout(mouseTimer);
-    });
+    // this.map.getCanvas().addEventListener('mouseup', () => {
+    //   clearTimeout(mouseTimer);
+    // });
 
-    this.map.getCanvas().addEventListener('mouseleave', () => {
-      clearTimeout(mouseTimer);
-    });
+    // this.map.getCanvas().addEventListener('mouseleave', () => {
+    //   clearTimeout(mouseTimer);
+    // });
 
     this.updateWaypointList();
   }
@@ -177,33 +180,33 @@ export default class extends Controller {
     }
 
 
-    handleLandmark(event) {
-      console.log("adding landmark")
-      const coords = [event.lngLat.lng, event.lngLat.lat];
-      this.addMarker(coords, 'landmark', '#000', true);
+    // handleLandmark(event) {
+    //   console.log("adding landmark")
+    //   const coords = [event.lngLat.lng, event.lngLat.lat];
+    //   this.addMarker(coords, 'landmark', '#000', true);
 
-        const formData = new FormData();
-        formData.append('landmark[latitude]', coords[1]);
-        formData.append('landmark[longitude]', coords[0]);
-        formData.append('landmark[name]', 'New Landmark');
+    //     const formData = new FormData();
+    //     formData.append('landmark[latitude]', coords[1]);
+    //     formData.append('landmark[longitude]', coords[0]);
+    //     formData.append('landmark[name]', 'New Landmark');
 
-        const csrfToken = document.querySelector("[name='csrf-token']").content;
+    //     const csrfToken = document.querySelector("[name='csrf-token']").content;
 
-        const options = {
-          method: 'POST',
-          headers: {
-            "Accept": "text/plain",
-            "X-CSRF-Token": csrfToken,
-          },
-          body: formData,
-        };
+    //     const options = {
+    //       method: 'POST',
+    //       headers: {
+    //         "Accept": "text/plain",
+    //         "X-CSRF-Token": csrfToken,
+    //       },
+    //       body: formData,
+    //     };
 
-        fetch(`/routes/${this.routeIdTarget}/landmarks`, options)
-          .then(response => response.text())
-          .then((data) => {
-            this.landmarksTarget.insertAdjacentHTML('beforeend', data);
-          });
-    }
+    //     fetch(`/routes/${this.routeIdTarget}/landmarks`, options)
+    //       .then(response => response.text())
+    //       .then((data) => {
+    //         this.landmarksTarget.insertAdjacentHTML('beforeend', data);
+    //       });
+    // }
 
   getRoute(waypoints) {
     const waypointsString = waypoints.map(p => p.join(',')).join(';');
