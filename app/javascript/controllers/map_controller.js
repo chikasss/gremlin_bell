@@ -100,6 +100,11 @@ export default class extends Controller {
         }
       });
 
+      // remove all the existing marker, before re-rendering them
+      document.querySelectorAll(".custom-marker").forEach(marker => marker.remove())
+      console.log(document.querySelectorAll(".custom-marker"));
+
+      // re-rendering markers
       this.waypoints.forEach((point, index) => {
         this.addMarker(point, `waypoint-${index}`,
           index === 0 ? '#3887be' : '#f30', true);
@@ -124,15 +129,16 @@ export default class extends Controller {
 
     addMarker(coords, id, color, useCustomMarker = false) {
       console.log('Adding marker at', coords);
-      const markerElement = useCustomMarker ? this.createCustomMarkerElement() : null;
+      const markerElement = useCustomMarker ? this.createCustomMarkerElement(id) : null;
       const marker = new mapboxgl.Marker(markerElement || { color })
         .setLngLat(coords)
         .addTo(this.map);
       this.markers.set(id, marker);
     }
 
-    createCustomMarkerElement() {
+    createCustomMarkerElement(id) {
       const el = document.createElement('div');
+      el.id = `marker-${id}`
       el.className = 'custom-marker';
       el.style.backgroundImage = `url(${this.data.get("logoUrl")})`; // URL to your custom icon
       el.style.width = '42px'; // Size of the icon
@@ -146,13 +152,16 @@ export default class extends Controller {
       const waypointId = `waypoint-${index}`;
 
       console.log("Attempting to remove waypoint with ID:", waypointId);
-
+      console.log(this.markers);
       if (this.markers.has(waypointId)) {
         const marker = this.markers.get(waypointId);
+        console.log(`marker-${waypointId}`, marker, this.markers);
         marker.remove();  // This removes the marker from the map
         this.markers.delete(waypointId);  // This removes the marker from the tracking map
-      }
+        console.log(marker, this.markers);
 
+      }
+      console.log(this.waypoints);
       this.waypoints.splice(index, 1);
 
       this.updateWaypoints(); // Ensure map markers and route are updated
