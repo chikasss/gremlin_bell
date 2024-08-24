@@ -14,20 +14,6 @@ Route.destroy_all
 puts "Deleting Users"
 User.destroy_all
 
-puts 'Creating admin user...'
-
-admin = User.create!(
-  email: 'admin@mail.com',
-  password: 'admin123',
-  first_name: 'Admin',
-  last_name: 'User',
-  about: 'Administrator of the system',
-  prefecture: 'Tokyo',
-  admin: true
-)
-
-puts "Admin created"
-
 puts "Creating Users"
 
 bill = User.create!(
@@ -122,13 +108,6 @@ puts "Users created"
 
 puts "Creating bikes"
 
-admin_bikes = Bike.create!(
-  name: 'ADMIN',
-  year: 2024,
-  brand: 'ADMIN',
-  user: admin
-)
-
 bill_bikes = Bike.create!(
   name: 'Z900',
   year: 2022,
@@ -220,7 +199,7 @@ users = User.all
 users.each do |user|
   number_of_follows = rand(3..6)
   users_to_follow = users.where.not(id: user.id).sample(number_of_follows)
-  
+
   users_to_follow.each do |followed|
     user.following << followed unless user.following?(followed)
   end

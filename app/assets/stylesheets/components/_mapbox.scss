@@ -1,0 +1,25 @@
+.mapboxgl-ctrl-geocoder {
+  width: 250px; // Adjust the width to make it thinner
+  input {
+    height: 38px; // Adjust the height if needed
+    font-size: 15px; // Adjust the font size if needed
+  }
+}
+
+.mapboxgl-ctrl-top-left {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjusts the space between the controls */
+}
+
+.custom-geocoder {
+  min-width: 200px; /* Adjust width as necessary */
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  width: 23px;
+  height: 23px;
+}

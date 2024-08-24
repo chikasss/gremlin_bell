@@ -6,10 +6,17 @@
   <div class="bg-white">
     <div class="container">
       <h4 class="text-center">Register a new bike</h4>
-      <%= simple_form_for [@user, @bike] do |f| %>
+      <%= simple_form_for [@user, @bike], html: { multipart: true } do |f| %>
         <%= f.input :year, collection: @year, required: true %>
         <%= f.input :brand, collection: @brand.sort, required: true %>
         <%= f.input :name, label: 'Name', required: true %>
+        <div class="col-12 mb-2">
+          <%= f.label :photos, "Upload Photos" %>
+          <%= f.file_field :photos, multiple: true, accept: 'image/*', class: 'form-control' %>
+        </div>
+       <div class="form-text">
+          <strong>Note:</strong> Maximum file size is 10MB per photo.
+        </div>
         <div class="d-flex justify-content-center mt-4">
           <%= f.button :submit, 'Create Bike', class: 'btn-red' %>
         </div>
