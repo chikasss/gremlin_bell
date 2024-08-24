@@ -1,0 +1,25 @@
+.weather-container {
+  color: white;
+  .weather {
+    padding: 5px;
+    background-color: #960808;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    color: white;
+
+    .card-body {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  }
+  h6 {
+    color: white;
+    margin-bottom: 0px;
+  }
+}
