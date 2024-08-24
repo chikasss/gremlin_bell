@@ -848,8 +848,8 @@ review_for_hideo_route = Review.create!(
 
 review_for_hideo_route2 = Review.create!(
   date: DateTime.new(2024,8,15,17),
-  title: "Calm ride with minimal traffic lights. There was some construction with some new signage going up, but it didn't create any traffic",
-  description: "There are tunnels! VROOM!",
+  title: "Calm ride with minimal traffic lights.",
+  description: "There are tunnels! VROOM! There was some construction with some new signage going up, but it didn't create any traffic",
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",

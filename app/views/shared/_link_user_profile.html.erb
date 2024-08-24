@@ -10,7 +10,12 @@
       <% if user == current_user %>
         <h2 class="mb-0">Hello <strong><%= user.first_name %></strong>!</h2>
       <% else %>
-        <h2 class="mb-0"><strong><%= user.first_name %> <%= user.last_name %></strong></h2>
+        <div class="d-flex mb-2 align-items-center">
+          <h2 class="mb-0"><strong><%= user.first_name %> <%= user.last_name %></strong></h2>
+          <%= link_to new_chatroom_path(recipient_id: @user.id) do %>
+            <i class="fa-solid fa-comment-dots ms-2"></i>
+          <% end %>
+        </div>
       <% end %>
       <div class="d-flex">
         <p class="me-2 mb-0">

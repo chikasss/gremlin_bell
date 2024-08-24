@@ -11,6 +11,10 @@ class ChatroomPolicy < ApplicationPolicy
     create?
   end
 
+  def index?
+    true
+  end
+
   class Scope < Scope
     def resolve
       if user.admin?

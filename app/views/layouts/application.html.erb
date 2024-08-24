@@ -11,12 +11,16 @@
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
     <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
      rel="stylesheet"/>
-
   </head>
   <body>
     <%= render "shared/flashes" %>
     <div class="content-body">
       <%= yield %>
+      <div class="float-button">
+        <%= link_to chatrooms_path, class: "btn-float" do %>
+          <i class="fa-solid fa-comment-dots"></i>
+        <% end %>
+      </div>
     </div>
     <%= render "shared/navbar_footer" %>
   </body>

@@ -6,9 +6,6 @@
     </div>
     <div class="bg-white">
       <div class="container user-profile">
-        <% if current_user != @user %>
-          <%= link_to 'Send Message', new_chatroom_path(recipient_id: @user.id), class: "btn btn-primary" %>
-        <% end %>
         <div class="social-links">
           <% if @user.social_links.present? %>
             <% @user.social_links.each do |platform, url| %>
