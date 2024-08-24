@@ -1,4 +1,5 @@
 class RoutesController < ApplicationController
+  require_relative '../services/weather_service'
   before_action :authenticate_user!
 
   RIDE_TYPE = Route::RIDE_TYPE
@@ -26,12 +27,14 @@ class RoutesController < ApplicationController
 
   def new
     @route = Route.new
+    @waypoints = []
     authorize @route
   end
 
   def create
     @route = Route.new(route_params)
-    # @route.waypoints = JSON.parse(route_params[:waypoints][0])
+    #@route.waypoints = JSON.parse(route_params[:waypoints][0])
+
     if route_params[:waypoints].present? && route_params[:waypoints][0].present?
       @route.waypoints = JSON.parse(route_params[:waypoints][0])
     else
@@ -69,7 +72,11 @@ class RoutesController < ApplicationController
     # @comments_last_3 = @route.comments.includes(:user).order(created_at: :desc).limit(3)
     @comment = @route.comments.new
     @tail = YouTubeRails.extract_video_id(@route.videos_url)
-    ##@waypoints_json = @route.waypoints.to_json
+    @current_weather = WeatherService.new(@route.waypoints[0][1], @route.waypoints[0][0], "metric").get_current_weather
+    @forecast = WeatherService.new(@route.waypoints[0][1], @route.waypoints[0][0], "metric").get_forecast
+    # @waypoints_json = @route.waypoints.to_json
+    # @current_weather = open_weather_api.current lat: @route.waypoints[0][1].to_f, lon: @route.waypoints[0][0].to_f
+    # @forecast = open_weather_api.forecast lat: @route.waypoints[0][1].to_f, lon: @route.waypoints[0][0].to_f, cnt: 3
   end
 
   def save

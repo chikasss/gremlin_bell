@@ -37,7 +37,7 @@ export default class extends Controller {
    createCustomMarkerElement() {
     const el = document.createElement('div');
     el.className = 'custom-marker';
-    el.style.backgroundImage =  `url(${this.data.get("pin_route")})`; // URL to your custom icon
+    el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`; // URL to your custom icon
     el.style.width = '32px'; // Size of the icon
     el.style.height = '32px';
     el.style.backgroundSize = '100%';
@@ -82,7 +82,7 @@ export default class extends Controller {
             'line-cap': 'round'
           },
           paint: {
-            'line-color': '#6699ff',
+            'line-color': '#ff5e5e',
             'line-width': 4
           }
         });

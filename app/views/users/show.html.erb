@@ -29,7 +29,7 @@
           <% end %>
         </div>
         <% if @user.about.present? %>
-          <h3><strong>About:</strong></h3>
+          <h3><strong>About </strong><%= @user.first_name%>:</h3>
           <p class="p-2"><%= @user.about %></p>
         <% end %>
         <div class="d-flex justify-content-between mb-2">
