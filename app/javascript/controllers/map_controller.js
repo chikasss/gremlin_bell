@@ -7,6 +7,7 @@ export default class extends Controller {
   static targets = ["waypointsInput", "mapContainer"]
 
   connect() {
+    this.markers = new Map();
     const mapboxAccessToken = this.element.dataset.mapboxApiKey;
     mapboxgl.accessToken = mapboxAccessToken;
 
@@ -24,17 +25,71 @@ export default class extends Controller {
         },
         trackUserLocation: true,
         showUserHeading: false
-      })
+      }),
+      'top-left'
     );
 
-    this.map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken, mapboxgl: mapboxgl }));
+    this.map.addControl(
+      new MapboxGeocoder({
+      accessToken: mapboxgl.accessToken,
+      mapboxgl: mapboxgl,
+      placeholder: 'Search for a place',
+      className: 'custom-geocoder'
+    }),
+  );
 
-    this.waypoints = [];
+    this.waypoints = this.initializeWaypoints();
+    //this.updateWaypoints();
+    let isLongPress = false;
 
     this.map.on('click', (event) => {
-      const coords = [event.lngLat.lng, event.lngLat.lat];
-      this.waypoints.push(coords);
+      if (!isLongPress) {
+        const coords = [event.lngLat.lng, event.lngLat.lat];
+        this.waypoints.push(coords);
+        this.updateWaypoints();
+      }
+      isLongPress = false;
+    });
 
+    let touchTimer, mouseTimer;
+
+    this.map.on('touchstart', (event) => {
+      touchTimer = setTimeout(() => {
+        isLongPress = true;
+        this.handleLandmark(event);
+      }, 1500);
+    });
+
+    this.map.on('touchend', () => {
+      clearTimeout(touchTimer);
+    });
+
+    this.map.getCanvas().addEventListener('mousedown', (event) => {
+      mouseTimer = setTimeout(() => {
+        isLongPress = true;
+        //const mapboxPoint = this.map.unproject([event.clientX, event.clientY]);
+        this.handleLandmark(event); //
+      }, 1500);
+    });
+
+    this.map.getCanvas().addEventListener('mouseup', () => {
+      clearTimeout(mouseTimer);
+    });
+
+    this.map.getCanvas().addEventListener('mouseleave', () => {
+      clearTimeout(mouseTimer);
+    });
+
+    this.updateWaypointList();
+  }
+
+    initializeWaypoints() {
+      const waypointsInput = document.querySelector('#waypoints_input');
+      return waypointsInput ? JSON.parse(waypointsInput.value || '[]') : [];
+    }
+
+
+    updateWaypoints(){
       ['start', 'end'].forEach(id => {
         if (this.map.getLayer(id)) {
           this.map.removeLayer(id);
@@ -43,43 +98,112 @@ export default class extends Controller {
       });
 
       this.waypoints.forEach((point, index) => {
-        this.addMarker(point, `waypoint-${index}`, index === 0 ? '#3887be' : '#f30', true);
+        this.addMarker(point, `waypoint-${index}`,
+          index === 0 ? '#3887be' : '#f30', true);
       });
 
       if (this.waypoints.length > 1) {
         this.getRoute(this.waypoints);
+      } else {
+        if (this.map.getSource('route')) {
+          this.map.removeLayer('route');
+          this.map.removeSource('route');
+        }
       }
 
-      const waypointsInput = this.waypointsInputTarget;
+      const waypointsInput = document.querySelector('#waypoints_input');
+      if (waypointsInput) {
       waypointsInput.value = JSON.stringify(this.waypoints);
-    });
+      }
 
-    this.map.on('contextmenu', (event) => {
-      this.addMarker([event.lngLat.lng, event.lngLat.lat], 'landmark', '#000', true);
+      this.updateWaypointList();
+    }
 
-      const formData = new FormData();
-      formData.append('landmark[latitude]', event.lngLat.lat);
-      formData.append('landmark[longitude]', event.lngLat.lng);
-      formData.append('landmark[name]', 'New Landmark');
+    addMarker(coords, id, color, useCustomMarker = false) {
+      console.log('Adding marker at', coords);
+      const markerElement = useCustomMarker ? this.createCustomMarkerElement() : null;
+      const marker = new mapboxgl.Marker(markerElement || { color })
+        .setLngLat(coords)
+        .addTo(this.map);
+      this.markers.set(id, marker);
+    }
 
-      const csrfToken = document.querySelector("[name='csrf-token']").content;
+    createCustomMarkerElement() {
+      const el = document.createElement('div');
+      el.className = 'custom-marker';
+      el.style.backgroundImage = `url(${this.data.get("logoUrl")})`; // URL to your custom icon
+      el.style.width = '42px'; // Size of the icon
+      el.style.height = '42px';
+      el.style.backgroundSize = '100%';
+      return el;
+    }
 
-      const options = {
-        method: 'POST',
-        headers: {
-          "Accept": "text/plain",
-          "X-CSRF-Token": csrfToken,
-        },
-        body: formData,
-      };
+    removeWaypoint(event){
+      const index = parseInt(event.currentTarget.dataset.index);
+      const waypointId = `waypoint-${index}`;
 
-      fetch(`/routes/${this.routeIdTarget}/landmarks`, options)
-        .then(response => response.text())
-        .then((data) => {
-          this.landmarksTarget.insertAdjacentHTML('beforeend', data);
-        });
-    });
-  }
+      console.log("Attempting to remove waypoint with ID:", waypointId);
+
+      if (this.markers.has(waypointId)) {
+        const marker = this.markers.get(waypointId);
+        marker.remove();  // This removes the marker from the map
+        this.markers.delete(waypointId);  // This removes the marker from the tracking map
+      }
+
+      this.waypoints.splice(index, 1);
+
+      this.updateWaypoints(); // Ensure map markers and route are updated
+      this.updateWaypointList(); // Update the lis
+    }
+
+    updateWaypointList() {
+      console.log("updating")
+      const waypointsList = document.querySelector('#waypoints-list');
+      if (!waypointsList) return;
+
+      waypointsList.innerHTML = '';
+
+      this.waypoints.forEach((coords, index) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `Waypoint ${index + 1} - Lat: ${coords[1]}, Lng: ${coords[0]} `;
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.setAttribute('type', 'button');
+        removeButton.dataset.action = 'click->map#removeWaypoint';
+        removeButton.dataset.index = index;
+        listItem.appendChild(removeButton);
+        waypointsList.appendChild(listItem);
+      });
+    }
+
+
+    handleLandmark(event) {
+      console.log("adding landmark")
+      const coords = [event.lngLat.lng, event.lngLat.lat];
+      this.addMarker(coords, 'landmark', '#000', true);
+
+        const formData = new FormData();
+        formData.append('landmark[latitude]', coords[1]);
+        formData.append('landmark[longitude]', coords[0]);
+        formData.append('landmark[name]', 'New Landmark');
+
+        const csrfToken = document.querySelector("[name='csrf-token']").content;
+
+        const options = {
+          method: 'POST',
+          headers: {
+            "Accept": "text/plain",
+            "X-CSRF-Token": csrfToken,
+          },
+          body: formData,
+        };
+
+        fetch(`/routes/${this.routeIdTarget}/landmarks`, options)
+          .then(response => response.text())
+          .then((data) => {
+            this.landmarksTarget.insertAdjacentHTML('beforeend', data);
+          });
+    }
 
   getRoute(waypoints) {
     const waypointsString = waypoints.map(p => p.join(',')).join(';');
@@ -115,36 +239,11 @@ export default class extends Controller {
             'line-cap': 'round'
           },
           paint: {
-            'line-color': '#6699ff',
+            'line-color': '#ff5e5e',
             'line-width': 4
           }
         });
       }
     });
-  }
-
-  addMarker(coords, id, color, useCustomMarker = false) {
-    console.log('Adding marker at', coords);
-    const markerElement = useCustomMarker ? this.createCustomMarkerElement() : null;
-    new mapboxgl.Marker(markerElement || { color })
-      .setLngLat(coords)
-      .addTo(this.map);
-  }
-
-  createCustomMarkerElement() {
-    const el = document.createElement('div');
-    el.className = 'custom-marker';
-    el.style.backgroundImage = `url(${this.data.get("logoUrl")})`; // URL to your custom icon
-    el.style.width = '42px'; // Size of the icon
-    el.style.height = '42px';
-    el.style.backgroundSize = '100%';
-    return el;
-  }
-
-  updateMap(coordinates) {
-    this.map.flyTo({ center: coordinates, zoom: 12 });
-    new mapboxgl.Marker()
-      .setLngLat(coordinates)
-      .addTo(this.map);
   }
 }
