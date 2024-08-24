@@ -8,18 +8,22 @@ class RoutesController < ApplicationController
 
   def index
     @routes = policy_scope(Route).order(:created_at)
+    @popular_routes = Route.joins(:reviews).select('routes.*, AVG(reviews.rating) as average_rating').group('routes.id').order('average_rating DESC').limit(5)
     @region_prefectures = PREFECTURES_HASH
 
     if params[:query].present?
       if params[:query][:region].present?
         @routes = @routes.where(prefecture: @region_prefectures[params[:query][:region].to_sym])
+        @top_five = @popular_routes.where(prefecture: @region_prefectures[params[:query][:region].to_sym])
       end
       if params[:query][:prefecture].present?
         @routes = @routes.where(prefecture: params[:query][:prefecture])
         @prefecture_routes = @routes.where(prefecture: params[:query][:prefecture])
+        @top_five = @popular_routes.where(prefecture: params[:query][:prefecture])
       end
       if params[:query][:ride_type].present?
         @routes = @routes.where("'#{params[:query][:ride_type]}' = ANY (ride_type)")
+        @top_five = @popular_routes.where("'#{params[:query][:ride_type]}' = ANY (ride_type)")
       end
     end
   end
