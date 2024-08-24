@@ -33,6 +33,7 @@ export default class extends Controller {
       new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl,
+      countries: 'jp',
       placeholder: 'Search for a place',
       className: 'custom-geocoder'
     }),

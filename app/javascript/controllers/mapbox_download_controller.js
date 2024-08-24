@@ -33,9 +33,9 @@ export default class extends Controller {
       console.log(content)
     });
   }
-  Object.defineProperty(window, 'devicePixelRatio', {
-    get: function() {return dpi / 96 }
-  })
+  // Object.defineProperty(window, 'devicePixelRatio', {
+  //   get: function() {return dpi / 96 }
+  // })
 
 
 }
