@@ -410,7 +410,7 @@ bill_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Paved",
   user: bill,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 bill_route2 = Route.create!(
@@ -422,7 +422,7 @@ bill_route2 = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Paved",
   user: bill,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 hideo_route = Route.create!(
@@ -434,7 +434,7 @@ hideo_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Construction",
   user: hideo,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 mika_route = Route.create!(
@@ -446,7 +446,7 @@ mika_route = Route.create!(
   prefecture: "Fukuoka",
   road_condition: "Paved",
   user: mika,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 eric_route = Route.create!(
@@ -458,7 +458,7 @@ eric_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Dirt",
   user: eric,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 mary_route = Route.create!(
@@ -470,7 +470,7 @@ mary_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Poor",
   user: mary,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 angel_route = Route.create!(
@@ -482,7 +482,7 @@ angel_route = Route.create!(
   prefecture: "Oita",
   road_condition: "Paved",
   user: angel,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 vincenzo_route = Route.create!(
@@ -494,7 +494,7 @@ vincenzo_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Poor",
   user: vincenzo,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 ami_route = Route.create!(
@@ -506,7 +506,7 @@ ami_route = Route.create!(
   prefecture: "Kanagawa",
   road_condition: "Gravel",
   user: ami,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 puts "Attaching photos to Routes"
@@ -827,8 +827,8 @@ review_for_hideo_route = Review.create!(
 
 review_for_hideo_route2 = Review.create!(
   date: DateTime.new(2024,8,15,17),
-  title: "Calm ride with minimal traffic lights. There was some construction with some new signage going up, but it didn't create any traffic",
-  description: "There are tunnels! VROOM!",
+  title: "Calm ride with minimal traffic lights.",
+  description: "There are tunnels! VROOM! There was some construction with some new signage going up, but it didn't create any traffic",
   rating: 5,
   videos_url: "",
   used_bike: "2004 Yamaha V-MAX",

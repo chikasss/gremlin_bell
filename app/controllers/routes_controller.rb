@@ -77,6 +77,9 @@ class RoutesController < ApplicationController
     @comment = @route.comments.new
     @tail = YouTubeRails.extract_video_id(@route.videos_url)
     @current_weather = WeatherService.new(@route.waypoints[0][1], @route.waypoints[0][0], "metric").get_current_weather
+    unless @current_weather
+      @current_weather = { "main" => { "temp" => nil }, "weather" => [{ "icon" => nil }] }
+    end
     @forecast = WeatherService.new(@route.waypoints[0][1], @route.waypoints[0][0], "metric").get_forecast
     # @waypoints_json = @route.waypoints.to_json
     # @current_weather = open_weather_api.current lat: @route.waypoints[0][1].to_f, lon: @route.waypoints[0][0].to_f

@@ -1,6 +1,6 @@
 <div class="weather-container d-flex mb-4 me-3">
   <div class="weather col-4 mb-4 me-2 py-2">
-    <h6>Currently:</h6>
+    <h6 class="ms-2">Currently:</h6>
     <div class="justify-content-center">
       <h3 class="text-center text-light pt-1 mb-0"><%= @current_weather["main"]["temp"].to_i %>°C</h3>
     </div>
@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="weather col-4 mb-4 me-2 py-2">
-    <h6> <%= Date.tomorrow.strftime("%A") %> </h6>
+    <h6 class="ms-2"> <%= Date.tomorrow.strftime("%A") %> </h6>
     <div class="justify-content-center">
       <h3 class="text-center text-light pt-1 mb-0"><%= @forecast["list"].slice(5)["main"]["temp"].to_i %>°C</h3>
     </div>
@@ -20,7 +20,7 @@
     </div>
   </div>
   <div class="weather col-4 mb-4 me-2 py-2">
-    <h6><%= Date.tomorrow.tomorrow.strftime("%A") %></h6>
+    <h6 class="ms-2"><%= Date.tomorrow.tomorrow.strftime("%A") %></h6>
     <div class="justify-content-center">
       <h3 class="text-center text-light pt-1 mb-0"><%= @forecast["list"].slice(13)["main"]["temp"].to_i %>°C</h3>
     </div>

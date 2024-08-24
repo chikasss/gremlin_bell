@@ -4,7 +4,7 @@ class ReviewPolicy < ApplicationPolicy
   end
 
   def show?
-    user.present?
+    true
   end
 
   def edit?
@@ -19,4 +19,13 @@ class ReviewPolicy < ApplicationPolicy
     user.present? && (record.user == user || user.admin?)
   end
 
+  def index?
+    true
+  end
+
+  class Scope < Scope
+    def resolve
+      scope.all
+    end
+  end
 end

@@ -2,8 +2,7 @@
   color: white;
   .weather {
     padding: 5px;
-    background-color: #960808;
-    border: 2px solid #000000;
+    background-color: $dark-red;
     border-radius: 5px;
     color: white;
 
@@ -15,11 +14,20 @@
       img {
         width: 100px;
         height: 100px;
+        @media (max-width: 768px) {
+          width: 80px;
+          height: 80px;
+        }
       }
     }
   }
   h6 {
     color: white;
     margin-bottom: 0px;
+    font-weight: 300;
+  }
+
+  h3 {
+    font-weight: 700;
   }
 }

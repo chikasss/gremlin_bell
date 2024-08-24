@@ -1,0 +1,20 @@
+<div class="bg-red">
+  <div class="container">
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
+    <%= render 'shared/link_user_profile', user: (@user || current_user) %>
+  </div>
+  <div class="bg-white">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-11 col-md-8 review-show-details">
+          <h4 class="text-center mb-4">All reviews for route <%= link_to route_path(@route) do %><strong><%= @route.title %></strong><% end %></h4>
+          <% @reviews.each do |review| %>
+            <div class="mb-2">
+              <%= render 'components/review_card_show', review: review %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
