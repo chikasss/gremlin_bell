@@ -58,6 +58,7 @@ class ChatroomsController < ApplicationController
     @messages = @chatroom.messages.includes(:user)
     @message = @chatroom.messages.new(user: current_user, description: params[:description])
     authorize @chatroom
+    @messages.unread_by_user(current_user).update_all(read_at: Time.current)
   end
   
   

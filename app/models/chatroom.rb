@@ -7,6 +7,10 @@ class Chatroom < ApplicationRecord
   validates :slug, uniqueness: true
   validates :name, presence: true
 
+  def unread_messages_count(user)
+    messages.unread_by_user(user).count
+  end
+
   private
 
   def generate_slug

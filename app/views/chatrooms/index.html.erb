@@ -1,11 +1,39 @@
-<div class="container">
-  <h1>Chatrooms</h1>
-  <%= link_to 'New Chatroom', new_chatroom_path, class: "btn btn-primary" %>
-  <ul>
-    <% @chatrooms.each do |chatroom| %>
-      <li>
-        <%= link_to chatroom.name, chatroom_path(chatroom) %>
-      </li>
-    <% end %>
-  </ul>
+<div class="bg-red">
+  <div class="container">
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
+  </div>
+  <div class="bg-white chat-index">
+    <div class="container">
+      <h3>Messages</h3>
+      <div class="mx-4 border-bottom pt-2 mb-4"></div>
+      <% @chatrooms.each do |chat| %>
+        <%= link_to chatroom_path(chat) do %>
+          <div class="d-flex mb-4 chat">
+            <div class="">
+              <% if chat.recipient.avatar.present? %>
+                <%= image_tag chat.recipient.avatar, class: "avatar-large" %>
+              <% else %>
+                <%= image_tag 'user-photo.png', class: "avatar-large" %>
+              <% end %>
+            </div>
+            <div class="ms-3 w-100 messages">
+              <h5><%= chat.recipient.first_name %></h5>
+              <div class="d-flex justify-content-between">
+                <p class="mb-0"><%= chat.messages.last.description %></p>
+                <small class="mb-0">
+                  <%= chat.messages.last.created_at.strftime("%b %d") %>
+                </small>
+              </div>
+              <% unread_count = chat.unread_messages_count(current_user) %>
+              <% if unread_count > 0 %>
+                <span class="unread-count">
+                  <%= unread_count > 99 ? '99+' : unread_count %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -196,12 +196,22 @@
   justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-decoration: none;
+
+  &:hover {
+    background-color: rgba(250,250,250,0.9);
+  }
+
+  i {
+    font-size: 24px;
+  }
 }
 
-.btn-float:hover {
-  background-color: #0056b3;
-}
-
-.btn-float i {
-  font-size: 24px;
+.btn-send {
+  background: $dark-red;
+  border: none;
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: $white;
 }
