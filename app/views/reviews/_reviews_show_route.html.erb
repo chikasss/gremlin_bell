@@ -16,7 +16,6 @@
             <%= link_to 'Read', route_review_path(review), class: "btn-yellow-sm" %>
           </div>
         </div>
-        <p><%= review.description %></p>
         <div class="d-flex my-2 bike-p">
           <div class="me-2">
             <% if review.bike.present? %>
@@ -73,7 +72,7 @@
     <div class="mt-4 d-flex justify-content-center" data-action="click->new-review#newReview">
       <button class="btn-light-gray " data-new-review-target="writeReviewBtn">Write a Route Review</button>
     </div>
-    <div class="my-4 review-form" data-new-review-target="reviewForm">
+    <div class="my-4 toggle-form" data-new-review-target="reviewForm">
       <h3>Write a review:</h3>
       <%= simple_form_for [@route, @review] do |f| %>
         <%= render "reviews/form", f: f %>

@@ -1,9 +1,10 @@
 <div class="comments-routes-show">
   <div data-controller="insert-route-comment">
-    <div class="d-flex justify-content-center" data-action="click->insert-route-comment#insertRouteComment">
-      <button class="btn-light-gray" data-insert-route-comment-target="insertCommentBtn">Insert a Route Comment</button>
+    <div class="d-flex justify-content-between align-items-center" data-action="click->insert-route-comment#insertRouteComment">
+      <h3>Route Comments:</h3>
+      <button class="" data-insert-route-comment-target="insertCommentBtn"><i class="fa-solid fa-comment"></i></button>
     </div>
-    <div class="my-2 comment-form" data-insert-route-comment-target="commentForm">
+    <div class="my-2 toggle-form" data-insert-route-comment-target="commentForm">
       <%= render 'comments/form' %>
     </div>
   </div>

@@ -5,6 +5,10 @@
     margin-bottom: 0;
     padding-bottom: 0;
   }
+
+  h3 {
+    font-size: 1.2rem;
+  }
   i {
     font-size: 1.5em;
   }
@@ -25,6 +29,7 @@
   .road-condition-show {
     p {
       color: $gray-hover;
+      font-size: 0.8rem;
 
       strong {
         color: $dark-red;
@@ -34,12 +39,14 @@
 
     i {
       color: $dark-red;
+      font-size: 1rem;
     }
   }
 
   .route-description {
     i {
       color: $light-gray-icon;
+      font-size: 1rem;
     }
   }
 
@@ -52,42 +59,6 @@
       font-weight: 600;
       font-size: 1.3rem;
     }
-  }
-
-  .review-box{
-    transition: opacity 1.3s ease, max-height 1.3s ease;
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-  }
-
-  .review-box.visible {
-      opacity: 1;
-      max-height: fit-content;
-  }
-
-  .review-form{
-    transition: opacity 1.3s ease, max-height 1.3s ease;
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-  }
-
-  .review-form.visible {
-      opacity: 1;
-      max-height: fit-content;
-  }
-
-  .comment-form  {
-    transition: opacity 1.3s ease, max-height 1.3s ease;
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-  }
-
-  .comment-form.visible {
-    opacity: 1;
-    max-height: 300px;
   }
 
   .review-box {
@@ -223,5 +194,15 @@
 
   p {
     color: $gray-hover;
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: $gray-icon;
+  }
+
+  .btn-yellow {
+    font-size: 1rem;
   }
 }
