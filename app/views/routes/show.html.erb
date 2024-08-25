@@ -156,6 +156,8 @@
         <div data-controller="route-show-map"
          data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
          data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
+         data-route-show-map-landmark-long="<%= @route.landmarks.first.long %>"
+        data-route-show-map-landmark-lat="<%= @route.landmarks.first.lat %>"
          data-route-show-map-target="map"
          data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
          style="height: 500px;">

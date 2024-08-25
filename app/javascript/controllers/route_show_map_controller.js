@@ -16,6 +16,9 @@ export default class extends Controller {
     });
 
     // Parse and convert waypoints
+
+    map.on("load", () => {
+
     let waypoints = JSON.parse(this.data.get("waypoints")).map(([lng, lat]) =>
       [parseFloat(lng), parseFloat(lat)]);
 
@@ -28,10 +31,25 @@ export default class extends Controller {
         .addTo(map);
     });
 
-    map.on("load", () => {
-      this.getRoute(waypoints, map);
-    });
-  }
+    ////Add marker for landmark
+    const landmarkLng = parseFloat(this.data.get("landmarkLong"));
+    const landmarkLat = parseFloat(this.data.get("landmarkLat"));
+    const landmarkCoords = [landmarkLng, landmarkLat];
+
+    console.log("LandmarkCoords:", landmarkCoords)
+
+    new mapboxgl.Marker({
+      element: this.createCustomMarkerElement()
+    })
+      .setLngLat(landmarkCoords)
+      .addTo(map);
+
+
+
+        this.getRoute(waypoints, map);
+      });
+
+    }
 
    // Create custom marker element
    createCustomMarkerElement() {
@@ -43,6 +61,7 @@ export default class extends Controller {
     el.style.backgroundSize = '100%';
 
     return el;
+
   }
 
   async getRoute(waypoints, map) {

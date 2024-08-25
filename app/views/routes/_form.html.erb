@@ -22,6 +22,27 @@
     <%= f.label :waypoints, "Map", class: "mb-2" %>
     <%= render 'shared/map' %>
 
+<div data-controller="landmark"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+    <%= f.simple_fields_for :landmarks do |landmark_form| %>
+        <%= landmark_form.input :address,
+        label: "Search your favorite landmarks!",
+        input_html: {data: {landmark_target: "address"},
+        class: "d-none"
+        }%>
+        <%= landmark_form.hidden_field :lat, data: { landmark_target: "lat" } %>
+        <%= landmark_form.hidden_field :long, data: { landmark_target: "long" } %>
+      <% end %>
+  </div>
+                  <%#=# render 'shared/landmark', f: f %>
+                  <%# <div class="d-flex justify-content-center"> %>
+                    <%#= f.button :submit, "save landmark", class: "btn-yellow" %>
+                  <%# </div> %>
+
+
+    <%# <div class="landmark-search"> %>
+      <%#= render 'shared/landmark', f: f %>
+    <%# </div> %>
 
     <div class="mt-4">
       <%= f.input :videos_url, label: "Youtube Link" %>

@@ -32,11 +32,12 @@ export default class extends Controller {
     this.map.addControl(
       new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
+      types: "country,region,place,postcode,locality,neighborhood,address",
       mapboxgl: mapboxgl,
       placeholder: 'Search for a place',
       className: 'custom-geocoder'
     }),
-  );
+    );
 
     this.waypoints = this.initializeWaypoints();
     //this.updateWaypoints();
@@ -84,6 +85,7 @@ export default class extends Controller {
     // });
 
     this.updateWaypointList();
+    this.displayLandmark();
   }
 
     initializeWaypoints() {
@@ -127,6 +129,15 @@ export default class extends Controller {
       this.updateWaypointList();
     }
 
+    displayLandmark() {
+      // const lat = parseFloat(this.element.dataset.mapLat);
+      // const long = parseFloat(this.element.dataset.mapLong);
+      // landmark.coordinates
+      const coords = JSON.parse(this.element.dataset.mapCoordinates) ||'[]';
+      this.map.setCenter(coords);
+      this.addMarker(coords, 'landmark', '#000', true);
+    }
+
     addMarker(coords, id, color, useCustomMarker = false) {
       console.log('Adding marker at', coords);
       const markerElement = useCustomMarker ? this.createCustomMarkerElement(id) : null;
@@ -135,6 +146,7 @@ export default class extends Controller {
         .addTo(this.map);
       this.markers.set(id, marker);
     }
+
 
     createCustomMarkerElement(id) {
       const el = document.createElement('div');

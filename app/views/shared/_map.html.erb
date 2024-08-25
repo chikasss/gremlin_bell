@@ -1,5 +1,6 @@
 <div data-controller="map"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
+     data-map-coordinates="<%= @landmark ? [@landmark.long, @landmark.lat].to_json : '[]'  %>"
      data-map-logo-url="<%= asset_path('pin_route.svg')%>">
 
   <div id="map" style="height: 400px; width: 100%;"> </div>

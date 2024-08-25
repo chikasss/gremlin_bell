@@ -28,6 +28,7 @@ class RoutesController < ApplicationController
   def new
     @route = Route.new
     @waypoints = []
+    @route.landmarks.build # needed for nested form
     authorize @route
   end
 
@@ -134,7 +135,8 @@ class RoutesController < ApplicationController
       :road_condition,
       waypoints: [],
       ride_type: [],
-      recomended_bikes: []
+      recomended_bikes: [],
+      landmarks_attributes: [:address, :lat, :long, :title, :_destroy]
     )
   end
 end
