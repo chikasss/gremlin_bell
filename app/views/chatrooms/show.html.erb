@@ -20,7 +20,7 @@
         <!-- chat messages -->
         <div class="messages" data-chatroom-subscription-target="messages">
           <% @chatroom.messages.each do |message| %>
-            <%= render "messages/message", message: message %>
+            <%= render partial: "messages/message", locals: { message: message } %>
           <% end %>
         </div>
         <div class="chatroom-msg">

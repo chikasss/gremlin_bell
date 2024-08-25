@@ -60,8 +60,7 @@ class ChatroomsController < ApplicationController
     authorize @chatroom
     @messages.unread_by_user(current_user).update_all(read_at: Time.current)
   end
-  
-  
+
   private
 
   def set_recipient
