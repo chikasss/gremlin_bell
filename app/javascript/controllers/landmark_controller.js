@@ -27,13 +27,18 @@ export default class extends Controller {
   }
 
   // addLandmark(event) {
-  //   event.preventDefault()
-  //   const template = document.querySelector('#landmark-template').content.cloneNode(true)
-  //   template.querySelectorAll('input').forEach(input => {
-  //     input.name = input.name.replace(/\[\d+\]/, `[${this.index}]`)
-  //   })
-  //   this.element.querySelector('.add-landmark').insertAdjacentElement('beforebegin', template)
-  //   this.index++
+  //   event.preventDefault();
+  //   const newId = new Date().getTime();  // Generate a unique ID
+  //   const template = document.querySelector('#landmark-template').innerHTML;
+
+  //   // Replace any placeholders in the template with a unique ID
+  //   const newField = template.replace(/new_landmarks/g, newId);
+
+  //   // Insert the new set of fields into the form
+  //   this.element.insertAdjacentHTML('beforeend', newField);
+
+  //   this.application.getControllerForElementAndIdentifier(this.element, "landmark").connect();
+
   // }
 
   // removeLandmark(event) {
@@ -44,18 +49,35 @@ export default class extends Controller {
 
   #handleResult(event) {
     const result = event.result
-    console.log("result:", result);
 
     this.addressTarget.value = result["place_name"]
 
     const coordinates = result.geometry.coordinates
-    console.log("Coordinates:", coordinates);
+    console.log("Landmarks Coordinates:", coordinates);
+
+    this.#addLandmarkFields(result["place_name"], coordinates);
+
     this.latTarget.value = coordinates[1] // latitude
     this.longTarget.value = coordinates[0] // longitud
     //this.element.dataset.landmarkCoordinates = JSON.stringify(coordinates);
-    console.log("long, lat:", coordinates[1], coordinates[0])
     this.#addLandmarkToMap(coordinates);
 
+  }
+
+  #addLandmarkFields(address, coordinates) {
+    // Generate a new ID for each landmark
+    const newId = new Date().getTime();
+
+    // Create new landmark fields dynamically
+    const newFieldHTML = `
+      <div class="landmark-fields">
+        <input type="hidden" name="route[landmarks_attributes][${newId}][address]" value="${address}" />
+        <input type="hidden" name="route[landmarks_attributes][${newId}][lat]" value="${coordinates[1]}" />
+        <input type="hidden" name="route[landmarks_attributes][${newId}][long]" value="${coordinates[0]}" />
+      </div>
+    `;
+
+    document.getElementById('landmark-fields-container').insertAdjacentHTML('beforeend', newFieldHTML);
   }
 
   #addLandmarkToMap(coordinates) {
