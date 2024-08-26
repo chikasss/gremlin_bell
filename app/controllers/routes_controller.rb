@@ -61,6 +61,7 @@ class RoutesController < ApplicationController
   def show
     @route = Route.find(params[:id])
     authorize @route
+    @landmarks = @route.landmarks
     @reviews = @route.reviews.includes(:user).order(date: :desc, created_at: :desc)
     @review = @route.reviews.new
     @comments = @route.comments.includes(:user).order(created_at: :desc)
@@ -136,7 +137,7 @@ class RoutesController < ApplicationController
       waypoints: [],
       ride_type: [],
       recomended_bikes: [],
-      landmarks_attributes: [:address, :lat, :long, :title, :_destroy]
+      landmarks_attributes: [:id, :address, :lat, :long, :title, :_destroy]
     )
   end
 end

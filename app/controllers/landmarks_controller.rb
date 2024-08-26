@@ -7,7 +7,7 @@ class LandmarksController < ApplicationController
 
   def create
     @route = Route.find(params[:route_id])
-    @landmark = route.landmarks.new(landmark_params)
+    @landmark = @route.landmarks.new(landmark_params)
     #landmark.route = @route
     @landmark.save
     @coordinates = [@landmark.long, @landmark.lat]

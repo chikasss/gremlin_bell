@@ -1,18 +1,19 @@
 <div data-controller="map"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
      data-map-coordinates="<%= @landmark ? [@landmark.long, @landmark.lat].to_json : '[]'  %>"
-     data-map-logo-url="<%= asset_path('pin_route.svg')%>">
+     data-map-logo-url="<%= asset_path('pin_route.svg')%>"
+     data-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>">
 
   <div id="map" style="height: 400px; width: 100%;"> </div>
 
   <div class="waypoints-container">
-    <ul id="waypoints-list">
+    <div id="waypoints-list">
         <% @waypoints.each_with_index do |point, index| %>
           <li>
             Waypoint <%= index + 1 %> - Lat: <%= point[1] %>, Lng: <%= point[0] %>
             <button type="button" data-action="click->map#removeWaypoint" data-index="<%= index %>">Remove</button>
           </li>
         <% end %>
-    </ul>
+    </div>
   </div>
 </div>

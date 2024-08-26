@@ -19,37 +19,38 @@ export default class extends Controller {
 
     map.on("load", () => {
 
-    let waypoints = JSON.parse(this.data.get("waypoints")).map(([lng, lat]) =>
-      [parseFloat(lng), parseFloat(lat)]);
+      let waypoints = JSON.parse(this.data.get("waypoints")).map(([lng, lat]) =>
+        [parseFloat(lng), parseFloat(lat)]);
 
-    // Add markers for waypoints
-    waypoints.forEach((waypoint) => {
-      new mapboxgl.Marker({
-        element: this.createCustomMarkerElement()
-      })
-        .setLngLat(waypoint)
-        .addTo(map);
-    });
-
-    ////Add marker for landmark
-    const landmarkLng = parseFloat(this.data.get("landmarkLong"));
-    const landmarkLat = parseFloat(this.data.get("landmarkLat"));
-    const landmarkCoords = [landmarkLng, landmarkLat];
-
-    console.log("LandmarkCoords:", landmarkCoords)
-
-    new mapboxgl.Marker({
-      element: this.createCustomMarkerElement()
-    })
-      .setLngLat(landmarkCoords)
-      .addTo(map);
-
-
-
-        this.getRoute(waypoints, map);
+      // Add markers for waypoints
+      waypoints.forEach((waypoint) => {
+        new mapboxgl.Marker({
+          element: this.createCustomMarkerElement()
+        })
+          .setLngLat(waypoint)
+          .addTo(map);
       });
 
-    }
+      ////Add marker for landmark
+      // const landmarkLng = parseFloat(this.data.get("landmarkLong"));
+      // const landmarkLat = parseFloat(this.data.get("landmarkLat"));
+      // const landmarkCoords = [landmarkLng, landmarkLat];
+
+      // console.log("LandmarkCoords:", landmarkCoords)
+
+      const landmarks = JSON.parse(this.data.get("landmarks"));
+      landmarks.forEach((landmark) => {
+        const landmarkCoords = [parseFloat(landmark.long), parseFloat(landmark.lat)];
+        new mapboxgl.Marker({
+          element: this.createLandmarkCustomMarkerElement()
+        })
+          .setLngLat(landmarkCoords)
+          .addTo(map);
+        });
+
+        this.getRoute(waypoints, map);
+    });
+  }
 
    // Create custom marker element
    createCustomMarkerElement() {
@@ -59,10 +60,18 @@ export default class extends Controller {
     el.style.width = '32px'; // Size of the icon
     el.style.height = '32px';
     el.style.backgroundSize = '100%';
-
     return el;
+    }
 
-  }
+    createLandmarkCustomMarkerElement() {
+      const el = document.createElement('div');
+      el.className = 'custom-marker';
+      el.style.backgroundImage =  `url(${this.data.get("landmarkLogoUrl")})`; // URL to your custom icon
+      el.style.width = '32px'; // Size of the icon
+      el.style.height = '32px';
+      el.style.backgroundSize = '100%';
+      return el;
+      }
 
   async getRoute(waypoints, map) {
     // Directions API
