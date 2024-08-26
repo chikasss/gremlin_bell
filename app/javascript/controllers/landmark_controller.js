@@ -50,7 +50,7 @@ export default class extends Controller {
   #handleResult(event) {
     const result = event.result
 
-    this.addressTarget.value = result["place_name"]
+    // this.addressTarget.value = result["place_name"]
 
     const coordinates = result.geometry.coordinates
     console.log("Landmarks Coordinates:", coordinates);
