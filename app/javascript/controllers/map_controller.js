@@ -58,26 +58,6 @@ export default class extends Controller {
       this.addLandmarkMarker(coordinates, "landmark", "#000", true);
     });
 
-    // this.map.on('load', () => {
-    //   const landmarkContainer = document.querySelector('[data-controller="landmark"]');
-    //   const landmarkCoordinates = JSON.parse(landmarkContainer.dataset.landmarkCoordinates || "[]");
-
-    //   if (landmarkCoordinates.length) {
-    //     this.addLandmarkMarker(landmarkCoordinates, "landmark", "#000", true);
-    //   }
-    // });
-    // const landmarkLng = parseFloat(this.data.get("landmarkLong"));
-    //   const landmarkLat = parseFloat(this.data.get("landmarkLat"));
-    //   const landmarkCoords = [landmarkLng, landmarkLat];
-
-    //   console.log("LandmarkCoords:", landmarkCoords)
-
-    //   new mapboxgl.Marker({
-    //     element: this.createLandmarkCustomMarkerElement()
-    //   })
-    //     .setLngLat(landmarkCoords)
-    //     .addTo(this.map);
-
   }
 
   addLandmarkMarker(coords, id, color, useCustomMarker = false) {
@@ -94,7 +74,7 @@ export default class extends Controller {
     const el = document.createElement('div');
     el.id = `marker-${id}`
     el.className = 'custom-marker';
-    el.style.backgroundImage = `url(${this.data.get("landmarkLogoUrl")})`; // URL to your custom icon
+    el.style.backgroundImage = `url(${this.data.get("pinPurple")})`; // URL to your custom icon
     el.style.width = '42px'; // Size of the icon
     el.style.height = '42px';
     el.style.backgroundSize = '100%';
@@ -143,15 +123,6 @@ export default class extends Controller {
       this.updateWaypointList();
     }
 
-    // displayLandmark() {
-    //   // const lat = parseFloat(this.element.dataset.mapLat);
-    //   // const long = parseFloat(this.element.dataset.mapLong);
-    //   // landmark.coordinates
-    //   const coords = JSON.parse(this.element.dataset.mapCoordinates) ||'[]';
-    //   this.map.setCenter(coords);
-    //   this.addMarker(coords, 'landmark', '#000', true);
-    // }
-
 
 
     addMarker(coords, id, color, useCustomMarker = false) {
@@ -170,16 +141,16 @@ export default class extends Controller {
       el.id = `marker-${id}`
       console.log("id:", id )
       el.className = 'custom-marker';
-      el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
-      // if (id == "waypoint-0") {
-      //   el.style.backgroundImage = `url(${this.data.get("pinBlack")})`
-      // }
-      // else if (id == `waypoint-${this.waypoints.length - 1}`){
-      //   el.style.backgroundImage =  `url(${this.data.get("pin")})`
-      // }
-      // else {
-      //   el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
-      // }
+      //el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
+      if (id == "waypoint-0") {
+        el.style.backgroundImage = `url(${this.data.get("pinBlue")})`
+      }
+      else if (id == `waypoint-${this.waypoints.length - 1}`){
+        el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`
+      }
+      else {
+        el.style.backgroundImage = `url(${this.data.get("pin")})`;
+      }
 
       el.style.width = '42px'; // Size of the icon
       el.style.height = '42px';
@@ -231,35 +202,6 @@ export default class extends Controller {
         waypointsList.appendChild(listItem);
       });
     }
-
-
-    // handleLandmark(event) {
-    //   console.log("adding landmark")
-    //   const coords = [event.lngLat.lng, event.lngLat.lat];
-    //   this.addMarker(coords, 'landmark', '#000', true);
-
-    //     const formData = new FormData();
-    //     formData.append('landmark[latitude]', coords[1]);
-    //     formData.append('landmark[longitude]', coords[0]);
-    //     formData.append('landmark[name]', 'New Landmark');
-
-    //     const csrfToken = document.querySelector("[name='csrf-token']").content;
-
-    //     const options = {
-    //       method: 'POST',
-    //       headers: {
-    //         "Accept": "text/plain",
-    //         "X-CSRF-Token": csrfToken,
-    //       },
-    //       body: formData,
-    //     };
-
-    //     fetch(`/routes/${this.routeIdTarget}/landmarks`, options)
-    //       .then(response => response.text())
-    //       .then((data) => {
-    //         this.landmarksTarget.insertAdjacentHTML('beforeend', data);
-    //       });
-    // }
 
   getRoute(waypoints) {
     const waypointsString = waypoints.map(p => p.join(',')).join(';');
