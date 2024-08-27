@@ -34,8 +34,9 @@
               <p class='ms-2 pb-0 mb-0'><%= @route.prefecture %></p>
             </div>
             <div class="mt-2 d-flex align-items-center road-condition-show">
-              <i class="fa-solid fa-road ms-1"></i>
-              <p class='ms-2 pb-0 mb-0'>Road condition: <strong><%= @road_condition %></strong></p>
+              <div><i class="fa-solid fa-road ms-1"></i></div>
+            <p class="ms-1 mb-0"><%= " Road condition as of #{@reviews.any? ? @reviews.first.date.strftime("%m/%d/%Y") : @route.created_at.strftime("%m/%d/%Y")}:" %>
+            <strong style="color: #960808 "><%= @road_condition %></strong></p>
             </div>
           </div>
           <div class="route-photo d-flex row justify-content-center">
@@ -97,8 +98,8 @@
         <div data-controller="route-show-map"
          data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
          data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
-         data-route-show-map-landmark-long="<%= @route.landmarks.first.long %>"
-        data-route-show-map-landmark-lat="<%= @route.landmarks.first.lat %>"
+         data-route-show-map-landmark-long="<%#= @route.landmarks.first.long %>"
+        data-route-show-map-landmark-lat="<%#= @route.landmarks.first.lat %>"
          data-route-show-map-target="map"
          data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
           data-route-show-map-pin-blue="<%= asset_path('pin_route_blue.png') %>"
@@ -133,7 +134,7 @@
           <!-- Ride type -->
           <% if @route.ride_type.present? %>
             <div class="my-4">
-              <h3 class="mb-3">Route tags:</h3>
+              <h3 class="mb-3">Ride Type:</h3>
               <div class="d-flex justify-content-center">
                 <% if @route.ride_type.is_a?(Array) %>
                   <% @route.ride_type.each do |type| %>
