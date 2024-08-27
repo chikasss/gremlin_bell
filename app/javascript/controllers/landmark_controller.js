@@ -15,7 +15,7 @@ export default class extends Controller {
     this.geocoder = new MapboxGeocoder({
     accessToken: mapboxgl.accessToken,
      //accessToken: this.apiKeyValue,
-      types: "country,region,place,postcode,locality,neighborhood,address",
+      types: "poi",
       placeholder: 'Search landmarks',
       className: 'custom-geocoder',
       countries: 'jp',
