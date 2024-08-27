@@ -15,6 +15,17 @@ export default class extends Controller {
       zoom: 10, // Default zoom
     });
 
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserHeading: false
+      }),
+      'top-left'
+    );
+
     // Parse and convert waypoints
 
     map.on("load", () => {
@@ -49,6 +60,17 @@ export default class extends Controller {
         });
 
         this.getRoute(waypoints, map);
+
+        this.map.addControl(
+          new mapboxgl.GeolocateControl({
+            positionOptions: {
+              enableHighAccuracy: true
+            },
+            trackUserLocation: true,
+            showUserHeading: false
+          }),
+          'top-left'
+        );
     });
   }
 
