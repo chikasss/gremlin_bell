@@ -11,7 +11,7 @@
   z-index: 100;
 
   .bg-footer-nav {
-    background: #D9D9D9;
+    background-image: image-url('bg-app.png');
   }
 
   .footer-links {
@@ -19,5 +19,12 @@
     text-decoration: none;
     color: $black;
     }
-}
+  }
+
+  i {
+    display: inline-block;
+    border-radius: 60px;
+    box-shadow: 0 0 2px #888;
+    background-color: white;
+  }
 }

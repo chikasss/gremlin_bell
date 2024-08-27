@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="insert-route-comment"
 export default class extends Controller {
-  static targets = [ "commentForm", "insertCommentBtn" ]
+  static targets = [ "commentForm", "insertCommentBtn", "newCommentBtn" ]
 
   connect() {
     this.updateButtonText();
@@ -15,9 +15,9 @@ export default class extends Controller {
 
   updateButtonText() {
     if (this.commentFormTarget.classList.contains('visible')) {
-      this.insertCommentBtnTarget.innerText = 'Cancel';
+      this.newCommentBtnTarget.innerText = 'Cancel';
     } else {
-      this.insertCommentBtnTarget.innerText = 'Insert a Route Comment';
+      this.newCommentBtnTarget.innerText = 'Write your own comment or question';
     }
   }
 }

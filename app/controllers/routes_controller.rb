@@ -1,4 +1,5 @@
 class RoutesController < ApplicationController
+  require_relative '../services/weather_service'
   before_action :authenticate_user!
 
   RIDE_TYPE = Route::RIDE_TYPE
@@ -7,18 +8,22 @@ class RoutesController < ApplicationController
 
   def index
     @routes = policy_scope(Route).order(:created_at)
+    @popular_routes = Route.joins(:reviews).select('routes.*, AVG(reviews.rating) as average_rating').group('routes.id').order('average_rating DESC').limit(5)
     @region_prefectures = PREFECTURES_HASH
 
     if params[:query].present?
       if params[:query][:region].present?
         @routes = @routes.where(prefecture: @region_prefectures[params[:query][:region].to_sym])
+        @top_five = @popular_routes.where(prefecture: @region_prefectures[params[:query][:region].to_sym])
       end
       if params[:query][:prefecture].present?
         @routes = @routes.where(prefecture: params[:query][:prefecture])
         @prefecture_routes = @routes.where(prefecture: params[:query][:prefecture])
+        @top_five = @popular_routes.where(prefecture: params[:query][:prefecture])
       end
       if params[:query][:ride_type].present?
         @routes = @routes.where("'#{params[:query][:ride_type]}' = ANY (ride_type)")
+        @top_five = @popular_routes.where("'#{params[:query][:ride_type]}' = ANY (ride_type)")
       end
     end
   end
@@ -26,12 +31,15 @@ class RoutesController < ApplicationController
 
   def new
     @route = Route.new
+    @waypoints = []
+    @route.landmarks.build # needed for nested form
     authorize @route
   end
 
   def create
     @route = Route.new(route_params)
-    # @route.waypoints = JSON.parse(route_params[:waypoints][0])
+    #@route.waypoints = JSON.parse(route_params[:waypoints][0])
+
     if route_params[:waypoints].present? && route_params[:waypoints][0].present?
       @route.waypoints = JSON.parse(route_params[:waypoints][0])
     else
@@ -57,6 +65,7 @@ class RoutesController < ApplicationController
   def show
     @route = Route.find(params[:id])
     authorize @route
+    @landmarks = @route.landmarks
     @reviews = @route.reviews.includes(:user).order(date: :desc, created_at: :desc)
     @review = @route.reviews.new
     @comments = @route.comments.includes(:user).order(created_at: :desc)
@@ -69,7 +78,14 @@ class RoutesController < ApplicationController
     # @comments_last_3 = @route.comments.includes(:user).order(created_at: :desc).limit(3)
     @comment = @route.comments.new
     @tail = YouTubeRails.extract_video_id(@route.videos_url)
-    ##@waypoints_json = @route.waypoints.to_json
+    @current_weather = WeatherService.new(@route.waypoints[0][1], @route.waypoints[0][0], "metric").get_current_weather
+    unless @current_weather
+      @current_weather = { "main" => { "temp" => nil }, "weather" => [{ "icon" => nil }] }
+    end
+    @forecast = WeatherService.new(@route.waypoints[0][1], @route.waypoints[0][0], "metric").get_forecast
+    # @waypoints_json = @route.waypoints.to_json
+    # @current_weather = open_weather_api.current lat: @route.waypoints[0][1].to_f, lon: @route.waypoints[0][0].to_f
+    # @forecast = open_weather_api.forecast lat: @route.waypoints[0][1].to_f, lon: @route.waypoints[0][0].to_f, cnt: 3
   end
 
   def save
@@ -127,7 +143,8 @@ class RoutesController < ApplicationController
       :road_condition,
       waypoints: [],
       ride_type: [],
-      recomended_bikes: []
+      recomended_bikes: [],
+      landmarks_attributes: [:id, :address, :lat, :long, :title, :_destroy]
     )
   end
 end

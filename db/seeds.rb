@@ -20,20 +20,6 @@ Message.destroy_all
 Chatroom.destroy_all
 User.destroy_all
 
-puts 'Creating admin user...'
-
-admin = User.create!(
-  email: 'admin@mail.com',
-  password: 'admin123',
-  first_name: 'Admin',
-  last_name: 'User',
-  about: 'Administrator of the system',
-  prefecture: 'Tokyo',
-  admin: true
-)
-
-puts "Admin created"
-
 puts "Creating Users"
 
 bill = User.create!(
@@ -184,13 +170,6 @@ puts "Chatrooms and messages created!"
 
 puts "Creating bikes"
 
-admin_bikes = Bike.create!(
-  name: 'ADMIN',
-  year: 2024,
-  brand: 'ADMIN',
-  user: admin
-)
-
 bill_bikes = Bike.create!(
   name: 'Z900',
   year: 2022,
@@ -282,7 +261,7 @@ users = User.all
 users.each do |user|
   number_of_follows = rand(3..6)
   users_to_follow = users.where.not(id: user.id).sample(number_of_follows)
-  
+
   users_to_follow.each do |followed|
     user.following << followed unless user.following?(followed)
   end
@@ -493,7 +472,7 @@ bill_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Paved",
   user: bill,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 bill_route2 = Route.create!(
@@ -505,7 +484,7 @@ bill_route2 = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Paved",
   user: bill,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 hideo_route = Route.create!(
@@ -517,7 +496,7 @@ hideo_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Construction",
   user: hideo,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 mika_route = Route.create!(
@@ -529,7 +508,7 @@ mika_route = Route.create!(
   prefecture: "Fukuoka",
   road_condition: "Paved",
   user: mika,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 eric_route = Route.create!(
@@ -541,7 +520,7 @@ eric_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Dirt",
   user: eric,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 mary_route = Route.create!(
@@ -553,7 +532,7 @@ mary_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Poor",
   user: mary,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 angel_route = Route.create!(
@@ -565,7 +544,7 @@ angel_route = Route.create!(
   prefecture: "Oita",
   road_condition: "Paved",
   user: angel,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 vincenzo_route = Route.create!(
@@ -577,7 +556,7 @@ vincenzo_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Poor",
   user: vincenzo,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 ami_route = Route.create!(
@@ -589,7 +568,7 @@ ami_route = Route.create!(
   prefecture: "Kanagawa",
   road_condition: "Gravel",
   user: ami,
-  recomended_bikes: [recomended_bikes.sample, recomended_bikes.sample]
+  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
 puts "Attaching photos to Routes"

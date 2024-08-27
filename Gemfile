@@ -60,6 +60,7 @@ gem "geocoder"
 
 gem "pundit"
 gem "uri"
+gem "httparty"
 gem "ffi", "< 1.17.0"
 
 group :development, :test do

@@ -5,149 +5,208 @@
   </div>
   <div class="bg-white">
     <div class="container">
-      <div class="d-flex justify-content-between">
-        <div class="d-flex">
-          <% if current_user == @route.user %>
-            <%= link_to edit_route_path(@route), class: "btn btn-link" do %>
-              <i class="fa-solid fa-pen-to-square"></i>
-            <% end %>
-          <% end %>
-          <h2><%= @route.title %></h2>
-        </div>
-        <div>
-          <% if current_user.favorited?(@route) %>
-            <%= button_to unsave_route_path(@route), method: :delete, class: "btn-plus" do %>
-              <i class="fa-solid fa-circle-check"></i>
-            <% end %>
-          <% else %>
-            <%= button_to save_route_path(@route), method: :post, class: "btn-plus" do %>
-              <i class="fa-regular fa-circle-check"></i>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <div class="my-4">
-        <div class="ms-1 d-flex align-items-center location-route">
-          <i class="fa-solid fa-location-dot"></i>
-          <p class='ms-2 pb-0 mb-0'><%= @route.prefecture %></p>
-        </div>
-        <div class="mt-2 d-flex align-items-center road-condition-show">
-          <i class="fa-solid fa-road"></i>
-          <p class='ms-2 pb-0 mb-0'>Latest known road condition: <strong><%= @road_condition %></strong></p>
-        </div>
-      </div>
-      <div class="route-photo d-flex row justify-content-center">
+      <div class="row justify-content-center">
         <div class="col-11 col-md-10">
-          <% if @route.photos.any? %>
-            <!-- First route foto (big size) -->
-            <div><%= cl_image_tag @route.photos.first.image.key, class: "route-img" %></div>
-            <!-- All route photos on carousel -->
-            <div class="row d-flex justify-content-center mt-2">
-              <div class="col-md-10 d-flex flex-row flex-nowrap overflow-auto">
-                <% @route.photos.each do |photo| %>
-                  <% if photo.image.attached? && photo.image.variable? %>
-                    <div class="col-5 col-md-5 me-1">
-                      <%= cl_image_tag photo.image.key, class: "route-imgs" %>
-                    </div>
+          <div class="d-flex justify-content-between">
+            <div class="d-flex">
+              <% if current_user == @route.user %>
+                <%= link_to edit_route_path(@route), class: "btn btn-link" do %>
+                  <i class="fa-solid fa-pen-to-square"></i>
+                <% end %>
+              <% end %>
+              <h2><%= @route.title %></h2>
+            </div>
+            <div>
+              <% if current_user.favorited?(@route) %>
+                <%= button_to unsave_route_path(@route), method: :delete, class: "btn-plus" do %>
+                  <i class="fa-solid fa-circle-check"></i>
+                <% end %>
+              <% else %>
+                <%= button_to save_route_path(@route), method: :post, class: "btn-plus" do %>
+                  <i class="fa-regular fa-circle-check"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+          <div class="mb-4">
+            <div class="ms-1 d-flex align-items-center location-route">
+              <i class="fa-solid fa-location-dot"></i>
+              <p class='ms-2 pb-0 mb-0'><%= @route.prefecture %></p>
+            </div>
+            <div class="mt-2 d-flex align-items-center road-condition-show">
+              <i class="fa-solid fa-road ms-1"></i>
+              <p class='ms-2 pb-0 mb-0'>Road condition: <strong><%= @road_condition %></strong></p>
+            </div>
+          </div>
+          <div class="route-photo d-flex row justify-content-center">
+            <div class="col-md-10">
+              <% if @route.photos.any? %>
+                <!-- First route foto (big size) -->
+                <div><%= cl_image_tag @route.photos.first.image.key, class: "route-img" %></div>
+                <!-- All route photos on carousel -->
+                <div class="row d-flex justify-content-center mt-2">
+                  <div class="col-md-10 d-flex flex-row flex-nowrap overflow-auto">
+                    <% @route.photos.each do |photo| %>
+                      <% if photo.image.attached? && photo.image.variable? %>
+                        <div class="col-5 col-md-5 me-1">
+                          <%= cl_image_tag photo.image.key, class: "route-imgs" %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              <% else %>
+                <!-- Default msg and default img -->
+                <div><%= image_tag "route-bg.jpg", class: "route-img" %></div>
+                <small class="mt-2 text-center">Upload a photo for this route.</small>
+              <% end %>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-4 px-4">
+              <div class="btn-img">
+                <%= simple_form_for([@route, Photo.new], html: { multipart: true, data: { controller: "photo-upload" } }, remote: true) do |form| %>
+                  <%= form.file_field :image, id: "photo-upload", data: { target: "photo-upload.fileInput", action: "change->photo-upload#submitForm" }, style: "display:none;" %>
+                  <%= form.submit "Add Photo", data: { target: "photo-upload.submitButton" }, style: "display:none;" %>
+                  <button type="button" data-action="click->photo-upload#selectFile">
+                    <i class="fa-regular fa-image"></i>
+                  </button>
+                <% end %>
+              </div>
+              <div>
+                <%= link_to 'See all', route_photos_path(@route), class: "btn btn-light-gray-sm" %>
+              </div>
+            </div>
+          </div>
+          <div class="my-4 border-bottom mx-4"></div>
+          <div class="route-description d-flex mt-2">
+            <i class="fa-solid fa-quote-left me-2"></i>
+            <p><%= @route.description %></p>
+            <i class="fa-solid fa-quote-right ms-2"></i>
+          </div>
+          <!-- route videos -->
+          <% if @route.videos_url.present? %>
+            <div class="py-4">
+              <h3 class="mb-3">Route video:</h3>
+              <div class="d-flex justify-content-center align-items-center">
+                <iframe width="500" height="250" src="https://www.youtube.com/embed/<%= @tail %>" frameborder="0"></iframe>
+              </div>
+            </div>
+          <% end %>
+          <!-- map -->
+          <div class="map-container pt-4">
+            <h3 class="mb-3">Route map:</h3>
+            <div data-controller="route-show-map"
+          data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
+          data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
+          data-route-show-map-target="map"
+          data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
+          style="height: 500px;">
+            </div>
+          </div>
+          <!-- weather -->
+          <div class="pt-4">
+            <% if @current_weather.present? %>
+              <div class="mt-4">
+                <h3 class="mb-3">Weather:</h3>
+                <div class="d-flex row justify-content-center pe-0">
+                  <%= render 'components/weather_card' %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <!-- Ride type -->
+          <% if @route.ride_type.present? %>
+            <div class="my-4">
+              <h3 class="mb-3">Route tags:</h3>
+              <div class="d-flex justify-content-center">
+                <% if @route.ride_type.is_a?(Array) %>
+                  <% @route.ride_type.each do |type| %>
+                    <div class="route-tag rounded-pill me-2"><%= type %></div>
                   <% end %>
+                <% else %>
+                  <div class="route-tag rounded-pill me-2"><%= @route.ride_type %></div>
                 <% end %>
               </div>
             </div>
-          <% else %>
-            <!-- Default msg and default img -->
-            <div><%= image_tag "route-bg.jpg", class: "route-img" %></div>
-            <small class="mt-2 text-center">Upload a photo for this route.</small>
           <% end %>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-4 px-4">
-          <div class="btn-img">
-            <%= simple_form_for([@route, Photo.new], html: { multipart: true, data: { controller: "photo-upload" } }, remote: true) do |form| %>
-              <%= form.file_field :image, id: "photo-upload", data: { target: "photo-upload.fileInput", action: "change->photo-upload#submitForm" }, style: "display:none;" %>
-              <%= form.submit "Add Photo", data: { target: "photo-upload.submitButton" }, style: "display:none;" %>
-              <button type="button" data-action="click->photo-upload#selectFile">
-                <i class="fa-regular fa-image"></i>
-              </button>
-            <% end %>
-          </div>
-          <div>
-            <%= link_to 'See all', route_photos_path(@route), class: "btn btn-light-gray-sm" %>
-          </div>
-        </div>
-      </div>
-      <div class="my-4 border-bottom mx-4"></div>
-      <div class="route-description d-flex mt-2">
-        <i class="fa-solid fa-quote-left me-2"></i>
-        <p><%= @route.description %></p>
-        <i class="fa-solid fa-quote-right ms-1"></i>
-      </div>
-      <% if @route.videos_url.present? %>
-        <div class="my-2 p-4">
-          <h5>Route video:</h5>
-          <div class="d-flex justify-content-center align-items-center">
-            <iframe width="500" height="250" src="https://www.youtube.com/embed/<%= @tail %>" frameborder="0"></iframe>
-          </div>
-        </div>
-      <% end %>
-      <div class="border-bottom mx-4 mb-4"></div>
-      <div class="route-reviews" data-controller="show-reviews">
-        <div class="d-flex justify-content-between">
-          <div class="reviews-rating d-flex">
-            <% if @reviews.present? %>
-              <i class="fa-solid fa-star"></i>
-              <h3 class="ms-2 mb-0 pb-0"><%= @route.average_rating %></h3>
-            <% else %>
-              <i class="fa-solid fa-star"></i>
-            <% end %>
-          </div>
-          <% if @reviews.present? %>
-            <div class=" d-flex justify-content-end" data-action="click->show-reviews#showReviews">
-              <button class="btn-light-gray-sm" data-show-reviews-target="showReviewBtn">Road Reviews</button>
-            </div>
-          <% else %>
-            <div data-controller="new-review" class="mb-0 pb-0">
-              <div class="mt-4 d-flex justify-content-center" data-action="click->new-review#newReview">
-                <button class="btn-light-gray " data-new-review-target="writeReviewBtn">Write a Route Review</button>
-              </div>
-              <div class="my-4 review-form" data-new-review-target="reviewForm">
-                <h3>Write a review:</h3>
-                <%= simple_form_for [@route, @review] do |f| %>
-                  <%= render "reviews/form", f: f %>
-                  <div class="d-flex justify-content-center">
-                    <%= f.button :submit, "Submit Review", class: "btn-yellow" %>
+          <!-- recomended bikes -->
+          <% if @route.recomended_bikes.present? %>
+            <div class="my-4">
+              <h3 class="mb-3">Recommended bikes:</h3>
+              <div class="row d-flex justify-content-center mx-2">
+                <% @route.recomended_bikes.each do |bike| %>
+                  <div class="col-md-3 col-4 mb-2 ps-0 pe-0">
+                    <%= render partial: "components/recomended_bikes_tag", locals: { bike: bike } %>
                   </div>
                 <% end %>
               </div>
             </div>
           <% end %>
-        </div>
-        <div class="review-box" data-show-reviews-target="showLastFiveReviews">
-          <%= render 'reviews/reviews_show_route' %>
-        </div>
-      </div>
-      <% if @route.ride_type.present? %>
-        <div class="my-4">
-          <h3>Tags:</h3>
-          <div class="d-flex justify-content-center">
-            <% if @route.ride_type.is_a?(Array) %>
-              <% @route.ride_type.each do |type| %>
-                <div class="route-tag rounded-pill me-2"><%= type %></div>
-              <% end %>
+          <!-- reviews -->
+          <div class="route-reviews" data-controller="show-reviews">
+            <% if @reviews.present? %>
+              <div class="border-bottom mx-4 my-4"></div>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="reviews-rating d-flex">
+                  <i class="fa-solid fa-star"></i>
+                  <h3 class="ms-2 mb-0 pb-0"><%= @route.average_rating %></h3>
+                </div>
+                <div class=" d-flex justify-content-end" data-action="click->show-reviews#showReviews">
+                  <button class="btn-light-gray-sm" data-show-reviews-target="showReviewBtn">Read Reviews</button>
+                </div>
+              </div>
             <% else %>
-              <div class="route-tag rounded-pill me-2"><%= @route.ride_type %></div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-      <% if @route.recomended_bikes.present? %>
-        <div class="my-4">
-          <h3 class="py-4">Recomended bikes:</h3>
-          <div class="row d-flex justify-content-center mx-2">
-            <% @route.recomended_bikes.each do |bike| %>
-              <div class="col-md-3 col-4 mb-2 ps-0 pe-0">
-                <%= render partial: "components/recomended_bikes_tag", locals: { bike: bike } %>
+              <div data-controller="new-review" class="mb-0 pb-0">
+                <div class="d-flex justify-content-between reviews-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <div data-action="click->new-review#newReview">
+                    <button class="btn-light-gray " data-new-review-target="writeReviewBtn">Write a Route Review</button>
+                  </div>
+                </div>
+                <div class="my-4 review-form toggle-form" data-new-review-target="reviewForm">
+                  <h3 class="mb-3">Write the first review:</h3>
+                  <%= simple_form_for [@route, @review] do |f| %>
+                    <%= render "reviews/form", f: f %>
+                    <div class="d-flex justify-content-center">
+                      <%= f.button :submit, "Submit Review", class: "btn-yellow" %>
+                    </div>
+                  <% end %>
+                </div>
               </div>
             <% end %>
+            <div class="toggle-form" data-show-reviews-target="showLastFiveReviews">
+              <div class="reviews-route-show-page mt-4">
+                <% if @reviews.present? %>
+                  <h3>Last reviews:</h3>
+                  <% @reviews.limit(3).each do |review| %>
+                    <div class="mt-4">
+                      <%= render 'components/review_card_show', review: review %>
+                    </div>
+                  <% end %>
+                <% end %>
+                <div data-controller="new-review" class="mb-0 pb-0">
+                  <div class="d-flex justify-content-between mt-4">
+                    <div data-action="click->new-review#newReview">
+                      <button class="btn-light-gray " data-new-review-target="writeReviewBtn">Write a Route Review</button>
+                    </div>
+                    <div>
+                      <%= link_to 'see all', route_reviews_path(@route), class: 'btn-yellow-sm' %>
+                    </div>
+                  </div>
+                  <div class="mt-4 toggle-form" data-new-review-target="reviewForm">
+                    <h3>Write a review:</h3>
+                    <%= simple_form_for [@route, @review] do |f| %>
+                      <%= render "reviews/form", f: f %>
+                      <div class="d-flex justify-content-center">
+                        <%= f.button :submit, "Submit Review", class: "btn-yellow" %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <div class="border-bottom mx-4 my-4"></div>
+            </div>
           </div>
+
         </div>
       <% end %>
       <!-- map -->
@@ -156,29 +215,46 @@
         <div data-controller="route-show-map"
          data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
          data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
+         data-route-show-map-landmark-long="<%= @route.landmarks.first.long %>"
+        data-route-show-map-landmark-lat="<%= @route.landmarks.first.lat %>"
          data-route-show-map-target="map"
          data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
-         style="height: 500px;">
+         data-route-show-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>"
+        data-route-show-map-landmarks="<%= @landmarks.map { |lm| { lat: lm.lat, long: lm.long } }.to_json %>"
+        style="width: 100%; height: 400px;">
+        <%# "<%#= @route.landmarks.to_json %>
         </div>
       </div>
-      <% if @route.comments.any? %>
-        <div>
-          <h3>Route Comments:</h3>
-          <%= render 'comments/comments_show_route' %>
-        </div>
-      <% else %>
-        <div data-controller="insert-route-comment">
-          <div class="d-flex justify-content-center mt-4" data-action="click->insert-route-comment#insertRouteComment">
-            <button class="btn-light-gray" data-insert-route-comment-target="insertCommentBtn">Insert a Route Comment</button>
-          </div>
-          <div class="my-4 comment-form" data-insert-route-comment-target="commentForm">
-            <%= render 'comments/form' %>
-          </div>
-        </div>
-      <% end %>
-      <div class="my-4 d-flex justify-content-center">
-        <%= button_to 'Save to My Trips', save_route_path(@route),
+      <!-- weather -->
+      <div>
+      <div>
+        <h3>Weather:</h3>
+      </div>
+      <div class="d-flex row justify-content-center pe-0">
+        <%= render 'components/weather_card' %>
+      </div>
+      </div>
+
+          <!-- comments -->
+          <% if @route.comments.any? %>
+            <div class="mt-4">
+              <%= render 'comments/comments_show_route' %>
+            </div>
+          <% else %>
+            <div data-controller="insert-route-comment">
+              <div class="d-flex justify-content-center mt-4" data-action="click->insert-route-comment#insertRouteComment">
+                <button class="btn-light-gray" data-insert-route-comment-target="newCommentBtn">Write your own comment or question</button>
+              </div>
+              <div class="my-4 toggle-form" data-insert-route-comment-target="commentForm">
+                <%= render 'comments/form' %>
+              </div>
+            </div>
+          <% end %>
+          <div class="my-4 d-flex justify-content-center">
+            <%= button_to 'Save to My Trips', save_route_path(@route),
             method: :post, class: 'btn-red-lg' %>
+
+          </div>
+        </div>
       </div>
     </div>
-  </div>

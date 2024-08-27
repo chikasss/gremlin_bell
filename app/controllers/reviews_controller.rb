@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-before_action :set_route, only: [:new, :create, :edit, :update]
+before_action :set_route, only: [:new, :create, :edit, :update, :index]
 
   def show
     @review = Review.find(params[:id])
@@ -9,10 +9,15 @@ before_action :set_route, only: [:new, :create, :edit, :update]
     @review = Review.new
   end
 
+  def index
+    @reviews = policy_scope(@route.reviews)
+    authorize @reviews
+  end
+  
   def create
     @review = @route.reviews.build(review_params)
     @review.user = current_user
-    authorize @review  # Pundit authorization
+    authorize @review
 
     if @review.save
       Rails.logger.info "Review was successfully saved."
