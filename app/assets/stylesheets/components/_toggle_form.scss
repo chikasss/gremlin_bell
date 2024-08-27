@@ -1,0 +1,12 @@
+.toggle-form.visible {
+  opacity: 1;
+  max-height: fit-content;
+  padding-bottom: 30px;
+}
+
+.toggle-form {
+transition: opacity 1.3s ease, max-height 1.3s ease;
+overflow: hidden;
+max-height: 0;
+opacity: 0;
+}

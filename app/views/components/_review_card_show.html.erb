@@ -1,0 +1,65 @@
+<div class="border p-4 review-card">
+  <div class="d-flex justify-content-between">
+    <div>
+      <% review.rating.times do %>
+        <i class="fa-solid fa-star"></i>
+      <% end %>
+      <div>
+        <h5><%= review.title %></h5>
+      </div>
+    </div>
+    <div>
+      <%= link_to 'Read', route_review_path(@route, review), class: "btn-yellow-sm" %>
+    </div>
+  </div>
+  <% if review.bike.present? || review.road_condition.present? %>
+    <div class="d-flex justify-content-around align-items-center mt-2 mb-4 road-bike-condition-details">
+      <div class="d-flex align-items-center">
+        <i class="fa-solid fa-motorcycle me-2"></i>
+        <p>
+          <%= review.bike.name %> <%= review.bike.year %>, <%= review.bike.brand %>
+        </p>
+      </div>
+      <div class="d-flex align-items-center">
+        <i class="fa-solid fa-road me-2"></i>
+        <p><%= review.road_condition %></p>
+      </div>
+    </div>
+  <% end %>
+  <% if review.photos.present? %>
+    <div class="mb-4">
+      <p>Photos:</p>
+      <div class="d-flex flex-row flex-nowrap overflow-auto">
+        <% review.photos.each do |photo| %>
+          <%= image_tag(photo, class: "review-photo-sm me-2") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="d-flex justify-content-between align-items-center">
+    <%= link_to user_path(review.user) do %>
+      <div class="d-flex align-items-center">
+        <% if review.user.avatar.present? %>
+          <div class="me-2">
+            <%= image_tag review.user.avatar, class: "avatar" %>
+          </div>
+        <% else %>
+          <div class="me-2">
+            <%= image_tag "user-photo.png", class: "avatar" %>
+          </div>
+        <% end %>
+        <div>
+          <p class="mb-0"><%= review.user.first_name %></p>
+          <p class="mb-0"><%= review.date.strftime("%B %d, %Y") %></p>
+        </div>
+      </div>
+    <% end %>
+    <div>
+      <% if current_user == review.user %>
+        <%= link_to edit_route_review_path(route_id: @route, id: review.id) do %>
+          <i class="fa-solid fa-pen-to-square"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -170,7 +170,7 @@
               <div class="friends-bikes mt-4">
                 <h4>Your friends' recently added bikes:</h4>
                 <% if @bikes.any? %>
-                  <div class="row d-flex justify-content-center">
+                  <div class="row d-flex justify-content-center mt-4">
                     <% @bikes.each do |bike| %>
                       <div class="col-11 col-md-4 mb-3">
                         <%= render 'components/feed_img_card',

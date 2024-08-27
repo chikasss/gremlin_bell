@@ -2,19 +2,7 @@
   <%= simple_form_for(@route, html: { multipart: true }) do |f| %>
     <%= f.input :title %>
     <%= f.input :description %>
-    <%= f.input :prefecture, collection: Route::PREFECTURES, label: "Route prefecture" %>
-
-    <div data-controller="address-autocomplete" data-address-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-      <%= f.input :address,
-                  label: false,
-                  input_html: {
-                    data: { address_autocomplete_target: "address" },
-                    id: "address-input",
-                    style: "display: none;",
-                    placeholder: "Search for an address...",
-                    class: "form-control"
-                  } %>
-    </div>
+    <%= f.input :prefecture, collection: Route::PREFECTURES, label: "Route prefecture", input_html: {data: {controller: "tom-select"}} %>
 
     <%= f.hidden_field :waypoints, id: 'waypoints_input',
     data: { target: "waypointsInput" }, multiple: true %>

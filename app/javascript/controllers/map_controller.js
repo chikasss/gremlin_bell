@@ -34,6 +34,7 @@ export default class extends Controller {
       accessToken: mapboxgl.accessToken,
       types: "country,region,place,postcode,locality,neighborhood,address",
       mapboxgl: mapboxgl,
+      countries: 'jp',
       placeholder: 'Search for a place',
       className: 'custom-geocoder'
     }),
