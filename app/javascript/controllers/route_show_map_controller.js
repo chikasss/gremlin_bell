@@ -30,24 +30,18 @@ export default class extends Controller {
 
     map.on("load", () => {
 
-      let waypoints = JSON.parse(this.data.get("waypoints")).map(([lng, lat]) =>
+      this.waypoints = JSON.parse(this.data.get("waypoints")).map(([lng, lat]) =>
         [parseFloat(lng), parseFloat(lat)]);
 
+      console.log("map on waypoints:", this.waypoints)
       // Add markers for waypoints
-      waypoints.forEach((waypoint) => {
+      this.waypoints.forEach((waypoint, index) => {
         new mapboxgl.Marker({
-          element: this.createCustomMarkerElement()
+          element: this.createCustomMarkerElement(index)
         })
           .setLngLat(waypoint)
           .addTo(map);
       });
-
-      ////Add marker for landmark
-      // const landmarkLng = parseFloat(this.data.get("landmarkLong"));
-      // const landmarkLat = parseFloat(this.data.get("landmarkLat"));
-      // const landmarkCoords = [landmarkLng, landmarkLat];
-
-      // console.log("LandmarkCoords:", landmarkCoords)
 
       const landmarks = JSON.parse(this.data.get("landmarks"));
       landmarks.forEach((landmark) => {
@@ -58,37 +52,26 @@ export default class extends Controller {
           .setLngLat(landmarkCoords)
           .addTo(map);
         });
-
-        this.getRoute(waypoints, map);
-
-        this.map.addControl(
-          new mapboxgl.GeolocateControl({
-            positionOptions: {
-              enableHighAccuracy: true
-            },
-            trackUserLocation: true,
-            showUserHeading: false
-          }),
-          'top-left'
-        );
+        this.getRoute(this.waypoints, map);
     });
   }
 
    // Create custom marker element
-   createCustomMarkerElement() {
+   createCustomMarkerElement(id) {
     const el = document.createElement('div');
-    // el.id = `marker-${id}`
+    el.id = `marker-${id}`
     el.className = 'custom-marker';
-    el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`;
-    // if (id == "waypoint-0") {
-    //   el.style.backgroundImage = `url(${this.data.get("pinBlack")})`
-    // }
-    // else if (id == `waypoint-${this.waypoints.length - 1}`){
-    //   el.style.backgroundImage =  `url(${this.data.get("pin")})`
-    // }
-    // else {
-    //   el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
-    // }
+    console.log("waypoints:", this.waypoints)
+    //el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`;
+    if (id == 0) {
+      el.style.backgroundImage = `url(${this.data.get("pinBlue")})`
+    }
+    else if (id == this.waypoints.length - 1){
+      el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`
+    }
+    else {
+      el.style.backgroundImage = `url(${this.data.get("pinYellow")})`;
+    }
     el.style.width = '32px'; // Size of the icon
     el.style.height = '32px';
     el.style.backgroundSize = '100%';
@@ -98,7 +81,7 @@ export default class extends Controller {
     createLandmarkCustomMarkerElement() {
       const el = document.createElement('div');
       el.className = 'custom-marker';
-      el.style.backgroundImage =  `url(${this.data.get("landmarkLogoUrl")})`; // URL to your custom icon
+      el.style.backgroundImage =  `url(${this.data.get("pinPurple")})`; // URL to your custom icon
       el.style.width = '32px'; // Size of the icon
       el.style.height = '32px';
       el.style.backgroundSize = '100%';
