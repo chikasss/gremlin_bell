@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+  <div class="float-button" data-controller="float-button">
+    <%= link_to chatrooms_path, class: "btn-float", data: { float_button_target: "button" } do %>
+      <i class="fa-solid fa-comment-dots" data-float-button-target="icon"></i>
+      <% unread_count = @chatrooms.sum { |chatroom| chatroom.unread_messages_count(current_user) } %>
+      <% if unread_count > 0 %>
+        <span class="unread-count" data-float-button-target="alert">
+          <%= unread_count > 99 ? '99+' : unread_count %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

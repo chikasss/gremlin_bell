@@ -9,18 +9,13 @@
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
-    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
-     rel="stylesheet"/>
+    <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css" rel="stylesheet"/>
   </head>
-  <body>
+  <body data-controller-name="<%= controller_name %>" data-action-name="<%= action_name %>">
     <%= render "shared/flashes" %>
     <div class="content-body">
       <%= yield %>
-      <div class="float-button">
-        <%= link_to chatrooms_path, class: "btn-float" do %>
-          <i class="fa-solid fa-comment-dots"></i>
-        <% end %>
-      </div>
+      <%= render 'shared/float_btn' %>
     </div>
     <%= render "shared/navbar_footer" %>
   </body>

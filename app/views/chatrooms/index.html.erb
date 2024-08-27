@@ -6,28 +6,27 @@
     <div class="container">
       <h3>Messages</h3>
       <div class="mx-4 border-bottom pt-2 mb-4"></div>
-      <% @chatrooms.each do |chat| %>
-        <%= link_to chatroom_path(chat) do %>
+      <% @chatroom_data.each do |data| %>
+        <%= link_to chatroom_path(data[:chatroom]) do %>
           <div class="d-flex mb-4 chat">
-            <div class="">
-              <% if chat.recipient.avatar.present? %>
-                <%= image_tag chat.recipient.avatar, class: "avatar-large" %>
+            <div>
+              <% if data[:chat_user].avatar.present? %>
+                <%= image_tag data[:chat_user].avatar, class: "avatar-large" %>
               <% else %>
                 <%= image_tag 'user-photo.png', class: "avatar-large" %>
               <% end %>
             </div>
             <div class="ms-3 w-100 messages">
-              <h5><%= chat.recipient.first_name %></h5>
+              <h5><%= data[:chat_user].first_name %></h5>
               <div class="d-flex justify-content-between">
-                <p class="mb-0"><%= chat.messages.last.description %></p>
-                <small class="mb-0">
-                  <%= chat.messages.last.created_at.strftime("%b %d") %>
+                <p class="mb-0 chat-msg-index"><%= truncate_words(data[:last_message].description, 3) %></p>
+                <small class="mb-0 chat-date">
+                  <%= data[:last_message].created_at.strftime("%b %d, %H:%M") %>
                 </small>
               </div>
-              <% unread_count = chat.unread_messages_count(current_user) %>
-              <% if unread_count > 0 %>
+              <% if data[:unread_count] > 0 %>
                 <span class="unread-count">
-                  <%= unread_count > 99 ? '99+' : unread_count %>
+                  <%= data[:unread_count] > 99 ? '99+' : data[:unread_count] %>
                 </span>
               <% end %>
             </div>

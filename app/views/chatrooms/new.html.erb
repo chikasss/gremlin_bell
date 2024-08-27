@@ -1,9 +1,28 @@
-<!-- app/views/chatrooms/new.html.erb -->
-<h1>Send a Message to <%= @recipient.first_name %></h1>
-<%= simple_form_for @chatroom, url: chatrooms_path do |f| %>
-  <%= f.hidden_field :recipient_id, value: @recipient.id %>
-  <div class="form-group">
-    <%= text_area_tag :description, nil, placeholder: "Your message", class: "form-control", rows: 3 %>
+<div class="bg-red">
+  <div class="container">
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
   </div>
-  <%= f.submit "Send Message", class: "btn btn-primary" %>
-<% end %>
+  <div class="bg-white chatroom-page">
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <% if @chatroom.recipient.avatar.present? %>
+          <%= image_tag @chatroom.recipient.avatar, class: "avatar" %>
+        <% else %>
+          <%= image_tag 'user-photo.png', class: "avatar" %>
+        <% end %>
+        <h2 class="mb-0 ms-3"><%= @chatroom.recipient.first_name %></h2>
+      </div>
+      <div class="border-bottom mx-4 mt-3"></div>
+      <div class="chatroom-msg">
+        <%= simple_form_for @chatroom, url: chatrooms_path, html: { class: "d-flex align-items-stretch" } do |f| %>
+          <%= f.hidden_field :recipient_id, value: @recipient.id %>
+          <%= text_area_tag :description, nil, 
+                      placeholder: "Your message", 
+                      class: "form-control flex-grow-1 me-2", 
+                      rows: 3 %>
+          <%= f.submit "Send", class: "btn-send" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@
 }
 .chat-index {
   p {
-    color: $black;
+    color: $black !important;
   }
   
   .chat {
@@ -35,7 +35,7 @@
       transform: translate(-50%, -50%);
       width: 20px;
       height: 20px;
-      background-color: $dark-red;
+      background-color: lighten($dark-red, 10%);
       border-radius: 50%;
       z-index: -1;
     }
@@ -43,6 +43,7 @@
   
   small {
     color: $gray-hover;
+    font-size: 0.7rem;
   }
 }
 
@@ -54,12 +55,12 @@
 
 .chatroom {
   flex: 1;
-  overflow-y: auto; /* Adiciona o scroll na área das mensagens */
-  padding: 20px; /* Espaçamento interno */
+  overflow-y: auto;
+  padding: 20px;
 
   .messages {
-    max-height: calc(100vh - 200px); /* Ajuste conforme necessário para não cobrir o input */
-    overflow-y: auto; /* Scroll para as mensagens */
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
   }
 }
 
@@ -75,11 +76,6 @@
   .chatroom-msg form {
     display: flex;
     align-items: center;
-  }
-
-  .chatroom-msg input[type="text"] {
-    flex-grow: 1;
-    margin-right: 10px;
   }
 }
 

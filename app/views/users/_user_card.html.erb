@@ -1,6 +1,6 @@
 <div class="border user-card">
-  <div class="follower-icon">
-    <% if user != current_user %>
+  <% if user != current_user %>
+    <div class="follower-icon">
       <% if current_user.following.include?(user) %>
         <%= button_to unfollow_user_path(user), method: :delete, remote: true do %>
           <i class="fa-solid fa-user-check"></i>
@@ -10,8 +10,8 @@
           <i class="fa-solid fa-user-plus"></i>
         <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
   <div class="d-flex flex-column justify-content-center align-items-center text-center">
     <%= link_to user_path(user) do %>
       <div class="user-avatar">
@@ -20,8 +20,13 @@
         <% else %>
           <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-bordered" %></div>
         <% end %>
-      </div>
-    <% end %>
+        <% if user != current_user %>
+          <%= link_to new_chatroom_path(recipient_id: user.id) do %>
+            <i class="fa-solid fa-comment-dots ms-2"></i>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
     <div class="user-info mt-2">
       <h4><%= user.first_name %> <%= user.last_name %></h4>
       <div class="location">

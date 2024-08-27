@@ -3,44 +3,54 @@ class ChatroomsController < ApplicationController
   before_action :set_recipient, only: [:create]
   before_action :set_chatroom, only: [:show]
   before_action :authorize_chatroom, only: [:create]
-
+  
   def index
     @chatrooms = policy_scope(Chatroom).where(user: current_user).or(Chatroom.where(recipient: current_user))
+
+    @chatroom_data = @chatrooms.map do |chat|
+      chat_user = chat.recipient == current_user ? chat.user : chat.recipient
+      last_message = chat.messages.last
+      
+      {
+        chatroom: chat,
+        chat_user: chat_user,
+        last_message: last_message,
+        unread_count: chat.unread_messages_count(current_user)
+      }
+    end
   end
   
-
   def new
     if params[:recipient_id]
       @recipient = User.find(params[:recipient_id])
-      @chatroom = Chatroom.new
+      @chatroom = Chatroom.new(recipient: @recipient)
       authorize @chatroom
     else
       flash[:alert] = "Recipient not specified."
-      redirect_to root_path
+      redirect_to chatrooms_path
     end
-  end
+  end  
 
   def create
     @recipient = User.find(params[:chatroom][:recipient_id])
     @chatroom = Chatroom.find_by(user: current_user, recipient: @recipient) ||
                 Chatroom.find_by(user: @recipient, recipient: @recipient)
-  
+    
     if @chatroom
       @message = @chatroom.messages.create(user: current_user, description: params[:description])
-      redirect_to @chatroom, notice: 'Redirect to chatroom.'
+      redirect_to @chatroom
     else
       @chatroom = Chatroom.new(chatroom_params)
       @chatroom.user = current_user
       @chatroom.recipient = @recipient
-      @chatroom.slug = generate_unique_slug
-  
+      
       authorize @chatroom
-  
+      
       if @chatroom.save
         @message = @chatroom.messages.create(user: current_user, description: params[:description])
-  
+        
         if @message.persisted?
-          redirect_to @chatroom, notice: 'Chatroom and first message were successfully created.'
+          redirect_to @chatroom
         else
           Rails.logger.debug("Failed to Save Message: #{@message.errors.full_messages}")
           flash[:alert] = "Chatroom was created, but the first message could not be saved."
@@ -82,21 +92,20 @@ class ChatroomsController < ApplicationController
     params.require(:chatroom).permit(:name, :recipient_id, :private, :slug)
   end 
 
-  def generate_unique_slug
-    recipient = User.find(@chatroom.recipient_id)
-    base_slug = "#{recipient.first_name} chat".parameterize
-    slug = base_slug
-    count = 1
+  # def generate_unique_slug
+  #   recipient = User.find(@chatroom.recipient_id)
+  #   base_slug = "#{recipient.first_name} chat".parameterize
+  #   slug = base_slug
+  #   count = 1
   
-    while Chatroom.exists?(slug: slug)
-      slug = "#{base_slug}-#{count}"
-      count += 1
-    end
+  #   while Chatroom.exists?(slug: slug)
+  #     slug = "#{base_slug}-#{count}"
+  #     count += 1
+  #   end
   
-    slug
-  end
+  #   slug
+  # end
   
-
   def authorize_chatroom
     authorize Chatroom
   end
