@@ -99,6 +99,9 @@
           data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
           data-route-show-map-target="map"
           data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
+          data-route-show-map-pin-orange="<%= asset_path('pin_route_orange.png') %>"
+          data-route-show-map-pin-black="<%= asset_path('pin_route_black.png') %>"
+          data-route-show-map-pin="<%= asset_path('pin_route_yellow.png') %>"
           style="height: 500px;">
             </div>
           </div>
@@ -208,7 +211,7 @@
           </div>
 
         </div>
-      <% end %>
+      <%# end %>
       <!-- map -->
       <div class="map-container my-4">
         <h3 class="mb-3">Route map:</h3>
@@ -254,8 +257,8 @@
           <div class="my-4 d-flex justify-content-center">
             <%= button_to 'Save to My Trips', save_route_path(@route),
             method: :post, class: 'btn-red-lg' %>
-
           </div>
         </div>
       </div>
     </div>
+</div>

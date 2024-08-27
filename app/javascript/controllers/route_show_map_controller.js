@@ -55,8 +55,18 @@ export default class extends Controller {
    // Create custom marker element
    createCustomMarkerElement() {
     const el = document.createElement('div');
+    // el.id = `marker-${id}`
     el.className = 'custom-marker';
-    el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`; // URL to your custom icon
+    el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`;
+    // if (id == "waypoint-0") {
+    //   el.style.backgroundImage = `url(${this.data.get("pinBlack")})`
+    // }
+    // else if (id == `waypoint-${this.waypoints.length - 1}`){
+    //   el.style.backgroundImage =  `url(${this.data.get("pin")})`
+    // }
+    // else {
+    //   el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
+    // }
     el.style.width = '32px'; // Size of the icon
     el.style.height = '32px';
     el.style.backgroundSize = '100%';

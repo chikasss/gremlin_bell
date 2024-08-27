@@ -170,16 +170,16 @@ export default class extends Controller {
       el.id = `marker-${id}`
       console.log("id:", id )
       el.className = 'custom-marker';
-      //el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
-      if (id == "waypoint-0") {
-        el.style.backgroundImage = `url(${this.data.get("pinBlack")})`
-      }
-      else if (id == `waypoint-${this.waypoints.length - 1}`){
-        el.style.backgroundImage =  `url(${this.data.get("pin")})`
-      }
-      else {
-        el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
-      }
+      el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
+      // if (id == "waypoint-0") {
+      //   el.style.backgroundImage = `url(${this.data.get("pinBlack")})`
+      // }
+      // else if (id == `waypoint-${this.waypoints.length - 1}`){
+      //   el.style.backgroundImage =  `url(${this.data.get("pin")})`
+      // }
+      // else {
+      //   el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
+      // }
 
       el.style.width = '42px'; // Size of the icon
       el.style.height = '42px';
