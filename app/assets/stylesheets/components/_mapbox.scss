@@ -1,19 +1,19 @@
 .mapboxgl-ctrl-geocoder {
-  width: 250px; // Adjust the width to make it thinner
+  width: 250px;
   input {
-    height: 38px; // Adjust the height if needed
-    font-size: 15px; // Adjust the font size if needed
+    height: 38px;
+    font-size: 15px;
   }
 }
 
 .mapboxgl-ctrl-top-left {
   display: flex;
   align-items: center;
-  gap: 10px; /* Adjusts the space between the controls */
+  gap: 10px;
 }
 
 .custom-geocoder {
-  min-width: 200px; /* Adjust width as necessary */
+  min-width: 200px;
 }
 
 .mapboxgl-ctrl-geocoder--icon-search {
@@ -43,14 +43,14 @@
 }
 
 .landmark-search-form .form-group {
-  margin-bottom: 0; /* Reduces the space between label and search button */
+  margin-bottom: 0;
 }
 
 .landmark-search-form label {
-  margin-bottom: 0; /* Removes any bottom margin from the label */
+  margin-bottom: 0;
 }
 
 .landmark-search-form input {
-  margin-top: 0; /* Removes any top margin from the input */
-  padding-top: 0; /* Removes any top padding from the input */
+  margin-top: 0;
+  padding-top: 0;
 }

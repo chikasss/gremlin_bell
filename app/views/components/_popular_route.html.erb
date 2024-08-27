@@ -1,7 +1,7 @@
 <div class="d-flex flex-row flex-nowrap overflow-auto">
   <% if params[:query].present?%>
     <% @top_five.each do |route| %>
-      <div class="col-6 col-md-3 me-2">
+      <div class="col-8 col-md-4 me-2">
         <%= render 'components/route_card', route: route %>
       </div>
     <% end %>
@@ -13,4 +13,5 @@
     <% end %>
   <% end %>
 </div>
-<h3 class="mt-4">Or browse all of them</h3>
+<h4 class="mt-4 text-center">Or browse all of them</h4>
+<div class="m-4 border-bottom"></div>
