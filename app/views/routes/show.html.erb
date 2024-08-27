@@ -220,6 +220,7 @@
          data-route-show-map-target="map"
          data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
          data-route-show-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>"
+         data-route-show-map-pin="<%= asset_path('pin_route_yellow.png') %>"
         data-route-show-map-landmarks="<%= @landmarks.map { |lm| { lat: lm.lat, long: lm.long } }.to_json %>"
         style="width: 100%; height: 400px;">
         <%# "<%#= @route.landmarks.to_json %>

@@ -161,14 +161,26 @@ export default class extends Controller {
         .setLngLat(coords)
         .addTo(this.map);
       this.markers.set(id, marker);
+      console.log("this.waypoints:", this.waypoints)
     }
 
 
     createCustomMarkerElement(id) {
       const el = document.createElement('div');
       el.id = `marker-${id}`
+      console.log("id:", id )
       el.className = 'custom-marker';
-      el.style.backgroundImage = `url(${this.data.get("logoUrl")})`; // URL to your custom icon
+      //el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
+      if (id == "waypoint-0") {
+        el.style.backgroundImage = `url(${this.data.get("pinBlack")})`
+      }
+      else if (id == `waypoint-${this.waypoints.length - 1}`){
+        el.style.backgroundImage =  `url(${this.data.get("pin")})`
+      }
+      else {
+        el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
+      }
+
       el.style.width = '42px'; // Size of the icon
       el.style.height = '42px';
       el.style.backgroundSize = '100%';
@@ -199,7 +211,6 @@ export default class extends Controller {
     }
 
     updateWaypointList() {
-      console.log("updating")
       const waypointsList = document.querySelector('#waypoints-list');
       if (!waypointsList) return;
 

@@ -2,7 +2,10 @@
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
      data-map-coordinates="<%= @landmark ? [@landmark.long, @landmark.lat].to_json : '[]'  %>"
      data-map-logo-url="<%= asset_path('pin_route.svg')%>"
-     data-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>">
+     data-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>"
+     data-map-pin-orange="<%= asset_path('pin_route_orange.png') %>"
+     data-map-pin-black="<%= asset_path('pin_route_black.png') %>"
+     data-map-pin="<%= asset_path('pin_route_yellow.png') %>">
 
   <div id="map" style="height: 400px; width: 100%;"> </div>
 
