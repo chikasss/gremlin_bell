@@ -92,14 +92,19 @@
             </div>
           <% end %>
           <!-- map -->
-          <div class="map-container pt-4">
+          <div class="map-container my-4">
             <h3 class="mb-3">Route map:</h3>
             <div data-controller="route-show-map"
-              data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
-              data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
-              data-route-show-map-target="map"
-              data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
-              style="height: 500px;">
+         data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
+         data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
+         data-route-show-map-landmark-long="<%= @route.landmarks.first.long %>"
+        data-route-show-map-landmark-lat="<%= @route.landmarks.first.lat %>"
+         data-route-show-map-target="map"
+         data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
+         data-route-show-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>"
+        data-route-show-map-landmarks="<%= @landmarks.map { |lm| { lat: lm.lat, long: lm.long } }.to_json %>"
+        style="width: 100%; height: 400px;">
+              <%# "<%#= @route.landmarks.to_json %>
             </div>
           </div>
           <!-- weather -->
