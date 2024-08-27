@@ -139,8 +139,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_124904) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
+    t.bigint "user_id", null: false
+    t.string "visibility", default: "public"
+    t.string "image_url"
+    t.integer "likes_count", default: 0
+    t.integer "comments_count", default: 0
+    t.string "location"
+    t.string "tags", default: [], array: true
+    t.bigint "parent_post_id"
+    t.string "status", default: "published"
+    t.string "media_url"
+    t.string "mentions", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["parent_post_id"], name: "index_posts_on_parent_post_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -209,6 +222,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_27_124904) do
   add_foreign_key "messages", "users"
   add_foreign_key "photos", "routes"
   add_foreign_key "photos", "users"
+  add_foreign_key "posts", "posts", column: "parent_post_id"
+  add_foreign_key "posts", "users"
   add_foreign_key "reviews", "bikes"
   add_foreign_key "reviews", "routes"
   add_foreign_key "reviews", "users"

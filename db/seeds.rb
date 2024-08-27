@@ -694,91 +694,91 @@ puts "Creating comments"
 
 hideo_to_bill_route = Comment.create!(
   description: "Looks incredible! I'm going to save this and check it out next time I'm in the area. Thanks!",
-  commentable: bill_route,  # Usando a associação polimórfica
+  commentable: bill_route,
   user: hideo
 )
 
 bill_response_to_hideo = Comment.create!(
   description: "Can't wait to see what you think. Hit me up when you're in the area. Maybe we can ride together.",
-  commentable: bill_route,  # Usando a associação polimórfica
+  commentable: bill_route,
   user: bill
 )
 
 angel_to_bill_route = Comment.create!(
   description: "Sadly no tunnels by me, but I totally get what you mean lol",
-  commentable: bill_route,  # Usando a associação polimórfica
+  commentable: bill_route,
   user: angel
 )
 
 bill_response_to_angel = Comment.create!(
   description: "VROOOOOOOOOOM!!!",
-  commentable: bill_route,  # Usando a associação polimórfica
+  commentable: bill_route,
   user: bill
 )
 
 vincenzo_to_ami_route = Comment.create!(
   description: "Oh wow! I actually live along this route. I've regularly go to Yokohama on the weekends, but I've never gone this way. Looks like fun. I'll check it out this weekend",
-  commentable: ami_route,  # Usando a associação polimórfica
+  commentable: ami_route,
   user: vincenzo
 )
 
 ami_response_to_vincenzo = Comment.create!(
   description: "Cool! Let me know how it goes.",
-  commentable: ami_route,  # Usando a associação polimórfica
+  commentable: ami_route,
   user: ami
 )
 
 vincenzo2_to_ami_route = Comment.create!(
   description: "Just finished the ride. It was great. I ended up finding a cafe I hadn't heard of before so I'm glad I checked it out.",
-  commentable: ami_route,  # Usando a associação polimórfica
+  commentable: ami_route,
   user: vincenzo
 )
 
 mary_to_hideo_route = Comment.create!(
   description: "I just checked out an onsen in the area. Sadly didn't have my bike with me, but I'll save this for next time.",
-  commentable: hideo_route,  # Usando a associação polimórfica
+  commentable: hideo_route,
   user: mary
 )
 
 hideo_response_to_mary = Comment.create!(
   description: "The onsens are so nice there. Hope you enjoyed it.",
-  commentable: hideo_route,  # Usando a associação polimórfica
+  commentable: hideo_route,
   user: hideo
 )
 
 bill_to_mika_route = Comment.create!(
   description: "I visited Hiraodai Karst last summer. Kushitani Cafe Aso is the best!",
-  commentable: mika_route,  # Usando a associação polimórfica
+  commentable: mika_route,
   user: bill
 )
 
 mika_response_to_bill = Comment.create!(
   description: "It is! Great spot to take a break.",
-  commentable: mika_route,  # Usando a associação polimórfica
+  commentable: mika_route,
   user: mika
 )
 
 bill_to_eric_route = Comment.create!(
   description: "This looks great! I know someone that lives in the area. I'm gonna let him know about this.",
-  commentable: eric_route,  # Usando a associação polimórfica
+  commentable: eric_route,
   user: bill
 )
 
 eric_response_to_bill = Comment.create!(
   description: "Wait! Are you friends with Ray? I remember him mentioning he knew a Bill that lives in Hokkaido",
-  commentable: eric_route,  # Usando a associação polimórfica
+  commentable: eric_route,
   user: eric
 )
 
 bill_to_eric = Comment.create!(
   description: "Ha! Yes, that's him! We went to college together. We got our motorcycle licenses at the same time too!",
-  commentable: eric_route,  # Usando a associação polimórfica
+  commentable: eric_route,
   user: bill
 )
 
 eric_response_to_bill2 = Comment.create!(
   description: "Small world!",
-  commentable: eric_route,  # Usando a associação polimórfica
+  commentable: eric_route,
   user: eric
 )
 
