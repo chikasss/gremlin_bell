@@ -32,7 +32,7 @@ export default class extends Controller {
     this.map.addControl(
       new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
-      types: "country,region,place,postcode,locality,neighborhood,address",
+      types: "country,region,place,postcode,locality,neighborhood,address, poi",
       mapboxgl: mapboxgl,
       countries: 'jp',
       placeholder: 'Search for a place',
