@@ -111,10 +111,18 @@
         <%# "<%#= @route.landmarks.to_json %>
         </div>
       </div>
+
+<!-- showing landmark address-->
+      <div>
+      <h3 class="">Landmarks:</h3>
+      <% @landmarks.each do  |landmark|%>
+        <p class="landmark-address"><%= landmark.address.split(",").first  %></p>
+      <% end %>
+      </div>
           <!-- weather -->
           <div class="pt-4">
             <% if @current_weather.present? %>
-              <div class="mt-4">
+              <div class="mt-0">
                 <h3 class="mb-3">Weather:</h3>
                 <div class="d-flex row justify-content-center pe-0">
                   <%= render 'components/weather_card' %>
