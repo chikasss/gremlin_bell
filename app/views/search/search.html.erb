@@ -4,17 +4,14 @@
     <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
   <div class="bg-white">
-    <div class="container">
+    <div class="container headers-gray">
       <div class="row justify-content-center">
         <div class="col-10">
-          <div class="d-flex justify-content-center align-items-center mb-4" data-controller="current-location">
-            <i class="fa-solid fa-location-arrow me-2" data-action="click->current-location#searchByCurrentLocation"></i>
-            <%= render 'components/search_bar' %>
-          </div>
+          <%= render 'components/search_bar' %>
         </div>
         <div class="text-center pb-2" data-controller="route-search">
           <div class="row">
-            <div class="ride-types drop-down-search" data-route-search-target="searchBars">
+            <div class="ride-types drop-down-search mt-3" data-route-search-target="searchBars">
               <% @ride_types.each_with_index do |type, index| %>
                 <% if index.even? %>
                   <div class="col-md-6 px-2 col-12 mb-2">
@@ -39,10 +36,12 @@
                 <% end %>
               <% end %>
             </div>
-            <i class="fa fa-caret-down fa-2xl" aria-hidden="true" class="btn-light-gray"
+            <div class="mb-4">
+              <i class="fa fa-caret-down fa-2xl" aria-hidden="true" class="btn-light-gray"
               data-route-search-target="rideTypeSearchButton"
               data-action="click->route-search#expandRideTypes">
-            </i>
+              </i>
+            </div>
           </div>
         </div>
       </div>
@@ -64,9 +63,7 @@
         </div>
         <div class="last_users">
           <div class="d-flex justify-content-between">
-
             <h3 class="mb-4">Latest Users</h3>
-
             <%= link_to users_path do %>
               <i class="fa-solid fa-circle-chevron-right"></i>
             <% end %>

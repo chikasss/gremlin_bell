@@ -7,24 +7,35 @@
   left: 0;
   right: 0;
   width: 100%;
-  text-align: center;
-  z-index: 100;
+  z-index: 1000;
+}
 
-  .bg-footer-nav {
-    background-image: image-url('bg-app.png');
-  }
+.footer-links {
+  background: #333333;
+  height: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
-  .footer-links {
-    a, i {
-    text-decoration: none;
-    color: $black;
-    }
-  }
+.footer-links a {
+  text-decoration: none;
+}
 
-  i {
-    display: inline-block;
-    border-radius: 60px;
-    box-shadow: 0 0 2px #888;
-    background-color: white;
-  }
+.footer-links i {
+  padding: 1.5rem 1rem;
+  margin: 0.5rem;
+}
+
+.white {
+  color: $white;
+}
+
+.red {
+  color: $dark-red;
+}
+
+.active-bg {
+  background: #dddddd;
+  border-radius: 50%;
 }

@@ -1,27 +1,23 @@
 <% if user_signed_in? %>
-  <footer class="nav-footer mt-auto py-3">
+  <footer class="nav-footer mt-auto py-3" data-controller="footer">
     <div class="container">
       <div class="d-inline-flex">
-        <div class="rounded-pill bg-footer-nav p-3 footer-links">
-          <span class="text-muted">
-            <%= link_to root_path, {style: "text-decoration: none"} do %>
-              <i class="fa-solid fa-house fa-lg p-4"></i>
-            <% end %>
-            <% if user_signed_in? %>
-              <%= link_to user_bikes_path(current_user), {style: "text-decoration: none"} do %>
-                <i class="fa-solid fa-motorcycle fa-lg p-4"></i>
-              <% end %>
-            <% end %>
-            <%= link_to advanced_search_path, {style: "text-decoration: none"} do %>
-              <i class="fas fa-search fa-lg p-4"></i>
-            <% end %>
-            <%= link_to saved_trips_user_path(current_user), {style: "text-decoration: none"} do %>
-              <i class="fa-duotone fa-solid fa-route fa-lg p-4" style="--fa-primary-color: #960801; --fa-secondary-color: #960801;"></i>
-            <% end %>
-            <%= link_to new_route_path, {style: "text-decoration: none"} do %>
-              <i class="fa-solid fa-square-plus fa-lg p-4"></i>
-            <% end %>
-          </span>
+        <div class="rounded-pill p-3 footer-links d-flex justify-content-around align-items-center">
+          <%= link_to root_path, class: "white", data: { footer_target: "link", page: root_path } do %>
+            <i class="fa-solid fa-house fa-lg" data-footer-target="icon" data-page="<%= root_path %>"></i>
+          <% end %>
+          <%= link_to user_bikes_path(current_user), class: "white", data: { footer_target: "link", page: user_bikes_path(current_user) } do %>
+            <i class="fa-solid fa-motorcycle fa-lg" data-footer-target="icon" data-page="<%= user_bikes_path(current_user) %>"></i>
+          <% end %>
+          <%= link_to advanced_search_path, class: "white", data: { footer_target: "link", page: advanced_search_path } do %>
+            <i class="fas fa-search fa-lg" data-footer-target="icon" data-page="<%= advanced_search_path %>"></i>
+          <% end %>
+          <%= link_to saved_trips_user_path(current_user), class: "white", data: { footer_target: "link", page: saved_trips_user_path(current_user) } do %>
+            <i class="fa-duotone fa-solid fa-route fa-lg" data-footer-target="icon" data-page="<%= saved_trips_user_path(current_user) %>"></i>
+          <% end %>
+          <%= link_to new_route_path, class: "white", data: { footer_target: "link", page: new_route_path } do %>
+            <i class="fa-solid fa-square-plus fa-lg" data-footer-target="icon" data-page="<%= new_route_path %>"></i>
+          <% end %>
         </div>
       </div>
     </div>

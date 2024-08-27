@@ -9,7 +9,7 @@
         <div class="col-10 pb-4">
           <%= render 'components/search_bar' %>
         </div>
-        <div class="px-2">
+        <div class="px-2 headers-gray">
           <div class="text-center" data-controller="route-search">
             <div class="row">
               <div class="ride-types drop-down-search" data-route-search-target="searchBars">
@@ -43,20 +43,20 @@
               </i>
             </div>
           </div>
-          <% if params[:query].present? && params[:query][:prefecture].present? && params[:query][:ride_type].present? %>
-            <h2 class="mt-4">Check out the most popular <strong><%= params[:query][:ride_type] %></strong> Routes in <strong><%= params[:query][:prefecture] %></strong></h2>
-            <%= render 'components/popular_route' %>
-          <% elsif params[:query].present? && params[:query][:ride_type].present? %>
-            <h2 class="mt-4"><strong>Check out the most popular <%= params[:query][:ride_type] %></strong> Routes</h2>
-            <%= render 'components/popular_route' %>
-          <% elsif params[:query].present? && params[:query][:prefecture].present?%>
-            <h2 class="mt-4">Check out the most popular routes in <strong><%= params[:query][:prefecture] %></strong></h2>
-            <%= render 'components/popular_route' %>
-          <% else %>
-            <h2 class="mt-4">Check out the most popular routes</h2>
-            <%= render 'components/popular_route' %>
-          <% end %>
           <% if @routes.any? %>
+            <% if params[:query].present? && params[:query][:prefecture].present? && params[:query][:ride_type].present? %>
+              <h3 class="mt-4 text-center">Check out the most popular <strong><%= params[:query][:ride_type] %></strong> Routes in <strong><%= params[:query][:prefecture] %></strong></h3>
+              <%= render 'components/popular_route' %>
+            <% elsif params[:query].present? && params[:query][:ride_type].present? %>
+              <h3 class="mt-4 text-center">Check out the most popular <strong><%= params[:query][:ride_type] %></strong> Routes</h3>
+              <%= render 'components/popular_route' %>
+            <% elsif params[:query].present? && params[:query][:prefecture].present?%>
+              <h3 class="mt-4 text-center">Check out the most popular routes in <strong><%= params[:query][:prefecture] %></strong></h3>
+              <%= render 'components/popular_route' %>
+            <% else %>
+              <h3 class="mt-4 text-center">Check out the most popular routes</h3>
+              <%= render 'components/popular_route' %>
+            <% end %>
             <div class="row d-flex justify-content-center">
               <% @routes.each do |route| %>
                 <div class="col-11 col-md-4">
@@ -65,7 +65,13 @@
               <% end %>
             </div>
           <% else %>
-            <p class="text-center mt-4">No routes found for this search.</p>
+            <% if params[:query].present? && params[:query][:ride_type].present? %>
+              <p class="text-center mt-4">No routes found for this ride type search<br>
+                <strong><%= params[:query][:ride_type] %></strong></p>
+            <% elsif params[:query].present? && params[:query][:prefecture].present?%>
+              <p class="text-center mt-4">No routes found for this prefecture search <br>
+                <strong><%= params[:query][:prefecture] %></strong></p>
+            <% end %>
           <% end %>
         </div>
       </div>
