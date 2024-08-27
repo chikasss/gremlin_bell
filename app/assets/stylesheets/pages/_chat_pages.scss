@@ -2,6 +2,10 @@
     margin-top: 0;
 }
 .chat-index {
+  p {
+    color: $black;
+  }
+  
   .chat {
     display: flex;
     align-items: center;

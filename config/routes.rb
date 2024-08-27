@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
 
   resources :chatrooms, only: [:index, :show, :new, :create] do
-    resources :messages, only: [:create]
+    resources :messages, only: [:create, :show]
   end
 
   get 'search', to: 'search#index', as: 'search_results'

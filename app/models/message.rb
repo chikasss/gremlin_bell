@@ -6,6 +6,6 @@ class Message < ApplicationRecord
   scope :unread_by_user, ->(user) { where(read_at: nil).where.not(user_id: user.id) }
 
   after_create_commit do
-    broadcast_append_to chatroom, target: "messages", partial: "messages/message", locals: { message: self }
+    broadcast_append_to chatroom, target: "messages", partial: "messages/message", locals: { message: self, current_user: self.user }
   end
 end

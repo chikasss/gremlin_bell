@@ -27,7 +27,7 @@ class ChatroomsController < ApplicationController
   
     if @chatroom
       @message = @chatroom.messages.create(user: current_user, description: params[:description])
-      redirect_to @chatroom, notice: 'Chatroom already exists.'
+      redirect_to @chatroom, notice: 'Redirect to chatroom.'
     else
       @chatroom = Chatroom.new(chatroom_params)
       @chatroom.user = current_user
