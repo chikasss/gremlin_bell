@@ -18,6 +18,15 @@
     }
   }
 
+  .fa-comment-dots {
+    color: #fff;
+    font-size: 1.3rem;
+    transition: color 0.3s;
+    &:hover {
+      color: $gray-hover;
+    }
+  }
+
   h2 {
     color: $white;
     font-size: 2rem;

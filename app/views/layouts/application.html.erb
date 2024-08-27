@@ -16,10 +16,11 @@
     <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
     <%= render 'shared/ios_pwa_links' %>
   </head>
-  <body>
+  <body data-controller-name="<%= controller_name %>" data-action-name="<%= action_name %>">
     <%= render "shared/flashes" %>
     <div class="content-body">
       <%= yield %>
+      <%= render 'shared/float_btn' %>
     </div>
     <%= render "shared/navbar_footer" %>
   </body>
