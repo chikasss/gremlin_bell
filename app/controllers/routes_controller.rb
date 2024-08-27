@@ -32,6 +32,7 @@ class RoutesController < ApplicationController
   def new
     @route = Route.new
     @waypoints = []
+    @route.landmarks.build # needed for nested form
     authorize @route
   end
 
@@ -64,6 +65,7 @@ class RoutesController < ApplicationController
   def show
     @route = Route.find(params[:id])
     authorize @route
+    @landmarks = @route.landmarks
     @reviews = @route.reviews.includes(:user).order(date: :desc, created_at: :desc)
     @review = @route.reviews.new
     @comments = @route.comments.includes(:user).order(created_at: :desc)
@@ -141,7 +143,8 @@ class RoutesController < ApplicationController
       :road_condition,
       waypoints: [],
       ride_type: [],
-      recomended_bikes: []
+      recomended_bikes: [],
+      landmarks_attributes: [:id, :address, :lat, :long, :title, :_destroy]
     )
   end
 end

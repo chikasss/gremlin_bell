@@ -10,6 +10,24 @@
     <%= f.label :waypoints, "Map", class: "mb-2" %>
     <%= render 'shared/map' %>
 
+    <div class="mt-3 landmark-search-form" data-controller="landmark"
+      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+        <%= f.simple_fields_for :landmarks do |landmark_form| %>
+          <div class="landmark-fields">
+              <%= landmark_form.input :address,
+              label: "Landmarks",
+              input_html: {data: {landmark_target: "address"},
+              class: "d-none"
+              }%>
+              <%= landmark_form.hidden_field :lat, data: { landmark_target: "lat" } %>
+              <%= landmark_form.hidden_field :long, data: { landmark_target: "long" } %>
+            </div>
+             <% end %>
+      </div>
+
+      <div id="landmark-fields-container">
+        <!-- landmark fields will be dynamically added from landmark controller -->
+      </div>
 
     <div class="mt-4">
       <%= f.input :videos_url, label: "Youtube Link" %>

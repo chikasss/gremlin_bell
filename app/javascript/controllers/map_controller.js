@@ -32,12 +32,13 @@ export default class extends Controller {
     this.map.addControl(
       new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
+      types: "country,region,place,postcode,locality,neighborhood,address",
       mapboxgl: mapboxgl,
       countries: 'jp',
       placeholder: 'Search for a place',
       className: 'custom-geocoder'
     }),
-  );
+    );
 
     this.waypoints = this.initializeWaypoints();
     //this.updateWaypoints();
@@ -47,45 +48,59 @@ export default class extends Controller {
         const coords = [event.lngLat.lng, event.lngLat.lat];
         this.waypoints.push(coords);
         this.updateWaypoints();
-      // if (!isLongPress) {
-      //   const coords = [event.lngLat.lng, event.lngLat.lat];
-      //   this.waypoints.push(coords);
-      //   this.updateWaypoints();
-      // }
-      //isLongPress = false;
     });
 
-    // let touchTimer, mouseTimer;
-
-    // this.map.on('touchstart', (event) => {
-    //   touchTimer = setTimeout(() => {
-    //     isLongPress = true;
-    //     this.handleLandmark(event);
-    //   }, 1500);
-    // });
-
-    // this.map.on('touchend', () => {
-    //   clearTimeout(touchTimer);
-    // });
-
-    // this.map.getCanvas().addEventListener('mousedown', (event) => {
-    //   mouseTimer = setTimeout(() => {
-    //     isLongPress = true;
-    //     //const mapboxPoint = this.map.unproject([event.clientX, event.clientY]);
-    //     this.handleLandmark(event); //
-    //   }, 1500);
-    // });
-
-    // this.map.getCanvas().addEventListener('mouseup', () => {
-    //   clearTimeout(mouseTimer);
-    // });
-
-    // this.map.getCanvas().addEventListener('mouseleave', () => {
-    //   clearTimeout(mouseTimer);
-    // });
-
     this.updateWaypointList();
+    //this.displayLandmark();
+
+    this.element.addEventListener('landmark:add', (event) => {
+      const { coordinates } = event.detail;
+      this.addLandmarkMarker(coordinates, "landmark", "#000", true);
+    });
+
+    // this.map.on('load', () => {
+    //   const landmarkContainer = document.querySelector('[data-controller="landmark"]');
+    //   const landmarkCoordinates = JSON.parse(landmarkContainer.dataset.landmarkCoordinates || "[]");
+
+    //   if (landmarkCoordinates.length) {
+    //     this.addLandmarkMarker(landmarkCoordinates, "landmark", "#000", true);
+    //   }
+    // });
+    // const landmarkLng = parseFloat(this.data.get("landmarkLong"));
+    //   const landmarkLat = parseFloat(this.data.get("landmarkLat"));
+    //   const landmarkCoords = [landmarkLng, landmarkLat];
+
+    //   console.log("LandmarkCoords:", landmarkCoords)
+
+    //   new mapboxgl.Marker({
+    //     element: this.createLandmarkCustomMarkerElement()
+    //   })
+    //     .setLngLat(landmarkCoords)
+    //     .addTo(this.map);
+
   }
+
+  addLandmarkMarker(coords, id, color, useCustomMarker = false) {
+    console.log('Adding landmark marker at', coords);
+    const markerElement = useCustomMarker ? this.createLandmarkCustomMarkerElement(id) : null;
+    const marker = new mapboxgl.Marker(markerElement || { color })
+      .setLngLat(coords)
+      .addTo(this.map);
+    this.markers.set(id, marker);
+    console.log('Landmark marker', marker);
+  }
+
+  createLandmarkCustomMarkerElement(id) {
+    const el = document.createElement('div');
+    el.id = `marker-${id}`
+    el.className = 'custom-marker';
+    el.style.backgroundImage = `url(${this.data.get("landmarkLogoUrl")})`; // URL to your custom icon
+    el.style.width = '42px'; // Size of the icon
+    el.style.height = '42px';
+    el.style.backgroundSize = '100%';
+    return el;
+  }
+
 
     initializeWaypoints() {
       const waypointsInput = document.querySelector('#waypoints_input');
@@ -128,6 +143,17 @@ export default class extends Controller {
       this.updateWaypointList();
     }
 
+    // displayLandmark() {
+    //   // const lat = parseFloat(this.element.dataset.mapLat);
+    //   // const long = parseFloat(this.element.dataset.mapLong);
+    //   // landmark.coordinates
+    //   const coords = JSON.parse(this.element.dataset.mapCoordinates) ||'[]';
+    //   this.map.setCenter(coords);
+    //   this.addMarker(coords, 'landmark', '#000', true);
+    // }
+
+
+
     addMarker(coords, id, color, useCustomMarker = false) {
       console.log('Adding marker at', coords);
       const markerElement = useCustomMarker ? this.createCustomMarkerElement(id) : null;
@@ -136,6 +162,7 @@ export default class extends Controller {
         .addTo(this.map);
       this.markers.set(id, marker);
     }
+
 
     createCustomMarkerElement(id) {
       const el = document.createElement('div');
@@ -147,6 +174,8 @@ export default class extends Controller {
       el.style.backgroundSize = '100%';
       return el;
     }
+
+
 
     removeWaypoint(event){
       const index = parseInt(event.currentTarget.dataset.index);
@@ -177,10 +206,13 @@ export default class extends Controller {
       waypointsList.innerHTML = '';
 
       this.waypoints.forEach((coords, index) => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `Waypoint ${index + 1} - Lat: ${coords[1]}, Lng: ${coords[0]} `;
+        const listItem = document.createElement('div');
+        // listItem.textContent = `Waypoint ${index + 1} - Lat: ${coords[1]}, Lng: ${coords[0]} `;
+        listItem.textContent = `Waypoint: ${index + 1} `;
+        listItem.classList.add('no-marker');
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
+        removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'custom-remove-btn');
         removeButton.setAttribute('type', 'button');
         removeButton.dataset.action = 'click->map#removeWaypoint';
         removeButton.dataset.index = index;

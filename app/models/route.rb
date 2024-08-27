@@ -6,6 +6,7 @@ class Route < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :landmarks, dependent: :destroy
+  accepts_nested_attributes_for :landmarks, allow_destroy: true
   acts_as_favoritable
   has_many :photos, dependent: :destroy
 
@@ -47,7 +48,7 @@ class Route < ApplicationRecord
     if self.recomended_bikes.is_a?(String)
       self.recomended_bikes = self.recomended_bikes.gsub(/[\{\}]/, '').split(',').map(&:strip)
     end
-    
+
     self.recomended_bikes.reject!(&:blank?)
 
   end

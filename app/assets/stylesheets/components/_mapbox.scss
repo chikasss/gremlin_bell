@@ -23,3 +23,34 @@
   width: 23px;
   height: 23px;
 }
+
+.custom-remove-btn {
+  background-color: #980403;
+  border-color: #980403;
+  border-radius: 6px;
+}
+
+.custom-remove-btn:hover {
+  background-color: #d75e62;
+  border-color: #d75e62;
+}
+
+.no-marker {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 2px;
+  margin-top: 5px;
+}
+
+.landmark-search-form .form-group {
+  margin-bottom: 0; /* Reduces the space between label and search button */
+}
+
+.landmark-search-form label {
+  margin-bottom: 0; /* Removes any bottom margin from the label */
+}
+
+.landmark-search-form input {
+  margin-top: 0; /* Removes any top margin from the input */
+  padding-top: 0; /* Removes any top padding from the input */
+}
