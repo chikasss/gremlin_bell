@@ -25,6 +25,10 @@ Rails.application.routes.draw do
     resources :messages, only: [:create, :show]
   end
 
+  resources :posts do
+    resources :comments, only: [:create]
+  end
+
   get 'search', to: 'search#index', as: 'search_results'
   get 'search/advanced', to: 'search#search', as: 'advanced_search'
 

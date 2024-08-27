@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_24_061936) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_27_124904) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -67,11 +67,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_061936) do
 
   create_table "comments", force: :cascade do |t|
     t.text "description"
-    t.bigint "route_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["route_id"], name: "index_comments_on_route_id"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -135,6 +136,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_061936) do
     t.index ["user_id"], name: "index_photos_on_user_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.date "date"
     t.string "title"
@@ -193,7 +201,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_061936) do
   add_foreign_key "bikes", "users"
   add_foreign_key "chatrooms", "users"
   add_foreign_key "chatrooms", "users", column: "recipient_id"
-  add_foreign_key "comments", "routes"
   add_foreign_key "comments", "users"
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
