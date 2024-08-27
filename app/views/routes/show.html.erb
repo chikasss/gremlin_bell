@@ -101,8 +101,11 @@
         data-route-show-map-landmark-lat="<%= @route.landmarks.first.lat %>"
          data-route-show-map-target="map"
          data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
+          data-route-show-map-pin-blue="<%= asset_path('pin_route_blue.png') %>"
+          data-route-show-map-pin-purple="<%= asset_path('pin_route_purple.png') %>"
+          data-route-show-map-pin-yellow="<%= asset_path('pin_route_yellow.png') %>"
+          data-route-show-map-pin-black="<%= asset_path('pin_route_black.png') %>"
          data-route-show-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>"
-         data-route-show-map-pin="<%= asset_path('pin_route_yellow.png') %>"
         data-route-show-map-landmarks="<%= @landmarks.map { |lm| { lat: lm.lat, long: lm.long } }.to_json %>"
         style="width: 100%; height: 400px;">
         <%# "<%#= @route.landmarks.to_json %>
