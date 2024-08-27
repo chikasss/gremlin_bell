@@ -17,7 +17,8 @@ export default class extends Controller {
      //accessToken: this.apiKeyValue,
       types: "country,region,place,postcode,locality,neighborhood,address",
       placeholder: 'Search landmarks',
-      className: 'custom-geocoder'
+      className: 'custom-geocoder',
+      countries: 'jp',
     })
 
     this.geocoder.addTo(this.element)
