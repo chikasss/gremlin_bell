@@ -1,0 +1,125 @@
+.bg-white.chat-index {
+    margin-top: 0;
+}
+.chat-index {
+  p {
+    color: $black !important;
+  }
+  
+  .chat {
+    display: flex;
+    align-items: center;
+  }
+
+  .messages {
+    position: relative;
+  }
+
+  .unread-count {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    color: white;
+    padding: 0 6px;
+    font-size: 9px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 20px;
+    z-index: 1;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background-color: lighten($dark-red, 10%);
+      border-radius: 50%;
+      z-index: -1;
+    }
+  }
+  
+  small {
+    color: $gray-hover;
+    font-size: 0.7rem;
+  }
+}
+
+// CHATROOM 
+
+.bg-white.chatroom-page {
+    margin-top: 0;
+}
+
+.chatroom {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+
+  .messages {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+}
+
+.chatroom-msg {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 2000;
+  .chatroom-msg form {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+
+  .receipt, .sender {
+    padding: 0.7rem;
+    margin: 0.5rem 0;
+    display: inline-block;
+    max-width: 70%;
+    border-radius: 10px;
+    word-wrap: break-word;
+  }
+
+  .sender {
+    background: $dark-red;
+    align-self: flex-end;
+
+  }
+
+  .receipt {
+    background: $gray-hover;
+    align-self: flex-start;
+
+  }
+
+  p {
+    margin: 0;
+    display: inline;
+    color: white;
+  }
+
+  small {
+    color: $gray-icon;
+    display: block;
+  }
+
+  .sender small {
+    text-align: right;
+  }
+
+  .receipt small {
+    text-align: left;
+  }
+}

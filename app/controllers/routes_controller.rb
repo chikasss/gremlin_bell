@@ -84,8 +84,6 @@ class RoutesController < ApplicationController
     end
     @forecast = WeatherService.new(@route.waypoints[0][1], @route.waypoints[0][0], "metric").get_forecast
     # @waypoints_json = @route.waypoints.to_json
-    # @current_weather = open_weather_api.current lat: @route.waypoints[0][1].to_f, lon: @route.waypoints[0][0].to_f
-    # @forecast = open_weather_api.forecast lat: @route.waypoints[0][1].to_f, lon: @route.waypoints[0][0].to_f, cnt: 3
   end
 
   def save

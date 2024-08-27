@@ -52,6 +52,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_061936) do
     t.index ["user_id"], name: "index_bikes_on_user_id"
   end
 
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "user_id"
+    t.bigint "recipient_id"
+    t.boolean "private", default: true
+    t.string "slug", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipient_id"], name: "index_chatrooms_on_recipient_id"
+    t.index ["slug"], name: "index_chatrooms_on_slug", unique: true
+    t.index ["user_id"], name: "index_chatrooms_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "description"
     t.bigint "route_id", null: false
@@ -103,12 +116,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_061936) do
 
   create_table "messages", force: :cascade do |t|
     t.text "description"
-    t.bigint "sender_id", null: false
-    t.bigint "receiver_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
+    t.datetime "read_at"
+    t.bigint "chatroom_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "photos", force: :cascade do |t|
@@ -177,13 +191,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_061936) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bikes", "users"
+  add_foreign_key "chatrooms", "users"
+  add_foreign_key "chatrooms", "users", column: "recipient_id"
   add_foreign_key "comments", "routes"
   add_foreign_key "comments", "users"
   add_foreign_key "follows", "users", column: "followed_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "landmarks", "routes"
-  add_foreign_key "messages", "users", column: "receiver_id"
-  add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "photos", "routes"
   add_foreign_key "photos", "users"
   add_foreign_key "reviews", "bikes"

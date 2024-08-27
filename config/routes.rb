@@ -21,7 +21,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :messages, only: %i[index show]
+  resources :chatrooms, only: [:index, :show, :new, :create] do
+    resources :messages, only: [:create, :show]
+  end
 
   get 'search', to: 'search#index', as: 'search_results'
   get 'search/advanced', to: 'search#search', as: 'advanced_search'

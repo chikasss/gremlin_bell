@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :set_prefectures
   before_action :set_regions
   before_action :set_regions_and_prefectures
+  before_action :load_chatrooms
 
   # Pundit: allow-list approach
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -37,5 +38,11 @@ class ApplicationController < ActionController::Base
 
   def set_regions_and_prefectures
     @region_prefectures = User::PREFECTURES_HASH
+  end
+
+  def load_chatrooms
+    if current_user
+      @chatrooms = Chatroom.where(user: current_user).or(Chatroom.where(recipient: current_user))
+    end
   end
 end
