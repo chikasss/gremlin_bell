@@ -33,6 +33,24 @@
           <% end %>
         <% end %>
       </div>
+      <div class="d-flex mt-2 icons">
+        <% if current_user.favorited?(post) %>
+          <div class="d-flex align-items-center me-4">
+            <%= button_to unlike_post_path(post), method: :delete do %>
+              <i class="fa-solid fa-heart me-2"></i>
+            <% end %>
+            <p><%= post.likes_count %></p>
+          </div>
+        <% else %>
+          <div class="d-flex align-items-center me-4">
+            <%= button_to like_post_path(post) do %>
+              <i class="fa-regular fa-heart"></i>
+            <% end %>
+            <p><%= post.likes_count %></p>
+          </div>
+        <% end %>
+        <i class="fa-regular fa-comment"></i>
+      </div>
     </div>
   </div>
 </div>

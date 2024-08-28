@@ -14,7 +14,11 @@
           <% else %>
             <%= image_tag 'user-photo.png', class: "avatar" %>
           <% end %>
-          <h2 class="mb-0 ms-3"><%= @chatroom.recipient.username %></h2>
+          <% if @chatroom.recipient.present? %>
+            <h2 class="mb-0 ms-3"><%= @chatroom.recipient.username %></h2>
+          <% else %>
+            <h2 class="mb-0 ms-3">Unknown User</h2>
+          <% end %>
         </div>
         <div class="border-bottom mx-4 mt-3"></div>
         <!-- chat messages -->

@@ -53,6 +53,22 @@ class PostsController < ApplicationController
     end
     authorize @posts
   end
+
+  # def like
+  #   @post = Post.find(params[:id])
+  #   authorize @post
+  #   current_user.favorite(@post)
+  #   # @post.update_likes_count
+  #   redirect_to posts_path, notice: "Post liked."
+  # end
+
+  # def unlike
+  #   @post = Post.find(params[:id])
+  #   authorize @post
+  #   current_user.unfavorite(@post)
+  #   # @post.update_likes_count
+  #   redirect_to posts_path, notice: "Post unliked."
+  # end
   
 
   private

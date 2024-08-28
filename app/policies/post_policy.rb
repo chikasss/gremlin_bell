@@ -28,4 +28,12 @@ class PostPolicy < ApplicationPolicy
   def search?
     true
   end
+
+  def like?
+    true
+  end
+
+  def unlike?
+    true
+  end
 end
