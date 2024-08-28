@@ -5,7 +5,10 @@
     <%= f.input :prefecture, collection: Route::PREFECTURES, label: "Route prefecture", input_html: {data: {controller: "tom-select"}} %>
     <%= f.hidden_field :waypoints, id: 'waypoints_input',
     data: { target: "waypointsInput" }, multiple: true %>
-    <%= f.label :waypoints, "Map", class: "mb-2" %>
+    <%= f.label :waypoints, "Map", class: "mb-0" %>
+       <div class="form-text mb-1">
+       Set waypoints up to 10.
+    </div>
     <%= render 'shared/map' %>
     <div class="mt-3 landmark-search-form" data-controller="landmark"
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
@@ -28,6 +31,7 @@
       <%= f.input :videos_url, label: "Youtube Link" %>
     </div>
     <div class="col-12 mb-2">
+    <h6>Photos</h6>
       <%= file_field_tag 'route[photos][]', multiple: true, accept: 'image/*', class: 'form-control' %>
     </div>
     <div class="form-text">

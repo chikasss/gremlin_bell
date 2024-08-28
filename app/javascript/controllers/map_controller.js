@@ -74,7 +74,7 @@ export default class extends Controller {
     const el = document.createElement('div');
     el.id = `marker-${id}`
     el.className = 'custom-marker';
-    el.style.backgroundImage = `url(${this.data.get("pinPurple")})`; // URL to your custom icon
+    el.style.backgroundImage = `url(${this.data.get("pinBlue")})`; // URL to your custom icon
     el.style.width = '42px'; // Size of the icon
     el.style.height = '42px';
     el.style.backgroundSize = '100%';
@@ -143,10 +143,34 @@ export default class extends Controller {
       el.className = 'custom-marker';
       //el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
       if (id == "waypoint-0") {
-        el.style.backgroundImage = `url(${this.data.get("pinBlue")})`
+        el.style.backgroundImage = `url(${this.data.get("pinOne")})`
       }
-      else if (id == `waypoint-${this.waypoints.length - 1}`){
-        el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`
+      else if (id == "waypoint-1") {
+        el.style.backgroundImage = `url(${this.data.get("pinTwo")})`
+      }
+      else if (id == "waypoint-2") {
+        el.style.backgroundImage = `url(${this.data.get("pinThree")})`
+      }
+      else if (id == "waypoint-3") {
+        el.style.backgroundImage = `url(${this.data.get("pinFour")})`
+      }
+      else if (id == "waypoint-4") {
+        el.style.backgroundImage = `url(${this.data.get("pinFive")})`
+      }
+      else if (id == "waypoint-5") {
+        el.style.backgroundImage = `url(${this.data.get("pinSix")})`
+      }
+      else if (id == "waypoint-6") {
+        el.style.backgroundImage = `url(${this.data.get("pinSeven")})`
+      }
+      else if (id == "waypoint-7") {
+        el.style.backgroundImage = `url(${this.data.get("pinEight")})`
+      }
+      else if (id == "waypoint-8") {
+        el.style.backgroundImage = `url(${this.data.get("pinNine")})`
+      }
+      else if (id == "waypoint-9") {
+        el.style.backgroundImage = `url(${this.data.get("pinTen")})`
       }
       else {
         el.style.backgroundImage = `url(${this.data.get("pin")})`;
