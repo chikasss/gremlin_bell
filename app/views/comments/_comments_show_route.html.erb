@@ -24,7 +24,7 @@
         <% end %>
         <div>
           <%= link_to user_path(comment.user) do %>
-            <p class="mb-0"><%= comment.user.first_name %></p>
+            <p class="mb-0"><%= comment.user.username %></p>
           <% end %>
           <p class="mb-0"><%= comment.created_at.strftime("%B %d, %Y") %></p>
         </div>

@@ -15,7 +15,7 @@ class Chatroom < ApplicationRecord
 
   def set_default_name
     if self.name.blank?
-      self.name = "Chatroom with #{recipient.first_name}"
+      self.name = "Chatroom with #{recipient.username}"
     end
   end
 
@@ -23,7 +23,7 @@ class Chatroom < ApplicationRecord
     return if slug.present?
 
     recipient = self.recipient
-    base_slug = "#{recipient.first_name}-chat".parameterize
+    base_slug = "#{recipient.username}-chat".parameterize
     slug = base_slug
     count = 1
 

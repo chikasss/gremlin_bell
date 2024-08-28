@@ -18,8 +18,9 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_one_attached :avatar
 
-  validates :first_name, :prefecture, presence: true
+  validates :username, :first_name, :prefecture, presence: true
   validates :email, uniqueness: true
+  validates :username, uniqueness: true, length: { in: 3..20 }
 
   PREFECTURES = [
     'Hokkaido', 'Aomori', 'Akita', 'Iwate', 'Yamagata', 'Miyagi', 'Niigata', 'Fukushima', 'Tochigi',

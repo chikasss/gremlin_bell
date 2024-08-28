@@ -1,0 +1,67 @@
+.post-form {
+  position: relative;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+
+  .btn-img {
+    button {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: $gray-hover;
+    }
+  }
+
+  .btn-submit {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  textarea {
+    background: none;
+    border: none;
+    outline: none;
+    input {
+      box-shadow: none;
+      padding-right: 4rem;
+    }
+
+    &::placeholder {
+      font-size: 0.9rem;
+      margin-right: 3rem;
+      color: $gray-icon;
+    }
+
+    &:focus {
+      outline: none; 
+      box-shadow: none;
+    }
+  }
+
+
+  .tags input {
+    background: none;
+    border-radius: 4px;
+    outline: none;
+    box-shadow: none;
+    border: 1px solid rgba(222, 226, 230, 0.5);
+  
+    &::placeholder {
+      font-size: 0.8rem;
+      color: $gray-icon;
+    }
+  
+    &:focus {
+      outline: none; 
+      box-shadow: none;
+      border-color: $border;
+    }
+  }
+  
+
+  .remove-mb {
+    margin-bottom: 0 !important;
+  }
+}

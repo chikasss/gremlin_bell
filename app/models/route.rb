@@ -3,7 +3,6 @@ class Route < ApplicationRecord
 
   belongs_to :user
 
-  # has_many :comments, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :landmarks, dependent: :destroy

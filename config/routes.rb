@@ -27,6 +27,9 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :comments, only: [:create]
+    collection do
+      get 'search', to: 'posts#search'
+    end
   end
 
   get 'search', to: 'search#index', as: 'search_results'

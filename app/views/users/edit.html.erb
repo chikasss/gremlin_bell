@@ -9,6 +9,7 @@
         <div class="col-11 col-md-8">
           <h3 class="text-center mb-4">Edit Your Profile</h3>
           <%= simple_form_for(@user) do |f| %>
+            <%= f.input :username %>
             <%= f.input :first_name %>
             <%= f.input :last_name %>
             <%= f.input :about, label: "About You" %>

@@ -5,6 +5,8 @@ class PagesController < ApplicationController
 
   def home
     if user_signed_in?
+      @post = Post.new
+      @posts = Post.where(user_id: current_user.following.pluck(:id) + [current_user.id]).order(created_at: :desc).to_a
       followed_users_ids = current_user.following.pluck(:id)
       @users = User.where.not(id: current_user.following.pluck(:id) + [current_user.id])
               .order(created_at: :desc)
@@ -19,7 +21,7 @@ class PagesController < ApplicationController
       end
 
       # sorted by created_at and shuffled
-      @feed_items = (@routes + @reviews + @bikes + @comments + @routes_with_photos)
+      @feed_items = (@routes + @reviews + @bikes + @comments + @routes_with_photos + @posts)
       .group_by do |item|
         item.is_a?(Hash) ? item[:route].created_at : item.created_at
       end
@@ -35,6 +37,7 @@ class PagesController < ApplicationController
       @bikes = []
       @comments = []
       @feed_items = []
+      @posts = []
     end
   end
 end

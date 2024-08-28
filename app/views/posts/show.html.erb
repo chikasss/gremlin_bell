@@ -1,0 +1,7 @@
+<% if @post.tags.any? %>
+  <% @post.tags.each do |tag| %>
+    <%= link_to "##{tag}", search_posts_path(tag: tag), class: "hashtag" %>
+  <% end %>
+<% end %>
+<p><%= raw @post.content %></p>
+<p><%= @post.content %></p>

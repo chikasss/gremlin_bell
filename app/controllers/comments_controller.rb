@@ -1,17 +1,4 @@
 class CommentsController < ApplicationController
-  # def create
-  #   @route = Route.find(params[:route_id])
-  #   @comment = @route.comments.new(comment_params)
-  #   @comment.user = current_user
-    
-  #   authorize @comment
-
-  #   if @comment.save
-  #     redirect_to @route
-  #   else
-  #     render 'routes/show'
-  #   end
-  # end
 
   def create
     if params[:route_id]
@@ -28,7 +15,7 @@ class CommentsController < ApplicationController
     authorize @comment
 
     if @comment.save
-      redirect_to @commentable # Redireciona para a rota ou post
+      redirect_to @commentable
     else
       flash[:alert] = "Não foi possível postar o comentário. Por favor, tente novamente."
     end
