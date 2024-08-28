@@ -43,20 +43,28 @@ export default class extends Controller {
           .addTo(map);
       });
 
-      const landmarks = JSON.parse(this.data.get("landmarks"));
-      landmarks.forEach((landmark) => {
-        const landmarkCoords = [parseFloat(landmark.long), parseFloat(landmark.lat)];
-        new mapboxgl.Marker({
-          element: this.createLandmarkCustomMarkerElement()
-        })
+      const landmarksData = this.data.get("landmarks");
+      console.log("any landmarks?",landmarksData )
+      console.log("any landmarks?",landmarksData[0].value )
+
+      if (landmarksData && landmarksData !== "[]" && landmarksData !== "[{\"lat\":null,\"long\":null}]") {
+        const landmarks = JSON.parse(this.data.get("landmarks"));
+        landmarks.forEach((landmark) => {
+          if (landmark.lat !== null && landmark.long !== null) {
+          const landmarkCoords = [parseFloat(landmark.long), parseFloat(landmark.lat)];
+          new mapboxgl.Marker({
+            element: this.createLandmarkCustomMarkerElement()
+          })
           .setLngLat(landmarkCoords)
           .addTo(map);
-        });
-
+        }
+      });
+          } else {
+            console.log("No landmarks found.");
+        }
         this.getRoute(this.waypoints, map);
     });
   }
-
    // Create custom marker element
    createCustomMarkerElement(id) {
     const el = document.createElement('div');
