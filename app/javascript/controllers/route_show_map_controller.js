@@ -98,7 +98,7 @@ export default class extends Controller {
     //   el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`
     // }
     else {
-      el.style.backgroundImage = `url(${this.data.get("pinYellow")})`;
+      el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
     }
     el.style.width = '42px'; // Size of the icon
     el.style.height = '42px';

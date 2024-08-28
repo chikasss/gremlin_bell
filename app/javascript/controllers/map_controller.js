@@ -74,7 +74,7 @@ export default class extends Controller {
     const el = document.createElement('div');
     el.id = `marker-${id}`
     el.className = 'custom-marker';
-    el.style.backgroundImage = `url(${this.data.get("pinBlue")})`; // URL to your custom icon
+    el.style.backgroundImage = `url(${this.data.get("pinPurple")})`; // URL to your custom icon
     el.style.width = '42px'; // Size of the icon
     el.style.height = '42px';
     el.style.backgroundSize = '100%';
@@ -173,7 +173,7 @@ export default class extends Controller {
         el.style.backgroundImage = `url(${this.data.get("pinTen")})`
       }
       else {
-        el.style.backgroundImage = `url(${this.data.get("pin")})`;
+        el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
       }
 
       el.style.width = '42px'; // Size of the icon
