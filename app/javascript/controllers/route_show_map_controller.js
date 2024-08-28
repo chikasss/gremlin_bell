@@ -52,6 +52,7 @@ export default class extends Controller {
           .setLngLat(landmarkCoords)
           .addTo(map);
         });
+
         this.getRoute(this.waypoints, map);
     });
   }
@@ -64,11 +65,38 @@ export default class extends Controller {
     console.log("waypoints:", this.waypoints)
     //el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`;
     if (id == 0) {
-      el.style.backgroundImage = `url(${this.data.get("pinBlue")})`
+      el.style.backgroundImage = `url(${this.data.get("pinOne")})`
     }
-    else if (id == this.waypoints.length - 1){
-      el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`
+    else if (id == 1) {
+      el.style.backgroundImage = `url(${this.data.get("pinTwo")})`
     }
+    else if (id == 2) {
+      el.style.backgroundImage = `url(${this.data.get("pinThree")})`
+    }
+    else if (id == 3) {
+      el.style.backgroundImage = `url(${this.data.get("pinFour")})`
+    }
+    else if (id == 4) {
+      el.style.backgroundImage = `url(${this.data.get("pinFive")})`
+    }
+    else if (id == 5) {
+      el.style.backgroundImage = `url(${this.data.get("pinSix")})`
+    }
+    else if (id == 6) {
+      el.style.backgroundImage = `url(${this.data.get("pinSeven")})`
+    }
+    else if (id == 7) {
+      el.style.backgroundImage = `url(${this.data.get("pinEight")})`
+    }
+    else if (id == 8) {
+      el.style.backgroundImage = `url(${this.data.get("pinNine")})`
+    }
+    else if (id == 9) {
+      el.style.backgroundImage = `url(${this.data.get("pinTen")})`
+    }
+    // else if (id == this.waypoints.length - 1){
+    //   el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`
+    // }
     else {
       el.style.backgroundImage = `url(${this.data.get("pinYellow")})`;
     }
@@ -86,7 +114,9 @@ export default class extends Controller {
       el.style.height = '32px';
       el.style.backgroundSize = '100%';
       return el;
+
       }
+
 
   async getRoute(waypoints, map) {
     // Directions API
