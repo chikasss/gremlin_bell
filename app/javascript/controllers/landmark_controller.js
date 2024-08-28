@@ -27,26 +27,6 @@ export default class extends Controller {
     this.index = this.addressTargets.length
   }
 
-  // addLandmark(event) {
-  //   event.preventDefault();
-  //   const newId = new Date().getTime();  // Generate a unique ID
-  //   const template = document.querySelector('#landmark-template').innerHTML;
-
-  //   // Replace any placeholders in the template with a unique ID
-  //   const newField = template.replace(/new_landmarks/g, newId);
-
-  //   // Insert the new set of fields into the form
-  //   this.element.insertAdjacentHTML('beforeend', newField);
-
-  //   this.application.getControllerForElementAndIdentifier(this.element, "landmark").connect();
-
-  // }
-
-  // removeLandmark(event) {
-  //   event.preventDefault()
-  //   event.target.closest('.landmark-fields').remove()
-  // }
-
 
   #handleResult(event) {
     const result = event.result
