@@ -1,0 +1,2 @@
+$("#likes-count-<%= @post.id %>").html("<%= @post.likes_count %>");
+$("div[data-post-id='<%= @post.id %>']").html('<%= j(render partial: "components/like_button", locals: { post: @post }) %>');

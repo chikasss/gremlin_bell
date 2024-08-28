@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_post, only: [:like, :unlike]
 
   def new
     @post = Post.new
@@ -38,7 +39,6 @@ class PostsController < ApplicationController
                 .to_a
   end
   
-
   def show
     @post = Post.find(params[:id])
     @comment = Comment.new
@@ -54,24 +54,41 @@ class PostsController < ApplicationController
     authorize @posts
   end
 
-  # def like
-  #   @post = Post.find(params[:id])
-  #   authorize @post
-  #   current_user.favorite(@post)
-  #   # @post.update_likes_count
-  #   redirect_to posts_path, notice: "Post liked."
-  # end
-
-  # def unlike
-  #   @post = Post.find(params[:id])
-  #   authorize @post
-  #   current_user.unfavorite(@post)
-  #   # @post.update_likes_count
-  #   redirect_to posts_path, notice: "Post unliked."
-  # end
+  def like
+    @post.favorite(current_user)
   
+    respond_to do |format|
+      format.html { redirect_to @post }
+      format.json {
+        render json: {
+          likes_count: @post.likes_count,
+          like_button_html: render_to_string(partial: "components/like_button", locals: { post: @post }, formats: [:html])
+        }
+      }
+    end
+    authorize @post
+  end
 
+  def unlike
+    @post.unfavorite(current_user)
+
+    respond_to do |format|
+      format.html { redirect_to @post }
+      format.json {
+        render json: {
+          likes_count: @post.likes_count,
+          like_button_html: render_to_string(partial: "components/like_button", locals: { post: @post }, formats: [:html])
+        }
+      }
+    end
+    authorize @post
+  end
+  
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
   
   def process_mentions(content)
     mentions = []
