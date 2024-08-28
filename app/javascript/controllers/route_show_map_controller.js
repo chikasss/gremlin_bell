@@ -45,7 +45,6 @@ export default class extends Controller {
 
       const landmarksData = this.data.get("landmarks");
       console.log("any landmarks?",landmarksData )
-      console.log("any landmarks?",landmarksData[0].value )
 
       if (landmarksData && landmarksData !== "[]" && landmarksData !== "[{\"lat\":null,\"long\":null}]") {
         const landmarks = JSON.parse(this.data.get("landmarks"));
