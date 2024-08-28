@@ -51,6 +51,7 @@ class PostsController < ApplicationController
     else
       @posts = Post.all
     end
+    authorize @posts
   end
   
 

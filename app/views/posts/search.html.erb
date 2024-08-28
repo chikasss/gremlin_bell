@@ -1,7 +1,18 @@
-<h1>Posts tagged with <%= params[:tag] %></h1>
-<% @posts.each do |post| %>
-  <div class="post">
-    <h2><%= link_to post.title, post_path(post) %></h2>
-    <p><%= truncate(post.content, length: 100) %></p>
+<div class="bg-red">
+  <div class="container">
+    <%= render 'shared/logo_btn_top_white', user: (@user || current_user) %>
+    <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
-<% end %>
+  <div class="bg-white">
+    <div class="container headers-gray">
+      <h3 class="mb-4 text-center">Posts tagged with <strong>#<%= params[:tag] %></strong></h3 class="mb-4 text-center">
+      <% @posts.each do |post| %>
+        <div class="post">
+          <div class="mb-2">
+            <%= render 'posts/card', post: post %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
