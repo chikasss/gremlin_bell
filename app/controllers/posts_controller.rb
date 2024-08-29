@@ -17,9 +17,9 @@ class PostsController < ApplicationController
 
     if @post.save
       if request.referer == root_url
-        redirect_to root_path, notice: 'Post created successfully.'
+        redirect_to root_path
       else
-        redirect_to user_post_path(@post.user, @post), notice: 'Post created successfully.'
+        redirect_to user_post_path(@post.user, @post)
       end
     else
       flash[:alert] = "Unable to create post. Please try again."

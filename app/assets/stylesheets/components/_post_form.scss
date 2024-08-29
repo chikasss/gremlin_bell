@@ -19,27 +19,28 @@
     right: 10px;
   }
 
-  textarea {
-    background: none;
-    border: none;
-    outline: none;
-    input {
-      box-shadow: none;
-      padding-right: 4rem;
-    }
+  .input-form {
+    position: relative;
+    margin-right: 3rem;
 
-    &::placeholder {
-      font-size: 0.9rem;
-      margin-right: 3rem;
-      color: $gray-icon;
-    }
-
-    &:focus {
-      outline: none; 
-      box-shadow: none;
+    textarea {
+      background: none;
+      border: none;
+      outline: none;
+  
+      &::placeholder {
+        font-size: 0.9rem;
+        margin-right: 3rem;
+        color: $gray-icon;
+      }
+  
+      &:focus {
+        outline: none; 
+        box-shadow: none;
+        background-color: transparent;
+      }
     }
   }
-
 
   .tags input {
     background: none;
@@ -63,23 +64,48 @@
   .remove-mb {
     margin-bottom: 0 !important;
   }
+
+  @media(max-width: 768px) {
+    .btn-yellow-sm {
+      font-size: 0.7rem;
+    }
+  }
 }
 
 .mention-suggestions {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0.5rem;
   background: white;
   border: 1px solid #ccc;
+  border-radius: 6px;
   max-height: 150px;
   overflow-y: auto;
-}
+  width: 80%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
 
-.mention-suggestions li {
-  padding: 8px;
-  cursor: pointer;
-}
+  @media (max-width: 768px) {
+    width: 100%;
+    max-height: 100px;
+    padding: 0.3rem;
+  }
 
-.mention-suggestions li:hover {
-  background-color: #f0f0f0;
+  li {
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    color: $gray-hover;
+    font-weight: 500;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0.3rem;
+    }
+  }
 }

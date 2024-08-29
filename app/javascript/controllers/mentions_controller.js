@@ -15,8 +15,10 @@ export default class extends Controller {
     if (mentionStart !== -1 && this.query.length > mentionStart + 1) {
       const query = this.query.slice(mentionStart + 1)
       this.search(query)
+      this.resultsTarget.classList.remove('d-none');
     } else {
       this.resultsTarget.innerHTML = ""
+      this.resultsTarget.classList.add('d-none');
     }
   }
 
@@ -48,6 +50,7 @@ export default class extends Controller {
 
       this.inputTarget.value = this.query;
       this.resultsTarget.innerHTML = "";
+      this.resultsTarget.classList.add('d-none');
     }
   };
   
