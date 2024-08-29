@@ -68,7 +68,7 @@ export default class extends Controller {
 
   }
 
-  addLandmarkMarker(coords, id, color, useCustomMarker = false) {
+  addLandmarkMarker(coords, id, color, useCustomMarker = false, address = "") {
     console.log('Adding landmark marker at', coords);
     const markerElement = useCustomMarker ? this.createLandmarkCustomMarkerElement(id) : null;
     const marker = new mapboxgl.Marker(markerElement || { color })

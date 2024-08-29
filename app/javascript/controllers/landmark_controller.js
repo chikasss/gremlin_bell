@@ -31,10 +31,15 @@ export default class extends Controller {
   #handleResult(event) {
     const result = event.result
 
+    console.log("Extracted place_name:", result["place_name"]);
+
     // this.addressTarget.value = result["place_name"]
 
     const coordinates = result.geometry.coordinates
+     const address = result["place_name"];
+
     console.log("Landmarks Coordinates:", coordinates);
+    console.log("Landmark Address:", address);
 
     this.#addLandmarkFields(result["place_name"], coordinates);
 
