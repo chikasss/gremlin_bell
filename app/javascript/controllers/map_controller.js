@@ -63,10 +63,10 @@ export default class extends Controller {
       const { coordinates } = event.detail;
       const address = event.detail.address;
       if (Array.isArray(coordinates) && coordinates.length === 2) {
-        this.landmarks.push({ coordinates, address });
+        this.landmarks.push({ coords: coordinates, address });
         this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length - 1}`, "#000", true, address);
       } else {
-        console.error("Invalid coordinates format. Expected [lng, lat] array.");
+        console.error("1. Invalid coordinates format. Expected [lng, lat] array.");
       }
     });
 
@@ -75,7 +75,7 @@ export default class extends Controller {
   addLandmarkMarker(coords, id, color, useCustomMarker = false, address = "") {
     console.log('Adding landmark marker at', coords);
     if (!Array.isArray(coords) || coords.length !== 2) {
-      console.error("Invalid coordinates format. Expected [lng, lat] array.");
+      console.error("2. Invalid coordinates format. Expected [lng, lat] array.");
       return;
     }
 
@@ -112,7 +112,7 @@ export default class extends Controller {
 
       // remove all the existing marker, before re-rendering them
       document.querySelectorAll(".custom-marker").forEach(marker => marker.remove())
-      console.log(document.querySelectorAll(".custom-marker"));
+      // console.log(document.querySelectorAll(".custom-marker"));
 
 
       // re-rendering waypoints
@@ -121,16 +121,18 @@ export default class extends Controller {
           index === 0 ? '#3887be' : '#f30', true);
       });
 
-      console.log("Current landmarks:", this.landmarks);
-
+      // console.log("Current landmarks:", this.landmarks);
 
       // re-rendering landmarks
       this.landmarks.forEach((landmark, index) => {
-        const { coordinates, address } = landmark;
-        if (Array.isArray(coordinates) && coordinates.length === 2) {
-          this.addLandmarkMarker(coordinates, `landmark-${index}`, "#000", true, address);
+        const coords = landmark.coords;  // Access the coordinates array
+        const address = landmark.address;     // Access the address string
+
+        console.log("landmark coords:", coords)
+        if (Array.isArray(coords) && coords.length === 2) {
+          this.addLandmarkMarker(coords, `landmark-${index}`, "#000", true, address);
         } else {
-          console.error("Invalid coordinates format. Expected [lng, lat] array.");
+          console.error("3. Invalid coordinates format. Expected [lng, lat] array.");
         }
       });
 
