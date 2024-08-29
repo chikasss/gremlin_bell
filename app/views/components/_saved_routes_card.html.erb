@@ -1,6 +1,11 @@
 <div class="saved-route-card">
-  <% if route.photos.any? && route.photos.first.image.attached? %>
-    <%= cl_image_tag route.photos.first.image.key, class: "card-img" %>
+  <% if route.photos.any? %>
+    <% first_photo = route.photos.first %>
+    <% if first_photo.image.attached? %>
+      <%= cl_image_tag first_photo.image.key, class: "card-img" %>
+    <% else %>
+      <%= image_tag "default-route-image.jpg", class: "card-img" %>
+    <% end %>
   <% else %>
     <%= image_tag "default-route-image.jpg", class: "card-img" %>
   <% end %>

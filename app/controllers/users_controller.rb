@@ -53,8 +53,7 @@ class UsersController < ApplicationController
 
   def saved_trips
     authorize @user
-    @saved_trips = @user.all_favorited
-    # @user.favorited_routes
+    @saved_trips = @user.favorited_routes
   end
 
   def created_routes

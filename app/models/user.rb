@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+        :recoverable, :rememberable, :validatable
 
   acts_as_favoritor
   has_many :routes, dependent: :destroy
@@ -53,5 +53,10 @@ class User < ApplicationRecord
 
   def following?(user)
     following.include?(user)
+  end
+
+  def favorited_routes
+    Route.joins(:favorites)
+         .where(favorites: { favoritor_id: id, favoritor_type: 'User' })
   end
 end

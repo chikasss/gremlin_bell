@@ -5,6 +5,7 @@ class Route < ApplicationRecord
 
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_many :favorites, as: :favoritable, dependent: :destroy
   has_many :landmarks, dependent: :destroy
   accepts_nested_attributes_for :landmarks, allow_destroy: true
   acts_as_favoritable
