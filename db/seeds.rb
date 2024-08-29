@@ -383,7 +383,7 @@ vincenzo_bikes.photos.attach(
 )
 vincenzo_bikes.save
 
-file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/mjv.jpg")
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926699/250TR_ami_bike_t81mjv_o43kl6.jpg")
 
 ami_bikes.photos.attach(
   io: file,
@@ -606,7 +606,7 @@ Photo.create!(
   user: bill_route2.user
 )
 
-file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724047430/jozankei_guuq2s.jpg")
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926717/jozankei_guuq2s_bw4l9e.jpg")
 Photo.create!(
   image: {
     io: file,
@@ -1153,7 +1153,7 @@ end
 
 puts 'attaching photos to posts...'
 
-file = URI.open('file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724047432/nakayama_jmgip6.jpg")')
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926724/nakayama_jmgip6_uj0xth.jpg")
 post1.images.attach(
   io: file,
   filename: "post nakayama_pass",
@@ -1167,28 +1167,28 @@ post2.images.attach(
   content_type: "image/jpg"
 )
 
-file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724047911/ocean_y0fdqn.jpg")
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926728/ocean_y0fdqn_dxirgq.jpg")
 post3.images.attach(
   io: file,
   filename: "post ocean_drive",
   content_type: "image/jpg"
 )
 
-file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724047432/noborito_a9eebx.jpg")
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926725/noborito_a9eebx_cdp1gv.jpg")
 post4.images.attach(
   io: file,
   filename: "post noborito",
   content_type: "image/jpg"
 )
 
-file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724047432/highway38_zanqdw.jpg")
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926716/highway38_zanqdw_lekuhu.jpg")
 post5.images.attach(
   io: file,
   filename: "post highway_38",
   content_type: "image/jpg"
 )
 
-file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1723122228/Review_Hideo_Route_pxpwms.jpg")
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926736/Review_Hideo_Route_pxpwms_opazye.jpg")
 
 review_for_hideo_route.photos.attach(
   io: file,
