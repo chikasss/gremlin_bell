@@ -117,6 +117,12 @@
         color: $black;
       }
     }
+
+    a.dropdown-item:focus,
+    a.dropdown-item:active {
+      background-color: $dark-red;
+      color: white;
+    }
   }
 }
 
