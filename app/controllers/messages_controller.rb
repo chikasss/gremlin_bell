@@ -10,10 +10,12 @@ class MessagesController < ApplicationController
     authorize @message
   
     if @message.save
-      Rails.logger.debug "Warden: #{request.env['warden'].inspect}"
       ChatroomChannel.broadcast_to(
         @chatroom,
-        render_to_string(partial: "messages/message", locals: { message: @message, current_user: current_user })
+        {
+          message: render_to_string(partial: "messages/message", locals: { message: @message, current_user: current_user }),
+          user_id: current_user.id
+        }
       )
       head :ok
     # if @message.save
