@@ -30,16 +30,24 @@ export default class extends Controller {
       'top-left'
     );
 
-    this.map.addControl(
-      new MapboxGeocoder({
+    const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       types: "country,region,place,postcode,locality,neighborhood,address, poi",
       mapboxgl: mapboxgl,
       countries: 'jp',
       placeholder: 'Search for a place',
       className: 'custom-geocoder'
-    }),
-    );
+    });
+
+    this.map.addControl(geocoder);
+
+// geocoder.on('result', (event) => {
+//   const coordinates = event.result.geometry.coordinates;
+//   const address = event.result.place_name; // This is the address
+
+//   this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length}`, '#000', true, address);
+//   console.log(address)
+// });
 
     this.waypoints = this.initializeWaypoints();
 
@@ -53,20 +61,33 @@ export default class extends Controller {
 
     this.element.addEventListener('landmark:add', (event) => {
       const { coordinates } = event.detail;
-      this.landmarks.push(coordinates);
-      this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length - 1}`, "#000", true);
+      const address = event.detail.address;
+      if (Array.isArray(coordinates) && coordinates.length === 2) {
+        this.landmarks.push({ coordinates, address });
+        this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length - 1}`, "#000", true, address);
+      } else {
+        console.error("Invalid coordinates format. Expected [lng, lat] array.");
+      }
     });
 
   }
 
-  addLandmarkMarker(coords, id, color, useCustomMarker = false) {
+  addLandmarkMarker(coords, id, color, useCustomMarker = false, address = "") {
     console.log('Adding landmark marker at', coords);
+    if (!Array.isArray(coords) || coords.length !== 2) {
+      console.error("Invalid coordinates format. Expected [lng, lat] array.");
+      return;
+    }
+
     const markerElement = useCustomMarker ? this.createLandmarkCustomMarkerElement(id) : null;
     const marker = new mapboxgl.Marker(markerElement || { color })
       .setLngLat(coords)
       .addTo(this.map);
     this.markers.set(id, marker);
+    this.landmarks.push({ coords, address });
+
     console.log('Landmark marker', marker);
+    console.log('Landmark address:', address);
   }
 
   createLandmarkCustomMarkerElement(id) {
@@ -94,16 +115,23 @@ export default class extends Controller {
       console.log(document.querySelectorAll(".custom-marker"));
 
 
-      // re-rendering markers
+      // re-rendering waypoints
       this.waypoints.forEach((point, index) => {
         this.addMarker(point, `waypoint-${index}`,
           index === 0 ? '#3887be' : '#f30', true);
       });
 
+      console.log("Current landmarks:", this.landmarks);
+
 
       // re-rendering landmarks
-      this.landmarks.forEach((coords, index) => {
-        this.addLandmarkMarker(coords, `landmark-${index}`, "#000", true);
+      this.landmarks.forEach((landmark, index) => {
+        const { coordinates, address } = landmark;
+        if (Array.isArray(coordinates) && coordinates.length === 2) {
+          this.addLandmarkMarker(coordinates, `landmark-${index}`, "#000", true, address);
+        } else {
+          console.error("Invalid coordinates format. Expected [lng, lat] array.");
+        }
       });
 
       if (this.waypoints.length > 1) {
