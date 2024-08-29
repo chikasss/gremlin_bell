@@ -14,27 +14,29 @@
         <% end %>
         <small><%= post.created_at.strftime("%B %d") %></small>
       </div>
-      <div>
-        <p><%= raw post.content %></p>
-        <% if post.images.any? %>
-          <div class="d-flex flex-row flex-nowrap overflow-auto">
-            <% post.images.each do |image| %>
-              <div class="col-8 col-md-4 me-2">
-                <%= cl_image_tag image.key, class: "post-image" %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-        <% if post.tags.any? %>
-          <% post.tags.each do |tag| %>
-            <%= link_to search_posts_path(tag: tag), class: "hashtag" do %>
-              <span class="tag-post">#<%= tag %></span>
+      <%= link_to user_post_path(post.user, post) do %>
+        <div>
+          <p><%= raw post.content %></p>
+          <% if post.images.any? %>
+            <div class="d-flex flex-row flex-nowrap overflow-auto">
+              <% post.images.each do |image| %>
+                <div class="col-8 col-md-4 me-2">
+                  <%= cl_image_tag image.key, class: "post-image" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+          <% if post.tags.any? %>
+            <% post.tags.each do |tag| %>
+              <%= link_to search_posts_path(tag: tag), class: "hashtag" do %>
+                <span class="tag-post">#<%= tag %></span>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
       <div class="d-flex align-items-center mt-2 icons" data-controller="like">
-        <div class=" me-4" data-post-id="<%= post.id %>">
+        <div class=" me-4">
           <%= render "components/like_button", post: post %>
         </div>
         <div class="d-flex align-items-center">
@@ -46,8 +48,8 @@
       </div>
     </div>
   </div>
-  <div class="mt-4 toggle-form-post" data-insert-post-comment-target="commentForm">
-    <%= simple_form_for [post, post.comments.build] do |f| %>
+  <div class="mt-1 toggle-form-post" data-insert-post-comment-target="commentForm">
+    <%= simple_form_for [post.user, post, post.comments.build] do |f| %>
       <%= f.input :description, label: false %>
       <div class="d-flex justify-content-center">
         <%= f.button :submit, "Post", class: "btn-yellow-sm" %>

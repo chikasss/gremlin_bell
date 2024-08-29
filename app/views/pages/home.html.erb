@@ -46,7 +46,6 @@
                   </div>
                 </div>
               </div>
-              <%= link_to 'see posts', posts_path %>
             </div>
             <!-- ALL ITEMS -->
             <% if current_user.following.any? %>
@@ -99,6 +98,7 @@
                             default_image: "route_default.jpg",
                             photo: item[:photo] %>
                       </div>
+                      <!-- posts -->
                     <% elsif item.is_a?(Post) %>
                       <div class="mb-2 col-md-8">
                         <%= render 'posts/card', post: item %>
@@ -131,7 +131,7 @@
             <!-- POSTS -->
             <div class="tab-pane fade" id="pills-post" role="tabpanel" aria-labelledby="pills-post-tab" tabindex="0">
               <div class="feed-posts mt-4">
-                <div class="">
+                <div>
                   <h3 class="pb-2">What's on your mind?</h3>
                   <div class="d-flex justify-content-center">
                     <div class="col-12 col-md-8">

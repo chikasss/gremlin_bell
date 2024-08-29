@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
       if @commentable.is_a?(Post)
         @commentable.increment!(:comments_count)
       end
-      redirect_to @commentable
+      redirect_to user_post_path(@commentable.user, @commentable)
     else
       flash[:alert] = "Unable to post comment. Please try again."
     end
