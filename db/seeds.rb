@@ -8,6 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+include MentionProcessor
+
 puts 'Cleaning database...'
 
 Favorite.destroy_all
@@ -914,7 +916,7 @@ review_for_hideo_route2 = Review.create!(
 
 puts "Reviews Created"
 
-puts "Attaching photos to reviews"
+# puts "Attaching photos to reviews"
 
 # file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122229/Review_Bill_Route_bizkh5.jpg")
 
@@ -1013,64 +1015,75 @@ noborito_yokohama = Route.find_by(title: "Noborito to Yokohama")
 
 # Create 10 Posts with Mentions
 posts = []
+
+processed = process_mentions("Had an amazing ride today on @[Nakayama Pass]! Thanks @[Hideo_Sato] for the recommendation!")
 posts << Post.create!(
   user: bill,
-  content: "Had an amazing ride today on @[Nakayama Pass]! Thanks @[Hideo_Sato] for the recommendation!",
-  mentions: [nakayama_pass.title, hideo.username]
+  content: processed[:content],
+  mentions: processed[:mentions]
 )
 
+processed = process_mentions("Explored @[Jozankei] today, and it was stunning. @[Eric_Hall], you should definitely check it out!")
 posts << Post.create!(
   user: mika,
-  content: "Explored @[Jozankei] today, and it was stunning. @[Eric_Hall], you should definitely check it out!",
-  mentions: [jozankei.title, eric.username]
+  content: processed[:content],
+  mentions: processed[:mentions]
 )
 
+processed = process_mentions("If you're looking for a great coastal ride, I highly recommend @[Ocean Drive]! @[Mary_Smith], you would love this one!")
 posts << Post.create!(
   user: vincenzo,
-  content: "If you're looking for a great coastal ride, I highly recommend @[Ocean Drive]! @[Mary_Smith], you would love this one!",
-  mentions: [ocean_drive.title, mary.username]
+  content: processed[:content],
+  mentions: processed[:mentions]
 )
 
+processed = process_mentions("Urban vibes on my ride through @[Noborito to Yokohama] today. @[Angel_Gibson], let's ride together next time!")
 posts << Post.create!(
   user: ami,
-  content: "Urban vibes on my ride through @[Noborito to Yokohama] today. @[Angel_Gibson], let's ride together next time!",
-  mentions: [noborito_yokohama.title, angel.username]
+  content: processed[:content],
+  mentions: processed[:mentions]
 )
 
+processed = process_mentions("Took a scenic route on @[Highway 38] today. @[Vincenzo_Garcia], you have to try this one!")
 posts << Post.create!(
   user: eric,
-  content: "Took a scenic route on @[Highway 38] today. @[Vincenzo_Garcia], you have to try this one!",
-  mentions: [highway_38.title, vincenzo.username]
+  content: processed[:content],
+  mentions: processed[:mentions]
 )
 
+processed = process_mentions("Enjoyed a peaceful ride along @[W800 Street on Mikuni Pass]. @[Ami_Ozaki], this is one for your list!")
 posts << Post.create!(
   user: mary,
-  content: "Enjoyed a peaceful ride along @[W800 Street on Mikuni Pass]. @[Ami_Ozaki], this is one for your list!",
-  mentions: [mikuni_pass.title, ami.username]
+  content: processed[:content],
+  mentions: processed[:mentions]
 )
 
+processed = process_mentions("Spent the day riding through @[Ride in Kyushu]. @[Mika_Hayashi], you would love the views!")
 posts << Post.create!(
   user: angel,
-  content: "Spent the day riding through @[Ride in Kyushu]. @[Mika_Hayashi], you would love the views!",
-  mentions: [ride_in_kyushu.title, mika.username]
+  content: processed[:content],
+  mentions: processed[:mentions]
 )
 
+processed = process_mentions("The @[West Coast of Hokkaido] is a must-ride for any biker. @[Bill_Billiards], let's go together next time!")
 posts << Post.create!(
   user: hideo,
-  content: "The @[West Coast of Hokkaido] is a must-ride for any biker. @[Bill_Billiards], let's go together next time!",
-  mentions: [west_coast_hokkaido.title, bill.username]
+  content: processed[:content],
+  mentions: processed[:mentions]
 )
 
+processed = process_mentions("Just had an amazing coffee stop during my ride. @[Ami_Ozaki], we need to plan a ride soon!")
 posts << Post.create!(
   user: vincenzo,
-  content: "Just had an amazing coffee stop during my ride. @[Ami_Ozaki], we need to plan a ride soon!",
-  mentions: [ami.username]
+  content: processed[:content],
+  mentions: processed[:mentions]
 )
 
+processed = process_mentions("Another beautiful day riding through @[Kyushu]. @[Hideo_Sato], thanks for the tips on this route!")
 posts << Post.create!(
   user: bill,
-  content: "Another beautiful day riding through @[Kyushu]. @[Hideo_Sato], thanks for the tips on this route!",
-  mentions: [kyushu.title, hideo.username]
+  content: processed[:content],
+  mentions: processed[:mentions]
 )
 
 # Seed 15 Comments on Posts

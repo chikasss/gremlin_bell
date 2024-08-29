@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include MentionProcessor
   before_action :authenticate_user!
   before_action :set_post, only: [:like, :unlike]
 
@@ -98,28 +99,28 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
   
-  def process_mentions(content)
-    mentions = []
+  # def process_mentions(content)
+  #   mentions = []
   
-    processed_content = content.gsub(/@\[(.+?)\]/) do |mention|
-      user_or_route_name = $1.strip
-      user = User.find_by(username: user_or_route_name)
-      route = Route.where("LOWER(title) = ?", user_or_route_name.downcase).first
+  #   processed_content = content.gsub(/@\[(.+?)\]/) do |mention|
+  #     user_or_route_name = $1.strip
+  #     user = User.find_by(username: user_or_route_name)
+  #     route = Route.where("LOWER(title) = ?", user_or_route_name.downcase).first
   
-      if user
-        mentions << user.username
-        "<a href='#{user_path(user)}'>@#{user.username}</a>"
-      elsif route
-        mentions << route.title
-        "<a href='#{route_path(route)}'>@#{route.title}</a>"
-      else
-        mention
-      end
-    end
+  #     if user
+  #       mentions << user.username
+  #       "<a href='#{user_path(user)}'>@#{user.username}</a>"
+  #     elsif route
+  #       mentions << route.title
+  #       "<a href='#{route_path(route)}'>@#{route.title}</a>"
+  #     else
+  #       mention
+  #     end
+  #   end
   
-    @post.mentions = mentions if @post.respond_to?(:mentions)
-    processed_content
-  end
+  #   @post.mentions = mentions if @post.respond_to?(:mentions)
+  #   processed_content
+  # end
   
   def process_tags(tags_string)
     tags_string.split(',').map { |tag| tag.strip.downcase.gsub(/\s+/, '-') }
