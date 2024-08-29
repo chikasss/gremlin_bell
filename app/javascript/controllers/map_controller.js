@@ -41,12 +41,13 @@ export default class extends Controller {
 
     this.map.addControl(geocoder);
 
-geocoder.on('result', (event) => {
-  const coordinates = event.result.geometry.coordinates;
-  const address = event.result.place_name; // This is the address
+// geocoder.on('result', (event) => {
+//   const coordinates = event.result.geometry.coordinates;
+//   const address = event.result.place_name; // This is the address
 
-  this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length}`, '#000', true, address);
-});
+//   this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length}`, '#000', true, address);
+//   console.log(address)
+// });
 
     this.waypoints = this.initializeWaypoints();
 
@@ -60,8 +61,9 @@ geocoder.on('result', (event) => {
 
     this.element.addEventListener('landmark:add', (event) => {
       const { coordinates } = event.detail;
-      this.landmarks.push(coordinates);
-      this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length - 1}`, "#000", true);
+      const address = event.detail.address;
+      this.landmarks.push({ coordinates, address} );
+      this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length - 1}`, "#000", true, address);
     });
 
   }
@@ -75,17 +77,18 @@ geocoder.on('result', (event) => {
     this.markers.set(id, marker);
     this.landmarks.push({ coords, address });
 
-    const event = new CustomEvent('landmark:added', {
-      detail: {
-        id: id,
-        coords: coords,
-        address: address
-      }
-    });
-    this.element.dispatchEvent(event);
+    // const event = new CustomEvent('landmark:added', {
+    //   detail: {
+    //     id: id,
+    //     coords: coords,
+    //     // address: address
+    //   }
+    // });
+    // this.element.dispatchEvent(event);
     // console.log('address', this.address);
 
     console.log('Landmark marker', marker);
+    console.log('Landmark address:', address);
   }
 
   createLandmarkCustomMarkerElement(id) {

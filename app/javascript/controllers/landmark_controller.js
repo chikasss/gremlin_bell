@@ -61,11 +61,14 @@ export default class extends Controller {
     document.getElementById('landmark-fields-container').insertAdjacentHTML('beforeend', newFieldHTML);
   }
 
-  #addLandmarkToMap(coordinates) {
+  #addLandmarkToMap(coordinates, address) {
     const mapControllerElement = document.querySelector('[data-controller="map"]');
     if (mapControllerElement) {
       mapControllerElement.dispatchEvent(new CustomEvent('landmark:add', {
-        detail: { coordinates: coordinates }
+        detail: {
+          coordinates: coordinates,
+        address: address
+       }
       }));
     }
   }
