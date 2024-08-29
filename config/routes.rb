@@ -31,13 +31,13 @@ Rails.application.routes.draw do
     end
   end
   
-
   resources :chatrooms, only: [:index, :show, :new, :create] do
     resources :messages, only: [:create, :show]
   end
 
   get 'search', to: 'search#index', as: 'search_results'
   get 'search/advanced', to: 'search#search', as: 'advanced_search'
+  get 'mentions/search', to: 'mentions#search'
 
   resources :routes, only: %i[new create index show edit update] do
     resources :reviews, only: %i[index create show edit update]
