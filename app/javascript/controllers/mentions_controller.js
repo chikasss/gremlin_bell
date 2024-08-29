@@ -41,23 +41,25 @@ export default class extends Controller {
   selectMention = (event) => {
     const mention = event.currentTarget.dataset.name;
     const mentionStart = this.query.lastIndexOf('@');
-  
+
     if (mentionStart !== -1) {
-      const beforeMention = this.query.slice(0, mentionStart); // includes '@'
-      const afterMention = this.query.slice(mentionStart + mention.length + 1);
-  
-      this.query = beforeMention + `@${mention}` + afterMention;
+      const beforeMention = this.query.slice(0, mentionStart);
+
+      if (mention.includes(' ')) {
+        this.query = beforeMention + `@[${mention}]`; // add [] on routes mentions
+      } else {
+        this.query = beforeMention + `@${mention}`; // user mention without []
+      }
 
       this.inputTarget.value = this.query;
       this.resultsTarget.innerHTML = "";
       this.resultsTarget.classList.add('d-none');
     }
   };
-  
 
   beforeSubmit = () => {
     let content = this.inputTarget.value;
-    // add [] before submit
-    this.inputTarget.value = content.replace(/@(\w+(\s\w+)*)(?![\[\]])/g, '@[$1]');
+    this.inputTarget.value = content;
   }
 }
+
