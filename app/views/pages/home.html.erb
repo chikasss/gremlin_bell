@@ -40,7 +40,7 @@
             <div class="post my-4">
               <div class="d-flex justify-content-center">
                 <div class="col-12 col-md-8 mb-2">
-                  <h3 class="pb-2">What's on your mind?</h3>
+                  <h3 class="pb-2">What's up?</h3>
                   <%= render 'posts/form', user: current_user %>
                 </div>
               </div>
@@ -82,10 +82,10 @@
                           <% if item.commentable.is_a?(Route) %>
                             <%= render 'components/feed_card', item: item, action_text: "commented on the route", item_title: item.commentable.title, item_link: route_path(item.commentable) %>
                           <% elsif item.commentable.is_a?(Post) %>
-                            <%= render 'components/feed_card', 
-                                item: item, 
-                                action_text: "commented on a post by", 
-                                item_title: "@#{item.commentable.user.username}", 
+                            <%= render 'components/feed_card',
+                                item: item,
+                                action_text: "commented on a post by",
+                                item_title: "@#{item.commentable.user.username}",
                                 item_link: user_post_path(item.commentable.user, item.commentable) %>
                           <% end %>
                         </div>
@@ -136,10 +136,10 @@
                 <div class="col-12 col-md-8">
                   <div class="feed-posts mt-4">
                     <div>
-                      <h3 class="pb-2">What's on your mind?</h3>
+                      <h3 class="pb-2">What's up?</h3>
                       <%= render 'posts/form', user: current_user %>
                     </div>
-                    <h4 class="my-4">Recently posts:</h4>
+                    <h4 class="my-4">Recent posts:</h4>
                     <% @posts.each do |post| %>
                       <div class="mb-2">
                         <%= render 'posts/card', post: post %>
@@ -154,7 +154,7 @@
               <div class="row d-flex justify-content-center mt-4">
                 <div class="col-11 col-md-8 mb-3">
                   <div class="feed-photos">
-                    <h4 class="mb-4">Your friends' recently added photos:</h4>
+                    <h4 class="mb-4">Following:</h4>
                     <% if @routes_with_photos.any? %>
                       <% @routes_with_photos.each do |item| %>
                         <div class="mb-2">
@@ -180,7 +180,7 @@
               <div class="row d-flex justify-content-center">
                 <div class="col-11 col-md-8">
                   <div class="friends-routes mt-4">
-                    <h4 class="mb-4">Your friends' recently added routes:</h4>
+                    <h4 class="mb-4">Following:</h4>
                     <% if @routes.any? %>
                       <% @routes.each do |route| %>
                         <div class="mb-2">
@@ -199,7 +199,8 @@
               <div class="row d-flex justify-content-center mt-4">
                 <div class="col-11 col-md-8 mb-2">
                   <div class="friends-review">
-                    <h4 class="mb-4">Your friends' recently added reviews:</h4>
+                    <h4 class="mb-4">Following:</h4>
+                    <h5>Reviews:</h5>
                     <% if @reviews.any? %>
                       <% @reviews.each do |review| %>
                         <div class="mb-2">
@@ -214,24 +215,24 @@
                   </div>
                   <!-- COMMENTS -->
                   <div class="friends-comments mt-4">
-                    <h4>Your friends' recently added comments:</h4>
+                    <h5>Comments:</h5>
                     <% if @comments.any? %>
                       <div class="mt-4">
                         <% @comments.each do |comment| %>
                           <div class="mb-2">
                             <!-- Route comments -->
                             <% if comment.commentable.is_a?(Route) %>
-                              <%= render 'components/feed_card', 
-                                  item: comment, 
-                                  action_text: "created a new comment in route", 
-                                  item_title: comment.commentable.title, 
+                              <%= render 'components/feed_card',
+                                  item: comment,
+                                  action_text: "created a new comment in route",
+                                  item_title: comment.commentable.title,
                                   item_link: route_path(comment.commentable) %>
                               <!-- Posts comments -->
                             <% elsif comment.commentable.is_a?(Post) %>
-                              <%= render 'components/feed_card', 
-                                  item: comment, 
-                                  action_text: "commented on a post by", 
-                                  item_title: "@#{comment.commentable.user.username}", 
+                              <%= render 'components/feed_card',
+                                  item: comment,
+                                  action_text: "commented on a post by",
+                                  item_title: "@#{comment.commentable.user.username}",
                                   item_link: user_post_path(comment.commentable.user, comment.commentable) %>
                             <% else %>
                               <p>Comentário sem entidade associada.</p>
@@ -249,7 +250,7 @@
               <div class="row d-flex justify-content-center mt-4">
                 <div class="col-11 col-md-8">
                   <div class="friends-bikes">
-                    <h4 class="mb-4">Your friends' recently added bikes:</h4>
+                    <h4 class="mb-4">Following:</h4>
                     <% if @bikes.any? %>
                       <% @bikes.each do |bike| %>
                         <div class="mb-3">

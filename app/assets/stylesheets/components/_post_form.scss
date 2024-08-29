@@ -27,15 +27,15 @@
       background: none;
       border: none;
       outline: none;
-  
+
       &::placeholder {
         font-size: 0.9rem;
         margin-right: 3rem;
         color: $gray-icon;
       }
-  
+
       &:focus {
-        outline: none; 
+        outline: none;
         box-shadow: none;
         background-color: transparent;
       }
@@ -48,14 +48,14 @@
     outline: none;
     box-shadow: none;
     border: 1px solid rgba(222, 226, 230, 0.5);
-  
+
     &::placeholder {
       font-size: 0.8rem;
       color: $gray-icon;
     }
-  
+
     &:focus {
-      outline: none; 
+      outline: none;
       box-shadow: none;
       border-color: $border;
     }

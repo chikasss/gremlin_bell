@@ -38,9 +38,9 @@
         <div class="last-posts mt-4">
           <div class="d-flex justify-content-between mb-3">
             <% if @user == current_user %>
-              <h3><strong>Your</strong> posts:</h3>
+              <h3><strong>My</strong> Posts:</h3>
             <% else %>
-              <h3><%= @user.first_name %>'s <strong>posts:</strong></h3>
+              <h3><%= @user.first_name %>'s <strong>Posts:</strong></h3>
             <% end %>
             <%= link_to user_posts_path(@user) do %>
               <i class="fa-solid fa-circle-chevron-right"></i>
@@ -61,7 +61,7 @@
         <!-- BIKES -->
         <div class="d-flex justify-content-between mt-4 pt-4 mb-2">
           <% if @user ==current_user %>
-            <h3><strong>Your</strong> Garage:</h3>
+            <h3><strong>My</strong> Garage:</h3>
           <% else %>
             <h3><%= @user.first_name %>'s <strong>Garage:</strong></h3>
           <% end %>
@@ -84,9 +84,9 @@
         <div class="created-routes mt-4 pt-4">
           <div class="d-flex justify-content-between">
             <% if @user == current_user %>
-              <h3><strong>Your</strong> routes:</h3>
+              <h3><strong>My</strong> Routes:</h3>
             <% else %>
-              <h3><%= @user.first_name %>'s <strong>routes:</strong></h3>
+              <h3><%= @user.first_name %>'s <strong>Routes:</strong></h3>
             <% end %>
             <% if @user.routes.any? %>
               <%= link_to created_routes_user_path(@user) do %>
@@ -108,9 +108,9 @@
         <div class="my-4">
           <div class="d-flex justify-content-between">
             <% if @user == current_user %>
-              <h3>Your <strong>last review</strong></h3>
+              <h3>My <strong>Latest Review</strong></h3>
             <% else %>
-              <h3>Last <%= @user.first_name %>'s <strong>review</strong></h3>
+              <h3><%= @user.first_name %>'s <strong> Latest review</strong></h3>
             <% end %>
             <%= link_to user_reviews_user_path(@user) do %>
               <i class="fa-solid fa-circle-chevron-right"></i>
