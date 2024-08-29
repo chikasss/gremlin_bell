@@ -1015,13 +1015,6 @@ posts << post1 =  Post.create!(
   tags: ["Nakayama Pass", "ride", "recommendation"]
 )
 
-file = URI.open('file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/nakayama_jmgip6.jpg")')
-post1.images.attach(
-  io: file,
-  filename: "post nakayama_pass",
-  content_type: "image/jpg"
-)
-
 # Post 2
 processed = process_mentions("Explored @Jozankei today, and it was stunning. @Eric_Hall, you should definitely check it out!")
 posts << post2 = Post.create!(
@@ -1029,13 +1022,6 @@ posts << post2 = Post.create!(
   content: processed[:content],
   mentions: processed[:mentions],
   tags: ["Jozankei", "explore", "stunning"]
-)
-
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047430/jozankei_guuq2s.jpg")
-post2.images.attach(
-  io: file,
-  filename: "post jozankei",
-  content_type: "image/jpg"
 )
 
 # Post 3
@@ -1047,13 +1033,6 @@ posts << post3 = Post.create!(
   tags: ["Ocean Drive", "coastal", "ride"]
 )
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047911/ocean_y0fdqn.jpg")
-post3.images.attach(
-  io: file,
-  filename: "post ocean_drive",
-  content_type: "image/jpg"
-)
-
 # Post 4
 processed = process_mentions("Urban vibes on my ride through @[Noborito to Yokohama] today. @Angel_Gibson, let's ride together next time!")
 posts << post4 = Post.create!(
@@ -1063,13 +1042,6 @@ posts << post4 = Post.create!(
   tags: ["Noborito to Yokohama", "urban", "vibes"]
 )
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/noborito_a9eebx.jpg")
-post4.images.attach(
-  io: file,
-  filename: "post noborito",
-  content_type: "image/jpg"
-)
-
 # Post 5
 processed = process_mentions("Took a scenic route on @[Highway 38] today. @Vincenzo_Garcia, you have to try this one!")
 posts << post5 = Post.create!(
@@ -1077,13 +1049,6 @@ posts << post5 = Post.create!(
   content: processed[:content],
   mentions: processed[:mentions],
   tags: ["Highway 38", "scenic", "route", "ride"]
-)
-
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/highway38_zanqdw.jpg")
-post5.images.attach(
-  io: file,
-  filename: "post highway_38",
-  content_type: "image/jpg"
 )
 
 # Post 6
@@ -1129,14 +1094,6 @@ posts << Post.create!(
   content: processed[:content],
   mentions: processed[:mentions],
   tags: ["Kyushu", "beautiful day", "tips", "biker", "route"]
-)
-
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Hideo_Route_pxpwms.jpg")
-
-review_for_hideo_route.photos.attach(
-  io: file,
-  filename: "hideo_route_photo",
-  content_type: "image/jpg"
 )
 
 puts "Posts created"
@@ -1187,5 +1144,50 @@ posts.each do |post|
   post.update_column(:likes_count, favorites_count)
   puts "Post ID: #{post.id}, Likes: #{favorites_count}"
 end
+
+puts 'attaching photos to posts...'
+
+file = URI.open('file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/nakayama_jmgip6.jpg")')
+post1.images.attach(
+  io: file,
+  filename: "post nakayama_pass",
+  content_type: "image/jpg"
+)
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047430/jozankei_guuq2s.jpg")
+post2.images.attach(
+  io: file,
+  filename: "post jozankei",
+  content_type: "image/jpg"
+)
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047911/ocean_y0fdqn.jpg")
+post3.images.attach(
+  io: file,
+  filename: "post ocean_drive",
+  content_type: "image/jpg"
+)
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/noborito_a9eebx.jpg")
+post4.images.attach(
+  io: file,
+  filename: "post noborito",
+  content_type: "image/jpg"
+)
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/highway38_zanqdw.jpg")
+post5.images.attach(
+  io: file,
+  filename: "post highway_38",
+  content_type: "image/jpg"
+)
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Hideo_Route_pxpwms.jpg")
+
+review_for_hideo_route.photos.attach(
+  io: file,
+  filename: "hideo_route_photo",
+  content_type: "image/jpg"
+)
 
 puts "Seeding Complete"
