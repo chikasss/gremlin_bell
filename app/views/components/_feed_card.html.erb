@@ -13,9 +13,9 @@
     <% end %>
     <div>
       <p class="mb-0">
-        <strong><%= link_to user_path(item.user) do %><%= item.user.username %><% end %></strong>
+        <strong><%= link_to user_path(item.user) do %>@<%= item.user.username %><% end %></strong>
         <%= action_text %>
-        <strong><%= link_to item_link do %><%= item_title %><% end %></strong>
+        <span><%= link_to item_link do %><%= item_title %><% end %></span>
       </p>
       <small class="mb-0"><%= item.created_at.strftime("%B %d, %Y") %></small>
     </div>

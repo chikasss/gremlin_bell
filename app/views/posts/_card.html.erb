@@ -10,7 +10,7 @@
       </div>
       <div class="flex-grow-1">
         <div class="d-flex justify-content-between">
-          <p><strong><%= post.user.username %></strong></p>
+          <p><strong>@<%= post.user.username %></strong></p>
         <% end %>
         <small><%= post.created_at.strftime("%B %d") %></small>
       </div>

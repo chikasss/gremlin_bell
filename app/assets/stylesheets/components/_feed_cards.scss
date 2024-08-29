@@ -2,12 +2,16 @@
   padding: 0.7rem;
   border-radius: 8px;
 
-  a {
+  strong a {
     color: $dark-red;
   }
 
   small {
     color: $gray-hover;
+  }
+
+  span {
+    font-weight: 600;
   }
 }
 
@@ -21,8 +25,12 @@
     box-shadow: 0 0px 6px rgba(0, 0, 0, 0.5);
   }
 
-  a {
+  strong a {
     color: $dark-red;
+  }
+
+  span {
+    font-weight: 600;
   }
 
   small {
