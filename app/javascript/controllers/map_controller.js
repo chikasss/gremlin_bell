@@ -8,6 +8,7 @@ export default class extends Controller {
 
   connect() {
     this.markers = new Map();
+    this.landmarks = this.landmarks || [];
     const mapboxAccessToken = this.element.dataset.mapboxApiKey;
     mapboxgl.accessToken = mapboxAccessToken;
 
@@ -41,8 +42,6 @@ export default class extends Controller {
     );
 
     this.waypoints = this.initializeWaypoints();
-    //this.updateWaypoints();
-    //let isLongPress = false;
 
     this.map.on('click', (event) => {
         const coords = [event.lngLat.lng, event.lngLat.lat];
@@ -51,11 +50,11 @@ export default class extends Controller {
     });
 
     this.updateWaypointList();
-    //this.displayLandmark();
 
     this.element.addEventListener('landmark:add', (event) => {
       const { coordinates } = event.detail;
-      this.addLandmarkMarker(coordinates, "landmark", "#000", true);
+      this.landmarks.push(coordinates);
+      this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length - 1}`, "#000", true);
     });
 
   }
@@ -89,21 +88,22 @@ export default class extends Controller {
 
 
     updateWaypoints(){
-      ['start', 'end'].forEach(id => {
-        if (this.map.getLayer(id)) {
-          this.map.removeLayer(id);
-          this.map.removeSource(id);
-        }
-      });
 
       // remove all the existing marker, before re-rendering them
       document.querySelectorAll(".custom-marker").forEach(marker => marker.remove())
       console.log(document.querySelectorAll(".custom-marker"));
 
+
       // re-rendering markers
       this.waypoints.forEach((point, index) => {
         this.addMarker(point, `waypoint-${index}`,
           index === 0 ? '#3887be' : '#f30', true);
+      });
+
+
+      // re-rendering landmarks
+      this.landmarks.forEach((coords, index) => {
+        this.addLandmarkMarker(coords, `landmark-${index}`, "#000", true);
       });
 
       if (this.waypoints.length > 1) {
@@ -143,13 +143,37 @@ export default class extends Controller {
       el.className = 'custom-marker';
       //el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
       if (id == "waypoint-0") {
-        el.style.backgroundImage = `url(${this.data.get("pinBlue")})`
+        el.style.backgroundImage = `url(${this.data.get("pinOne")})`
       }
-      else if (id == `waypoint-${this.waypoints.length - 1}`){
-        el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`
+      else if (id == "waypoint-1") {
+        el.style.backgroundImage = `url(${this.data.get("pinTwo")})`
+      }
+      else if (id == "waypoint-2") {
+        el.style.backgroundImage = `url(${this.data.get("pinThree")})`
+      }
+      else if (id == "waypoint-3") {
+        el.style.backgroundImage = `url(${this.data.get("pinFour")})`
+      }
+      else if (id == "waypoint-4") {
+        el.style.backgroundImage = `url(${this.data.get("pinFive")})`
+      }
+      else if (id == "waypoint-5") {
+        el.style.backgroundImage = `url(${this.data.get("pinSix")})`
+      }
+      else if (id == "waypoint-6") {
+        el.style.backgroundImage = `url(${this.data.get("pinSeven")})`
+      }
+      else if (id == "waypoint-7") {
+        el.style.backgroundImage = `url(${this.data.get("pinEight")})`
+      }
+      else if (id == "waypoint-8") {
+        el.style.backgroundImage = `url(${this.data.get("pinNine")})`
+      }
+      else if (id == "waypoint-9") {
+        el.style.backgroundImage = `url(${this.data.get("pinTen")})`
       }
       else {
-        el.style.backgroundImage = `url(${this.data.get("pin")})`;
+        el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
       }
 
       el.style.width = '42px'; // Size of the icon

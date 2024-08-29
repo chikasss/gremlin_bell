@@ -43,19 +43,27 @@ export default class extends Controller {
           .addTo(map);
       });
 
-      const landmarks = JSON.parse(this.data.get("landmarks"));
-      landmarks.forEach((landmark) => {
-        const landmarkCoords = [parseFloat(landmark.long), parseFloat(landmark.lat)];
-        new mapboxgl.Marker({
-          element: this.createLandmarkCustomMarkerElement()
-        })
+      const landmarksData = this.data.get("landmarks");
+      console.log("any landmarks?",landmarksData )
+
+      if (landmarksData && landmarksData !== "[]" && landmarksData !== "[{\"lat\":null,\"long\":null}]") {
+        const landmarks = JSON.parse(this.data.get("landmarks"));
+        landmarks.forEach((landmark) => {
+          if (landmark.lat !== null && landmark.long !== null) {
+          const landmarkCoords = [parseFloat(landmark.long), parseFloat(landmark.lat)];
+          new mapboxgl.Marker({
+            element: this.createLandmarkCustomMarkerElement()
+          })
           .setLngLat(landmarkCoords)
           .addTo(map);
-        });
+        }
+      });
+          } else {
+            console.log("No landmarks found.");
+        }
         this.getRoute(this.waypoints, map);
     });
   }
-
    // Create custom marker element
    createCustomMarkerElement(id) {
     const el = document.createElement('div');
@@ -64,16 +72,43 @@ export default class extends Controller {
     console.log("waypoints:", this.waypoints)
     //el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`;
     if (id == 0) {
-      el.style.backgroundImage = `url(${this.data.get("pinBlue")})`
+      el.style.backgroundImage = `url(${this.data.get("pinOne")})`
     }
-    else if (id == this.waypoints.length - 1){
-      el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`
+    else if (id == 1) {
+      el.style.backgroundImage = `url(${this.data.get("pinTwo")})`
     }
+    else if (id == 2) {
+      el.style.backgroundImage = `url(${this.data.get("pinThree")})`
+    }
+    else if (id == 3) {
+      el.style.backgroundImage = `url(${this.data.get("pinFour")})`
+    }
+    else if (id == 4) {
+      el.style.backgroundImage = `url(${this.data.get("pinFive")})`
+    }
+    else if (id == 5) {
+      el.style.backgroundImage = `url(${this.data.get("pinSix")})`
+    }
+    else if (id == 6) {
+      el.style.backgroundImage = `url(${this.data.get("pinSeven")})`
+    }
+    else if (id == 7) {
+      el.style.backgroundImage = `url(${this.data.get("pinEight")})`
+    }
+    else if (id == 8) {
+      el.style.backgroundImage = `url(${this.data.get("pinNine")})`
+    }
+    else if (id == 9) {
+      el.style.backgroundImage = `url(${this.data.get("pinTen")})`
+    }
+    // else if (id == this.waypoints.length - 1){
+    //   el.style.backgroundImage =  `url(${this.data.get("logoUrl")})`
+    // }
     else {
-      el.style.backgroundImage = `url(${this.data.get("pinYellow")})`;
+      el.style.backgroundImage = `url(${this.data.get("logoUrl")})`;
     }
-    el.style.width = '32px'; // Size of the icon
-    el.style.height = '32px';
+    el.style.width = '42px'; // Size of the icon
+    el.style.height = '42px';
     el.style.backgroundSize = '100%';
     return el;
     }
@@ -82,11 +117,13 @@ export default class extends Controller {
       const el = document.createElement('div');
       el.className = 'custom-marker';
       el.style.backgroundImage =  `url(${this.data.get("pinPurple")})`; // URL to your custom icon
-      el.style.width = '32px'; // Size of the icon
-      el.style.height = '32px';
+      el.style.width = '42px'; // Size of the icon
+      el.style.height = '42px';
       el.style.backgroundSize = '100%';
       return el;
+
       }
+
 
   async getRoute(waypoints, map) {
     // Directions API
