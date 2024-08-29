@@ -48,6 +48,7 @@ class UsersController < ApplicationController
     @routes = @user.routes
     @reviews = @user.reviews
     @last_review = @reviews.last
+    @posts = @user.posts.order(created_at: :desc).last(3)
   end
 
   def saved_trips
