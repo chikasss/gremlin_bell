@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  # include MentionProcessor
   before_action :authenticate_user!
   before_action :set_post, only: [:like, :unlike]
 
@@ -125,7 +124,6 @@ class PostsController < ApplicationController
         match
       end
     end
-  
     @post.mentions = mentions if @post.respond_to?(:mentions)
     processed_content
   end

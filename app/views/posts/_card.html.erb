@@ -29,7 +29,7 @@
         <% end %>
         <% if post.tags.any? %>
           <% post.tags.each do |tag| %>
-            <%= link_to search_posts_path(tag: tag), class: "hashtag" do %>
+            <%= link_to search_user_posts_path(user_id: post.user_id, tag: tag), class: "hashtag" do %>
               <span class="tag-post">#<%= tag %></span>
             <% end %>
           <% end %>

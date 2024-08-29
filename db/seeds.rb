@@ -8,6 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+include MentionProcessor
+
 puts 'Cleaning database...'
 
 Favorite.destroy_all
@@ -18,6 +20,7 @@ Comment.destroy_all
 Review.destroy_all
 Message.destroy_all
 Chatroom.destroy_all
+Post.destroy_all
 User.destroy_all
 
 puts "Creating Users"
@@ -556,7 +559,7 @@ angel_route = Route.create!(
 )
 
 vincenzo_route = Route.create!(
-  title: "Ride Along West Coast of Hokkaido",
+  title: "West Coast of Hokkaido",
   description: "I was visiting a friend up in Hokkaido and we went for a ride along the coast. If you're a fan of the ocean, definitely ride here.",
   ride_type: ["Coastal"],
   waypoints: [["130.3765", "33.5868"], ["130.3515", "33.5934"]],
@@ -988,5 +991,201 @@ review_for_hideo_route2.photos.attach(
 review_for_hideo_route2.save
 
 puts "Photos attached to Reviews"
+
+puts "Creating Posts"
+
+bill = User.find_by(email: 'bill@mail.com')
+hideo = User.find_by(email: 'hideo@mail.com')
+mika = User.find_by(email: 'mika@mail.com')
+eric = User.find_by(email: 'eric@mail.com')
+mary = User.find_by(email: 'mary@mail.com')
+angel = User.find_by(email: 'angel@mail.com')
+vincenzo = User.find_by(email: 'vincenzo@mail.com')
+ami = User.find_by(email: 'ami@mail.com')
+
+
+posts = []
+
+# Post 1
+processed = process_mentions("Had an amazing ride today on @[Nakayama Pass]! Thanks @Hideo_Sato for the recommendation!")
+posts << post1 =  Post.create!(
+  user: bill,
+  content: processed[:content],
+  mentions: processed[:mentions],
+  tags: ["Nakayama Pass", "ride", "recommendation"]
+)
+
+file = URI.open('file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/nakayama_jmgip6.jpg")')
+post1.images.attach(
+  io: file,
+  filename: "post nakayama_pass",
+  content_type: "image/jpg"
+)
+
+# Post 2
+processed = process_mentions("Explored @Jozankei today, and it was stunning. @Eric_Hall, you should definitely check it out!")
+posts << post2 = Post.create!(
+  user: mika,
+  content: processed[:content],
+  mentions: processed[:mentions],
+  tags: ["Jozankei", "explore", "stunning"]
+)
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047430/jozankei_guuq2s.jpg")
+post2.images.attach(
+  io: file,
+  filename: "post jozankei",
+  content_type: "image/jpg"
+)
+
+# Post 3
+processed = process_mentions("If you're looking for a great coastal ride, I highly recommend @[Ocean Drive]! @Mary_Smith, you would love this one!")
+posts << post3 = Post.create!(
+  user: vincenzo,
+  content: processed[:content],
+  mentions: processed[:mentions],
+  tags: ["Ocean Drive", "coastal", "ride"]
+)
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047911/ocean_y0fdqn.jpg")
+post3.images.attach(
+  io: file,
+  filename: "post ocean_drive",
+  content_type: "image/jpg"
+)
+
+# Post 4
+processed = process_mentions("Urban vibes on my ride through @[Noborito to Yokohama] today. @Angel_Gibson, let's ride together next time!")
+posts << post4 = Post.create!(
+  user: ami,
+  content: processed[:content],
+  mentions: processed[:mentions],
+  tags: ["Noborito to Yokohama", "urban", "vibes"]
+)
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/noborito_a9eebx.jpg")
+post4.images.attach(
+  io: file,
+  filename: "post noborito",
+  content_type: "image/jpg"
+)
+
+# Post 5
+processed = process_mentions("Took a scenic route on @[Highway 38] today. @Vincenzo_Garcia, you have to try this one!")
+posts << post5 = Post.create!(
+  user: eric,
+  content: processed[:content],
+  mentions: processed[:mentions],
+  tags: ["Highway 38", "scenic", "route", "ride"]
+)
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/highway38_zanqdw.jpg")
+post5.images.attach(
+  io: file,
+  filename: "post highway_38",
+  content_type: "image/jpg"
+)
+
+# Post 6
+processed = process_mentions("Enjoyed a peaceful ride along @[W800 Street on Mikuni Pass]. @Ami_Ozaki, this is one for your list!")
+posts << Post.create!(
+  user: mary,
+  content: processed[:content],
+  mentions: processed[:mentions],
+  tags: ["W800 Street", "Mikuni Pass", "peaceful", "ride", "route"]
+)
+
+# Post 7
+processed = process_mentions("Spent the day riding through @[Ride in Kyushu]. @Mika_Hayashi, you would love the views!")
+posts << Post.create!(
+  user: angel,
+  content: processed[:content],
+  mentions: processed[:mentions],
+  tags: ["Ride in Kyushu", "views", "day ride"]
+)
+
+# Post 8
+processed = process_mentions("The @[West Coast of Hokkaido] is a must-ride for any biker. @Bill_Billiards, let's go together next time!")
+posts << Post.create!(
+  user: hideo,
+  content: processed[:content],
+  mentions: processed[:mentions],
+  tags: ["West Coast of Hokkaido", "must-ride", "biker"]
+)
+
+# Post 9
+processed = process_mentions("Just had an amazing coffee stop during my ride. @Ami_Ozaki, we need to plan a ride soon!")
+posts << Post.create!(
+  user: vincenzo,
+  content: processed[:content],
+  mentions: processed[:mentions],
+  tags: ["coffee stop", "ride", "plan", "biker"]
+)
+
+# Post 10
+processed = process_mentions("Another beautiful day riding through @[Kyushu]. @Hideo_Sato, thanks for the tips on this route!")
+posts << Post.create!(
+  user: bill,
+  content: processed[:content],
+  mentions: processed[:mentions],
+  tags: ["Kyushu", "beautiful day", "tips", "biker", "route"]
+)
+
+file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Hideo_Route_pxpwms.jpg")
+
+review_for_hideo_route.photos.attach(
+  io: file,
+  filename: "hideo_route_photo",
+  content_type: "image/jpg"
+)
+
+puts "Posts created"
+puts "Creating comments for posts"
+
+Comment.create!(user: hideo, commentable: posts[0], description: "Glad you enjoyed the ride, Bill!")
+Comment.create!(user: eric, commentable: posts[1], description: "Sounds awesome, Mika. I'll definitely check it out.")
+Comment.create!(user: mary, commentable: posts[2], description: "That looks amazing, Vincenzo! I'm adding it to my list.")
+Comment.create!(user: angel, commentable: posts[3], description: "Definitely, Ami! Let's plan something soon.")
+Comment.create!(user: vincenzo, commentable: posts[4], description: "Thanks for the tip, Eric. I'll give it a try next weekend.")
+Comment.create!(user: ami, commentable: posts[5], description: "I'll definitely check it out, Mary. Thanks for the suggestion!")
+Comment.create!(user: mika, commentable: posts[6], description: "Wow, the views must have been incredible, Angel!")
+Comment.create!(user: bill, commentable: posts[7], description: "Let's do it, Hideo! Can't wait for our next ride.")
+Comment.create!(user: hideo, commentable: posts[8], description: "Coffee and a ride, count me in, Vincenzo!")
+Comment.create!(user: mika, commentable: posts[9], description: "Kyushu is always a great ride. Glad you enjoyed it, Bill!")
+Comment.create!(user: mary, commentable: posts[1], description: "Jozankei is one of my favorites too, Mika!")
+Comment.create!(user: eric, commentable: posts[6], description: "I've been wanting to ride in Kyushu. Thanks for the inspiration, Angel!")
+Comment.create!(user: vincenzo, commentable: posts[3], description: "Urban rides are so much fun. Glad you enjoyed it, Ami!")
+Comment.create!(user: angel, commentable: posts[5], description: "Mikuni Pass sounds like a peaceful ride. I'll add it to my list!")
+Comment.create!(user: ami, commentable: posts[0], description: "Nakayama Pass is a gem! Thanks for sharing, Bill.")
+
+puts 'updating comments count...'
+
+posts.each do |post|
+  post.update_column(:comments_count, post.comments.size)
+end
+
+puts 'favorite posts...'
+
+users = [bill, hideo, mika, eric, mary, angel, vincenzo, ami]
+posts.each_with_index do |post, index|
+  user = users[index % users.size]
+  user.favorite(post)
+  puts "User #{user.username} favoritou o post ID: #{post.id}"
+end
+
+users.each do |user|
+  posts.sample(7).each do |post|
+    unless post.favorited_by?(user)
+      user.favorite(post)
+      puts "User #{user.username} favoritou o post ID: #{post.id}"
+    end
+  end
+end
+
+posts.each do |post|
+  favorites_count = Favorite.where(favoritable: post).count
+  post.update_column(:likes_count, favorites_count)
+  puts "Post ID: #{post.id}, Likes: #{favorites_count}"
+end
 
 puts "Seeding Complete"
