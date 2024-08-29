@@ -5,7 +5,7 @@
       <%= render 'shared/link_user_profile', user: (@user || current_user) %>
     </div>
     <div class="bg-white">
-      <div class="container user-profile">
+      <div class="container user-profile headers-gray">
         <!-- SOCIAL MEDIA -->
         <div class="social-links">
           <% if @user.social_links.present? %>
@@ -35,7 +35,7 @@
           <p class="p-2"><%= @user.about %></p>
         <% end %>
         <!-- POSTS -->
-        <div class="last-posts">
+        <div class="last-posts mt-4">
           <div class="d-flex justify-content-between mb-3">
             <% if @user == current_user %>
               <h3><strong>Your</strong> posts:</h3>

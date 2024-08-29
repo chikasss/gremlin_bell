@@ -33,11 +33,13 @@ class PostsController < ApplicationController
   end
 
   def index
+    @user = User.find(params[:user_id])
     @posts = policy_scope(Post)
-                .where(user_id: current_user.following.pluck(:id) + [current_user.id])
-                .order(created_at: :desc)
-                .to_a
+            .where(user_id: @user.id)
+            .includes(:user)
+            .order(created_at: :desc)
   end
+  
   
   def show
     @post = Post.find(params[:id])
