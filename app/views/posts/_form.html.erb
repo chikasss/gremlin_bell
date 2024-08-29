@@ -19,6 +19,7 @@
                         data: { action: "input->mentions#onInput", "mentions-target": "input" } 
                       }, 
                       placeholder: "Write something... Use @ to mention people or routes" %>
+          <%= f.hidden_field :content_raw, value: "", data: { "mentions-target": "hiddenInput" } %>
           <ul class="mention-suggestions d-none" data-mentions-target="results"></ul>
         </div>
         <div class="d-flex justify-content-between tags">

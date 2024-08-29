@@ -11,7 +11,10 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
     @post.tags = params[:post][:tags].split(',').map(&:strip) if params[:post][:tags].present?
-    @post.content = process_mentions(@post.content)
+    # @post.content = process_mentions(@post.content)
+    processed = process_mentions(@post.content)
+    @post.content = processed[:content]   # Conteúdo processado com links
+    @post.mentions = processed[:mentions] 
     authorize @post
     Rails.logger.debug { @post.inspect }
 
@@ -98,36 +101,68 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  # def process_mentions(content)
+  #   mentions = []
+  
+  #   processed_content = content.gsub(/@\[(.+?)\]|@(\w+)/) do |match|
+  #     route_or_user_name = $1 || $2
+  
+  #     if $1
+  #       route = Route.where("LOWER(title) = ?", route_or_user_name.downcase).first
+  #       if route
+  #         mentions << route.title
+  #         "<a href='#{route_path(route)}'>@#{route.title}</a>"
+  #       else
+  #         match
+  #       end
+  #     elsif $2
+  #       user = User.find_by(username: route_or_user_name)
+  #       if user
+  #         mentions << user.username
+  #         "<a href='#{user_path(user)}'>@#{user.username}</a>"
+  #       else
+  #         match
+  #       end
+  #     else
+  #       match
+  #     end
+  #   end
+  #   @post.mentions = mentions if @post.respond_to?(:mentions)
+  #   processed_content
+  # end
+  # 
   def process_mentions(content)
     mentions = []
-  
+    
+    # Substitui menções de rotas ou usuários
     processed_content = content.gsub(/@\[(.+?)\]|@(\w+)/) do |match|
       route_or_user_name = $1 || $2
   
-      if $1
+      if $1 # Se for uma rota, deve estar dentro de colchetes
         route = Route.where("LOWER(title) = ?", route_or_user_name.downcase).first
         if route
           mentions << route.title
           "<a href='#{route_path(route)}'>@#{route.title}</a>"
         else
-          match
+          match # Se a rota não for encontrada, mantém a menção original
         end
-      elsif $2
+      elsif $2 # Se for um usuário
         user = User.find_by(username: route_or_user_name)
         if user
           mentions << user.username
           "<a href='#{user_path(user)}'>@#{user.username}</a>"
         else
-          match
+          match # Se o usuário não for encontrado, mantém a menção original
         end
       else
-        match
+        match # Retorna o match original se nada for encontrado
       end
     end
-    @post.mentions = mentions if @post.respond_to?(:mentions)
-    processed_content
+  
+    { content: processed_content, mentions: mentions }
   end
-
+  
+  
 
   def process_tags(tags_string)
     tags_string.split(',').map { |tag| tag.strip.downcase.gsub(/\s+/, '-') }
