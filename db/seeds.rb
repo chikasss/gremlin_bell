@@ -18,6 +18,7 @@ Comment.destroy_all
 Review.destroy_all
 Message.destroy_all
 Chatroom.destroy_all
+Post.destroy_all
 User.destroy_all
 
 puts "Creating Users"
@@ -281,189 +282,189 @@ puts "Bikes created"
 
 puts "Attaching bike photos to Bikes"
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270682/Z900_bill_bike_bnw7yx.webp")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270682/Z900_bill_bike_bnw7yx.webp")
 
-bill_bikes.photos.attach(
-  io: file,
-  filename: "bill_bike",
-  content_type: "image/jpg"
-)
-bill_bikes.save
+# bill_bikes.photos.attach(
+#   io: file,
+#   filename: "bill_bike",
+#   content_type: "image/jpg"
+# )
+# bill_bikes.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270686/XL1200R_hideo_bike_atoc33.png")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270686/XL1200R_hideo_bike_atoc33.png")
 
-hideo_bikes.photos.attach(
-  io: file,
-  filename: "hideo_bike",
-  content_type: "image/jpg"
-)
-hideo_bikes.save
+# hideo_bikes.photos.attach(
+#   io: file,
+#   filename: "hideo_bike",
+#   content_type: "image/jpg"
+# )
+# hideo_bikes.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270682/GL1500_mike_bike_mpcigh.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270682/GL1500_mike_bike_mpcigh.jpg")
 
-mika_bikes.photos.attach(
-  io: file,
-  filename: "mika_bike",
-  content_type: "image/jpg"
-)
-mika_bikes.save
+# mika_bikes.photos.attach(
+#   io: file,
+#   filename: "mika_bike",
+#   content_type: "image/jpg"
+# )
+# mika_bikes.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270683/VMAX_eric_bike_iudh6b.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270683/VMAX_eric_bike_iudh6b.jpg")
 
-eric_bikes.photos.attach(
-  io: file,
-  filename: "eric_bike",
-  content_type: "image/jpg"
-)
-eric_bikes.save
+# eric_bikes.photos.attach(
+#   io: file,
+#   filename: "eric_bike",
+#   content_type: "image/jpg"
+# )
+# eric_bikes.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270680/GL1500_eric_bike2_gkgc2v.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270680/GL1500_eric_bike2_gkgc2v.jpg")
 
-eric_bikes2.photos.attach(
-  io: file,
-  filename: "eric_bike2",
-  content_type: "image/jpg"
-)
-eric_bikes2.save
+# eric_bikes2.photos.attach(
+#   io: file,
+#   filename: "eric_bike2",
+#   content_type: "image/jpg"
+# )
+# eric_bikes2.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270688/XL1200R_eric_bike3_ln2mkv.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270688/XL1200R_eric_bike3_ln2mkv.jpg")
 
-eric_bikes3.photos.attach(
-  io: file,
-  filename: "eric_bike3",
-  content_type: "image/jpg"
-)
-eric_bikes3.save
+# eric_bikes3.photos.attach(
+#   io: file,
+#   filename: "eric_bike3",
+#   content_type: "image/jpg"
+# )
+# eric_bikes3.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270684/Z900_eric_bike4_kbryde.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270684/Z900_eric_bike4_kbryde.jpg")
 
-eric_bikes4.photos.attach(
-  io: file,
-  filename: "eric_bike4",
-  content_type: "image/jpg"
-)
-eric_bikes4.save
+# eric_bikes4.photos.attach(
+#   io: file,
+#   filename: "eric_bike4",
+#   content_type: "image/jpg"
+# )
+# eric_bikes4.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270687/Trail125_mary_bike_eekx21.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270687/Trail125_mary_bike_eekx21.jpg")
 
-mary_bikes.photos.attach(
-  io: file,
-  filename: "mary_bike",
-  content_type: "image/jpg"
-)
-mary_bikes.save
+# mary_bikes.photos.attach(
+#   io: file,
+#   filename: "mary_bike",
+#   content_type: "image/jpg"
+# )
+# mary_bikes.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270685/Z900_mary_bike2_slozex.webp")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270685/Z900_mary_bike2_slozex.webp")
 
-mary_bikes2.photos.attach(
-  io: file,
-  filename: "mary_bike2",
-  content_type: "image/jpg"
-)
-mary_bikes2.save
+# mary_bikes2.photos.attach(
+#   io: file,
+#   filename: "mary_bike2",
+#   content_type: "image/jpg"
+# )
+# mary_bikes2.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270683/VMAX_angel_bike_ckebu8.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270683/VMAX_angel_bike_ckebu8.jpg")
 
-angel_bikes.photos.attach(
-  io: file,
-  filename: "angel_bike",
-  content_type: "image/jpg"
-)
-angel_bikes.save
+# angel_bikes.photos.attach(
+#   io: file,
+#   filename: "angel_bike",
+#   content_type: "image/jpg"
+# )
+# angel_bikes.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270681/Z900_vincenzo_bike_syrsgb.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270681/Z900_vincenzo_bike_syrsgb.jpg")
 
-vincenzo_bikes.photos.attach(
-  io: file,
-  filename: "vincenzo_bike",
-  content_type: "image/jpg"
-)
-vincenzo_bikes.save
+# vincenzo_bikes.photos.attach(
+#   io: file,
+#   filename: "vincenzo_bike",
+#   content_type: "image/jpg"
+# )
+# vincenzo_bikes.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270686/250TR_ami_bike_t81mjv.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723270686/250TR_ami_bike_t81mjv.jpg")
 
-ami_bikes.photos.attach(
-  io: file,
-  filename: "ami_bike",
-  content_type: "image/jpg"
-)
-ami_bikes.save
+# ami_bikes.photos.attach(
+#   io: file,
+#   filename: "ami_bike",
+#   content_type: "image/jpg"
+# )
+# ami_bikes.save
 
-puts "Photos attached to Bikes"
+# puts "Photos attached to Bikes"
 
-puts "Attaching avatars to Users"
+# puts "Attaching avatars to Users"
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/bill_cgxobm.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/bill_cgxobm.jpg")
 
-bill.avatar.attach(
-  io: file,
-  filename: "bill_profile",
-  content_type: "image/jpg"
-)
-bill.save
+# bill.avatar.attach(
+#   io: file,
+#   filename: "bill_profile",
+#   content_type: "image/jpg"
+# )
+# bill.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/hideo_qw2ipi.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/hideo_qw2ipi.jpg")
 
-hideo.avatar.attach(
-  io: file,
-  filename: "hideo_profile",
-  content_type: "image/jpg"
-)
-hideo.save
+# hideo.avatar.attach(
+#   io: file,
+#   filename: "hideo_profile",
+#   content_type: "image/jpg"
+# )
+# hideo.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112804/mika_GL1500_m6vy8n.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112804/mika_GL1500_m6vy8n.jpg")
 
-mika.avatar.attach(
-  io: file,
-  filename: "mika_profile",
-  content_type: "image/jpg"
-)
-mika.save
+# mika.avatar.attach(
+#   io: file,
+#   filename: "mika_profile",
+#   content_type: "image/jpg"
+# )
+# mika.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/eric_wqvp0k.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/eric_wqvp0k.jpg")
 
-eric.avatar.attach(
-  io: file,
-  filename: "eric_profile",
-  content_type: "image/jpg"
-)
-eric.save
+# eric.avatar.attach(
+#   io: file,
+#   filename: "eric_profile",
+#   content_type: "image/jpg"
+# )
+# eric.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112804/mary_yyp4sm.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112804/mary_yyp4sm.jpg")
 
-mary.avatar.attach(
-  io: file,
-  filename: "mary_profile",
-  content_type: "image/jpg"
-)
-mary.save
+# mary.avatar.attach(
+#   io: file,
+#   filename: "mary_profile",
+#   content_type: "image/jpg"
+# )
+# mary.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112804/angel_gr0bov.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112804/angel_gr0bov.jpg")
 
-angel.avatar.attach(
-  io: file,
-  filename: "angel_profile",
-  content_type: "image/jpg"
-)
-angel.save
+# angel.avatar.attach(
+#   io: file,
+#   filename: "angel_profile",
+#   content_type: "image/jpg"
+# )
+# angel.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/vincenzo_bcx2gv.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/vincenzo_bcx2gv.jpg")
 
-vincenzo.avatar.attach(
-  io: file,
-  filename: "vincenzo_profile",
-  content_type: "image/jpg"
-)
-vincenzo.save
+# vincenzo.avatar.attach(
+#   io: file,
+#   filename: "vincenzo_profile",
+#   content_type: "image/jpg"
+# )
+# vincenzo.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/ami_rqcvjg.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723112805/ami_rqcvjg.jpg")
 
-ami.avatar.attach(
-  io: file,
-  filename: "ami_profile",
-  content_type: "image/jpg"
-)
-ami.save
+# ami.avatar.attach(
+#   io: file,
+#   filename: "ami_profile",
+#   content_type: "image/jpg"
+# )
+# ami.save
 
 puts "Avatars attached to Users"
 
@@ -581,104 +582,104 @@ ami_route = Route.create!(
 
 puts "Attaching photos to Routes"
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/nakayama_jmgip6.jpg")
-Photo.create!(
-  image: {
-    io: file,
-    filename: "bill_route",
-    content_type: "image/jpg"
-  },
-  route: bill_route,
-  user: bill_route.user
-)
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/nakayama_jmgip6.jpg")
+# Photo.create!(
+#   image: {
+#     io: file,
+#     filename: "bill_route",
+#     content_type: "image/jpg"
+#   },
+#   route: bill_route,
+#   user: bill_route.user
+# )
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047911/ocean_y0fdqn.jpg")
-Photo.create!(
-  image: {
-    io: file,
-    filename: "bill_route2",
-    content_type: "image/jpg"
-  },
-  route: bill_route2,
-  user: bill_route2.user
-)
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047911/ocean_y0fdqn.jpg")
+# Photo.create!(
+#   image: {
+#     io: file,
+#     filename: "bill_route2",
+#     content_type: "image/jpg"
+#   },
+#   route: bill_route2,
+#   user: bill_route2.user
+# )
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047430/jozankei_guuq2s.jpg")
-Photo.create!(
-  image: {
-    io: file,
-    filename: "hideo_route",
-    content_type: "image/jpg"
-  },
-  route: hideo_route,
-  user: hideo_route.user
-)
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047430/jozankei_guuq2s.jpg")
+# Photo.create!(
+#   image: {
+#     io: file,
+#     filename: "hideo_route",
+#     content_type: "image/jpg"
+#   },
+#   route: hideo_route,
+#   user: hideo_route.user
+# )
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047966/kyusyu_jjfzn0.jpg")
-Photo.create!(
-  image: {
-    io: file,
-    filename: "mika_route",
-    content_type: "image/jpg"
-  },
-  route: mika_route,
-  user: mika_route.user
-)
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047966/kyusyu_jjfzn0.jpg")
+# Photo.create!(
+#   image: {
+#     io: file,
+#     filename: "mika_route",
+#     content_type: "image/jpg"
+#   },
+#   route: mika_route,
+#   user: mika_route.user
+# )
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/highway38_zanqdw.jpg")
-Photo.create!(
-  image: {
-    io: file,
-    filename: "eric_route",
-    content_type: "image/jpg"
-  },
-  route: eric_route,
-  user: eric_route.user
-)
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/highway38_zanqdw.jpg")
+# Photo.create!(
+#   image: {
+#     io: file,
+#     filename: "eric_route",
+#     content_type: "image/jpg"
+#   },
+#   route: eric_route,
+#   user: eric_route.user
+# )
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047441/mikuni_kyf2gb.jpg")
-Photo.create!(
-  image: {
-    io: file,
-    filename: "mary_route",
-    content_type: "image/jpg"
-  },
-  route: mary_route,
-  user: mary_route.user
-)
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047441/mikuni_kyf2gb.jpg")
+# Photo.create!(
+#   image: {
+#     io: file,
+#     filename: "mary_route",
+#     content_type: "image/jpg"
+#   },
+#   route: mary_route,
+#   user: mary_route.user
+# )
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047433/summer_kyusyu_r5g56r.jpg")
-Photo.create!(
-  image: {
-    io: file,
-    filename: "angel_route",
-    content_type: "image/jpg"
-  },
-  route: angel_route,
-  user: angel_route.user
-)
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047433/summer_kyusyu_r5g56r.jpg")
+# Photo.create!(
+#   image: {
+#     io: file,
+#     filename: "angel_route",
+#     content_type: "image/jpg"
+#   },
+#   route: angel_route,
+#   user: angel_route.user
+# )
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/west_coast_hokkaido_b4pv70.jpg")
-Photo.create!(
-  image: {
-    io: file,
-    filename: "vincenzo_route",
-    content_type: "image/jpg"
-  },
-  route: vincenzo_route,
-  user: vincenzo_route.user
-)
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/west_coast_hokkaido_b4pv70.jpg")
+# Photo.create!(
+#   image: {
+#     io: file,
+#     filename: "vincenzo_route",
+#     content_type: "image/jpg"
+#   },
+#   route: vincenzo_route,
+#   user: vincenzo_route.user
+# )
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/noborito_a9eebx.jpg")
-Photo.create!(
-  image: {
-    io: file,
-    filename: "ami_route",
-    content_type: "image/jpg"
-  },
-  route: ami_route,
-  user: ami_route.user
-)
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1724047432/noborito_a9eebx.jpg")
+# Photo.create!(
+#   image: {
+#     io: file,
+#     filename: "ami_route",
+#     content_type: "image/jpg"
+#   },
+#   route: ami_route,
+#   user: ami_route.user
+# )
 
 puts "Route photos attached successfully!"
 
@@ -915,78 +916,192 @@ puts "Reviews Created"
 
 puts "Attaching photos to reviews"
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122229/Review_Bill_Route_bizkh5.jpg")
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122229/Review_Bill_Route_bizkh5.jpg")
 
-review_for_bill_route.photos.attach(
-  io: file,
-  filename: "bill_route_photo",
-  content_type: "image/jpg"
+# review_for_bill_route.photos.attach(
+#   io: file,
+#   filename: "bill_route_photo",
+#   content_type: "image/jpg"
+# )
+# review_for_bill_route.save
+
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Mary_Route_vqxmhq.jpg")
+
+# review_for_mary_route.photos.attach(
+#   io: file,
+#   filename: "mary_route_photo",
+#   content_type: "image/jpg"
+# )
+# review_for_mary_route.save
+
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Ami_Route_amsvyg.jpg")
+
+# review_for_ami_route.photos.attach(
+#   io: file,
+#   filename: "ami_route_photo",
+#   content_type: "image/jpg"
+# )
+# review_for_ami_route.save
+
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Mika_Route_djznvl.jpg")
+
+# review_for_mika_route.photos.attach(
+#   io: file,
+#   filename: "mika_route_photo",
+#   content_type: "image/jpg"
+# )
+# review_for_mika_route.save
+
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122229/Review_Eric_Route_xoj12h.jpg")
+
+# review_for_eric_route.photos.attach(
+#   io: file,
+#   filename: "eric_route_photo",
+#   content_type: "image/jpg"
+# )
+# review_for_eric_route.save
+
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Eric_Route2_rso6zl.jpg")
+
+# review_for_eric_route2.photos.attach(
+#   io: file,
+#   filename: "eric_route_photo2",
+#   content_type: "image/jpg"
+# )
+# review_for_eric_route2.save
+
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Hideo_Route_pxpwms.jpg")
+
+# review_for_hideo_route.photos.attach(
+#   io: file,
+#   filename: "hideo_route_photo",
+#   content_type: "image/jpg"
+# )
+# review_for_hideo_route.save
+
+# file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Hideo_Route2_zwzx0m.jpg")
+
+# review_for_hideo_route2.photos.attach(
+#   io: file,
+#   filename: "hideo_route_photo2",
+#   content_type: "image/jpg"
+# )
+# review_for_hideo_route2.save
+
+# puts "Photos attached to Reviews"
+
+# Seed Users
+bill = User.find_by(email: 'bill@mail.com')
+hideo = User.find_by(email: 'hideo@mail.com')
+mika = User.find_by(email: 'mika@mail.com')
+eric = User.find_by(email: 'eric@mail.com')
+mary = User.find_by(email: 'mary@mail.com')
+angel = User.find_by(email: 'angel@mail.com')
+vincenzo = User.find_by(email: 'vincenzo@mail.com')
+ami = User.find_by(email: 'ami@mail.com')
+
+# Seed Routes
+nakayama_pass = Route.find_by(title: "Nakayama Pass")
+ocean_drive = Route.find_by(title: "Ocean Drive")
+jozankei = Route.find_by(title: "Jozankei")
+kyushu = Route.find_by(title: "Kyushu")
+highway_38 = Route.find_by(title: "Highway 38")
+mikuni_pass = Route.find_by(title: "W800 Street on Mikuni Pass")
+ride_in_kyushu = Route.find_by(title: "Ride in Kyushu")
+west_coast_hokkaido = Route.find_by(title: "Ride Along West Coast of Hokkaido")
+noborito_yokohama = Route.find_by(title: "Noborito to Yokohama")
+
+# Create 10 Posts with Mentions
+posts = []
+posts << Post.create!(
+  user: bill,
+  content: "Had an amazing ride today on @[Nakayama Pass]! Thanks @[Hideo_Sato] for the recommendation!",
+  mentions: [nakayama_pass.title, hideo.username]
 )
-review_for_bill_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Mary_Route_vqxmhq.jpg")
-
-review_for_mary_route.photos.attach(
-  io: file,
-  filename: "mary_route_photo",
-  content_type: "image/jpg"
+posts << Post.create!(
+  user: mika,
+  content: "Explored @[Jozankei] today, and it was stunning. @[Eric_Hall], you should definitely check it out!",
+  mentions: [jozankei.title, eric.username]
 )
-review_for_mary_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Ami_Route_amsvyg.jpg")
-
-review_for_ami_route.photos.attach(
-  io: file,
-  filename: "ami_route_photo",
-  content_type: "image/jpg"
+posts << Post.create!(
+  user: vincenzo,
+  content: "If you're looking for a great coastal ride, I highly recommend @[Ocean Drive]! @[Mary_Smith], you would love this one!",
+  mentions: [ocean_drive.title, mary.username]
 )
-review_for_ami_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Mika_Route_djznvl.jpg")
-
-review_for_mika_route.photos.attach(
-  io: file,
-  filename: "mika_route_photo",
-  content_type: "image/jpg"
+posts << Post.create!(
+  user: ami,
+  content: "Urban vibes on my ride through @[Noborito to Yokohama] today. @[Angel_Gibson], let's ride together next time!",
+  mentions: [noborito_yokohama.title, angel.username]
 )
-review_for_mika_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122229/Review_Eric_Route_xoj12h.jpg")
-
-review_for_eric_route.photos.attach(
-  io: file,
-  filename: "eric_route_photo",
-  content_type: "image/jpg"
+posts << Post.create!(
+  user: eric,
+  content: "Took a scenic route on @[Highway 38] today. @[Vincenzo_Garcia], you have to try this one!",
+  mentions: [highway_38.title, vincenzo.username]
 )
-review_for_eric_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Eric_Route2_rso6zl.jpg")
-
-review_for_eric_route2.photos.attach(
-  io: file,
-  filename: "eric_route_photo2",
-  content_type: "image/jpg"
+posts << Post.create!(
+  user: mary,
+  content: "Enjoyed a peaceful ride along @[W800 Street on Mikuni Pass]. @[Ami_Ozaki], this is one for your list!",
+  mentions: [mikuni_pass.title, ami.username]
 )
-review_for_eric_route2.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Hideo_Route_pxpwms.jpg")
-
-review_for_hideo_route.photos.attach(
-  io: file,
-  filename: "hideo_route_photo",
-  content_type: "image/jpg"
+posts << Post.create!(
+  user: angel,
+  content: "Spent the day riding through @[Ride in Kyushu]. @[Mika_Hayashi], you would love the views!",
+  mentions: [ride_in_kyushu.title, mika.username]
 )
-review_for_hideo_route.save
 
-file = URI.open("https://res.cloudinary.com/dkoh816xy/image/upload/v1723122228/Review_Hideo_Route2_zwzx0m.jpg")
-
-review_for_hideo_route2.photos.attach(
-  io: file,
-  filename: "hideo_route_photo2",
-  content_type: "image/jpg"
+posts << Post.create!(
+  user: hideo,
+  content: "The @[West Coast of Hokkaido] is a must-ride for any biker. @[Bill_Billiards], let's go together next time!",
+  mentions: [west_coast_hokkaido.title, bill.username]
 )
-review_for_hideo_route2.save
 
-puts "Photos attached to Reviews"
+posts << Post.create!(
+  user: vincenzo,
+  content: "Just had an amazing coffee stop during my ride. @[Ami_Ozaki], we need to plan a ride soon!",
+  mentions: [ami.username]
+)
+
+posts << Post.create!(
+  user: bill,
+  content: "Another beautiful day riding through @[Kyushu]. @[Hideo_Sato], thanks for the tips on this route!",
+  mentions: [kyushu.title, hideo.username]
+)
+
+# Seed 15 Comments on Posts
+Comment.create!(user: hideo, commentable: posts[0], description: "Glad you enjoyed the ride, Bill!")
+Comment.create!(user: eric, commentable: posts[1], description: "Sounds awesome, Mika. I'll definitely check it out.")
+Comment.create!(user: mary, commentable: posts[2], description: "That looks amazing, Vincenzo! I'm adding it to my list.")
+Comment.create!(user: angel, commentable: posts[3], description: "Definitely, Ami! Let's plan something soon.")
+Comment.create!(user: vincenzo, commentable: posts[4], description: "Thanks for the tip, Eric. I'll give it a try next weekend.")
+Comment.create!(user: ami, commentable: posts[5], description: "I'll definitely check it out, Mary. Thanks for the suggestion!")
+Comment.create!(user: mika, commentable: posts[6], description: "Wow, the views must have been incredible, Angel!")
+Comment.create!(user: bill, commentable: posts[7], description: "Let's do it, Hideo! Can't wait for our next ride.")
+Comment.create!(user: hideo, commentable: posts[8], description: "Coffee and a ride, count me in, Vincenzo!")
+Comment.create!(user: mika, commentable: posts[9], description: "Kyushu is always a great ride. Glad you enjoyed it, Bill!")
+Comment.create!(user: mary, commentable: posts[1], description: "Jozankei is one of my favorites too, Mika!")
+Comment.create!(user: eric, commentable: posts[6], description: "I've been wanting to ride in Kyushu. Thanks for the inspiration, Angel!")
+Comment.create!(user: vincenzo, commentable: posts[3], description: "Urban rides are so much fun. Glad you enjoyed it, Ami!")
+Comment.create!(user: angel, commentable: posts[5], description: "Mikuni Pass sounds like a peaceful ride. I'll add it to my list!")
+Comment.create!(user: ami, commentable: posts[0], description: "Nakayama Pass is a gem! Thanks for sharing, Bill.")
+
+# Seed Likes on Posts (each user favorites at least 7 posts)
+users = [bill, hideo, mika, eric, mary, angel, vincenzo, ami]
+posts.each_with_index do |post, index|
+  users[index % users.size].favorite(post)
+end
+
+# Add additional favorites to ensure each user favorites at least 7 posts
+users.each do |user|
+  posts.sample(7).each do |post|
+    user.favorite(post) unless post.favorited_by?(user)
+  end
+end
+
 
 puts "Seeding Complete"
