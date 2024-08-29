@@ -7,34 +7,34 @@
         <% else %>
           <%= image_tag "user-photo.png", class: "avatar" %>
         <% end %>
-      </div>
-      <div class="flex-grow-1">
-        <div class="d-flex justify-content-between">
+      <% end %>
+    </div>
+    <div class="flex-grow-1">
+      <div class="d-flex justify-content-between">
+        <%= link_to user_post_path(post.user, post) do %>
           <p><strong>@<%= post.user.username %></strong></p>
         <% end %>
         <small><%= post.created_at.strftime("%B %d") %></small>
       </div>
-      <%= link_to user_post_path(post.user, post) do %>
-        <div>
-          <p><%= raw post.content %></p>
-          <% if post.images.any? %>
-            <div class="d-flex flex-row flex-nowrap overflow-auto">
-              <% post.images.each do |image| %>
-                <div class="col-8 col-md-4 me-2">
-                  <%= cl_image_tag image.key, class: "post-image" %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-          <% if post.tags.any? %>
-            <% post.tags.each do |tag| %>
-              <%= link_to search_posts_path(tag: tag), class: "hashtag" do %>
-                <span class="tag-post">#<%= tag %></span>
-              <% end %>
+      <div>
+        <p><%= raw post.content %></p>
+        <% if post.images.any? %>
+          <div class="d-flex flex-row flex-nowrap overflow-auto">
+            <% post.images.each do |image| %>
+              <div class="col-8 col-md-4 me-2">
+                <%= cl_image_tag image.key, class: "post-image" %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        <% if post.tags.any? %>
+          <% post.tags.each do |tag| %>
+            <%= link_to search_posts_path(tag: tag), class: "hashtag" do %>
+              <span class="tag-post">#<%= tag %></span>
             <% end %>
           <% end %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
       <div class="d-flex align-items-center mt-2 icons" data-controller="like">
         <div class=" me-4">
           <%= render "components/like_button", post: post %>
