@@ -59,3 +59,11 @@
   margin-top: 0;
   margin-bottom: 0rem;
 }
+
+#selected-address-container p {
+  margin-bottom: 2px;
+  padding: 1px;   /* Adds some padding around the address */
+  // border: 1px solid #ddd; /* Adds a border around each address */
+  // border-radius: 5px;   /* Adds rounded corners to the border */
+  // background-color: #f9f9f9; /* Light background color for the addresses */
+}

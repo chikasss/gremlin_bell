@@ -36,18 +36,30 @@ export default class extends Controller {
     // this.addressTarget.value = result["place_name"]
 
     const coordinates = result.geometry.coordinates
-     const address = result["place_name"];
+    const address = result["place_name"];
 
     console.log("Landmarks Coordinates:", coordinates);
     console.log("Landmark Address:", address);
 
-    this.#addLandmarkFields(result["place_name"], coordinates);
+    this.#addLandmarkFields(address, coordinates);
+
+    this.#displaySelectedAddress(address);
 
     this.latTarget.value = coordinates[1] // latitude
     this.longTarget.value = coordinates[0] // longitud
     //this.element.dataset.landmarkCoordinates = JSON.stringify(coordinates);
-    this.#addLandmarkToMap(coordinates);
+    this.#addLandmarkToMap(coordinates, address);
 
+  }
+
+  #displaySelectedAddress(address) {
+    const addressContainer = document.getElementById('selected-address-container');
+    const addressItem = document.createElement('p');
+    addressItem.innerHTML = `${address}`;
+    const firstPartOfAddress = address.split(",")[0];
+    addressItem.innerHTML = `${firstPartOfAddress}`;
+
+    addressContainer.appendChild(addressItem);
   }
 
   #addLandmarkFields(address, coordinates) {

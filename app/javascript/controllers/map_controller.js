@@ -62,30 +62,29 @@ export default class extends Controller {
     this.element.addEventListener('landmark:add', (event) => {
       const { coordinates } = event.detail;
       const address = event.detail.address;
-      this.landmarks.push({ coordinates, address} );
-      this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length - 1}`, "#000", true, address);
+      if (Array.isArray(coordinates) && coordinates.length === 2) {
+        this.landmarks.push({ coordinates, address });
+        this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length - 1}`, "#000", true, address);
+      } else {
+        console.error("Invalid coordinates format. Expected [lng, lat] array.");
+      }
     });
 
   }
 
   addLandmarkMarker(coords, id, color, useCustomMarker = false, address = "") {
     console.log('Adding landmark marker at', coords);
+    if (!Array.isArray(coords) || coords.length !== 2) {
+      console.error("Invalid coordinates format. Expected [lng, lat] array.");
+      return;
+    }
+
     const markerElement = useCustomMarker ? this.createLandmarkCustomMarkerElement(id) : null;
     const marker = new mapboxgl.Marker(markerElement || { color })
       .setLngLat(coords)
       .addTo(this.map);
     this.markers.set(id, marker);
     this.landmarks.push({ coords, address });
-
-    // const event = new CustomEvent('landmark:added', {
-    //   detail: {
-    //     id: id,
-    //     coords: coords,
-    //     // address: address
-    //   }
-    // });
-    // this.element.dispatchEvent(event);
-    // console.log('address', this.address);
 
     console.log('Landmark marker', marker);
     console.log('Landmark address:', address);
@@ -116,16 +115,23 @@ export default class extends Controller {
       console.log(document.querySelectorAll(".custom-marker"));
 
 
-      // re-rendering markers
+      // re-rendering waypoints
       this.waypoints.forEach((point, index) => {
         this.addMarker(point, `waypoint-${index}`,
           index === 0 ? '#3887be' : '#f30', true);
       });
 
+      console.log("Current landmarks:", this.landmarks);
+
 
       // re-rendering landmarks
-      this.landmarks.forEach((coords, index) => {
-        this.addLandmarkMarker(coords, `landmark-${index}`, "#000", true);
+      this.landmarks.forEach((landmark, index) => {
+        const { coordinates, address } = landmark;
+        if (Array.isArray(coordinates) && coordinates.length === 2) {
+          this.addLandmarkMarker(coordinates, `landmark-${index}`, "#000", true, address);
+        } else {
+          console.error("Invalid coordinates format. Expected [lng, lat] array.");
+        }
       });
 
       if (this.waypoints.length > 1) {
