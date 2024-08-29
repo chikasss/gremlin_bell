@@ -4,85 +4,89 @@
     <%= render 'shared/link_user_profile', user: (@user || current_user) %>
   </div>
   <div class="bg-white">
-    <div class="container pb-4 headers-gray ">
-      <h4 class="text-center mb-4"><%= @post.user.first_name %>'s post</h4 class="text-center mb-4">
-      <div class="post-card border" data-controller="insert-post-comment">
-        <div class="d-flex">
-          <div class="me-2">
-            <%= link_to user_path(@post.user) do %>
-              <% if @post.user&.avatar.present? %>
-                <%= cl_image_tag @post.user.avatar.key, class: "avatar" %>
-              <% else %>
-                <%= image_tag "user-photo.png", class: "avatar" %>
-              <% end %>
-            </div>
-            <div class="flex-grow-1">
-              <div class="d-flex justify-content-between">
-                <p><strong><%= @post.user.username %></strong></p>
-              <% end %>
-              <small><%= @post.created_at.strftime("%B %d") %></small>
-            </div>
-            <div>
-              <p><%= raw @post.content %></p>
-              <% if @post.images.any? %>
-                <div class="d-flex flex-row flex-nowrap overflow-auto">
-                  <% @post.images.each do |image| %>
-                    <div class="col-8 col-md-4 me-2">
-                      <%= cl_image_tag image.key, class: "post-image" %>
+    <div class="container pb-4">
+      <div class="headers-gray row justify-content-center">
+        <div class="col-11 col-md-8">
+          <h4 class="text-center mb-4"><%= @post.user.first_name %>'s post</h4>
+          <div class="post-card border" data-controller="insert-post-comment">
+            <div class="d-flex">
+              <div class="me-2">
+                <%= link_to user_path(@post.user) do %>
+                  <% if @post.user&.avatar.present? %>
+                    <%= cl_image_tag @post.user.avatar.key, class: "avatar" %>
+                  <% else %>
+                    <%= image_tag "user-photo.png", class: "avatar" %>
+                  <% end %>
+                </div>
+                <div class="flex-grow-1">
+                  <div class="d-flex justify-content-between">
+                    <p><strong><%= @post.user.username %></strong></p>
+                  <% end %>
+                  <small><%= @post.created_at.strftime("%B %d") %></small>
+                </div>
+                <div>
+                  <p><%= raw @post.content %></p>
+                  <% if @post.images.any? %>
+                    <div class="d-flex flex-row flex-nowrap overflow-auto">
+                      <% @post.images.each do |image| %>
+                        <div class="col-8 col-md-4 me-2">
+                          <%= cl_image_tag image.key, class: "post-image" %>
+                        </div>
+                      <% end %>
                     </div>
                   <% end %>
-                </div>
-              <% end %>
-              <% if @post.tags.any? %>
-                <% @post.tags.each do |tag| %>
-                  <%= link_to search_posts_path(tag: tag), class: "hashtag" do %>
-                    <span class="tag-post">#<%= tag %></span>
-                  <% end %>
-                <% end %>
-              <% end %>
-            </div>
-            <div class="d-flex align-items-center mt-2 icons" data-controller="like">
-              <div class=" me-4">
-                <%= render "components/like_button", post: @post %>
-              </div>
-              <div class="d-flex align-items-center">
-                <button data-insert-post-comment-target="insertCommentBtn" data-action="click->insert-post-comment#insertPostComment">
-                  <i class="fa-regular fa-comment me-2"></i>
-                </button>
-                <span><%= @post.comments_count %></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="mt-2 toggle-form-post" data-insert-post-comment-target="commentForm">
-          <%= simple_form_for [@post.user, @post, @post.comments.build] do |f| %>
-            <%= f.input :description, label: false %>
-            <div class="d-flex justify-content-center">
-              <%= f.button :submit, "Post", class: "btn-yellow-sm" %>
-            </div>
-          <% end %>
-        </div>
-        <% if @comments.any? %>
-          <div class="mt-3">
-            <% @comments.each do |comment| %>
-              <div class="d-flex comments mb-2">
-                <div class="me-2">
-                  <%= link_to user_path(comment.user) do %>
-                    <% if comment.user.avatar.present? %>
-                      <%= cl_image_tag comment.user.avatar.key, class: "avatar" %>
-                    <% else %>
-                      <%= image_tag "user-photo.png", class: "avatar" %>
+                  <% if @post.tags.any? %>
+                    <% @post.tags.each do |tag| %>
+                      <%= link_to search_posts_path(tag: tag), class: "hashtag" do %>
+                        <span class="tag-post">#<%= tag %></span>
+                      <% end %>
                     <% end %>
-                  </div>
-                  <div>
-                    <p><strong><%= comment.user.username %></strong></p>
                   <% end %>
-                  <p><%= comment.description %></p>
                 </div>
+                <div class="d-flex align-items-center mt-2 icons" data-controller="like">
+                  <div class=" me-4">
+                    <%= render "components/like_button", post: @post %>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <button data-insert-post-comment-target="insertCommentBtn" data-action="click->insert-post-comment#insertPostComment">
+                      <i class="fa-regular fa-comment me-2"></i>
+                    </button>
+                    <span><%= @post.comments_count %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-2 toggle-form-post" data-insert-post-comment-target="commentForm">
+              <%= simple_form_for [@post.user, @post, @post.comments.build] do |f| %>
+                <%= f.input :description, label: false %>
+                <div class="d-flex justify-content-center">
+                  <%= f.button :submit, "Post", class: "btn-yellow-sm" %>
+                </div>
+              <% end %>
+            </div>
+            <% if @comments.any? %>
+              <div class="mt-3">
+                <% @comments.each do |comment| %>
+                  <div class="d-flex comments mb-2">
+                    <div class="me-2">
+                      <%= link_to user_path(comment.user) do %>
+                        <% if comment.user.avatar.present? %>
+                          <%= cl_image_tag comment.user.avatar.key, class: "avatar" %>
+                        <% else %>
+                          <%= image_tag "user-photo.png", class: "avatar" %>
+                        <% end %>
+                      </div>
+                      <div>
+                        <p><strong><%= comment.user.username %></strong></p>
+                      <% end %>
+                      <p><%= comment.description %></p>
+                    </div>
+                  </div>
+                <% end %>
               </div>
             <% end %>
           </div>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>

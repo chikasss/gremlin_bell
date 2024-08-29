@@ -36,17 +36,6 @@ Rails.application.routes.draw do
     resources :messages, only: [:create, :show]
   end
 
-  # resources :posts do
-  #   member do
-  #     post 'like'
-  #     delete 'unlike'
-  #   end
-  #   resources :comments, only: [:create]
-  #   collection do
-  #     get 'search', to: 'posts#search'
-  #   end
-  # end
-
   get 'search', to: 'search#index', as: 'search_results'
   get 'search/advanced', to: 'search#search', as: 'advanced_search'
 

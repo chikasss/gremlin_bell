@@ -38,37 +38,36 @@
           <div class="tab-pane fade show active" id="pills-feed" role="tabpanel" aria-labelledby="pills-feed-tab" tabindex="0">
             <!-- POSTS -->
             <div class="post my-4">
-              <div class=" mb-2">
-                <h3 class="pb-2">What's on your mind?</h3>
-                <div class="d-flex justify-content-center">
-                  <div class="col-12 col-md-8">
-                    <%= render 'posts/form', user: current_user %>
-                  </div>
+              <div class="d-flex justify-content-center">
+                <div class="col-12 col-md-8 mb-2">
+                  <h3 class="pb-2">What's on your mind?</h3>
+                  <%= render 'posts/form', user: current_user %>
                 </div>
               </div>
             </div>
             <!-- ALL ITEMS -->
             <% if current_user.following.any? %>
-              <div class="my-4">
-                <h4>Latest updates:</h4>
-                <div class="mt-4 row d-flex justify-content-center">
-                  <% post_counter = 0 %>
-                  <% @feed_items.each do |item| %>
-                    <% post_counter += 1 %>
-                    <!-- route items -->
-                    <% if item.is_a?(Route) %>
-                      <div class="mb-2 col-md-8">
-                        <%= render 'components/feed_card', item: item, action_text: "created the route", item_title: item.title, item_link: route_path(item) %>
-                      </div>
-                      <!-- review items -->
-                    <% elsif item.is_a?(Review) %>
-                      <div class="mb-2 col-md-8">
-                        <%= render 'components/feed_card', item: item, action_text: "posted a new review for", item_title: item.route.title, item_link: route_path(item.route) %>
-                      </div>
-                      <!-- bike items -->
-                    <% elsif item.is_a?(Bike) %>
-                      <div class="mb-2 col-md-8">
-                        <%= render 'components/feed_img_card',
+              <div class="my-4 row d-flex justify-content-center">
+                <div class="mb-2 col-md-8">
+                  <h4>Latest updates:</h4>
+                  <div class="mt-4">
+                    <% post_counter = 0 %>
+                    <% @feed_items.each do |item| %>
+                      <% post_counter += 1 %>
+                      <!-- route items -->
+                      <% if item.is_a?(Route) %>
+                        <div class="mb-2">
+                          <%= render 'components/feed_card', item: item, action_text: "created the route", item_title: item.title, item_link: route_path(item) %>
+                        </div>
+                        <!-- review items -->
+                      <% elsif item.is_a?(Review) %>
+                        <div class="mb-2">
+                          <%= render 'components/feed_card', item: item, action_text: "posted a new review for", item_title: item.route.title, item_link: route_path(item.route) %>
+                        </div>
+                        <!-- bike items -->
+                      <% elsif item.is_a?(Bike) %>
+                        <div class="mb-2">
+                          <%= render 'components/feed_img_card',
                             item: item,
                             user: item.user,
                             action_text: "added a new bike",
@@ -76,20 +75,20 @@
                             item_path: user_bikes_path(item.user),
                             default_image: "bike_garage.jpg",
                             photo: nil %>
-                      </div>
-                      <!-- comments routes -->
-                    <% elsif item.is_a?(Comment) %>
-                      <div class="mb-2 col-md-8">
-                        <% if item.commentable.is_a?(Route) %>
-                          <%= render 'components/feed_card', item: item, action_text: "commented on the route", item_title: item.commentable.title, item_link: route_path(item.commentable) %>
-                        <% elsif item.commentable.is_a?(Post) %>
-                          <%= render 'components/feed_card', item: item, action_text: "commented on the post", item_title: item.commentable.title, item_link: post_path(item.commentable) %>
-                        <% end %>
-                      </div>
-                      <!-- photos -->
-                    <% elsif item.is_a?(Hash) && item[:photo].is_a?(Photo) %>
-                      <div class="mb-2 col-md-8">
-                        <%= render 'components/feed_img_card',
+                        </div>
+                        <!-- comments routes -->
+                      <% elsif item.is_a?(Comment) %>
+                        <div class="mb-2">
+                          <% if item.commentable.is_a?(Route) %>
+                            <%= render 'components/feed_card', item: item, action_text: "commented on the route", item_title: item.commentable.title, item_link: route_path(item.commentable) %>
+                          <% elsif item.commentable.is_a?(Post) %>
+                            <%= render 'components/feed_card', item: item, action_text: "commented on the post", item_title: item.commentable.title, item_link: post_path(item.commentable) %>
+                          <% end %>
+                        </div>
+                        <!-- photos -->
+                      <% elsif item.is_a?(Hash) && item[:photo].is_a?(Photo) %>
+                        <div class="mb-2">
+                          <%= render 'components/feed_img_card',
                             item: item[:route],
                             user: item[:photo].user,
                             action_text: "posted a new photo in",
@@ -97,17 +96,16 @@
                             item_path: route_path(item[:route]),
                             default_image: "route_default.jpg",
                             photo: item[:photo] %>
-                      </div>
-                      <!-- posts -->
-                    <% elsif item.is_a?(Post) %>
-                      <div class="mb-2 col-md-8">
-                        <%= render 'posts/card', post: item %>
-                      </div>
-                    <% end %>
-                    <!-- discover riders after 5 posts -->
-                    <% if post_counter == 5 || (post_counter > 5 && (post_counter - 5) % 10 == 0) %>
-                      <div class="discover my-4 row justify-content-center">
-                        <div class="col-11 col-md-8">
+                        </div>
+                        <!-- posts -->
+                      <% elsif item.is_a?(Post) %>
+                        <div class="mb-2">
+                          <%= render 'posts/card', post: item %>
+                        </div>
+                      <% end %>
+                      <!-- discover riders after 5 posts -->
+                      <% if post_counter == 5 || (post_counter > 5 && (post_counter - 5) % 10 == 0) %>
+                        <div class="discover my-4 row justify-content-center">
                           <div class="d-flex justify-content-between mb-2">
                             <h3>Find riders</h3>
                             <%= link_to users_path do %>
@@ -122,42 +120,41 @@
                             <% end %>
                           </div>
                         </div>
-                      </div>
+                      <% end %>
                     <% end %>
-                  <% end %>
+                  </div>
                 </div>
               </div>
             </div>
             <!-- POSTS -->
             <div class="tab-pane fade" id="pills-post" role="tabpanel" aria-labelledby="pills-post-tab" tabindex="0">
-              <div class="feed-posts mt-4">
-                <div>
-                  <h3 class="pb-2">What's on your mind?</h3>
-                  <div class="d-flex justify-content-center">
-                    <div class="col-12 col-md-8">
+              <div class="d-flex justify-content-center">
+                <div class="col-12 col-md-8">
+                  <div class="feed-posts mt-4">
+                    <div>
+                      <h3 class="pb-2">What's on your mind?</h3>
                       <%= render 'posts/form', user: current_user %>
                     </div>
+                    <h4 class="my-4">Recently posts:</h4>
+                    <% @posts.each do |post| %>
+                      <div class="mb-2">
+                        <%= render 'posts/card', post: post %>
+                      </div>
+                    <% end %>
                   </div>
-                </div>
-                <h4 class="my-4">Recently posts:</h4>
-                <div class="row d-flex justify-content-center">
-                  <% @posts.each do |post| %>
-                    <div class="col-11 col-md-8 mb-2">
-                      <%= render 'posts/card', post: post %>
-                    </div>
-                  <% end %>
                 </div>
               </div>
             </div>
             <!-- PHOTOS -->
             <div class="tab-pane fade" id="pills-photos" role="tabpanel" aria-labelledby="pills-photos-tab" tabindex="0">
-              <div class="feed-photos pt-3">
-                <h4 class="mt-2">Your friends' recently added photos:</h4>
-                <% if @routes_with_photos.any? %>
-                  <div class="row d-flex justify-content-center mt-4">
-                    <% @routes_with_photos.each do |item| %>
-                      <div class="col-11 col-md-4 mb-3">
-                        <%= render 'components/feed_img_card',
+              <div class="row d-flex justify-content-center mt-4">
+                <div class="col-11 col-md-8 mb-3">
+                  <div class="feed-photos">
+                    <h4 class="mb-4">Your friends' recently added photos:</h4>
+                    <% if @routes_with_photos.any? %>
+                      <% @routes_with_photos.each do |item| %>
+                        <div class="mb-2">
+                          <%= render 'components/feed_img_card',
                             item: item[:route],
                             user: item[:user],
                             action_text: "posted a new photo in",
@@ -165,86 +162,92 @@
                             item_path: route_path(item[:route]),
                             default_image: "route_default.jpg",
                             photo: item[:photo] %>
-                      </div>
-                    <% end %>
-                  </div>
-                <% else %>
-                  <p>No photos from users you follow.</p>
-                <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% else %>
+                    <p>No photos from users you follow.</p>
+                  <% end %>
+                </div>
               </div>
             </div>
             <!-- ROUTES-->
             <div class="tab-pane fade" id="pills-routes" role="tabpanel" aria-labelledby="pills-routes-tab" tabindex="0">
-              <div class="friends-routes mt-4">
-                <h4>Your friends' recently added routes:</h4>
-                <% if @routes.any? %>
-                  <div class="row d-flex justify-content-center mt-4">
-                    <% @routes.each do |route| %>
-                      <div class="col-11 col-md-4 mb-2">
-                        <%= render 'components/feed_card', item: route, action_text: "created the route", item_title: route.title, item_link: route_path(route) %>
-                      </div>
+              <div class="row d-flex justify-content-center">
+                <div class="col-11 col-md-8">
+                  <div class="friends-routes mt-4">
+                    <h4 class="mb-4">Your friends' recently added routes:</h4>
+                    <% if @routes.any? %>
+                      <% @routes.each do |route| %>
+                        <div class="mb-2">
+                          <%= render 'components/feed_card', item: route, action_text: "created the route", item_title: route.title, item_link: route_path(route) %>
+                        </div>
+                      <% end %>
+                    <% else %>
+                      <p>No routes from users you follow.</p>
                     <% end %>
                   </div>
-                <% else %>
-                  <p>No routes from users you follow.</p>
-                <% end %>
+                </div>
               </div>
             </div>
             <!-- REVIEWS -->
             <div class="tab-pane fade" id="pills-reviews" role="tabpanel" aria-labelledby="pills-reviews-tab" tabindex="0">
-              <div class="friends-review mt-4">
-                <h4>Your friends' recently added reviews:</h4>
-                <% if @reviews.any? %>
-                  <div class="row d-flex justify-content-center mt-4">
-                    <% @reviews.each do |review| %>
-                      <div class="col-11 col-md-4 mb-2">
-                        <%= link_to route_review_path(review.route_id, review.id) do %>
-                          <%= render 'components/feed_card', item: review, action_text: "created a new review for", item_title: review.route.title, item_link: route_path(review.route) %>
-                        <% end %>
-                      </div>
+              <div class="row d-flex justify-content-center mt-4">
+                <div class="col-11 col-md-8 mb-2">
+                  <div class="friends-review">
+                    <h4 class="mb-4">Your friends' recently added reviews:</h4>
+                    <% if @reviews.any? %>
+                      <% @reviews.each do |review| %>
+                        <div class="mb-2">
+                          <%= link_to route_review_path(review.route_id, review.id) do %>
+                            <%= render 'components/feed_card', item: review, action_text: "created a new review for", item_title: review.route.title, item_link: route_path(review.route) %>
+                          <% end %>
+                        </div>
+                      <% end %>
+                    <% else %>
+                      <p>No reviews from users you follow.</p>
                     <% end %>
                   </div>
-                <% else %>
-                  <p>No reviews from users you follow.</p>
-                <% end %>
-              </div>
-              <!-- COMMENTS -->
-              <div class="friends-comments mt-4">
-                <h4>Your friends' recently added comments:</h4>
-                <% if @comments.any? %>
-                  <div class="row d-flex justify-content-center mt-4">
-                    <% @comments.each do |comment| %>
-                      <div class="col-11 col-md-4 mb-2">
-                        <% if comment.commentable.is_a?(Route) %>
-                          <%= render 'components/feed_card', 
+                  <!-- COMMENTS -->
+                  <div class="friends-comments mt-4">
+                    <h4>Your friends' recently added comments:</h4>
+                    <% if @comments.any? %>
+                      <div class="mt-4">
+                        <% @comments.each do |comment| %>
+                          <div class="mb-2">
+                            <% if comment.commentable.is_a?(Route) %>
+                              <%= render 'components/feed_card', 
                         item: comment, 
                         action_text: "created a new comment in route", 
                         item_title: comment.commentable.title, 
                         item_link: route_path(comment.commentable) %>
-                        <% elsif comment.commentable.is_a?(Post) %>
-                          <%= render 'components/feed_card', 
+                            <% elsif comment.commentable.is_a?(Post) %>
+                              <%= render 'components/feed_card', 
                         item: comment, 
                         action_text: "created a new comment on post", 
                         item_title: comment.commentable.title, 
                         item_link: post_path(comment.commentable) %>
-                        <% else %>
-                          <p>Comentário sem entidade associada.</p>
+                            <% else %>
+                              <p>Comentário sem entidade associada.</p>
+                            <% end %>
+                          </div>
                         <% end %>
                       </div>
                     <% end %>
                   </div>
-                <% end %>
+                </div>
               </div>
             </div>
             <!-- BIKES-->
             <div class="tab-pane fade" id="pills-bikes" role="tabpanel" aria-labelledby="pills-bikes-tab" tabindex="0">
-              <div class="friends-bikes mt-4">
-                <h4 class="mb-4">Your friends' recently added bikes:</h4>
-                <% if @bikes.any? %>
-                  <div class="row d-flex justify-content-center mt-4">
-                    <% @bikes.each do |bike| %>
-                      <div class="col-11 col-md-4 mb-3">
-                        <%= render 'components/feed_img_card',
+              <div class="row d-flex justify-content-center mt-4">
+                <div class="col-11 col-md-8">
+                  <div class="friends-bikes">
+                    <h4 class="mb-4">Your friends' recently added bikes:</h4>
+                    <% if @bikes.any? %>
+                      <% @bikes.each do |bike| %>
+                        <div class="mb-3">
+                          <%= render 'components/feed_img_card',
             item: bike,
             user: bike.user,
             action_text: "added a new bike",
@@ -252,10 +255,11 @@
             item_path: user_bikes_path(bike.user),
             default_image: "bike_garage.jpg",
             photo: nil %> <!-- photo é nil, mas o default_image deve aparecer -->
-                      </div>
-                    <% end %>
-                  </div>
-                <% end %>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
               </div>
             </div>
             <!-- END TABS -->
