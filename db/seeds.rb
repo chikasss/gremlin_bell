@@ -122,52 +122,52 @@ puts "Users created"
 
 puts 'Creating Chatrooms and Messages'
 
-# Chatroom1
+Chatroom1
 chatroom1 = Chatroom.create!(name: 'Chatroom with Hideo', user: bill, recipient: hideo)
 Message.create!(description: "Hey Hideo, how's it going?", chatroom: chatroom1, user: bill)
 Message.create!(description: "Hey Bill! It's going well, thanks! How about you?", chatroom: chatroom1, user: hideo)
 Message.create!(description: "I'm doing great, just planning my next ride. Any suggestions?", chatroom: chatroom1, user: bill)
 Message.create!(description: "Yes, you should check out the routes in Kanagawa. I'll send you some details!", chatroom: chatroom1, user: hideo)
 
-# Chatroom2
+Chatroom2
 chatroom2 = Chatroom.create!(name: 'Chatroom with Ami', user: vincenzo, recipient: ami)
 Message.create!(description: "Hi Ami! Are you up for a ride this weekend?", chatroom: chatroom2, user: vincenzo)
 Message.create!(description: "Hi Vincenzo! Sure, that sounds fun. Where are we headed?", chatroom: chatroom2, user: ami)
 Message.create!(description: "Let's do a coastal route, I know a great spot for coffee.", chatroom: chatroom2, user: vincenzo)
-  
-# Chatroom3
+
+Chatroom3
 chatroom3 = Chatroom.create!(name: 'Chatroom with Eric', user: mary, recipient: eric)
 Message.create!(description: "Hey Eric, I need some help with my bike. Got time?", chatroom: chatroom3, user: mary)
 Message.create!(description: "Sure Mary, bring it to the shop and I'll take a look.", chatroom: chatroom3, user: eric)
 Message.create!(description: "Thanks, I'll be there in the afternoon.", chatroom: chatroom3, user: mary)
 
-# Chatroom4
+Chatroom4
 chatroom4 = Chatroom.create!(name: 'Chatroom with Vincenzo', user: angel, recipient: vincenzo)
 Message.create!(description: "Hi Vincenzo, any good routes near Kanagawa?", chatroom: chatroom4, user: angel)
 Message.create!(description: "Hey Angel! Absolutely, I'll share a few with you.", chatroom: chatroom4, user: vincenzo)
 Message.create!(description: "Thanks! Can't wait to try them out.", chatroom: chatroom4, user: angel)
 
-# Chatroom5
+Chatroom5
 chatroom5 = Chatroom.create!(name: 'Chatroom with Angel', user: eric, recipient: angel)
 Message.create!(description: "Hi Angel, how was your last ride?", chatroom: chatroom5, user: eric)
 Message.create!(description: "Hey Eric! It was amazing, the weather was perfect!", chatroom: chatroom5, user: angel)
 Message.create!(description: "Glad to hear! Let's ride together next time.", chatroom: chatroom5, user: eric)
 
-# Chatroom6
+Chatroom6
 chatroom6 = Chatroom.create!(name: "Chatroom with Mika", user: bill, recipient: mika)
 Message.create!(description: "Hi Mika! I heard you recently got back from Australia. Did you bring your bike?", chatroom: chatroom6, user: bill)
 Message.create!(description: "Hey Bill! Yes, I did. I'm excited to explore Japan's roads now.", chatroom: chatroom6, user: mika)
 Message.create!(description: "Awesome! We should plan a ride together. Any routes in mind?", chatroom: chatroom6, user: bill)
 Message.create!(description: "I'd love that! Maybe we can start with some routes in Aomori?", chatroom: chatroom6, user: mika)
 
-# Chatroom7
+Chatroom7
 chatroom7 = Chatroom.create!(name: "Chatroom with Mary", user: hideo, recipient: mary)
 Message.create!(description: "Hi Mary, I saw your post about Nagano. How's the riding there?", chatroom: chatroom7, user: hideo)
 Message.create!(description: "Hi Hideo! Nagano is beautiful, especially during the autumn. You should definitely check it out.", chatroom: chatroom7, user: mary)
 Message.create!(description: "That sounds great! Any specific routes you'd recommend?", chatroom: chatroom7, user: hideo)
 Message.create!(description: "Yes, I'll share a couple of my favorites with you!", chatroom: chatroom7, user: mary)
 
-# Chatroom8
+Chatroom8
 chatroom8 = Chatroom.create!(name: "Chatroom with Eric", user: vincenzo, recipient: eric)
 Message.create!(description: "Hey Eric! I'm thinking of upgrading my bike. Any recommendations?", chatroom: chatroom8, user: vincenzo)
 Message.create!(description: "Hi Vincenzo! It depends on what you're looking for. Are you after speed, comfort, or something else?", chatroom: chatroom8, user: eric)
@@ -504,7 +504,7 @@ hideo_route = Route.create!(
   prefecture: "Hokkaido",
   road_condition: "Construction",
   user: hideo,
-  recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
+  recomended_bikes: ["Cruiser", "Standard"]
 )
 
 mika_route = Route.create!(
@@ -752,6 +752,12 @@ hideo_response_to_mary = Comment.create!(
   description: "The onsens are so nice there. Hope you enjoyed it.",
   commentable: hideo_route,
   user: hideo
+)
+
+bill_response_to_hideo = Comment.create!(
+  description: "I love this ride thanks!",
+  commentable: hideo_route,
+  user: bill
 )
 
 bill_to_mika_route = Comment.create!(
