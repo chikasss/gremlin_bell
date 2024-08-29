@@ -18,7 +18,7 @@
             </div>
             <div class="ms-3 w-100 messages">
               <% if data[:chat_user].present? %>
-                <h5><%= data[:chat_user].username %></h5>
+                <h5>@<%= data[:chat_user].username %></h5>
               <% else %>
                 <h5>Unknown User</h5>
               <% end %>

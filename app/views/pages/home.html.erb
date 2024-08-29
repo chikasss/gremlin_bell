@@ -248,13 +248,13 @@
                       <% @bikes.each do |bike| %>
                         <div class="mb-3">
                           <%= render 'components/feed_img_card',
-            item: bike,
-            user: bike.user,
-            action_text: "added a new bike",
-            item_name: bike.name,
-            item_path: user_bikes_path(bike.user),
-            default_image: "bike_garage.jpg",
-            photo: nil %> <!-- photo é nil, mas o default_image deve aparecer -->
+                              item: bike,
+                              user: bike.user,
+                              action_text: "added a new bike",
+                              item_name: bike.name,
+                              item_path: user_bikes_path(bike.user),
+                              default_image: "bike_garage.jpg",
+                              photo: nil %>
                         </div>
                       <% end %>
                     </div>

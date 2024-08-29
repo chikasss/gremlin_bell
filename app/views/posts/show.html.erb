@@ -71,9 +71,9 @@
                     <div class="me-2">
                       <%= link_to user_path(comment.user) do %>
                         <% if comment.user.avatar.present? %>
-                          <%= cl_image_tag comment.user.avatar.key, class: "avatar" %>
+                          <%= cl_image_tag comment.user.avatar.key, class: "avatar-sm" %>
                         <% else %>
-                          <%= image_tag "user-photo.png", class: "avatar" %>
+                          <%= image_tag "user-photo.png", class: "avatar-sm" %>
                         <% end %>
                       </div>
                       <div>

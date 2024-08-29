@@ -15,7 +15,7 @@
             <%= image_tag 'user-photo.png', class: "avatar" %>
           <% end %>
           <% if @chatroom.recipient.present? %>
-            <h2 class="mb-0 ms-3"><%= @chatroom.recipient.username %></h2>
+            <h3 class="mb-0 ms-3">@<%= @chatroom.recipient.username %></h3>
           <% else %>
             <h2 class="mb-0 ms-3">Unknown User</h2>
           <% end %>
