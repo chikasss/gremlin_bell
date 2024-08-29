@@ -1,0 +1,9 @@
+<div class="container">
+  <div>
+    <% @posts.each do |post| %>
+      <div class="mb-2">
+        <%= render 'posts/card', post: post %>
+      </div>
+    <% end %>
+  </div>
+</div>

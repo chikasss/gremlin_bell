@@ -1,0 +1,12 @@
+<div class="d-flex align-items-center" data-like-target="likeContainer">
+  <% if current_user.favorited?(post) %>
+    <%= button_to unlike_user_post_path(post.user, post), method: :delete, remote: true, class: 'btn-unlike', data: { action: 'like#toggleLike', 'like-target': 'likeButton', method: 'delete' } do %>
+      <i class="fa-solid fa-heart me-2"></i>
+    <% end %>
+  <% else %>
+    <%= button_to like_user_post_path(post.user, post), remote: true, class: 'btn-like', data: { action: 'like#toggleLike', 'like-target': 'likeButton', method: 'post' } do %>
+      <i class="fa-regular fa-heart me-2"></i>
+    <% end %>
+  <% end %>
+  <span data-like-target="likeCount"><%= post.likes_count %></span>
+</div>

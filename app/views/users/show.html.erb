@@ -6,6 +6,7 @@
     </div>
     <div class="bg-white">
       <div class="container user-profile">
+        <!-- SOCIAL MEDIA -->
         <div class="social-links">
           <% if @user.social_links.present? %>
             <% @user.social_links.each do |platform, url| %>
@@ -28,11 +29,37 @@
             <% end %>
           <% end %>
         </div>
+        <!-- ABOUT -->
         <% if @user.about.present? %>
           <h3><strong>About </strong><%= @user.first_name%>:</h3>
           <p class="p-2"><%= @user.about %></p>
         <% end %>
-        <div class="d-flex justify-content-between mb-2">
+        <!-- POSTS -->
+        <div class="last-posts">
+          <div class="d-flex justify-content-between mb-3">
+            <% if @user == current_user %>
+              <h3><strong>Your</strong> posts:</h3>
+            <% else %>
+              <h3><%= @user.first_name %>'s <strong>posts:</strong></h3>
+            <% end %>
+            <%= link_to user_posts_path(@user) do %>
+              <i class="fa-solid fa-circle-chevron-right"></i>
+            <% end %>
+          </div>
+          <% if @posts.any? %>
+            <div class="d-flex flex-row flex-nowrap overflow-auto">
+              <% @posts.each do |post| %>
+                <div class="col-11 col-md-6 me-2">
+                  <%= render 'posts/card', post: post %>
+                </div>
+              <% end %>
+            </div>
+          <% else %>
+            <p><%= @user.first_name %> has not posted anything yet.</p>
+          <% end %>
+        </div>
+        <!-- BIKES -->
+        <div class="d-flex justify-content-between mt-4 pt-4 mb-2">
           <% if @user ==current_user %>
             <h3><strong>Your</strong> Garage:</h3>
           <% else %>
@@ -53,7 +80,8 @@
             <p><%= @user.first_name %> has not added any bikes yet.</p>
           <% end %>
         </div>
-        <div class="saved-routes mt-4 pt-4">
+        <!-- CREATED ROUTES -->
+        <div class="created-routes mt-4 pt-4">
           <div class="d-flex justify-content-between">
             <% if @user == current_user %>
               <h3><strong>Your</strong> routes:</h3>
@@ -76,6 +104,7 @@
             <% end %>
           </div>
         </div>
+        <!-- REVIEWS -->
         <div class="my-4">
           <div class="d-flex justify-content-between">
             <% if @user == current_user %>

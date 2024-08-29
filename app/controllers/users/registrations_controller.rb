@@ -14,7 +14,7 @@ module Users
     protected
 
     def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :prefecture])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :username, :prefecture])
     end
 
     def after_sign_up_path_for(resource)

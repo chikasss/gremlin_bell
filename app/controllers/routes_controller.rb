@@ -75,7 +75,6 @@ class RoutesController < ApplicationController
       else
         @route.road_condition
       end
-    # @comments_last_3 = @route.comments.includes(:user).order(created_at: :desc).limit(3)
     @comment = @route.comments.new
     @tail = YouTubeRails.extract_video_id(@route.videos_url)
     @current_weather = WeatherService.new(@route.waypoints[0][1], @route.waypoints[0][0], "metric").get_current_weather

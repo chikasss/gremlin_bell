@@ -17,7 +17,11 @@
               <% end %>
             </div>
             <div class="ms-3 w-100 messages">
-              <h5><%= data[:chat_user].first_name %></h5>
+              <% if data[:chat_user].present? %>
+                <h5>@<%= data[:chat_user].username %></h5>
+              <% else %>
+                <h5>Unknown User</h5>
+              <% end %>
               <div class="d-flex justify-content-between">
                 <p class="mb-0 chat-msg-index"><%= truncate_words(data[:last_message].description, 3) %></p>
                 <small class="mb-0 chat-date">

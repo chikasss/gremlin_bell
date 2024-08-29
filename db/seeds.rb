@@ -28,6 +28,7 @@ bill = User.create!(
   password_confirmation: 'password',
   first_name: 'Bill',
   last_name: 'Billiards',
+  username: 'Bill_Billiards',
   about: "Hi! My name is Bill. I'm an American that's been living in Hokkaido for 5 years. I've been riding motorcycles for about 15 years. After three attempts, I finally got a Japanese license this year so I'm looking to explore what Japan's roads have to offer! I'm looking forward to checking out your awesome routes and adding some of my own!",
   prefecture: "Hokkaido",
   social_links: { twitter: "twitter.com/notatallarealpageforbill", facebook: "facebook.com/notatallarealpageforbill", instagram: "instagram.com/notatallarealpageforbill", youtube: "youtube.com/notatallarealpageforbill", tiktok: "tiktok.com/notatallarealpageforbill"},
@@ -39,6 +40,7 @@ hideo = User.create!(
   password_confirmation: 'password',
   first_name: 'Hideo',
   last_name: 'Sato',
+  username: 'Hideo_Sato',
   about: "Hello. My name is Hideo. I've ridden motorcycles all over Japan. I live in Kanagawa so I know the area very well. Please take a look at my routes. If you have any questions, don't hesitate to ask me. Maybe we can go on a ride together. I recently retired so I have way too much free time.",
   prefecture: "Kanagawa",
   social_links: { twitter: "twitter.com/notatallarealpageforhideo", facebook: "facebook.com/notatallarealpageforhideo", instagram: "instagram.com/notatallarealpageforhideo", youtube: "youtube.com/notatallarealpageforhideo", tiktok: "tiktok.com/notatallarealpageforhideo"},
@@ -50,6 +52,7 @@ mika = User.create!(
   password_confirmation: 'password',
   first_name: 'Mika',
   last_name: 'Hayashi',
+  username: 'Mika_Hayashi',
   about: "Hello. My name is Mika. I just returned to Japan after studying abroad in Australia. I hope to make some friends and go on rides together.",
   prefecture: "Aomori",
   social_links: { twitter: "twitter.com/notatallarealpageformika", facebook: "facebook.com/notatallarealpageformika", instagram: "instagram.com/notatallarealpageformika", youtube: "youtube.com/notatallarealpageformika", tiktok: "tiktok.com/notatallarealpageformika"},
@@ -61,6 +64,7 @@ eric = User.create!(
   password_confirmation: 'password',
   first_name: 'Eric',
   last_name: 'Hall',
+  username: 'Eric_Hall',
   about: "Hey, I'm Eric. I own a motorcycle repair shop in Tokyo. I've been riding bikes for more than 20 years. On the weekends, I like to pick direction and just go where the road takes.",
   prefecture: "Tokyo",
   social_links: { twitter: "twitter.com/notatallarealpageforeric", facebook: "facebook.com/notatallarealpageforeric", instagram: "instagram.com/notatallarealpageforeric", youtube: "youtube.com/notatallarealpageforeric", tiktok: "tiktok.com/notatallarealpageforeric"},
@@ -72,6 +76,7 @@ mary = User.create!(
   password_confirmation: 'password',
   first_name: 'Mary',
   last_name: 'Smith',
+  username: 'Mary_Smith',
   about: "G'day mate! Just an Aussie cruisin' Japan's countryside.",
   prefecture: "Nagano",
   social_links: { twitter: "twitter.com/notatallarealpageformary", facebook: "facebook.com/notatallarealpageformary", instagram: "instagram.com/notatallarealpageformary", youtube: "youtube.com/notatallarealpageformary", tiktok: "tiktok.com/notatallarealpageformary"},
@@ -83,6 +88,7 @@ angel = User.create!(
   password_confirmation: 'password',
   first_name: 'Angel',
   last_name: 'Gibson',
+  username: 'Angel_Gibson',
   about: "Hi! I'm Angel. My partner and I have been riding around Fukuoka for 10 years so we know some great areas to ride around.  ",
   prefecture: "Fukuoka",
   social_links: { twitter: "twitter.com/notatallarealpageforangel", facebook: "facebook.com/notatallarealpageforangel", instagram: "instagram.com/notatallarealpageforangel", youtube: "youtube.com/notatallarealpageforangel", tiktok: "tiktok.com/notatallarealpageforangel"},
@@ -94,6 +100,7 @@ vincenzo = User.create!(
   password_confirmation: 'password',
   first_name: 'Vincenzo',
   last_name: 'Garcia',
+  username: 'Vincenzo_Garcia',
   about: "Hi! I'm Vincenzo. I love riding and drinking coffee. Lets grab a drink during a ride some time.",
   prefecture: "Kanagawa",
   social_links: { twitter: "twitter.com/notatallarealpageforvincenzo", facebook: "facebook.com/notatallarealpageforvincenzo", instagram: "instagram.com/notatallarealpageforvincenzo", youtube: "youtube.com/notatallarealpageforvincenzo", tiktok: "tiktok.com/notatallarealpageforvincenzo"},
@@ -105,6 +112,7 @@ ami = User.create!(
   password_confirmation: 'password',
   first_name: 'Ami',
   last_name: 'Ozaki',
+  username: 'Ami_Ozaki',
   about: "Hi! I'm Ami. I spend most of the warm months on my bike.",
   prefecture: "Kanagawa",
   social_links: { twitter: "twitter.com/notatallarealpageforami", facebook: "facebook.com/notatallarealpageforami", instagram: "instagram.com/notatallarealpageforami", youtube: "youtube.com/notatallarealpageforami", tiktok: "tiktok.com/notatallarealpageforami"},
@@ -690,96 +698,99 @@ puts "Random favorites routes added successfully!"
 
 puts "Creating comments"
 
+puts "Creating comments"
+
 hideo_to_bill_route = Comment.create!(
   description: "Looks incredible! I'm going to save this and check it out next time I'm in the area. Thanks!",
-  route: bill_route,
+  commentable: bill_route,
   user: hideo
 )
 
 bill_response_to_hideo = Comment.create!(
   description: "Can't wait to see what you think. Hit me up when you're in the area. Maybe we can ride together.",
-  route: bill_route,
+  commentable: bill_route,
   user: bill
 )
 
 angel_to_bill_route = Comment.create!(
   description: "Sadly no tunnels by me, but I totally get what you mean lol",
-  route: bill_route,
+  commentable: bill_route,
   user: angel
 )
 
 bill_response_to_angel = Comment.create!(
   description: "VROOOOOOOOOOM!!!",
-  route: bill_route,
+  commentable: bill_route,
   user: bill
 )
 
 vincenzo_to_ami_route = Comment.create!(
   description: "Oh wow! I actually live along this route. I've regularly go to Yokohama on the weekends, but I've never gone this way. Looks like fun. I'll check it out this weekend",
-  route: ami_route,
+  commentable: ami_route,
   user: vincenzo
 )
 
 ami_response_to_vincenzo = Comment.create!(
   description: "Cool! Let me know how it goes.",
-  route: ami_route,
+  commentable: ami_route,
   user: ami
 )
 
 vincenzo2_to_ami_route = Comment.create!(
   description: "Just finished the ride. It was great. I ended up finding a cafe I hadn't heard of before so I'm glad I checked it out.",
-  route: ami_route,
+  commentable: ami_route,
   user: vincenzo
 )
 
 mary_to_hideo_route = Comment.create!(
   description: "I just checked out an onsen in the area. Sadly didn't have my bike with me, but I'll save this for next time.",
-  route: hideo_route,
+  commentable: hideo_route,
   user: mary
 )
 
 hideo_response_to_mary = Comment.create!(
   description: "The onsens are so nice there. Hope you enjoyed it.",
-  route: hideo_route,
+  commentable: hideo_route,
   user: hideo
 )
 
 bill_to_mika_route = Comment.create!(
   description: "I visited Hiraodai Karst last summer. Kushitani Cafe Aso is the best!",
-  route: mika_route,
+  commentable: mika_route,
   user: bill
 )
 
 mika_response_to_bill = Comment.create!(
   description: "It is! Great spot to take a break.",
-  route: mika_route,
+  commentable: mika_route,
   user: mika
 )
 
 bill_to_eric_route = Comment.create!(
   description: "This looks great! I know someone that lives in the area. I'm gonna let him know about this.",
-  route: eric_route,
+  commentable: eric_route,
   user: bill
 )
 
 eric_response_to_bill = Comment.create!(
   description: "Wait! Are you friends with Ray? I remember him mentioning he knew a Bill that lives in Hokkaido",
-  route: eric_route,
+  commentable: eric_route,
   user: eric
 )
 
 bill_to_eric = Comment.create!(
   description: "Ha! Yes, that's him! We went to college together. We got our motorcycle licenses at the same time too!",
-  route: eric_route,
+  commentable: eric_route,
   user: bill
 )
+
 eric_response_to_bill2 = Comment.create!(
   description: "Small world!",
-  route: eric_route,
+  commentable: eric_route,
   user: eric
 )
 
-puts "Comments created"
+puts 'Comments created!'
 
 puts "Creating Reviews"
 

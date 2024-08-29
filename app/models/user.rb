@@ -10,16 +10,18 @@ class User < ApplicationRecord
   has_many :bikes, dependent: :destroy
   has_many :routes
   has_many :reviews
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :messages
+  has_many :posts, dependent: :destroy
   has_many :active_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :passive_relationships, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
   has_many :followers, through: :passive_relationships, source: :follower
   has_one_attached :avatar
 
-  validates :first_name, :prefecture, presence: true
+  validates :username, :first_name, :prefecture, presence: true
   validates :email, uniqueness: true
+  validates :username, uniqueness: true, length: { in: 3..20 }
 
   PREFECTURES = [
     'Hokkaido', 'Aomori', 'Akita', 'Iwate', 'Yamagata', 'Miyagi', 'Niigata', 'Fukushima', 'Tochigi',

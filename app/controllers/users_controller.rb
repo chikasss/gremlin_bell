@@ -48,6 +48,7 @@ class UsersController < ApplicationController
     @routes = @user.routes
     @reviews = @user.reviews
     @last_review = @reviews.last
+    @posts = @user.posts.order(created_at: :desc).last(3)
   end
 
   def saved_trips
@@ -78,7 +79,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :avatar, :social_links, :about, :prefecture)
+    params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :password_confirmation, :avatar, :social_links, :about, :prefecture)
   end
 
   def social_params

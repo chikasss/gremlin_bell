@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Criar Novo Post</h1>
+  <%= simple_form_for @post do |f| %>
+    <div class="form-group">
+      <%= f.input :content, as: :text, input_html: { class: 'form-control', placeholder: "Escreva algo... Use @ para mencionar pessoas ou rotas" } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :image_url, input_html: { class: 'form-control' } %>
+    </div>
+    <div class="form-group">
+      <%= f.input :tags, as: :string, input_html: { class: 'form-control', value: @post.tags.join(', '), placeholder: "Insira tags separadas por vírgulas" } %>
+    </div>
+    <%= f.button :submit, "Criar Post", class: "btn btn-primary" %>
+  <% end %>
+  <%= link_to 'Voltar', root_path, class: "btn btn-secondary" %>
+</div>

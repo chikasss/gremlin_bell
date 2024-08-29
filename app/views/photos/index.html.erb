@@ -34,7 +34,7 @@
                   <div class="col-6 mb-2 route-img-index">
                     <%= cl_image_tag photo.image.key %>
                     <%= link_to user_path(photo.user) do %>
-                      <p class="user">by <%= photo.user.first_name %></p>
+                      <p class="user">by <%= photo.user.username %></p>
                     <% end %>
                   </div>
                 <% end %>

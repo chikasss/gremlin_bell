@@ -35,8 +35,8 @@
             </div>
             <div class="mt-2 d-flex align-items-center road-condition-show">
               <div><i class="fa-solid fa-road ms-1"></i></div>
-            <p class="ms-1 mb-0"><%= " Road condition as of #{@reviews.any? ? @reviews.first.date.strftime("%m/%d/%Y") : @route.created_at.strftime("%m/%d/%Y")}:" %>
-            <strong style="color: #960808 "><%= @road_condition %></strong></p>
+              <p class="ms-1 mb-0"><%= " Road condition as of #{@reviews.any? ? @reviews.first.date.strftime("%m/%d/%Y") : @route.created_at.strftime("%m/%d/%Y")}:" %>
+                <strong style="color: #960808 "><%= @road_condition %></strong></p>
             </div>
           </div>
           <div class="route-photo d-flex row justify-content-center">
@@ -93,43 +93,43 @@
             </div>
           <% end %>
           <!-- map -->
-      <div class="map-container my-4">
-        <h3 class="mb-3">Route map:</h3>
-        <div data-controller="route-show-map"
-         data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
-         data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
-         data-route-show-map-landmark-long="<%#= @route.landmarks.first.long %>"
-        data-route-show-map-landmark-lat="<%#= @route.landmarks.first.lat %>"
-         data-route-show-map-target="map"
-         data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
-          data-route-show-map-pin-blue="<%= asset_path('pin_route_blue.png') %>"
-          data-route-show-map-pin-purple="<%= asset_path('pin_route_purple.png') %>"
-          data-route-show-map-pin-yellow="<%= asset_path('pin_route_yellow.png') %>"
-          data-route-show-map-pin-black="<%= asset_path('pin_route_black.png') %>"
-          data-route-show-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>"
-          data-route-show-map-pin-one="<%= asset_path('1.png') %>"
-          data-route-show-map-pin-two="<%= asset_path('2.png') %>"
-          data-route-show-map-pin-three="<%= asset_path('3.png') %>"
-          data-route-show-map-pin-four="<%= asset_path('4.png') %>"
-          data-route-show-map-pin-five="<%= asset_path('5.png') %>"
-          data-route-show-map-pin-six="<%= asset_path('6.png') %>"
-          data-route-show-map-pin-seven="<%= asset_path('7.png') %>"
-          data-route-show-map-pin-eight="<%= asset_path('8.png') %>"
-          data-route-show-map-pin-nine="<%= asset_path('9.png') %>"
-          data-route-show-map-pin-ten="<%= asset_path('10.png') %>"
-          data-route-show-map-landmarks="<%= @landmarks.map { |lm| { lat: lm.lat, long: lm.long } }.to_json %>"
-        style="width: 100%; height: 400px;">
-        <%# "<%#= @route.landmarks.to_json %>
-        </div>
-      </div>
+          <div class="map-container my-4">
+            <h3 class="mb-3">Route map:</h3>
+            <div data-controller="route-show-map"
+                 data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
+                 data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
+                 data-route-show-map-landmark-long="<%= @route.landmarks.first&.long %>"
+                 data-route-show-map-landmark-lat="<%= @route.landmarks.first&.lat %>"
+                 data-route-show-map-target="map"
+                 data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
+                 data-route-show-map-pin-blue="<%= asset_path('pin_route_blue.png') %>"
+                 data-route-show-map-pin-purple="<%= asset_path('pin_route_purple.png') %>"
+                 data-route-show-map-pin-yellow="<%= asset_path('pin_route_yellow.png') %>"
+                 data-route-show-map-pin-black="<%= asset_path('pin_route_black.png') %>"
+                 data-route-show-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>"
+                 data-route-show-map-pin-one="<%= asset_path('1.png') %>"
+                 data-route-show-map-pin-two="<%= asset_path('2.png') %>"
+                 data-route-show-map-pin-three="<%= asset_path('3.png') %>"
+                 data-route-show-map-pin-four="<%= asset_path('4.png') %>"
+                 data-route-show-map-pin-five="<%= asset_path('5.png') %>"
+                 data-route-show-map-pin-six="<%= asset_path('6.png') %>"
+                 data-route-show-map-pin-seven="<%= asset_path('7.png') %>"
+                 data-route-show-map-pin-eight="<%= asset_path('8.png') %>"
+                 data-route-show-map-pin-nine="<%= asset_path('9.png') %>"
+                 data-route-show-map-pin-ten="<%= asset_path('10.png') %>"
+                 data-route-show-map-landmarks="<%= @landmarks.map { |lm| { lat: lm.lat, long: lm.long } }.to_json %>"
+                 style="width: 100%; height: 400px;">
+            </div>
+          </div>
 
-<!-- showing landmark address-->
-      <div>
-      <h3 class="">Landmarks:</h3>
-      <% @landmarks.each do  |landmark|%>
-        <p class="landmark-address"><%= landmark.address.split(",").first  %></p>
-      <% end %>
-      </div>
+          <!-- showing landmark address-->
+          <div>
+            <h3 class="">Landmarks:</h3>
+            <% @landmarks.each do |landmark| %>
+              <p class="landmark-address"><%= landmark.address.split(",").first %></p>
+            <% end %>
+          </div>
+          
           <!-- weather -->
           <div class="pt-4">
             <% if @current_weather.present? %>
@@ -234,28 +234,29 @@
               <div class="border-bottom mx-4 my-4"></div>
             </div>
           </div>
-
         </div>
-          <!-- comments -->
-          <% if @route.comments.any? %>
-            <div class="mt-4">
+        <!-- comments -->
+        <% if @route.comments.any? %>
+          <div class="mt-4">
+            <div class="mx-4">
               <%= render 'comments/comments_show_route' %>
             </div>
-          <% else %>
-            <div data-controller="insert-route-comment">
-              <div class="d-flex justify-content-center mt-4" data-action="click->insert-route-comment#insertRouteComment">
-                <button class="btn-light-gray" data-insert-route-comment-target="newCommentBtn">Write your own comment or question</button>
-              </div>
-              <div class="my-4 toggle-form" data-insert-route-comment-target="commentForm">
-                <%= render 'comments/form' %>
-              </div>
-            </div>
-          <% end %>
-          <div class="my-4 d-flex justify-content-center">
-            <%= button_to 'Save to My Trips', save_route_path(@route),
-            method: :post, class: 'btn-red-lg' %>
           </div>
+        <% else %>
+          <div data-controller="insert-route-comment">
+            <div class="d-flex justify-content-center mt-4" data-action="click->insert-route-comment#insertRouteComment">
+              <button class="btn-light-gray" data-insert-route-comment-target="newCommentBtn">Write your own comment or question</button>
+            </div>
+            <div class="my-4 toggle-form" data-insert-route-comment-target="commentForm">
+              <%= render 'comments/form' %>
+            </div>
+          </div>
+        <% end %>
+        <div class="my-4 d-flex justify-content-center">
+          <%= button_to 'Save to My Trips', save_route_path(@route),
+            method: :post, class: 'btn-red-lg' %>
         </div>
       </div>
     </div>
+  </div>
 </div>

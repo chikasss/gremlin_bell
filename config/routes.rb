@@ -9,6 +9,16 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[index edit show update] do
     resources :bikes, only: %i[create edit update show index new]
+    resources :posts do
+      member do
+        post 'like'
+        delete 'unlike'
+      end
+      resources :comments, only: [:create, :show]
+      collection do
+        get 'search', to: 'posts#search'
+      end
+    end
     member do
       post 'follow', to: 'users#follow', as: 'follow'
       delete 'unfollow', to: 'users#unfollow', as: 'unfollow'
@@ -20,6 +30,7 @@ Rails.application.routes.draw do
       get 'user_reviews', to: 'users#user_reviews', as: :user_reviews
     end
   end
+  
 
   resources :chatrooms, only: [:index, :show, :new, :create] do
     resources :messages, only: [:create, :show]
