@@ -10,7 +10,7 @@ export default class extends Controller {
 
   initializeReviews() {
     this.showLastFiveReviewsTarget.classList.remove('visible');
-    this.showReviewBtnTarget.innerText = 'Road Reviews';
+    this.showReviewBtnTarget.innerText = 'Read Reviews';
   }
 
   showReviews() {

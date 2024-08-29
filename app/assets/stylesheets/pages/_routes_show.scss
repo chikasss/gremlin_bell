@@ -17,9 +17,14 @@
     text-decoration: none;
   }
 
+  i.fa-user {
+    color: $dark-red;
+  }
+
   i.fa-location-dot {
     color: $dark-red;
   }
+
 
   .location-route p {
     color: $dark-red;
@@ -156,7 +161,7 @@
       background: none;
       border: none;
     }
-  
+
     i {
       color: $gray-hover;
       transition: color 0.3s;

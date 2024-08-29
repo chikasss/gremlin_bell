@@ -45,16 +45,16 @@
           </div>
           <% if @routes.any? %>
             <% if params[:query].present? && params[:query][:prefecture].present? && params[:query][:ride_type].present? %>
-              <h3 class="mt-4 text-center">Check out the most popular <strong><%= params[:query][:ride_type] %></strong> Routes in <strong><%= params[:query][:prefecture] %></strong></h3>
+              <h3 class="mt-4 text-center">Popular <strong style="color: #960808"><%= params[:query][:ride_type] %></strong> routes in <strong style="color: #960808"><%= params[:query][:prefecture] %></strong></h3>
               <%= render 'components/popular_route' %>
             <% elsif params[:query].present? && params[:query][:ride_type].present? %>
-              <h3 class="mt-4 text-center">Check out the most popular <strong><%= params[:query][:ride_type] %></strong> Routes</h3>
+              <h3 class="mt-4 text-center">Popular <strong style="color: #960808"><%= params[:query][:ride_type] %></strong> routes</h3>
               <%= render 'components/popular_route' %>
             <% elsif params[:query].present? && params[:query][:prefecture].present?%>
-              <h3 class="mt-4 text-center">Check out the most popular routes in <strong><%= params[:query][:prefecture] %></strong></h3>
+              <h3 class="mt-4 text-center">Popular routes in <strong style="color: #960808"><%= params[:query][:prefecture] %></strong></h3>
               <%= render 'components/popular_route' %>
             <% else %>
-              <h3 class="mt-4 text-center">Check out the most popular routes</h3>
+              <h3 class="mt-4 text-center">Popular routes</h3>
               <%= render 'components/popular_route' %>
             <% end %>
             <div class="row d-flex justify-content-center">
@@ -66,11 +66,11 @@
             </div>
           <% else %>
             <% if params[:query].present? && params[:query][:ride_type].present? %>
-              <p class="text-center mt-4">No routes found for this ride type search<br>
-                <strong><%= params[:query][:ride_type] %></strong></p>
+              <p class="text-center mt-4">No routes found for this ride type:<br>
+                <strong style="color: #960808"><%= params[:query][:ride_type] %></strong></p>
             <% elsif params[:query].present? && params[:query][:prefecture].present?%>
-              <p class="text-center mt-4">No routes found for this prefecture search <br>
-                <strong><%= params[:query][:prefecture] %></strong></p>
+              <p class="text-center mt-4">No routes found for:<br>
+                <strong style="color: #960808"><%= params[:query][:prefecture] %></strong></p>
             <% end %>
           <% end %>
         </div>

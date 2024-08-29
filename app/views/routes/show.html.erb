@@ -29,7 +29,11 @@
             </div>
           </div>
           <div class="mb-4">
-            <div class="ms-1 d-flex align-items-center location-route">
+            <div class="d-flex location-route">
+                <i class="ms-1 fa-solid fa-user"></i>
+                <p class="ms-2 mb-0"><%= @route.user.first_name %></p>
+            </div>
+            <div class="mt-2 ms-1 d-flex align-items-center location-route">
               <i class="fa-solid fa-location-dot"></i>
               <p class='ms-2 pb-0 mb-0'><%= @route.prefecture %></p>
             </div>
@@ -123,13 +127,15 @@
           </div>
 
           <!-- showing landmark address-->
+          <% if @landmarks.any? %>
           <div>
-            <h3 class="">Landmarks:</h3>
-            <% @landmarks.each do |landmark| %>
-              <p class="landmark-address"><%= landmark.address.split(",").first %></p>
-            <% end %>
+              <h3 class="">Landmarks:</h3>
+              <% @landmarks.each do |landmark| %>
+                <p class="landmark-address"><%= landmark.address.split(",").first %></p>
+              <% end %>
           </div>
-          
+          <% end %>
+
           <!-- weather -->
           <div class="pt-4">
             <% if @current_weather.present? %>
@@ -214,10 +220,10 @@
                 <div data-controller="new-review" class="mb-0 pb-0">
                   <div class="d-flex justify-content-between mt-4">
                     <div data-action="click->new-review#newReview">
-                      <button class="btn-light-gray " data-new-review-target="writeReviewBtn">Write a Route Review</button>
+                      <button class="btn-light-gray " data-new-review-target="writeReviewBtn">Write a Review</button>
                     </div>
                     <div>
-                      <%= link_to 'see all', route_reviews_path(@route), class: 'btn-yellow-sm' %>
+                      <%= link_to 'See All Reviews', route_reviews_path(@route), class: 'btn-yellow-sm' %>
                     </div>
                   </div>
                   <div class="mt-4 toggle-form" data-new-review-target="reviewForm">
@@ -253,7 +259,7 @@
           </div>
         <% end %>
         <div class="my-4 d-flex justify-content-center">
-          <%= button_to 'Save to My Trips', save_route_path(@route),
+          <%= button_to 'Save This Trip', save_route_path(@route),
             method: :post, class: 'btn-red-lg' %>
         </div>
       </div>

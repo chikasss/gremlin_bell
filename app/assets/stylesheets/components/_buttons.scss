@@ -82,7 +82,7 @@
   border: none;
   padding: 0.3rem 1rem;
   border-radius: 24px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: $white;
 }
@@ -95,7 +95,7 @@
     color: $dark-red;
     transition: color 0.3s;
     &:hover {
-      color: $primary-yellow; 
+      color: $primary-yellow;
     }
   }
 }
@@ -159,7 +159,7 @@
   }
 }
 
-// PROFILE LINKS 
+// PROFILE LINKS
 
 .profile-link {
   i {
@@ -177,7 +177,7 @@
   }
 }
 
-// FLOAT BTN 
+// FLOAT BTN
 
 .float-button {
   position: fixed;
@@ -213,7 +213,7 @@
 
     &.opacity-reduced {
       background-color: rgba(250, 250, 250, 0.2);
-      
+
       i {
         opacity: 0.7;
       }
