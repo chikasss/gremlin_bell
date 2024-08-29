@@ -30,16 +30,23 @@ export default class extends Controller {
       'top-left'
     );
 
-    this.map.addControl(
-      new MapboxGeocoder({
+    const geocoder = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       types: "country,region,place,postcode,locality,neighborhood,address, poi",
       mapboxgl: mapboxgl,
       countries: 'jp',
       placeholder: 'Search for a place',
       className: 'custom-geocoder'
-    }),
-    );
+    });
+
+    this.map.addControl(geocoder);
+
+geocoder.on('result', (event) => {
+  const coordinates = event.result.geometry.coordinates;
+  const address = event.result.place_name; // This is the address
+
+  this.addLandmarkMarker(coordinates, `landmark-${this.landmarks.length}`, '#000', true, address);
+});
 
     this.waypoints = this.initializeWaypoints();
 
@@ -66,6 +73,18 @@ export default class extends Controller {
       .setLngLat(coords)
       .addTo(this.map);
     this.markers.set(id, marker);
+    this.landmarks.push({ coords, address });
+
+    const event = new CustomEvent('landmark:added', {
+      detail: {
+        id: id,
+        coords: coords,
+        address: address
+      }
+    });
+    this.element.dispatchEvent(event);
+    // console.log('address', this.address);
+
     console.log('Landmark marker', marker);
   }
 
