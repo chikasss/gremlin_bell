@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:like, :unlike]
 
   def new
+    @user = current_user
     @post = Post.new
     authorize @post
   end
@@ -15,9 +16,14 @@ class PostsController < ApplicationController
     Rails.logger.debug { @post.inspect }
 
     if @post.save
-      redirect_to root_path
+      if request.referer == root_url
+        redirect_to root_path, notice: 'Post created successfully.'
+      else
+        redirect_to user_post_path(@post.user, @post), notice: 'Post created successfully.'
+      end
     else
-      flash[:alert] = "Não foi possível postar o comentário. Por favor, tente novamente."
+      flash[:alert] = "Unable to create post. Please try again."
+      render :new
     end
   end
 
@@ -39,7 +45,6 @@ class PostsController < ApplicationController
             .includes(:user)
             .order(created_at: :desc)
   end
-  
   
   def show
     @post = Post.find(params[:id])
@@ -96,12 +101,17 @@ class PostsController < ApplicationController
   def process_mentions(content)
     mentions = []
   
-    processed_content = content.gsub(/@(\w+)/) do |mention|
-      user = User.find_by(username: $1)
+    processed_content = content.gsub(/@\[(.+?)\]/) do |mention|
+      user_or_route_name = $1.strip
+      user = User.find_by(username: user_or_route_name)
+      route = Route.where("LOWER(title) = ?", user_or_route_name.downcase).first
   
       if user
         mentions << user.username
         "<a href='#{user_path(user)}'>@#{user.username}</a>"
+      elsif route
+        mentions << route.title
+        "<a href='#{route_path(route)}'>@#{route.title}</a>"
       else
         mention
       end

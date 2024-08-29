@@ -1,0 +1,60 @@
+import { Controller } from "@hotwired/stimulus"
+import debounce from "lodash.debounce"
+
+export default class extends Controller {
+  static targets = ["input", "results"]
+
+  connect = () => {
+    this.query = ""
+    this.search = debounce(this.search, 300)
+  }
+
+  onInput = (event) => {
+    this.query = event.target.value
+    const mentionStart = this.query.lastIndexOf('@')
+    if (mentionStart !== -1 && this.query.length > mentionStart + 1) {
+      const query = this.query.slice(mentionStart + 1)
+      this.search(query)
+    } else {
+      this.resultsTarget.innerHTML = ""
+    }
+  }
+
+  search = (query) => {
+    fetch(`/mentions/search?query=${query}`)
+      .then(response => response.json())
+      .then(data => {
+        this.resultsTarget.innerHTML = this.renderResults(data)
+      })
+  }
+
+  renderResults = (results) => {
+    return results.map(result => 
+      `<li data-action="click->mentions#selectMention" data-name="${result.name}">
+        ${result.name}
+      </li>`
+    ).join("")
+  }
+
+  selectMention = (event) => {
+    const mention = event.currentTarget.dataset.name;
+    const mentionStart = this.query.lastIndexOf('@');
+  
+    if (mentionStart !== -1) {
+      const beforeMention = this.query.slice(0, mentionStart); // includes '@'
+      const afterMention = this.query.slice(mentionStart + mention.length + 1);
+  
+      this.query = beforeMention + `@${mention}` + afterMention;
+
+      this.inputTarget.value = this.query;
+      this.resultsTarget.innerHTML = "";
+    }
+  };
+  
+
+  beforeSubmit = () => {
+    let content = this.inputTarget.value;
+    // add [] before submit
+    this.inputTarget.value = content.replace(/@(\w+(\s\w+)*)(?![\[\]])/g, '@[$1]');
+  }
+}
