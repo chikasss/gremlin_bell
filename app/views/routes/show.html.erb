@@ -96,32 +96,31 @@
           <div class="map-container my-4">
             <h3 class="mb-3">Route map:</h3>
             <div data-controller="route-show-map"
-                 data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
-                 data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
-                 data-route-show-map-landmark-long="<%= @route.landmarks.first&.long %>"
-                 data-route-show-map-landmark-lat="<%= @route.landmarks.first&.lat %>"
-                 data-route-show-map-target="map"
-                 data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
-                 data-route-show-map-pin-blue="<%= asset_path('pin_route_blue.png') %>"
-                 data-route-show-map-pin-purple="<%= asset_path('pin_route_purple.png') %>"
-                 data-route-show-map-pin-yellow="<%= asset_path('pin_route_yellow.png') %>"
-                 data-route-show-map-pin-black="<%= asset_path('pin_route_black.png') %>"
-                 data-route-show-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>"
-                 data-route-show-map-pin-one="<%= asset_path('1.png') %>"
-                 data-route-show-map-pin-two="<%= asset_path('2.png') %>"
-                 data-route-show-map-pin-three="<%= asset_path('3.png') %>"
-                 data-route-show-map-pin-four="<%= asset_path('4.png') %>"
-                 data-route-show-map-pin-five="<%= asset_path('5.png') %>"
-                 data-route-show-map-pin-six="<%= asset_path('6.png') %>"
-                 data-route-show-map-pin-seven="<%= asset_path('7.png') %>"
-                 data-route-show-map-pin-eight="<%= asset_path('8.png') %>"
-                 data-route-show-map-pin-nine="<%= asset_path('9.png') %>"
-                 data-route-show-map-pin-ten="<%= asset_path('10.png') %>"
-                 data-route-show-map-landmarks="<%= @landmarks.map { |lm| { lat: lm.lat, long: lm.long } }.to_json %>"
-                 style="width: 100%; height: 400px;">
+                data-route-show-map-access-token="<%= ENV['MAPBOX_API_KEY'] %>"
+                data-route-show-map-waypoints="<%= @route.waypoints.to_json %>"
+                data-route-show-map-landmark-long="<%= @route.landmarks.first&.long %>"
+                data-route-show-map-landmark-lat="<%= @route.landmarks.first&.lat %>"
+                data-route-show-map-target="map"
+                data-route-show-map-logo-url="<%= asset_path('pin_route.svg') %>"
+                data-route-show-map-pin-blue="<%= asset_path('pin_route_blue.png') %>"
+                data-route-show-map-pin-purple="<%= asset_path('pin_route_purple.png') %>"
+                data-route-show-map-pin-yellow="<%= asset_path('pin_route_yellow.png') %>"
+                data-route-show-map-pin-black="<%= asset_path('pin_route_black.png') %>"
+                data-route-show-map-landmark-logo-url="<%= asset_path('pin_route_green.png') %>"
+                data-route-show-map-pin-one="<%= asset_path('1.png') %>"
+                data-route-show-map-pin-two="<%= asset_path('2.png') %>"
+                data-route-show-map-pin-three="<%= asset_path('3.png') %>"
+                data-route-show-map-pin-four="<%= asset_path('4.png') %>"
+                data-route-show-map-pin-five="<%= asset_path('5.png') %>"
+                data-route-show-map-pin-six="<%= asset_path('6.png') %>"
+                data-route-show-map-pin-seven="<%= asset_path('7.png') %>"
+                data-route-show-map-pin-eight="<%= asset_path('8.png') %>"
+                data-route-show-map-pin-nine="<%= asset_path('9.png') %>"
+                data-route-show-map-pin-ten="<%= asset_path('10.png') %>"
+                data-route-show-map-landmarks="<%= @landmarks.map { |lm| { lat: lm.lat, long: lm.long } }.to_json %>"
+                style="width: 100%; height: 400px;">
             </div>
           </div>
-
           <!-- showing landmark address-->
           <div>
             <h3 class="">Landmarks:</h3>
@@ -129,7 +128,6 @@
               <p class="landmark-address"><%= landmark.address.split(",").first %></p>
             <% end %>
           </div>
-          
           <!-- weather -->
           <div class="pt-4">
             <% if @current_weather.present? %>
