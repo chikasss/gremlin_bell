@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     elsif params[:post_id]
       @commentable = Post.find(params[:post_id])
     else
-      redirect_to root_path, alert: "Comentário inválido."
+      redirect_to root_path, alert: "Invalid comment."
       return
     end
 
@@ -15,9 +15,12 @@ class CommentsController < ApplicationController
     authorize @comment
 
     if @comment.save
+      if @commentable.is_a?(Post)
+        @commentable.increment!(:comments_count)
+      end
       redirect_to @commentable
     else
-      flash[:alert] = "Não foi possível postar o comentário. Por favor, tente novamente."
+      flash[:alert] = "Unable to post comment. Please try again."
     end
   end
 

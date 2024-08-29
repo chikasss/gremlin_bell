@@ -10,7 +10,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def show?
-    record.user == user || user.following.include?(record.user)
+    true
   end
 
   def create?
