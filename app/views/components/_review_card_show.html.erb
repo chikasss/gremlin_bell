@@ -26,6 +26,7 @@
       </div>
     </div>
   <% end %>
+  <p><%= truncate(review.description, length: 40) %></p>
   <% if review.photos.present? %>
     <div class="mb-4">
       <p>Photos:</p>
