@@ -76,13 +76,17 @@
                             default_image: "bike_garage.jpg",
                             photo: nil %>
                         </div>
-                        <!-- comments routes -->
+                        <!-- comments -->
                       <% elsif item.is_a?(Comment) %>
                         <div class="mb-2">
                           <% if item.commentable.is_a?(Route) %>
                             <%= render 'components/feed_card', item: item, action_text: "commented on the route", item_title: item.commentable.title, item_link: route_path(item.commentable) %>
                           <% elsif item.commentable.is_a?(Post) %>
-                            <%= render 'components/feed_card', item: item, action_text: "commented on the post", item_title: item.commentable.title, item_link: post_path(item.commentable) %>
+                            <%= render 'components/feed_card', 
+                                item: item, 
+                                action_text: "commented on a post by", 
+                                item_title: "@#{item.commentable.user.username}", 
+                                item_link: user_post_path(item.commentable.user, item.commentable) %>
                           <% end %>
                         </div>
                         <!-- photos -->
@@ -215,18 +219,20 @@
                       <div class="mt-4">
                         <% @comments.each do |comment| %>
                           <div class="mb-2">
+                            <!-- Route comments -->
                             <% if comment.commentable.is_a?(Route) %>
                               <%= render 'components/feed_card', 
-                        item: comment, 
-                        action_text: "created a new comment in route", 
-                        item_title: comment.commentable.title, 
-                        item_link: route_path(comment.commentable) %>
+                                  item: comment, 
+                                  action_text: "created a new comment in route", 
+                                  item_title: comment.commentable.title, 
+                                  item_link: route_path(comment.commentable) %>
+                              <!-- Posts comments -->
                             <% elsif comment.commentable.is_a?(Post) %>
                               <%= render 'components/feed_card', 
-                        item: comment, 
-                        action_text: "created a new comment on post", 
-                        item_title: comment.commentable.title, 
-                        item_link: post_path(comment.commentable) %>
+                                  item: comment, 
+                                  action_text: "commented on a post by", 
+                                  item_title: "@#{comment.commentable.user.username}", 
+                                  item_link: user_post_path(comment.commentable.user, comment.commentable) %>
                             <% else %>
                               <p>Comentário sem entidade associada.</p>
                             <% end %>
