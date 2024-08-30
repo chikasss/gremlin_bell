@@ -5,37 +5,39 @@ class ChatroomsController < ApplicationController
   before_action :authorize_chatroom, only: [:create]
   
   def index
-    @chatrooms = policy_scope(Chatroom).where(user: current_user).or(Chatroom.where(recipient: current_user))
-
-    @chatroom_data = @chatrooms.map do |chat|
-      chat_user = chat.recipient == current_user ? chat.user : chat.recipient
-      last_message = chat.messages.last
-      
+    @chatrooms = policy_scope(Chatroom).where(user_id: current_user.id).or(Chatroom.where(recipient: current_user.id))
+  
+    @chatroom_data = @chatrooms.map do |chatroom|
+      chat_user = chatroom.recipient(current_user)  # Certifique-se de passar current_user aqui
+      last_message = chatroom.messages.last
+      unread_count = chatroom.messages.where(read_at: nil).where.not(user_id: current_user.id).count
+  
       {
-        chatroom: chat,
+        chatroom: chatroom,
         chat_user: chat_user,
         last_message: last_message,
-        unread_count: chat.unread_messages_count(current_user)
+        unread_count: unread_count
       }
     end
   end
   
+  
   def new
     if params[:recipient_id]
       @recipient = User.find(params[:recipient_id])
-      @chatroom = Chatroom.new(recipient: @recipient)
+      @chatroom = Chatroom.new(user: current_user, recipient_id: @recipient.id)
       authorize @chatroom
     else
       flash[:alert] = "Recipient not specified."
       redirect_to chatrooms_path
     end
-  end  
+  end
 
   def create
     @recipient = User.find(params[:chatroom][:recipient_id])
     @chatroom = Chatroom.find_by(user: current_user, recipient: @recipient) ||
-                Chatroom.find_by(user: @recipient, recipient: @recipient)
-    
+                Chatroom.find_by(user: @recipient, recipient: current_user) # Ajustado o segundo find_by
+  
     if @chatroom
       @message = @chatroom.messages.create(user: current_user, description: params[:description])
       redirect_to @chatroom
@@ -61,16 +63,17 @@ class ChatroomsController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     end
-  end     
+  end
+      
 
   def show
     @chatroom = Chatroom.find(params[:id])
-    @messages = @chatroom.messages.includes(:user)
+    @messages = @chatroom.messages.order(:created_at, :id).includes(:user)
     @message = @chatroom.messages.new(user: current_user, description: params[:description])
     authorize @chatroom
     @messages.unread_by_user(current_user).update_all(read_at: Time.current)
   end
-
+  
   private
 
   def set_recipient

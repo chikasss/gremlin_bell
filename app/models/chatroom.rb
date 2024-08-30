@@ -1,16 +1,20 @@
 class Chatroom < ApplicationRecord
   has_many :messages, dependent: :destroy
   belongs_to :user
-  belongs_to :recipient, class_name: 'User', optional: true 
+  belongs_to :recipient, class_name: 'User'
   before_validation :set_default_name, on: :create
   validates :slug, uniqueness: true
   validates :name, presence: true
   before_validation :generate_unique_slug, on: :create
 
   def unread_messages_count(user)
-    messages.unread_by_user(user).count
+    messages.where(read_at: nil).where.not(user_id: user.id).count
   end
 
+  def recipient(current_user = self.user)
+    self.user == current_user ? User.find(self.recipient_id) : self.user
+  end
+  
   private
 
   def set_default_name

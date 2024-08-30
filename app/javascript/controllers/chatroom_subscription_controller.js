@@ -6,73 +6,46 @@ export default class extends Controller {
   static targets = ["messages"]
 
   connect() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
     this.subscription = createConsumer().subscriptions.create(
       { channel: "ChatroomChannel", id: this.chatroomIdValue },
-      { received: data => this.insertMessageAndScrollDown(data) }
-    )
-    console.log(`Subscribed to the chatroom with the id ${this.chatroomIdValue}.`)
-    this.scrollToBottom()
+      {
+        received: data => this.insertMessageAndScrollDown(data),
+      }
+    );
+
+    this.scrollToBottom();
+    this.applyClassesToMessages();
   }
 
   insertMessageAndScrollDown(data) {
-    console.log(`Received message from user ID: ${data.user_id}`)
-    console.log(`Current user ID: ${this.currentUserIdValue}`)
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(data.message, "text/html");
+    const messageElement = doc.body.firstChild;
 
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(data.message, "text/html")
-    const newMessage = doc.querySelector(`[id^="message-"]`)
+    const isCurrentUser = data.user_id === this.currentUserIdValue;
+    messageElement.classList.add(isCurrentUser ? 'sender' : 'receipt');
 
-    if (data.user_id === this.currentUserIdValue) {
-      newMessage.classList.add('sender')
-    } else {
-      newMessage.classList.add('receipt')
-    }
+    this.messagesTarget.appendChild(messageElement);
+    this.scrollToBottom();
+  }
 
-    this.messagesTarget.insertAdjacentHTML("beforeend", newMessage.outerHTML)
-    this.scrollToBottom()
+  applyClassesToMessages() {
+    this.messagesTarget.querySelectorAll('.message').forEach((messageElement) => {
+      const userId = parseInt(messageElement.dataset.userId, 10);
+      const isCurrentUser = userId === this.currentUserIdValue;
+      messageElement.classList.add(isCurrentUser ? 'sender' : 'receipt');
+    });
   }
 
   scrollToBottom() {
-    this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight)
+    this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight);
   }
 
   resetForm(event) {
-    event.target.reset()
+    event.target.reset();
   }
 }
-
-
-
-// import { Controller } from "@hotwired/stimulus"
-// import { createConsumer } from "@rails/actioncable"
-
-// export default class extends Controller {
-//   static values = { chatroomId: Number }
-//   static targets = ["messages"]
-
-//   connect() {
-//     this.subscription = createConsumer().subscriptions.create(
-//       { channel: "ChatroomChannel", id: this.chatroomIdValue },
-//       { received: data => this.insertMessageAndScrollDown(data.message) }
-//     )
-//     console.log(`Subscribed to the chatroom with the id ${this.chatroomIdValue}.`)
-//   }
-  
-//   insertMessageAndScrollDown(message) {
-//     const isCurrentUser = message.user_id === this.currentUserId
-//     const messageElement = document.createElement("div")
-//     messageElement.id = `message-${message.id}`
-//     messageElement.className = isCurrentUser ? 'receipt' : 'sender'
-//     messageElement.innerHTML = `
-//       <p>${message.description}</p>
-//       <small>${message.created_at}</small>
-//     `
-
-//     this.messagesTarget.appendChild(messageElement)
-//     this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight)
-//   }
-
-//   resetForm(event) {
-//     event.target.reset()
-//   }
-// }

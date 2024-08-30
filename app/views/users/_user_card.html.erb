@@ -20,7 +20,12 @@
         <% else %>
           <div class="p-2"><%= image_tag "user-photo.png", class: "avatar-bordered" %></div>
         <% end %>
-        <% if user != current_user %>
+        <% existing_chatroom = Chatroom.find_by(user: current_user, recipient: user) || Chatroom.find_by(user: user, recipient: current_user) %>
+        <% if existing_chatroom %>
+          <%= link_to chatroom_path(existing_chatroom) do %>
+            <i class="fa-solid fa-comment-dots ms-2"></i>
+          <% end %>
+        <% else %>
           <%= link_to new_chatroom_path(recipient_id: user.id) do %>
             <i class="fa-solid fa-comment-dots ms-2"></i>
           <% end %>
