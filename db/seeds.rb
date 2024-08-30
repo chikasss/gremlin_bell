@@ -320,7 +320,7 @@ bill_bikes.photos.attach(
 )
 bill_bikes.save
 
-file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926715/hideo_qw2ipi_pdcsko.jpg")
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724927413/XL1200R_hideo_bike_atoc33_elzgs6.png")
 
 hideo_bikes.photos.attach(
   io: file,
@@ -441,7 +441,7 @@ bill.avatar.attach(
 )
 bill.save
 
-file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724927413/XL1200R_hideo_bike_atoc33_elzgs6.png")
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926715/hideo_qw2ipi_pdcsko.jpg")
 
 hideo.avatar.attach(
   io: file,
