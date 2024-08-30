@@ -558,6 +558,18 @@ eric_route = Route.create!(
   recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
+hideo_route = Route.create!(
+  title: "Jozankei",
+  description: "Just a calm ride by the tree covered mountains. Awesome onsens in the area.",
+  ride_type: ["Twisty", "Calm", "Mountainous"],
+  waypoints: [["141.34922013893006", "42.99612873322272"], ["141.30041947250808", "42.96164203836398"], ["141.12440229400718", "42.917284593230214"]],
+  videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
+  prefecture: "Hokkaido",
+  road_condition: "Construction",
+  user: hideo,
+  recomended_bikes: ["Cruiser", "Standard"]
+)
+
 mary_route = Route.create!(
   title: "W800 Street on Mikuni Pass",
   description: "A nice ride with lots of trees surrounding the road. Good ride if you want to just get a good whiff of trees.",
@@ -606,17 +618,6 @@ ami_route = Route.create!(
   recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
-hideo_route = Route.create!(
-  title: "Jozankei",
-  description: "Just a calm ride by the tree covered mountains. Awesome onsens in the area.",
-  ride_type: ["Twisty", "Calm", "Mountainous"],
-  waypoints: [["141.34922013893006", "42.99612873322272"], ["141.30041947250808", "42.96164203836398"], ["141.12440229400718", "42.917284593230214"]],
-  videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
-  prefecture: "Hokkaido",
-  road_condition: "Construction",
-  user: hideo,
-  recomended_bikes: ["Cruiser", "Standard"]
-)
 
 puts "Attaching Landmarks to Routes"
 
