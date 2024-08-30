@@ -47,7 +47,7 @@
             <div class="col-md-10">
               <% if @route.photos.any? %>
                 <!-- First route foto (big size) -->
-                <div><%= cl_image_tag @route.photos.first.image.key, class: "route-img" %></div>
+                <div><%= cl_image_tag @route.photos.last.image.key, class: "route-img" %></div>
                 <!-- All route photos on carousel -->
                 <div class="row d-flex justify-content-center mt-2">
                   <div class="col-md-10 d-flex flex-row flex-nowrap overflow-auto">
@@ -77,7 +77,7 @@
                 <% end %>
               </div>
               <div>
-                <%= link_to 'See all', route_photos_path(@route), class: "btn btn-light-gray-sm" %>
+                <%= link_to 'See all photos', route_photos_path(@route), class: "btn btn-light-gray-sm" %>
               </div>
             </div>
           </div>

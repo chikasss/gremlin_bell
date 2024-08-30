@@ -25,6 +25,18 @@ User.destroy_all
 
 puts "Creating Users"
 
+ryder = User.create!(
+  email: 'ryder@mail.com',
+  password: 'password',
+  password_confirmation: 'password',
+  first_name: 'Ryder',
+  last_name: 'Tanaka',
+  username: 'Ryder_Tanaka',
+  about: "Foreign man in a foreign land. Just me, the road, and my hog.",
+  prefecture: "Tokyo",
+  social_links: { twitter: "twitter.com/notatallarealpageforryder", facebook: "facebook.com/notatallarealpageforryder", instagram: "instagram.com/notatallarealpageforryder", youtube: "youtube.com/notatallarealpageforryder", tiktok: "tiktok.com/notatallarealpageforryder"},
+)
+
 bill = User.create!(
   email: 'bill@mail.com',
   password: 'password',
@@ -181,6 +193,13 @@ puts "Chatrooms and messages created!"
 
 puts "Creating bikes"
 
+ryder_bikes = Bike.create!(
+  name: 'Road King',
+  year: 2009,
+  brand: 'Harley-Davidson',
+  user: ryder
+)
+
 bill_bikes = Bike.create!(
   name: 'Z900',
   year: 2022,
@@ -283,6 +302,14 @@ puts "Users are now following each other"
 puts "Bikes created"
 
 puts "Attaching bike photos to Bikes"
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724991125/ryder_bike_flrddg.jpg")
+
+ryder_bikes.photos.attach(
+  io: file,
+  filename: "ryder_bike",
+  content_type: "image/jpg"
+)
+ryder_bikes.save
 
 file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724927420/Z900_bill_bike_bnw7yx_ydfdhy.webp")
 
@@ -396,6 +423,15 @@ puts "Photos attached to Bikes"
 
 puts "Attaching avatars to Users"
 
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724991118/PXL_20240830_040020893_ceshxe.jpg")
+
+ryder.avatar.attach(
+  io: file,
+  filename: "ryder_profile",
+  content_type: "image/jpg"
+)
+ryder.save
+
 file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926701/bill_cgxobm_c4syon.jpg")
 
 bill.avatar.attach(
@@ -500,9 +536,9 @@ bill_route2 = Route.create!(
 
 hideo_route = Route.create!(
   title: "Jozankei",
-  description: "Just a calm ride by the tree covered mountains.",
+  description: "Just a calm ride by the tree covered mountains. Awesome onsens in the area.",
   ride_type: ["Calm", "Mountainous"],
-  waypoints: [["141.281196", "42.961095"], ["141.146212", "42.877933"]],
+  waypoints: [["141.34922013893006", "42.99612873322272"], ["141.30041947250808", "42.96164203836398"], ["141.12440229400718", "42.917284593230214"]],
   videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
   prefecture: "Hokkaido",
   road_condition: "Construction",
@@ -582,6 +618,14 @@ ami_route = Route.create!(
   recomended_bikes: recomended_bikes.sample(5).uniq.first(2)
 )
 
+puts "Attaching Landmarks to Routes"
+
+hideo_route.landmarks.create!(
+  address: "Jozankei Onsen",
+  long: 141.1632012271542,
+  lat: 42.965142884280105
+)
+
 puts "Attaching photos to Routes"
 
 file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926724/nakayama_jmgip6_uj0xth.jpg")
@@ -607,6 +651,28 @@ Photo.create!(
 )
 
 file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926717/jozankei_guuq2s_bw4l9e.jpg")
+Photo.create!(
+  image: {
+    io: file,
+    filename: "hideo_route",
+    content_type: "image/jpg"
+  },
+  route: hideo_route,
+  user: hideo_route.user
+)
+
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724991249/jozankei_fall_sxsjsn.jpg")
+Photo.create!(
+  image: {
+    io: file,
+    filename: "hideo_route",
+    content_type: "image/jpg"
+  },
+  route: hideo_route,
+  user: hideo_route.user
+)
+
+file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724992414/Jozankei_Onsen_Winter-1024x665_cy9fw6.jpg")
 Photo.create!(
   image: {
     io: file,
@@ -1185,14 +1251,6 @@ file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926716/h
 post5.images.attach(
   io: file,
   filename: "post highway_38",
-  content_type: "image/jpg"
-)
-
-file = URI.open("https://res.cloudinary.com/dpktcdaku/image/upload/v1724926736/Review_Hideo_Route_pxpwms_opazye.jpg")
-
-review_for_hideo_route.photos.attach(
-  io: file,
-  filename: "hideo_route_photo",
   content_type: "image/jpg"
 )
 
