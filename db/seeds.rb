@@ -537,7 +537,7 @@ bill_route2 = Route.create!(
 hideo_route = Route.create!(
   title: "Jozankei",
   description: "Just a calm ride by the tree covered mountains. Awesome onsens in the area.",
-  ride_type: ["Calm", "Mountainous"],
+  ride_type: ["Twisty", "Calm", "Mountainous"],
   waypoints: [["141.34922013893006", "42.99612873322272"], ["141.30041947250808", "42.96164203836398"], ["141.12440229400718", "42.917284593230214"]],
   videos_url: "https://youtu.be/ddS0POyoErs?si=dvTYyFnwQR7tckzm",
   prefecture: "Hokkaido",
