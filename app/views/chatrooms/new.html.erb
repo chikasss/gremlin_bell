@@ -5,12 +5,17 @@
   <div class="bg-white chatroom-page">
     <div class="container p-4">
       <div class="d-flex align-items-center">
-        <% if @chatroom.recipient.avatar.present? %>
-          <%= image_tag @chatroom.recipient.avatar, class: "avatar" %>
+        <% recipient = @chatroom.recipient(current_user) %>
+        <% if recipient && recipient.avatar.present? %>
+          <%= image_tag recipient.avatar, class: "avatar" %>
         <% else %>
           <%= image_tag 'user-photo.png', class: "avatar" %>
         <% end %>
-        <h3 class="mb-0 ms-3">@<%= @chatroom.recipient.username %></h3>
+        <% if recipient %>
+          <h3 class="mb-0 ms-3">@<%= recipient.username %></h3>
+        <% else %>
+          <h3 class="mb-0 ms-3">Unknown User</h3>
+        <% end %>
       </div>
       <div class="border-bottom mx-4 mt-3"></div>
       <div class="chatroom-msg">

@@ -6,26 +6,23 @@
     <div class="container">
       <div class="chatroom"
       data-controller="chatroom-subscription"
-      data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
+      data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>"
+      data-chatroom-subscription-current-user-id-value="<%= current_user.id %>">
         <!-- chat name -->
         <div class="d-flex align-items-center">
-          <% if @chatroom.recipient.avatar.present? %>
-            <%= image_tag @chatroom.recipient.avatar, class: "avatar" %>
+          <% recipient = @chatroom.recipient(current_user) %>
+          <% if recipient.avatar.present? %>
+            <%= image_tag recipient.avatar, class: "avatar" %>
           <% else %>
             <%= image_tag 'user-photo.png', class: "avatar" %>
           <% end %>
-          <% if @chatroom.recipient.present? %>
-            <h3 class="mb-0 ms-3">@<%= @chatroom.recipient.username %></h3>
-          <% else %>
-            <h2 class="mb-0 ms-3">Unknown User</h2>
-          <% end %>
+          <h3 class="mb-0 ms-3">@<%= recipient.username %></h3>
         </div>
         <div class="border-bottom mx-4 mt-3"></div>
         <!-- chat messages -->
-        <div class="messages" data-chatroom-subscription-target="messages">
-          <% @chatroom.messages.each do |message| %>
-            <%= render partial: "messages/message", locals: { message: message } %>
-          <% end %>
+        <div id="messages" class="messages" data-chatroom-subscription-target="messages">
+          <%= turbo_stream_from @chatroom %>
+          <%= render partial: "messages/message", locals: { messages: @messages, current_user: current_user } %>
         </div>
         <div class="chatroom-msg">
           <%= simple_form_for [@chatroom, @message],

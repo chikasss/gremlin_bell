@@ -12,8 +12,15 @@
       <% else %>
         <div class="d-flex mb-2 align-items-center">
           <h2 class="mb-0"><strong>@<%= user.username %></strong></h2>
-          <%= link_to new_chatroom_path(recipient_id: @user.id), class: "d-flex align-items-end" do %>
-            <i class="fa-solid fa-comment-dots ms-2"></i>
+          <% existing_chatroom = Chatroom.find_by(user: current_user, recipient: user) || Chatroom.find_by(user: user, recipient: current_user) %>
+          <% if existing_chatroom %>
+            <%= link_to chatroom_path(existing_chatroom) do %>
+              <i class="fa-solid fa-comment-dots ms-2"></i>
+            <% end %>
+          <% else %>
+            <%= link_to new_chatroom_path(recipient_id: user.id) do %>
+              <i class="fa-solid fa-comment-dots ms-2"></i>
+            <% end %>
           <% end %>
         </div>
       <% end %>
