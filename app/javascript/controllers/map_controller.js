@@ -244,17 +244,70 @@ export default class extends Controller {
       this.waypoints.forEach((coords, index) => {
         const listItem = document.createElement('div');
         // listItem.textContent = `Waypoint ${index + 1} - Lat: ${coords[1]}, Lng: ${coords[0]} `;
-        listItem.textContent = `Waypoint: ${index + 1} `;
+        // listItem.textContent = `Waypoint: ${index + 1} `;
         listItem.classList.add('no-marker');
+
+        const waypointImage = document.createElement('img');
+        waypointImage.src = this.getWaypointImageSrc(index);
+        waypointImage.alt = `Waypoint ${index + 1}`;
+        waypointImage.classList.add('waypoint-icon');
+        listItem.appendChild(waypointImage);
+
         const removeButton = document.createElement('button');
-        removeButton.textContent = 'Remove';
+        removeButton.textContent = '×';
         removeButton.classList.add('btn', 'btn-danger', 'btn-sm', 'custom-remove-btn');
         removeButton.setAttribute('type', 'button');
         removeButton.dataset.action = 'click->map#removeWaypoint';
         removeButton.dataset.index = index;
         listItem.appendChild(removeButton);
+
         waypointsList.appendChild(listItem);
+
+  //       const removeButton = document.createElement('button');
+  // removeButton.classList.add('custom-remove-btn'); // Add a custom class for any specific styles
+  // removeButton.setAttribute('type', 'button');
+  // removeButton.dataset.action = 'click->map#removeWaypoint';
+  // removeButton.dataset.index = index;
+
+  // // Create the image element for the remove button
+  // const removeIcon = document.createElement('img');
+  // removeIcon.src = this.data.get("remove");// Replace with the correct path to your icon
+  // removeIcon.alt = 'Remove';
+  // removeIcon.style.width = '38px'; // Adjust size as needed
+  // removeIcon.style.height = '38px'; // Adjust size as needed
+
+  // removeButton.appendChild(removeIcon); // Append the image to the button
+  // listItem.appendChild(removeButton);
+
+  // waypointsList.appendChild(listItem);
       });
+    }
+
+    getWaypointImageSrc(index) {
+      switch (index) {
+        case 0:
+          return this.data.get("pinOne");
+        case 1:
+          return this.data.get("pinTwo");
+        case 2:
+          return this.data.get("pinThree");
+        case 3:
+          return this.data.get("pinFour");
+        case 4:
+          return this.data.get("pinFive");
+        case 5:
+          return this.data.get("pinSix");
+        case 6:
+          return this.data.get("pinSeven");
+        case 7:
+          return this.data.get("pinEight");
+        case 8:
+          return this.data.get("pinNine");
+        case 9:
+          return this.data.get("pinTen");
+        default:
+          return this.data.get("logoUrl"); // Fallback image
+      }
     }
 
   getRoute(waypoints) {
