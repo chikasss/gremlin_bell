@@ -55,9 +55,19 @@ export default class extends Controller {
   #displaySelectedAddress(address) {
     const addressContainer = document.getElementById('selected-address-container');
     const addressItem = document.createElement('p');
+
+    const landmarkIcon = document.createElement('img');
+    landmarkIcon.src = addressContainer.dataset.landmarkPinPurple;
+    landmarkIcon.alt = 'Landmark';
+    landmarkIcon.style.width = '30px';
+    landmarkIcon.style.height = '30px';
+    landmarkIcon.style.marginRight = '4px';
+
     addressItem.innerHTML = `${address}`;
     const firstPartOfAddress = address.split(",")[0];
     addressItem.innerHTML = `${firstPartOfAddress}`;
+
+    addressItem.prepend(landmarkIcon);
 
     addressContainer.appendChild(addressItem);
   }
