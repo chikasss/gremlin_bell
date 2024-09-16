@@ -34,6 +34,7 @@ class Route < ApplicationRecord
     "Cruiser" => "recomended_bikes/cruiser_bike.png"
   }
 
+  validate :minimum_waypoints
   validates :ride_type, inclusion: { in: RIDE_TYPE }
   validates :prefecture, inclusion: { in: PREFECTURES }
   validates :recomended_bikes, presence: true
@@ -45,12 +46,16 @@ class Route < ApplicationRecord
 
   private
 
+  def minimum_waypoints
+    if waypoints.nil? || waypoints.size > 2
+      errors.add(:waypoints, "a minumum of 2 waypoints must be provided to create a route")
+    end
+  end
+
   def ensure_recomended_bikes_is_array
     if self.recomended_bikes.is_a?(String)
       self.recomended_bikes = self.recomended_bikes.gsub(/[\{\}]/, '').split(',').map(&:strip)
     end
-
     self.recomended_bikes.reject!(&:blank?)
-
   end
 end
