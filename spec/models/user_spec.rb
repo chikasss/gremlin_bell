@@ -2,6 +2,7 @@ require 'rails_helper'
 user = User.new(
   username: 'TestUsername',
   email: 'testuser@mail.com',
+  password: 'password',
   first_name: 'Test',
   last_name: 'User',
   prefecture: 'Hokkaido'
@@ -22,12 +23,12 @@ RSpec.describe User, type: :model do
 
       it 'username is invalid when under 3 characters'  do
         user.username = "sn"
-        expect(user.username.errors.messages).to eq({ username: ["can't be blank", "is too short (minimum is 3 characters"] })
+        expect(user.errors.messages[:username]).to include("username must be between 3 and 20 characters long")
       end
 
       it 'username is invalid when over 20 characters'  do
         user.username = 'thisisaverylongusername'
-        expect(user).to equ
+        expect(user.errors[:username]).to include("username must be between 3 and 20 characters long")
       end
 
       it 'user has an email' do
