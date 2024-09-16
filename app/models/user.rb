@@ -21,7 +21,10 @@ class User < ApplicationRecord
 
   validates :username, :first_name, :prefecture, presence: true
   validates :email, uniqueness: true
-  validates :username, uniqueness: true, length: { in: 3..20 }
+  validates :username, uniqueness: true, length: {
+    in: 3..20,
+    message: "username must be between 3 and 20 characters long"
+  }
 
   PREFECTURES = [
     'Hokkaido', 'Aomori', 'Akita', 'Iwate', 'Yamagata', 'Miyagi', 'Niigata', 'Fukushima', 'Tochigi',
