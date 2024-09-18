@@ -47,7 +47,7 @@ class Route < ApplicationRecord
   private
 
   def valid_youtube_url
-    youtube_regex = /\A(?:https?:\/\/)?(?:www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})\z/
+    youtube_regex = %r{\A(?:https?://)?(?:www\.)?(youtube\.com/watch\?v=|youtu\.be/)([a-zA-Z0-9_-]{11})\z}
 
     unless youtube_url.present? && youtube_url.match?(youtube_regex)
       errors.add(:youtube_url, "is not a valid YouTube link")
