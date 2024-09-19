@@ -45,15 +45,6 @@ class Route < ApplicationRecord
   end
 
   private
-
-  def valid_youtube_url
-    youtube_regex = %r{\A(?:https?://)?(?:www\.)?(youtube\.com/watch\?v=|youtu\.be/)([a-zA-Z0-9_-]{11})\z}
-
-    unless youtube_url.present? && youtube_url.match?(youtube_regex)
-      errors.add(:youtube_url, "is not a valid YouTube link")
-    end
-  end
-
   def minimum_waypoints
     if waypoints.nil? || waypoints.size > 2
       errors.add(:waypoints, "a minumum of 2 waypoints must be provided to create a route")
