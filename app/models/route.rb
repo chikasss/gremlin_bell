@@ -45,6 +45,7 @@ class Route < ApplicationRecord
   end
 
   private
+
   def minimum_waypoints
     if waypoints.nil? || waypoints.size > 2
       errors.add(:waypoints, "a minumum of 2 waypoints must be provided to create a route")
