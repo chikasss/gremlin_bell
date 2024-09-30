@@ -26,12 +26,9 @@ RSpec.describe Route, type: :model do
       ride_type: ['Mountainous'],
       road_condition: 'Paved',
       recomended_bikes: ['Sport Bike'],
+      user_id: user
     )
   end
-
-  # it { should belong_to(:user) }
-  # it { should have_many(:comments) }
-  # it { should validate_presence_of(:comments) }
 
   describe 'associations' do
     it 'belongs to a user' do
@@ -66,22 +63,44 @@ RSpec.describe Route, type: :model do
   end
 
   describe 'validations' do
-    before { route.title = nil }
-    it 'is valid with a title' do
-      expect(route.valid?).to eq(false)
+    context 'when title is nil' do
+      before { route.title = nil }
+      it 'is invalid without a title' do
+        expect(route.valid?).to eq(false)
+        expect(route.errors[:title]).to include("can't be blank")
+      end
     end
 
-    before { route.user_id = nil }
-    it 'is invalid without user' do
-      expect(route.valid?).to eq(false)
+    context 'when user_id is nil' do
+      before { route.user_id = nil }
+      it 'is invalid without a user_id' do
+        expect(route.valid?).to eq(false)
+        expect(route.errors[:user]).to include("must exist")
+      end
+    end
+
+    context 'when description is nil' do
+      before { route.description = nil }
+      it 'is invalid without a description' do
+        expect(route.valid?).to eq(false)
+        expect(route.errors[:description]).to include("can't be blank")
+      end
+    end
+
+    context 'when prefecture is nil' do
+      before { route.prefecture = nil }
+      it 'is invalid without a prefecture' do
+        expect(route.valid?).to eq(false)
+        expect(route.errors[:prefecture]).to include("is not included in the list")
+      end
     end
   end
 
   describe '#minimum_waypoints' do
-    before { route.waypoints = ["140.93342678338806", "42.79543274892502"] }
-    it 'returns an invalid route when only one waypoint is provided' do
-      puts route.waypoints.count
+    before { route.waypoints = [["140.93342678338806", "42.79543274892502"]] }
+    it 'is invalid with only one waypoint' do
       expect(route.valid?).to eq(false)
+      expect(route.errors[:waypoints]).to include("a minumum of 2 waypoints must be provided to create a route")
     end
   end
 end
