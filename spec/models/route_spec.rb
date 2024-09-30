@@ -160,10 +160,12 @@ RSpec.describe Route, type: :model do
   end
 
   describe '#minimum_waypoints' do
-    before { route.waypoints = [["140.93342678338806", "42.79543274892502"]] }
-    it 'is invalid with only one waypoint' do
-      expect(route.valid?).to eq(false)
-      expect(route.errors[:waypoints]).to include("a minumum of 2 waypoints must be provided to create a route")
+    context 'when waypoints given is 1 or less' do
+      before { route.waypoints = [["140.93342678338806", "42.79543274892502"]] }
+      it 'is invalid with only one waypoint' do
+        expect(route.valid?).to eq(false)
+        expect(route.errors[:waypoints]).to include("a minumum of 2 waypoints must be provided to create a route")
+      end
     end
   end
 end
