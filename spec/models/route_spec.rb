@@ -87,6 +87,22 @@ RSpec.describe Route, type: :model do
       end
     end
 
+    context 'when road condition is nil' do
+      before { route.road_condition = nil }
+      it 'is invalid without a road condition' do
+        expect(route.valid?).to eq(false)
+        expect(route.errors[:road_condition]).to include("is not included in the list")
+      end
+    end
+
+    context 'when ride type is nil' do
+      before { route.ride_type = nil }
+      it 'is invalid without a ride type' do
+        expect(route.valid?).to eq(false)
+        expect(route.errors[:ride_type]).to include("is not included in the list")
+      end
+    end
+
     context 'when prefecture is nil' do
       before { route.prefecture = nil }
       it 'is invalid without a prefecture' do
