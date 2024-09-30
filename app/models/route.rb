@@ -36,9 +36,9 @@ class Route < ApplicationRecord
 
   validate :minimum_waypoints
   validates :title, :description, :recomended_bikes, presence: true
-  validates :ride_type, inclusion: { in: RIDE_TYPE }
-  validates :road_condition, inclusion: { in: ROAD_CONDITION }
-  validates :prefecture, inclusion: { in: PREFECTURES }
+  validates :ride_type, inclusion: { in: RIDE_TYPE }, presence: true
+  validates :road_condition, inclusion: { in: ROAD_CONDITION }, presence: true
+  validates :prefecture, inclusion: { in: PREFECTURES }, presence: true
   before_save :ensure_recomended_bikes_is_array
 
   def average_rating
