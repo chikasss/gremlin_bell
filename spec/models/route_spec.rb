@@ -113,47 +113,129 @@ RSpec.describe Route, type: :model do
   end
 
   describe '#average_rating' do
-    let!(:review) do
-      Review.create(
-        date: DateTime.new(2024,8,10,17),
-        title: 'TestReview',
-        description: 'This is a test review1',
-        rating: 5,
-        videos_url: '',
-        used_bike: '2004 Yamaha V-MAX',
-        road_condition: 'Paved',
-        route: route,
-        user: user
+
+    let!(:user) do
+      User.create(
+        username: 'TestUsername',
+        email: 'testuser@mail.com',
+        password: 'password',
+        first_name: 'Test',
+        last_name: 'User',
+        prefecture: 'Hokkaido'
       )
     end
 
-    let!(:review2) do
-      Review.create(
-        date: Date.today,
-        title: 'TestReview2',
-        description: 'This is a test review2',
-        rating: 3,
-        videos_url: '',
-        used_bike: '2004 Yamaha V-MAX',
-        road_condition: 'Paved',
-        route: route,
-        user: user
+    let!(:bike) do
+      Bike.create(
+        brand: 'Yamaha',
+        name: 'V-MAX',
+        year: 2004,
+        user: User.first
       )
     end
+
+    let!(:route) do
+      Route.create(
+        title: 'TestRoute',
+        videos_url: 'www.youtube.com',
+        description: 'This is a test route',
+        prefecture: 'Hokkaido',
+        waypoints: [
+          ["140.93342678338806", "42.79543274892502"],
+          ["141.09836986142776", "42.86675427633369"],
+          ["141.1490391486532", "42.95572467766607"]
+        ],
+        ride_type: ['Mountainous'],
+        road_condition: 'Paved',
+        recomended_bikes: ['Sport Bike'],
+        user: User.first
+      )
+    end
+
+
+    # let!(:review) do
+    #   Review.create(
+    #     date: DateTime.new(2024,8,10,17),
+    #     title: 'TestReview',
+    #     description: 'This is a test review1',
+    #     rating: 5,
+    #     videos_url: '',
+    #     used_bike: '2004 Yamaha V-MAX',
+    #     road_condition: 'Paved',
+    #     route: route,
+    #     user: User.first
+    #   )
+    # end
+
+    # let!(:review2) do
+    #   Review.create(
+    #     date: Date.today,
+    #     title: 'TestReview2',
+    #     description: 'This is a test review2',
+    #     rating: 3,
+    #     videos_url: '',
+    #     used_bike: '2004 Yamaha V-MAX',
+    #     road_condition: 'Paved',
+    #     route: route,
+    #     user: User.first
+    #   )
+    # end
 
     context 'when there are reviews' do
       before do
-        route.reviews << [review, review2]
-        # review.user = user
-        review2.user = user
+        Review.create(
+          date: DateTime.new(2024,8,10,17),
+          title: 'TestReview',
+          description: 'This is a test review1',
+          rating: 5,
+          videos_url: '',
+          used_bike: '2004 Yamaha V-MAX',
+          road_condition: 'Paved',
+          route: Route.first,
+          user: User.first,
+          bike: Bike.first
+        )
+
+        Review.create(
+          date: Date.today,
+          title: 'TestReview2',
+          description: 'This is a test review2',
+          rating: 3,
+          videos_url: '',
+          used_bike: '2004 Yamaha V-MAX',
+          road_condition: 'Paved',
+          route: Route.first,
+          user: User.first,
+          bike: Bike.first
+        )
+    #         Route.create(
+    #   title: 'TestRoute',
+    #   videos_url: 'www.youtube.com',
+    #   description: 'This is a test route',
+    #   prefecture: 'Hokkaido',
+    #   waypoints: [
+    #     ["140.93342678338806", "42.79543274892502"],
+    #     ["141.09836986142776", "42.86675427633369"],
+    #     ["141.1490391486532", "42.95572467766607"]
+    #   ],
+    #   ride_type: ['Mountainous'],
+    #   road_condition: 'Paved',
+    #   recomended_bikes: ['Sport Bike'],
+    #   user_id: user
+    # )
+        # route.reviews << [review, review2]
+        # route.save
       end
       it 'returns the average rating of a route' do
-        puts route.reviews.first.rating
-        puts route.reviews.first.user.username
-        puts route.reviews.first.route.title
-        puts route.reviews.second.rating
-        puts route.reviews.second.user.username
-        puts route.reviews.second.route.title
+        # puts route
+        # puts Review.count
+        # puts route.reviews.first.rating
+        # puts route.reviews.first.user.username
+        # puts route.reviews.first.route.title
+        # puts route.reviews.second.rating
+        # puts route.reviews.second.user.username
+        # puts route.reviews.second.route.title
+        # byebug
         expect(route.average_rating).to eq(4.0)
       end
     end
