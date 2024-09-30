@@ -63,10 +63,12 @@ gem "uri"
 gem "httparty"
 gem "ffi", "< 1.17.0"
 
+
 # RSpec rails gem installation
 
 group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
+  gem 'byebug'
 end
 
 group :development, :test do
