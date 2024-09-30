@@ -38,7 +38,6 @@ RSpec.describe Route, type: :model do
       user: User.first
     )
   end
-
   describe 'associations' do
     it 'belongs to a user' do
       r = Route.reflect_on_association(:user)
