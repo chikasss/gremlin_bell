@@ -112,6 +112,53 @@ RSpec.describe Route, type: :model do
     end
   end
 
+  describe '#average_rating' do
+    let!(:review) do
+      Review.create(
+        date: DateTime.new(2024,8,10,17),
+        title: 'TestReview',
+        description: 'This is a test review1',
+        rating: 5,
+        videos_url: '',
+        used_bike: '2004 Yamaha V-MAX',
+        road_condition: 'Paved',
+        route: route,
+        user: user
+      )
+    end
+
+    let!(:review2) do
+      Review.create(
+        date: Date.today,
+        title: 'TestReview2',
+        description: 'This is a test review2',
+        rating: 3,
+        videos_url: '',
+        used_bike: '2004 Yamaha V-MAX',
+        road_condition: 'Paved',
+        route: route,
+        user: user
+      )
+    end
+
+    context 'when there are reviews' do
+      before do
+        route.reviews << [review, review2]
+        # review.user = user
+        review2.user = user
+      end
+      it 'returns the average rating of a route' do
+        puts route.reviews.first.rating
+        puts route.reviews.first.user.username
+        puts route.reviews.first.route.title
+        puts route.reviews.second.rating
+        puts route.reviews.second.user.username
+        puts route.reviews.second.route.title
+        expect(route.average_rating).to eq(4.0)
+      end
+    end
+  end
+
   describe '#minimum_waypoints' do
     before { route.waypoints = [["140.93342678338806", "42.79543274892502"]] }
     it 'is invalid with only one waypoint' do
