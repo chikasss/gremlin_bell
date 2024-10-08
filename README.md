@@ -110,14 +110,6 @@ rails s
   </div>
 </div>
 
-## Built With
-- [Rails 7](https://guides.rubyonrails.org/) - Backend / Front-end
-- [Stimulus JS](https://stimulus.hotwired.dev/) - Front-end JS
-- [Heroku](https://heroku.com/) - Deployment
-- [PostgreSQL](https://www.postgresql.org/) - Database
-- [Bootstrap](https://getbootstrap.com/) — Styling
-- [Figma](https://www.figma.com) — Prototyping
-
 ## Team Members
 * [Andrew Beckett](https://github.com/Timbit87)
 * [Chika Sakai](https://github.com/chikasss)
