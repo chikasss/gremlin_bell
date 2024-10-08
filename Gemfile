@@ -63,6 +63,14 @@ gem "uri"
 gem "httparty"
 gem "ffi", "< 1.17.0"
 
+
+# RSpec rails gem installation
+
+group :development, :test do
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'byebug'
+end
+
 group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
